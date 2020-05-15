@@ -1,0 +1,2 @@
+- Description, Critère d'acceptation, Test d'acceptation.
+- Un set d'issues github pour chaques tâches à réaliser pour que la story soit fonctionnelle.
