@@ -19,7 +19,7 @@ public class hexMap : MonoBehaviour
                 } else {
                     z = (pos.z - hexHeight + (3)) / hexHeight / 1.73f * 2f;
                 }
-                print(Mathf.RoundToInt(x)+"; "+Mathf.RoundToInt(z));
+                //print(Mathf.RoundToInt(x)+"; "+Mathf.RoundToInt(z));
                 
             }
     }
