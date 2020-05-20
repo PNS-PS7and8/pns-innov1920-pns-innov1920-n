@@ -16,6 +16,6 @@ public class BoardUnit : MonoBehaviour {
     }
 
     private void UpdateText() {
-        text.text = string.Format("{0} / {1}", unit.Health, unit.Card.Health);
+        //text.text = string.Format("{0} / {1}", unit.Health, unit.Card.Health);
     }
 }

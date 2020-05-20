@@ -13,14 +13,17 @@ public class Unit : ITakeDamage, IDealDamage
     public UnitCard Card => card;
 
     private BoardUnit boardUnit;
+    private Vector2 coord;
 
-    public Unit(UnitCard card) {
+    public Unit(UnitCard card, Vector2 coord) {
         this.card = card;
         this.health = card.Health;
         this.attack = card.Attack;
+        this.coord = coord;
         GameObject gameObject = Object.Instantiate(card.Model);
         this.boardUnit = gameObject.GetComponent<BoardUnit>();
         boardUnit.unit = this;
+        boardUnit.transform.position = GameObject.Find("hexMap").transform.InverseTransformPoint(new Vector3(coord.x, 0, coord.y))+Vector3.up*2;
     }
 
     public void TakeDamage(int amount) {

@@ -7,7 +7,7 @@ public class BoardManager : MonoBehaviour {
 
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Space)) {
-            units.Add(new Unit(card));
+            //units.Add(new Unit(card));
         }
         else if (Input.GetKeyDown(KeyCode.Return)) {
             var unit = units[0];

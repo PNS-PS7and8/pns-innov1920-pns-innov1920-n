@@ -16,6 +16,6 @@ MonoBehaviour:
   name: 
   description: No description
   cost: 1
-  model: {fileID: 969341970982029539, guid: 32f62855e2237333ca164f740b6480c1, type: 3}
+  model: {fileID: 4411826633910963546, guid: b137aa6defe3e0347926270395c88b90, type: 3}
   health: 2
   attack: 1
