@@ -10,7 +10,13 @@ public class HandCard : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (selected == true){
+            Behaviour halo = (Behaviour)GetComponent ("Halo");
+            halo.enabled = true; 
+        } else {
+            Behaviour halo = (Behaviour)GetComponent ("Halo");
+            halo.enabled = false; 
+        }
     }
 
     void OnMouseDown() {
