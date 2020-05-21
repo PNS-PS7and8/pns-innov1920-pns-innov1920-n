@@ -10,4 +10,8 @@ public class UnitCard : CardBase {
     public int Health => health;
     public int Attack => attack;
 
+    protected override void CardEffect(Cell target)
+    {
+        Unit unit = new Unit(this, target);
+    }
 }

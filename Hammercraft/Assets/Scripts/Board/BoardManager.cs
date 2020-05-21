@@ -4,7 +4,6 @@ using UnityEngine;
 public class BoardManager : MonoBehaviour {
     public Board board { get; private set; }
     [SerializeField] private Vector2Int boardSize = new Vector2Int(50, 50);
-    private BoardBehaviour[] boardBehaviours;
 
     private void Awake() {
         ResetBoard();
@@ -12,9 +11,5 @@ public class BoardManager : MonoBehaviour {
 
     public void ResetBoard() {
         board = new Board(boardSize);
-        boardBehaviours = FindObjectsOfType<BoardBehaviour>();
-        foreach(var boardBehaviour in boardBehaviours) {
-            boardBehaviour.board = board;
-        }
     }
 }

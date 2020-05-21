@@ -12,8 +12,9 @@ public class BoardMesh : BoardBehaviour
     [Range(0,1)] public float thickness = 0.1f;
     [Range(0,1)] public float spacing = 0.1f;
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         mesh = new Mesh();
         mesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
 

@@ -7,23 +7,25 @@ public class Unit : ITakeDamage, IDealDamage
     private UnitCard card;
     private int health;
     private int attack;
+    private Cell cell;
 
     public int Health => health;
     public int Attack => attack;
     public UnitCard Card => card;
+    public Cell Cell => cell;
 
     private BoardUnit boardUnit;
-    private Vector2 coord;
 
-    public Unit(UnitCard card, Vector2 coord) {
+    public Unit(UnitCard card, Cell cell) {
         this.card = card;
         this.health = card.Health;
         this.attack = card.Attack;
-        this.coord = coord;
+        this.cell = cell;
+        this.cell.unit = this;
+        
         GameObject gameObject = Object.Instantiate(card.Model);
         this.boardUnit = gameObject.GetComponent<BoardUnit>();
         boardUnit.unit = this;
-        boardUnit.transform.position = GameObject.Find("hexMap").transform.InverseTransformPoint(new Vector3(coord.x, 0, coord.y))+Vector3.up*2;
     }
 
     public void TakeDamage(int amount) {
@@ -37,7 +39,7 @@ public class Unit : ITakeDamage, IDealDamage
         target.TakeDamage(attack);
     }
 
-    public void Die() {
-        GameObject.Destroy(boardUnit.gameObject);
+    private void Die() {
+        cell.unit = null;
     }
 }

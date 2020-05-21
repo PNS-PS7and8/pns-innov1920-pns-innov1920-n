@@ -10,4 +10,10 @@ public abstract class CardBase : ScriptableObject {
     public string Description => description;
     public Sprite Image => image;
     public string Name => name;
+
+    public void Use(Cell target) {
+        CardEffect(target);
+    }
+
+    protected abstract void CardEffect(Cell target);
 }

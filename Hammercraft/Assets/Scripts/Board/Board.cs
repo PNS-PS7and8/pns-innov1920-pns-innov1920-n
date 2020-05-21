@@ -42,8 +42,8 @@ public class Board {
     }
 
     public Cell GetCell(int x, int y) {
-        x = Mathf.Clamp(x, 0, 100);
-        y = Mathf.Clamp(y, 0, 100);
+        x = Mathf.Clamp(x, 0, size.x-1);
+        y = Mathf.Clamp(y, 0, size.y-1);
         return cells[x, y];
         
     }
