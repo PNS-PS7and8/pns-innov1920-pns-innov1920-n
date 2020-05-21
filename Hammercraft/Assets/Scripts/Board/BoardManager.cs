@@ -2,17 +2,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BoardManager : MonoBehaviour {
-    public UnitCard card = null;
-    private List<Unit> units = new List<Unit>();
+    public Board board { get; private set; }
+    [SerializeField] private Vector2Int boardSize = new Vector2Int(50, 50);
+    private BoardBehaviour[] boardBehaviours;
 
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            //units.Add(new Unit(card));
-        }
-        else if (Input.GetKeyDown(KeyCode.Return)) {
-            var unit = units[0];
-            unit.TakeDamage(1);
-            if (unit.Health <= 0) units.RemoveAt(0);
+    private void Awake() {
+        ResetBoard();
+    }
+
+    public void ResetBoard() {
+        board = new Board(boardSize);
+        boardBehaviours = FindObjectsOfType<BoardBehaviour>();
+        foreach(var boardBehaviour in boardBehaviours) {
+            boardBehaviour.board = board;
         }
     }
 }
