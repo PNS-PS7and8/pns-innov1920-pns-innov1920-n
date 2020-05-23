@@ -30,7 +30,11 @@ public class PlayerClickControls : MonoBehaviour {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out RaycastHit hitinfo)) {
                     if (hitinfo.transform.TryGetComponent<GameCard>(out var gameCard)) {
+                        if (selectedCard != null){
+                            selectedCard.transform.localScale += new Vector3(-2,-2,-2);
+                        }
                         selectedCard = gameCard;
+                        gameCard.transform.localScale += new Vector3(2,2,2);
                     }
                 }
             }
