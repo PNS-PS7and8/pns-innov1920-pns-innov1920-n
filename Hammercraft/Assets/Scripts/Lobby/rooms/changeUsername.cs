@@ -10,10 +10,14 @@ public class changeUsername : MonoBehaviourPunCallbacks
     private TMP_Text username;
     [SerializeField]
     private MasterManager MasterManager;
+    [SerializeField]
+    private Canvas MenuCanvas;
 
 
     public void On_Click_Change_Username() {
         MasterManager.GameSettings.setNickname(username.text);
         PhotonNetwork.NickName = MasterManager.GameSettings.Nickname;
+        MenuCanvas.gameObject.SetActive(true);
+        gameObject.SetActive(false);
     }
 }

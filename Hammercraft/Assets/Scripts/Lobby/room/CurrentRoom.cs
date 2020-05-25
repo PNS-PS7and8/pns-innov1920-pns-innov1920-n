@@ -13,20 +13,24 @@ public class CurrentRoom : MonoBehaviourPunCallbacks
     [SerializeField]
     private TMP_Text Text_Timer;
     private Coroutine _timer=null;
+    private Coroutine _dots = null;
     [SerializeField]
     private RawImage StrangeNebula;
+    [SerializeField]
+    private TMP_Text ThreeDots;
     
 
     public override void OnEnable()
     {
         base.OnEnable();
-
-        if(PhotonNetwork.CurrentRoom.PlayerCount == 2)
+        _dots = StartCoroutine(Dots());
+        if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
         {
             foreach (KeyValuePair<int, Photon.Realtime.Player> player in PhotonNetwork.CurrentRoom.Players)
             {
                 if(player.Value.NickName != PhotonNetwork.NickName)
                     _OtherPlayer.text = player.Value.NickName;
+                    ThreeDots.gameObject.SetActive(false);
             }
         } 
     }
@@ -35,14 +39,18 @@ public class CurrentRoom : MonoBehaviourPunCallbacks
     {
         foreach (KeyValuePair<int, Photon.Realtime.Player> player in PhotonNetwork.CurrentRoom.Players)
         {
+            print("MES GROU");
             if (player.Value.NickName != PhotonNetwork.NickName)
                 _OtherPlayer.text = player.Value.NickName;
+                ThreeDots.gameObject.SetActive(false);
         }
     }
 
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
     {
-        _OtherPlayer.text = "Waiting for player...";
+        _OtherPlayer.text = "Waiting for player";
+
+        ThreeDots.gameObject.SetActive(true);
     }
         
     public void FixedUpdate()
@@ -63,7 +71,7 @@ public class CurrentRoom : MonoBehaviourPunCallbacks
             Text_Timer.gameObject.SetActive(false);
             StrangeNebula.gameObject.SetActive(true);
         }
-        StrangeNebula.transform.Rotate(new Vector3(0, 0, 3));
+        StrangeNebula.transform.Rotate(new Vector3(0, 0, -2));
     }
 
     private IEnumerator Timer()
@@ -74,6 +82,22 @@ public class CurrentRoom : MonoBehaviourPunCallbacks
             Text_Timer.text = i.ToString();
             yield return new WaitForSecondsRealtime(1f);
             
+        }
+    }
+
+    private IEnumerator Dots()
+    {
+        while (true)
+        {
+            if(ThreeDots.text.Equals("..."))
+            {
+                ThreeDots.text = "";
+            } else
+            {
+                ThreeDots.text = ThreeDots.text + ".";
+            }
+            yield return new WaitForSecondsRealtime(0.7f);
+
         }
     }
 
