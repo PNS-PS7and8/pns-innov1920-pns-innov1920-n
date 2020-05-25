@@ -11,8 +11,12 @@ public class BoardPlayer : BoardBehaviour {
     
     private Player player;
     
-    protected override void Start() {
-        base.Start();
+    public override void OnResetBoard(BoardManager boardManager) {
+        base.OnResetBoard(boardManager);
+        Start();
+    }
+    
+    private void Start() {
         gameCards = new List<GameCard>();
         player = new Player(
             new Deck(units.ToArray(), spells.ToArray())

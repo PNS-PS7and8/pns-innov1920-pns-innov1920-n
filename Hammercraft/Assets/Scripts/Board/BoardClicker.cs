@@ -2,25 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider))]
+[RequireComponent(typeof(Collider))]
 public class BoardClicker : BoardBehaviour
 {
     public bool ClickCell(out Cell cell) {
         if (Input.GetMouseButtonDown(0)) {
             return HoverCell(out cell);
         }
-        cell = new Cell();
+        cell = null;
         return false;
     }
 
     public bool HoverCell(out Cell cell) {
-        cell = new Cell();
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hitinfo) && hitinfo.transform == transform) {
             Vector2Int cellPos = board.LocalToCell(transform.InverseTransformPoint(hitinfo.point));
             cell = board.GetCell(cellPos);
-            return true;
+            if (cell.cellType != Cell.CellType.None)
+                return true;
         }
+        cell = null;
         return false;
     }
 }

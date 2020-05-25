@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Board {
-    public Cell[,] cells;
+    private Cell[,] cells;
     public readonly Vector2Int size;
 
     public Board() {
@@ -30,11 +30,26 @@ public class Board {
                 cells[x, y] = new Cell() {
                         board = this,
                         position = new Vector2Int(x, y),
-                        cellType = CellType.Free,
+                        cellState = Cell.CellState.Free,
+                        cellType = Cell.CellType.Field,
                         unit = null
                 };
             }
         }
+    }
+
+    public IEnumerable<Cell> Cells(bool ignoreTypeNone = true) {
+        foreach (var cell in cells)
+            if (cell.cellType != Cell.CellType.None || !ignoreTypeNone)
+                yield return cell;
+    }
+
+    public bool HasCell(Vector2Int cellPosition) {
+        return HasCell(cellPosition.x, cellPosition.y);
+    }
+
+    public bool HasCell(int x, int y) {
+        return 0 <= x && x < size.x && 0 <= y && y < size.y && GetCell(x, y).cellType != Cell.CellType.None;
     }
 
     public Cell GetCell(Vector2Int cellPosition) {
@@ -42,8 +57,6 @@ public class Board {
     }
 
     public Cell GetCell(int x, int y) {
-        x = Mathf.Clamp(x, 0, size.x-1);
-        y = Mathf.Clamp(y, 0, size.y-1);
         return cells[x, y];
         
     }
@@ -53,10 +66,14 @@ public class Board {
     }
 
     public Vector3 CellToLocal(int x, int y) {
-        return new Vector3(x * 1.5f, 0, x * 0.866f + y * 1.732f);
+        float locx = x - size.x / 2f;
+        float locy = y - size.y / 2f;
+        Vector3 pos = new Vector3(locx * 3f / 2f, 0, locx * Mathf.Sqrt(3)/2f + locy * Mathf.Sqrt(3));
+        if (HasCell(x, y)) pos += cells[x, y].Height * Vector3.up;
+        return pos;
     }
 
     public Vector2Int LocalToCell(Vector3 point) {
-        return new Vector2Int(Mathf.RoundToInt(point.x * 0.666f), Mathf.RoundToInt(point.x * -0.333f + 0.577f * point.z));
+        return new Vector2Int(Mathf.RoundToInt(point.x * 2f / 3f), Mathf.RoundToInt(point.x / -3f + Mathf.Sqrt(3f)/3f * point.z)) + size / 2;
     }
 }

@@ -4,14 +4,18 @@ using TMPro;
 public class BoardUnit : BoardBehaviour {
     public Unit unit;
 
-    protected override void Start() {
-        base.Start();
+    private void Start() {
+        SyncPosition();
     }
 
     private void Update() {
-        transform.position = boardManager.transform.TransformPoint(board.CellToLocal(unit.Cell.position));
+        SyncPosition();
         if (unit.Health <= 0) {
             Destroy(gameObject);
         }
+    }
+
+    private void SyncPosition() {
+        transform.position = boardManager.transform.TransformPoint(board.CellToLocal(unit.Cell.position));
     }
 }

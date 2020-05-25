@@ -41,10 +41,25 @@ public class PlayerClickControls : MonoBehaviour {
         }
     }
     
+    int radius = 2;
     private void Update() {
         Hover();
         Select();
-        
+
+        if (Input.mouseScrollDelta.y > 0) radius+=2;
+        if (Input.mouseScrollDelta.y < 0) radius = Mathf.Max(radius-2, 0);
+        if (boardClicker.HoverCell(out var c)) {
+            List<Vector3> verts = new List<Vector3>();
+            foreach (var cell in c.Disc(radius))
+            {
+                verts.Add(cell.LocalPosition);
+            }
+            for (int i = 0; i < verts.Count-1; i++)
+            {
+                Debug.DrawLine(verts[i], verts[(i+1)%verts.Count], Color.white);
+            }
+        }
+
         if (selectedCell != null && selectedCard != null) {
             selectedCard.Use(selectedCell);
             selectedCard = null;
