@@ -39,7 +39,6 @@ public class CurrentRoom : MonoBehaviourPunCallbacks
     {
         foreach (KeyValuePair<int, Photon.Realtime.Player> player in PhotonNetwork.CurrentRoom.Players)
         {
-            print("MES GROU");
             if (player.Value.NickName != PhotonNetwork.NickName)
                 _OtherPlayer.text = player.Value.NickName;
                 ThreeDots.gameObject.SetActive(false);
@@ -55,7 +54,6 @@ public class CurrentRoom : MonoBehaviourPunCallbacks
         
     public void FixedUpdate()
     {
-        //print(PhotonNetwork.CurrentRoom.Players.Count.ToString());
         if (PhotonNetwork.CurrentRoom.PlayerCount >= 2 && _timer==null)
         {
              

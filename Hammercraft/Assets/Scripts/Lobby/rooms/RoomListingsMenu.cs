@@ -14,10 +14,9 @@ public class RoomListingsMenu : MonoBehaviourPunCallbacks
     private List<RoomListing> _listings = new List<RoomListing>();
    
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
-    {
+    {     
         foreach(RoomInfo info in roomList)
         {
-            print(info.Name);
             if (info.RemovedFromList)
             {
                 int index = _listings.FindIndex(x => x.RoomInfo.Name == info.Name);
