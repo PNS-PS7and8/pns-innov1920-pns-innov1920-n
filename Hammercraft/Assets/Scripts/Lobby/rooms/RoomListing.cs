@@ -27,6 +27,7 @@ public class RoomListing : MonoBehaviour
 
     public void on_click_join_room()
     {
+        
         PhotonNetwork.JoinRoom(RoomInfo.Name);
     }
 }

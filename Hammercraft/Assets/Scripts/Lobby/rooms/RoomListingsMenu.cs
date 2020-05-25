@@ -11,7 +11,7 @@ public class RoomListingsMenu : MonoBehaviourPunCallbacks
     [SerializeField]
     private Transform _content;
 
-    private List<RoomListing> _listings = new List<RoomListing>();
+    private Dictionary<string,RoomListing> ListGames = new Dictionary<string, RoomListing>();
    
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {     
@@ -19,19 +19,21 @@ public class RoomListingsMenu : MonoBehaviourPunCallbacks
         {
             if (info.RemovedFromList)
             {
-                int index = _listings.FindIndex(x => x.RoomInfo.Name == info.Name);
-                if(index != -1)
-                {
-                    Destroy(_listings[index].gameObject);
-                    _listings.RemoveAt(index);
-                }
+                
+                Destroy(ListGames[info.Name].gameObject);
+                ListGames.Remove(info.Name);
             } else
             {
-                RoomListing listing = Instantiate(_roomListing, _content);
-                if (listing != null)
+                RoomListing listing = null;
+                if (!ListGames.ContainsKey(info.Name)){
+
+                    listing = Instantiate(_roomListing, _content);
+                }
+                if (listing != null || ListGames.ContainsKey(info.Name))
                 {
-                    listing.SetRoomInfo(info);
-                    _listings.Add(listing);
+                    
+                    ListGames[info.Name] = (listing!=null) ? listing : ListGames[info.Name];
+                    ListGames[info.Name].SetRoomInfo(info);
                 }
 
             }
