@@ -114,9 +114,11 @@ public class PlayerClickControls : MonoBehaviour {
         }
 
         if (selectedCell != null && selectedCard != null) {
-            selectedCard.Use(selectedCell);
-            selectedCard = null;
-            selectedCell = null;
+            if (selectedCell.cellType == Cell.CellType.Field){
+                selectedCard.Use(selectedCell);
+                selectedCard = null;
+                selectedCell = null;
+            }   
         }
     }
 }
