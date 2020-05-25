@@ -11,12 +11,11 @@ public class JoinRoom : MonoBehaviourPunCallbacks
     [SerializeField]
     private TMP_Text _errorMsg;
     [SerializeField]
-    private Canvas currentCanvas;
-    [SerializeField]
-    private Canvas roomCanvas;
+    private GameObject roomCanvas;
 
     public void on_click_join_room()
     {
+
         PhotonNetwork.JoinRoom(_name.text);
         
     }
@@ -24,8 +23,7 @@ public class JoinRoom : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         print("Room joined succesfully");
-        currentCanvas.gameObject.SetActive(false);
-        roomCanvas.gameObject.SetActive(true);
+        roomCanvas.SetActive(true);
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)

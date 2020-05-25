@@ -14,6 +14,8 @@ public class CreateRoom : MonoBehaviourPunCallbacks
     private TMP_Text ErrorName;
     [SerializeField]
     private Toggle IsPrivate;
+    [SerializeField]
+    private GameObject _roomCanvas;
 
     public void CreateRoom_button()
     {
@@ -23,7 +25,7 @@ public class CreateRoom : MonoBehaviourPunCallbacks
             RoomOptions RoomOptions = new RoomOptions();
             RoomOptions.MaxPlayers = 2;
             RoomOptions.IsVisible = !IsPrivate.enabled;
-            PhotonNetwork.JoinOrCreateRoom(_roomName.text, RoomOptions, TypedLobby.Default);
+            PhotonNetwork.CreateRoom(_roomName.text, RoomOptions, TypedLobby.Default);
         } else
         {
             return;
@@ -36,6 +38,18 @@ public class CreateRoom : MonoBehaviourPunCallbacks
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
+    {
+        ErrorName.gameObject.SetActive(true);
+        ErrorName.text = message;
+    }
+
+    public override void OnJoinedRoom()
+    {
+        print("Room joined succesfully");
+        _roomCanvas.SetActive(true);
+    }
+
+    public override void OnJoinRoomFailed(short returnCode, string message)
     {
         ErrorName.gameObject.SetActive(true);
         ErrorName.text = message;
