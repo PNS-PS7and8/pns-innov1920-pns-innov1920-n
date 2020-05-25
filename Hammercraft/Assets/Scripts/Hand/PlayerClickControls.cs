@@ -10,6 +10,8 @@ public class PlayerClickControls : MonoBehaviour {
     private Dictionary<Cell, Cell> unit_cells_walkable = new Dictionary<Cell, Cell>();
     
     [SerializeField] private Transform hoverEffect = null;
+    [SerializeField] private Transform selectEffect = null;
+
 
     private void Start() {
         gameCards = new List<GameCard>();
@@ -26,7 +28,14 @@ public class PlayerClickControls : MonoBehaviour {
 
     private void Select() {
         if (boardClicker.ClickCell(out var cell)) {
-            selectedCell = cell;
+            if (cell == selectedCell){
+                selectedCell = null;
+                selectEffect.gameObject.SetActive(false);
+            } else {
+                selectedCell = cell;
+                selectEffect.gameObject.SetActive(true);
+                selectEffect.position = selectedCell.LocalPosition;
+            }
             if(cell.unit != null) {
                 Show_deplacements(cell.unit);
             } else if(unit_cells_walkable.ContainsKey(selectedCell)) {
@@ -135,11 +144,13 @@ public class PlayerClickControls : MonoBehaviour {
                     selectedCard = null;
                     selectedCell.cellState = Cell.CellState.Occupied;
                     selectedCell = null;
+                    selectEffect.gameObject.SetActive(false);
                 }
             } else {
                     selectedCard.Use(selectedCell);
                     selectedCard = null;
                     selectedCell = null;
+                    selectEffect.gameObject.SetActive(false);
             }
         }
     }
