@@ -36,6 +36,10 @@ MonoBehaviour:
   - DestroySpaceship
   - Fire
   - RespawnSpaceship
+  - UpdateText
+  - ChangeText_RPC
+  - ChangeText1_RPC
+  - ChangeText2_RPC
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

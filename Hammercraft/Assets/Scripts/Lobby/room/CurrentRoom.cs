@@ -17,6 +17,13 @@ public class CurrentRoom : MonoBehaviourPunCallbacks
     [SerializeField]
     private TMP_Text ReadyUpText;
     private bool isReady = false;
+    
+    [SerializeField]
+    private ReadyRPC[] _readyRPC = new ReadyRPC[2];
+    [SerializeField]
+    private TMP_Text Text_Timer;
+    private Coroutine _timer=null;
+    
 
     public override void OnEnable()
     {
@@ -25,6 +32,7 @@ public class CurrentRoom : MonoBehaviourPunCallbacks
         foreach(KeyValuePair<int,Photon.Realtime.Player> player in PhotonNetwork.CurrentRoom.Players)
         {
             _players[player.Key-1].text = player.Value.NickName;
+            _readyRPC[player.Key - 1].gameObject.SetActive(true);
         }
     }
 
@@ -33,20 +41,33 @@ public class CurrentRoom : MonoBehaviourPunCallbacks
         foreach (KeyValuePair<int, Photon.Realtime.Player> player in PhotonNetwork.CurrentRoom.Players)
         {
             _players[player.Key - 1].text = player.Value.NickName;
+            _readyRPC[player.Key - 1].gameObject.SetActive(true);
         }
     }
 
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
     {
-        foreach(TMP_Text playerName in _players)
+        foreach (TMP_Text playerName in _players)
         {
-            playerName.text = "Waiting for players...";
+            playerName.text = "Waiting for player...";
         }
         foreach (KeyValuePair<int, Photon.Realtime.Player> player in PhotonNetwork.CurrentRoom.Players)
         {
-            _players[player.Key - 1].text = player.Value.NickName;
+            _players[0].text = player.Value.NickName;
+        }
+        for (int i = 0; i < 2; i++)
+        {
+            if (_players[i].text == "Waiting for player...")
+            {
+                _readyRPC[i].gameObject.SetActive(false);
+            }
+            else
+            {
+                _readyRPC[i].gameObject.SetActive(true);
+            }
         }
     }
+        
 
     public void on_click_ready_up()
     {
@@ -58,6 +79,46 @@ public class CurrentRoom : MonoBehaviourPunCallbacks
         ReadyUpButton.colors = colors;
         ReadyUpText.text = (!isReady) ? "Unready" : "Ready";
         isReady = !isReady;
+        if(PhotonNetwork.LocalPlayer.NickName == _players[0].text)
+        {
+            _readyRPC[0].ChangeText((isReady) ? "Ready" : "Not Ready");
+
+        } else if(PhotonNetwork.LocalPlayer.NickName == _players[1].text)
+        {
+            _readyRPC[1].ChangeText((isReady) ? "Ready" : "Not Ready");
+        }
+        
     }
+
+    public void FixedUpdate()
+    {       
+        if (_readyRPC[0].Ready && _readyRPC[1].Ready && _timer==null)
+        {
+           
+            Text_Timer.gameObject.SetActive(true);
+            _timer = StartCoroutine(Timer());
+        } 
+        if((!_readyRPC[0].Ready || !_readyRPC[1].Ready) && _timer!=null)
+        {
+            StopCoroutine(_timer);
+            _timer = null;
+            Text_Timer.text = "Start in : 5";
+            Text_Timer.gameObject.SetActive(false);
+        }
+    }
+
+    private IEnumerator Timer()
+    {
+        string text = "Start in : ";
+        for(int i=5; i >= 0; i--)
+        {
+            yield return new WaitForSecondsRealtime(1f);
+            print("dans la boucle");
+            Text_Timer.text = text + i.ToString();
+            
+        }
+    }
+
+
 
 }
