@@ -24,6 +24,18 @@ public class Cell {
         return cells;
     }}
 
+    public List<Cell> FreeNeighbors { get {
+        List<Cell> cells = new List<Cell>();
+        foreach(var pos in new []{ (0,-1), (1,-1), (1,0), (0,1), (-1,1), (-1,0) }) {
+            int x = position.x + pos.Item1;
+            int y = position.y + pos.Item2;
+            if (board.HasCell(x, y) && board.GetCell(x, y).cellState == CellState.Free && board.GetCell(x, y).cellType == CellType.Field) {
+                cells.Add(board.GetCell(x, y));
+            }
+        }
+        return cells;
+    }}
+
     public float Height { get {
         switch (cellType) {
             case CellType.Water: return 1;

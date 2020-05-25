@@ -5,7 +5,9 @@ public class PlayerClickControls : MonoBehaviour {
     [SerializeField] private BoardClicker boardClicker = null;
     private Cell selectedCell = null;
     private GameCard selectedCard = null;
+    private Unit selectedUnit = null;
     private List<GameCard> gameCards;
+    private Dictionary<Cell, Cell> unit_cells_walkable = new Dictionary<Cell, Cell>();
     
     [SerializeField] private Transform hoverEffect = null;
 
@@ -25,6 +27,13 @@ public class PlayerClickControls : MonoBehaviour {
     private void Select() {
         if (boardClicker.ClickCell(out var cell)) {
             selectedCell = cell;
+            if(cell.unit != null) {
+                Show_deplacements(cell.unit);
+            } else if(unit_cells_walkable.ContainsKey(selectedCell)) {
+                selectedUnit.Cell = selectedCell;
+                unit_cells_walkable = new Dictionary<Cell, Cell>();
+                selectedUnit = cell.unit;
+            }
         } else {
             if (Input.GetMouseButton(0)) {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -40,11 +49,55 @@ public class PlayerClickControls : MonoBehaviour {
             }
         }
     }
+
+    /* Algo parcours en profondeur DFS : affichage des cases où l'unité peut se rendre */
+    private void Show_deplacements(Unit unit) {
+        unit_cells_walkable = new Dictionary<Cell, Cell>();
+        selectedUnit = selectedCell.unit;
+        int deplacement_max = unit.Deplacement;
+
+        /* Initialisation du dictionnaire :
+        - Cell => cellules où peut aller l'unité
+        - int => déplacement pour aller à ladite cellule
+        */
+        Dictionary<Cell, int> dict_walkable = new Dictionary<Cell, int>();
+        dict_walkable.Add(selectedCell, 0);
+
+        List<Cell> walkable = new List<Cell>();
+        foreach(Cell cell in selectedCell.FreeNeighbors) {
+            unit_cells_walkable[cell] = selectedCell;
+            dict_walkable.Add(cell, 1);
+            walkable.Add(cell);
+        }
+        
+        while(walkable.Count > 0) {
+            Cell current_cell = walkable[0];
+            int current_depl = dict_walkable[current_cell];
+
+            if(current_depl+1 <= deplacement_max) {
+                current_depl++;
+                foreach(Cell cell in current_cell.FreeNeighbors) {
+                    if(!dict_walkable.ContainsKey(cell) || dict_walkable[cell] > current_depl) {
+                        dict_walkable[cell] = current_depl;
+                        unit_cells_walkable[cell] = current_cell;
+                        walkable.Add(cell);
+                    }
+                }
+            }
+
+            walkable.RemoveAt(0);
+        }
+    }
     
     int radius = 2;
     private void Update() {
         Hover();
         Select();
+
+        //Colorisation des cases où peuvent marcher une unité
+        foreach(Cell cell in unit_cells_walkable.Keys) {
+            Debug.DrawLine(cell.LocalPosition, cell.LocalPosition+2*Vector3.up, Color.red);
+        }
 
         if (Input.mouseScrollDelta.y > 0) radius+=2;
         if (Input.mouseScrollDelta.y < 0) radius = Mathf.Max(radius-2, 0);
