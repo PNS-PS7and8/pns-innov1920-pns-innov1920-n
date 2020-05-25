@@ -30,20 +30,32 @@ public class PlayerClickControls : MonoBehaviour {
             if(cell.unit != null) {
                 Show_deplacements(cell.unit);
             } else if(unit_cells_walkable.ContainsKey(selectedCell)) {
-                selectedUnit.Cell = selectedCell;
-                unit_cells_walkable = new Dictionary<Cell, Cell>();
-                selectedUnit = cell.unit;
+                if (selectedUnit.Health > 0){
+                    selectedUnit.Cell.cellState = Cell.CellState.Free;
+                    selectedUnit.Cell = selectedCell;
+                    selectedCell.cellState = Cell.CellState.Occupied;
+                    unit_cells_walkable = new Dictionary<Cell, Cell>();
+                    selectedUnit = cell.unit;
+                }
             }
         } else {
-            if (Input.GetMouseButton(0)) {
+            if (Input.GetMouseButtonDown(0)) {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out RaycastHit hitinfo)) {
                     if (hitinfo.transform.TryGetComponent<GameCard>(out var gameCard)) {
                         if (selectedCard != null){
-                            selectedCard.transform.localScale += new Vector3(-2,-2,-2);
+                            if (selectedCard == gameCard){
+                            gameCard.transform.localScale = new Vector3(3,3,3);
+                            } else {
+                            selectedCard.transform.localScale = new Vector3(3,3,3);
+                            }
                         }
-                        selectedCard = gameCard;
-                        gameCard.transform.localScale += new Vector3(2,2,2);
+                        if (selectedCard == gameCard ) {
+                            selectedCard = null;
+                        } else {
+                            selectedCard = gameCard;
+                            gameCard.transform.localScale = new Vector3(5,5,5);
+                        }
                     }
                 }
             }
@@ -114,11 +126,21 @@ public class PlayerClickControls : MonoBehaviour {
         }
 
         if (selectedCell != null && selectedCard != null) {
-            if (selectedCell.cellType == Cell.CellType.Field){
-                selectedCard.Use(selectedCell);
-                selectedCard = null;
-                selectedCell = null;
-            }   
+            
+            if (selectedCard.card.GetType().ToString() == "UnitCard"){ 
+                if (selectedCell.cellType == Cell.CellType.Field &&
+                    selectedCell.cellState == Cell.CellState.Free){
+                    
+                    selectedCard.Use(selectedCell);
+                    selectedCard = null;
+                    selectedCell.cellState = Cell.CellState.Occupied;
+                    selectedCell = null;
+                }
+            } else {
+                    selectedCard.Use(selectedCell);
+                    selectedCard = null;
+                    selectedCell = null;
+            }
         }
     }
 }

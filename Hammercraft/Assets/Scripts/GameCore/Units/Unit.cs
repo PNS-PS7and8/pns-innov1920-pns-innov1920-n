@@ -51,6 +51,7 @@ public class Unit : ITakeDamage, IDealDamage
     }
 
     private void Die() {
+        cell.cellState = Cell.CellState.Free;
         cell.unit = null;
     }
 }
