@@ -180,7 +180,6 @@ MonoBehaviour:
   boardClicker: {fileID: 1959275063}
   hoverEffect: {fileID: 1809312204}
   selectEffect: {fileID: 1987328300}
-  movementEffect: {fileID: 2143670920}
 --- !u!4 &362202548
 Transform:
   m_ObjectHideFlags: 0
@@ -194,7 +193,6 @@ Transform:
   m_Children:
   - {fileID: 1809312204}
   - {fileID: 1987328300}
-  - {fileID: 2143670920}
   - {fileID: 1289623610}
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -311,7 +309,7 @@ Transform:
   m_Children:
   - {fileID: 398155961}
   m_Father: {fileID: 362202548}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
 --- !u!1 &1809312199
 GameObject:
@@ -680,49 +678,6 @@ Halo:
     serializedVersion: 2
     rgba: 4010435567
   m_Size: 1
---- !u!1 &2143670919
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2143670920}
-  - component: {fileID: 2143670921}
-  m_Layer: 0
-  m_Name: movementEffect
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &2143670920
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2143670919}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 362202548}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!122 &2143670921
-Halo:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2143670919}
-  m_Enabled: 1
-  m_Color:
-    serializedVersion: 2
-    rgba: 4279865385
-  m_Size: 0.5
 --- !u!1001 &5042579349845543917
 PrefabInstance:
   m_ObjectHideFlags: 0
