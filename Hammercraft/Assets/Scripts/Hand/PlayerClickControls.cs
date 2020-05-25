@@ -12,7 +12,6 @@ public class PlayerClickControls : MonoBehaviour {
     [SerializeField] private Transform hoverEffect = null;
     [SerializeField] private Transform selectEffect = null;
 
-
     private void Start() {
         gameCards = new List<GameCard>();
     }
@@ -45,6 +44,8 @@ public class PlayerClickControls : MonoBehaviour {
                     selectedCell.cellState = Cell.CellState.Occupied;
                     unit_cells_walkable = new Dictionary<Cell, Cell>();
                     selectedUnit = cell.unit;
+                    selectedCell = null;
+                    selectEffect.gameObject.SetActive(false);
                 }
             }
         } else {
@@ -127,6 +128,7 @@ public class PlayerClickControls : MonoBehaviour {
             foreach (var cell in c.Disc(radius))
             {
                 verts.Add(cell.LocalPosition);
+                
             }
             for (int i = 0; i < verts.Count-1; i++)
             {
