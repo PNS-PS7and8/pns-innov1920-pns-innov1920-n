@@ -1,2 +1,5 @@
-.vscode 
-build
+.vscode
+build/*
+Hammercraft/Assets/Fonts/LEMONMILKBOLD\ SDF.asset
+Hammercraft/Assets/Photon/PhotonUnityNetworking/Code/Editor/PunSceneSettingsFile.asset
+Hammercraft/Assets/Photon/PhotonUnityNetworking/Resources/PhotonServerSettings.asset
