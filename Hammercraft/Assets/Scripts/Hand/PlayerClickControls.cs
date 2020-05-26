@@ -118,7 +118,7 @@ public class PlayerClickControls : MonoBehaviour {
 
         //Colorisation des cases où peuvent marcher une unité
         foreach(Cell cell in unit_cells_walkable.Keys) {
-            Debug.DrawLine(cell.LocalPosition, cell.LocalPosition+2*Vector3.up, Color.red);
+            Debug.DrawLine(cell.LocalPosition, unit_cells_walkable[cell].LocalPosition, Color.red);
         }
 
         if (Input.mouseScrollDelta.y > 0) radius+=2;
