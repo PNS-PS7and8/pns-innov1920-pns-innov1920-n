@@ -93,6 +93,15 @@ public class Board {
         }
     }
     
+    public Unit GetUnit(int unitId) {
+        IEnumerable<Unit> e = units.Where(u => u.Id == unitId);
+        if (e.Count() > 0) {
+            return e.First();
+        } else {
+            return null;
+        }
+    }
+
     public Cell GetCell(Unit unit) {
         return GetCell(unit.position);
     }
@@ -114,12 +123,16 @@ public class Board {
                 yield return c;
     }
 
-public IEnumerable<Cell> FreeNeighbors(Cell cell) => Ring(cell, 2).Where(c => c.cellState == Cell.CellState.Free && c.cellType == Cell.CellType.Field);
+    public IEnumerable<Cell> FreeNeighbors(Cell cell) => Ring(cell, 2).Where(c => c.cellState == Cell.CellState.Free && c.cellType == Cell.CellType.Field);
 
     public IEnumerable<Unit> PlayerUnits(int player) {
         foreach(var unit in units) {
             if (unit.Player == player)
                 yield return unit;
         }
+    }
+
+    public void AddUnit(string unitResource, Cell target) {
+        units.Add(new Unit(unitResource, target.position, units.Count));
     }
 }

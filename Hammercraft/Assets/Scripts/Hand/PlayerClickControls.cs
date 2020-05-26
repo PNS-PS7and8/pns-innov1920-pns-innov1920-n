@@ -45,6 +45,7 @@ public class PlayerClickControls : BoardBehaviour {
                     selectedUnit = board.GetUnit(cell);
                     selectedCell = null;
                     selectEffect.gameObject.SetActive(false);
+                    boardManager.SubmitManager();
                 }
             }
         } else {

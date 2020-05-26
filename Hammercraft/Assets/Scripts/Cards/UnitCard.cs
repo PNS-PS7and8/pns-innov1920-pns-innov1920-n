@@ -16,6 +16,6 @@ public class UnitCard : CardBase {
 
     protected override void CardEffect(Board board, Cell target)
     {
-        board.Units.Add(new Unit(this, target.position));
+        board.AddUnit(resourcePath, target);
     }
 }

@@ -2,7 +2,8 @@ using UnityEngine;
 using TMPro;
 
 public class BoardUnit : BoardBehaviour {
-    public Unit unit;
+    public int unitId;
+    private Unit unit => board.GetUnit(unitId);
 
     private void Start() {
         SyncPosition();
@@ -10,12 +11,16 @@ public class BoardUnit : BoardBehaviour {
 
     private void Update() {
         SyncPosition();
-        if (unit.Health <= 0) {
-            Destroy(gameObject);
-        }
+        DisableIfNeeded();
     }
 
     private void SyncPosition() {
-        transform.position = boardManager.transform.TransformPoint(board.LocalPosition(unit));
+        if (unit != null)
+            transform.position = boardManager.transform.TransformPoint(board.LocalPosition(unit));
+    }
+
+    private void DisableIfNeeded() {
+        if (unit.Dead)
+            gameObject.SetActive(false);
     }
 }

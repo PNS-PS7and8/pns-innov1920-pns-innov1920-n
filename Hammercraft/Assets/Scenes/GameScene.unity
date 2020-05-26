@@ -156,15 +156,15 @@ MonoBehaviour:
   SpellCardPrefab: {fileID: 1765619134951339101, guid: 3030779ff99ccfb4386763d3dfded02c,
     type: 3}
   units:
-  - {fileID: 11400000, guid: 915e745caf094056cb9a2d04299114c8, type: 2}
-  - {fileID: 11400000, guid: 915e745caf094056cb9a2d04299114c8, type: 2}
-  - {fileID: 11400000, guid: 915e745caf094056cb9a2d04299114c8, type: 2}
-  - {fileID: 11400000, guid: 915e745caf094056cb9a2d04299114c8, type: 2}
+  - {fileID: 11400000, guid: cb3c9a209e97ff88e8a3e6bdff5bf925, type: 2}
+  - {fileID: 11400000, guid: cb3c9a209e97ff88e8a3e6bdff5bf925, type: 2}
+  - {fileID: 11400000, guid: cb3c9a209e97ff88e8a3e6bdff5bf925, type: 2}
+  - {fileID: 11400000, guid: cb3c9a209e97ff88e8a3e6bdff5bf925, type: 2}
   spells:
-  - {fileID: 11400000, guid: ee9b1e1b7dffe523499216ad7e8b3787, type: 2}
-  - {fileID: 11400000, guid: ee9b1e1b7dffe523499216ad7e8b3787, type: 2}
-  - {fileID: 11400000, guid: ee9b1e1b7dffe523499216ad7e8b3787, type: 2}
-  - {fileID: 11400000, guid: ee9b1e1b7dffe523499216ad7e8b3787, type: 2}
+  - {fileID: 11400000, guid: 5e7664ff3db0ce1f392ecd678fbb57f0, type: 2}
+  - {fileID: 11400000, guid: 5e7664ff3db0ce1f392ecd678fbb57f0, type: 2}
+  - {fileID: 11400000, guid: 5e7664ff3db0ce1f392ecd678fbb57f0, type: 2}
+  - {fileID: 11400000, guid: 5e7664ff3db0ce1f392ecd678fbb57f0, type: 2}
   hand: {fileID: 398155961}
   spacing: 0.5
 --- !u!114 &362202547
@@ -498,6 +498,7 @@ GameObject:
   - component: {fileID: 1959275067}
   - component: {fileID: 1959275069}
   - component: {fileID: 1959275066}
+  - component: {fileID: 1959275070}
   m_Layer: 0
   m_Name: Board
   m_TagString: Untagged
@@ -5718,6 +5719,18 @@ MonoBehaviour:
   viewIdField: 1
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &1959275070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1959275059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 267311ab26820aad19a7b6d6a83915c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1987328299
 GameObject:
   m_ObjectHideFlags: 0
