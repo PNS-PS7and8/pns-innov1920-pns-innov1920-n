@@ -17,7 +17,7 @@ public class GameCard : MonoBehaviour
 
     private void Update() {
         costText.text = card.Cost.ToString();
-        nameText.text = card.Description;
+        nameText.text = card.Name;
         descriptionText.text = card.Description;
         image.sprite = card.Image;
         
