@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerClickControls : MonoBehaviour {
+public class PlayerClickControls : BoardBehaviour {
     [SerializeField] private BoardClicker boardClicker = null;
     [SerializeField] private HoverCell hoverCell = null;
     private List<Cell> cellsToHover = new List<Cell>();
@@ -32,17 +32,17 @@ public class PlayerClickControls : MonoBehaviour {
             } else {
                 selectedCell = cell;
                 selectEffect.gameObject.SetActive(true);
-                selectEffect.position = selectedCell.LocalPosition;
+                selectEffect.position = board.LocalPosition(selectedCell);
             }
-            if(cell.unit != null) {
-                Show_deplacements(cell.unit);
+            if(board.GetUnit(cell) != null) {
+                Show_deplacements(board.GetUnit(cell));
             } else if(unit_cells_walkable.ContainsKey(selectedCell)) {
                 if (selectedUnit.Health > 0){
-                    selectedUnit.Cell.cellState = Cell.CellState.Free;
-                    selectedUnit.Cell = selectedCell;
+                    board.GetCell(selectedUnit).cellState = Cell.CellState.Free;
+                    selectedUnit.position = selectedCell.position;
                     selectedCell.cellState = Cell.CellState.Occupied;
                     unit_cells_walkable = new Dictionary<Cell, Cell>();
-                    selectedUnit = cell.unit;
+                    selectedUnit = board.GetUnit(cell);
                     selectedCell = null;
                     selectEffect.gameObject.SetActive(false);
                 }
@@ -74,7 +74,7 @@ public class PlayerClickControls : MonoBehaviour {
     /* Algo parcours en profondeur DFS : affichage des cases où l'unité peut se rendre */
     private void Show_deplacements(Unit unit) {
         unit_cells_walkable = new Dictionary<Cell, Cell>();
-        selectedUnit = selectedCell.unit;
+        selectedUnit = board.GetUnit(selectedCell);
         int deplacement_max = unit.Deplacement;
 
         /* Initialisation du dictionnaire :
@@ -85,7 +85,7 @@ public class PlayerClickControls : MonoBehaviour {
         dict_walkable.Add(selectedCell, 0);
 
         List<Cell> walkable = new List<Cell>();
-        foreach(Cell cell in selectedCell.FreeNeighbors) {
+        foreach(Cell cell in board.FreeNeighbors(selectedCell)) {
             unit_cells_walkable[cell] = selectedCell;
             dict_walkable.Add(cell, 1);
             walkable.Add(cell);
@@ -97,7 +97,7 @@ public class PlayerClickControls : MonoBehaviour {
 
             if(current_depl+1 <= deplacement_max) {
                 current_depl++;
-                foreach(Cell cell in current_cell.FreeNeighbors) {
+                foreach(Cell cell in board.FreeNeighbors(current_cell)) {
                     if(!dict_walkable.ContainsKey(cell) || dict_walkable[cell] > current_depl) {
                         dict_walkable[cell] = current_depl;
                         unit_cells_walkable[cell] = current_cell;
@@ -117,7 +117,7 @@ public class PlayerClickControls : MonoBehaviour {
 
         //Colorisation des cases où peuvent marcher une unité
         foreach(Cell cell in unit_cells_walkable.Keys) {
-            Debug.DrawLine(cell.LocalPosition, unit_cells_walkable[cell].LocalPosition, Color.red);
+            Debug.DrawLine(board.LocalPosition(cell), board.LocalPosition(unit_cells_walkable[cell]), Color.red);
         }
         cellsToHover.AddRange(unit_cells_walkable.Keys);
         hoverCell.ShowCells(cellsToHover);
@@ -126,10 +126,9 @@ public class PlayerClickControls : MonoBehaviour {
         if (Input.mouseScrollDelta.y < 0) radius = Mathf.Max(radius-2, 0);
         if (boardClicker.HoverCell(out var c)) {
             List<Vector3> verts = new List<Vector3>();
-            foreach (var cell in c.Disc(radius))
+            foreach (var cell in board.Disc(c, radius))
             {
-                verts.Add(cell.LocalPosition);
-                
+                verts.Add(board.LocalPosition(cell));
             }
             for (int i = 0; i < verts.Count-1; i++)
             {

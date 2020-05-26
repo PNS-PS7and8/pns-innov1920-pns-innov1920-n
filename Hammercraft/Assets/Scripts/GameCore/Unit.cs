@@ -1,34 +1,32 @@
+using ExitGames.Client.Photon;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
+//using UnityEngine.UI;
+//using TMPro;
 
+[System.Serializable]
 public class Unit : ITakeDamage, IDealDamage
 {
     private UnitCard card;
-    private int health;
-    private int attack;
-    private int deplacement;
-    private Cell cell;
+    [SerializeField] private int health;
+    [SerializeField] private int attack;
+    [SerializeField] private int deplacement;
+    [SerializeField] private int player;
+    public Vector2Int position;
 
     public UnitCard Card => card;
     public int Health => health;
     public int Attack => attack;
     public int Deplacement => deplacement;
-    public Cell Cell { get => cell; set {
-        cell.unit = null;
-        cell = value;
-        cell.unit = this;
-    }}
+    public int Player => player;
 
     private BoardUnit boardUnit;
 
-    public Unit(UnitCard card, Cell cell) {
+    public Unit(UnitCard card, Vector2Int position) {
         this.card = card;
         this.health = card.Health;
         this.attack = card.Attack;
         this.deplacement = card.Deplacement;
-        this.cell = cell;
-        this.cell.unit = this;
+        this.position = position;
         
         GameObject gameObject = Object.Instantiate(card.Model);
         this.boardUnit = gameObject.GetComponent<BoardUnit>();
@@ -51,7 +49,5 @@ public class Unit : ITakeDamage, IDealDamage
     }
 
     private void Die() {
-        cell.cellState = Cell.CellState.Free;
-        cell.unit = null;
     }
 }

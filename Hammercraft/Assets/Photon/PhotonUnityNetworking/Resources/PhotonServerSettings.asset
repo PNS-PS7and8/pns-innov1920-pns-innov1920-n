@@ -40,6 +40,8 @@ MonoBehaviour:
   - ChangeText_RPC
   - ChangeText1_RPC
   - ChangeText2_RPC
+  - Sync
+  - Reset
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d6fdbecdfe08ec05a72e4deaf5b058f, type: 3}
   m_Name: Card
   m_EditorClassIdentifier: 
-  image: {fileID: 21300004, guid: 9ba453ff7c6124209b57da4cd176d458, type: 3}
   name: The One
   description: Do nothing
   cost: 2

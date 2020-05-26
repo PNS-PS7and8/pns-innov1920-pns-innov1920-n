@@ -17,9 +17,11 @@ public class BoardClicker : BoardBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hitinfo) && hitinfo.transform == transform) {
             Vector2Int cellPos = board.LocalToCell(transform.InverseTransformPoint(hitinfo.point));
-            cell = board.GetCell(cellPos);
-            if (cell.cellType != Cell.CellType.None)
-                return true;
+            if (board.HasCell(cellPos)) {
+                cell = board.GetCell(cellPos);
+                if (cell.cellType != Cell.CellType.None)
+                    return true;
+            }
         }
         cell = null;
         return false;

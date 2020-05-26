@@ -16,6 +16,6 @@ public class BoardUnit : BoardBehaviour {
     }
 
     private void SyncPosition() {
-        transform.position = boardManager.transform.TransformPoint(board.CellToLocal(unit.Cell.position));
+        transform.position = boardManager.transform.TransformPoint(board.LocalPosition(unit));
     }
 }

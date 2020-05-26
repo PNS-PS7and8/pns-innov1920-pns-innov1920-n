@@ -19,9 +19,8 @@ public class BoardPlayer : BoardBehaviour {
     
     private void Start() {
         gameCards = new List<GameCard>();
-        player = new Player(
-            new Deck(units.ToArray(), spells.ToArray())
-        );
+        Deck deck = new Deck(units.ToArray(), spells.ToArray());
+        player = new Player(deck, 0);
         DrawUnit();
         DrawUnit();
         DrawSpell();

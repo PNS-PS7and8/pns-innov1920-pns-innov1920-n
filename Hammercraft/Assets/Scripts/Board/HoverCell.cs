@@ -17,7 +17,7 @@ public class HoverCell : BoardBehaviour
         cells = new List<Cell>();
 
         foreach(Cell cell in board.Cells()) {
-            GameObject goCell = Instantiate(hoverCellPrefab, cell.LocalPosition+Vector3.up*0.01f, Quaternion.Euler(90, 0, 0), transform);
+            GameObject goCell = Instantiate(hoverCellPrefab, board.LocalPosition(cell)+Vector3.up*0.01f, Quaternion.Euler(90, 0, 0), transform);
             goCell.SetActive(false);
             dictCells[cell] = goCell;
         }
@@ -31,7 +31,7 @@ public class HoverCell : BoardBehaviour
     void Update()
     {
         foreach(Cell cell in dictCells.Keys) {
-            if (cell.position == cells[0].position) {
+            if (cells.Count > 0 && cell.position == cells[0].position) {
                 dictCells[cell].GetComponent<SpriteRenderer>().sprite = spriteContourCell;
                 dictCells[cell].GetComponent<SpriteRenderer>().color = Color.white;
                 dictCells[cell].SetActive(true);

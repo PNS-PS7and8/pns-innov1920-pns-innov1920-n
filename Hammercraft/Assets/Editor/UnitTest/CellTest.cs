@@ -13,7 +13,7 @@ public class CellTest : MonoBehaviour
         Board board = new Board(10,10);
         Cell cell = board.GetCell(4,4);
         Cell cellN = board.GetCell(4,3);
-        List<Cell> got = cell.Neighbors;
+        List<Cell> got = board.Neighbors(cell).ToList();
         Assert.True(got.Contains(cellN));
     }
 
@@ -23,7 +23,7 @@ public class CellTest : MonoBehaviour
         Cell cell = board.GetCell(4,4);
         Cell cellN = board.GetCell(4,3);
         cellN.cellType = Cell.CellType.Field;
-        List<Cell> got = cell.FreeNeighbors;
+        List<Cell> got = board.FreeNeighbors(cell).ToList();
         Assert.True(got.Contains(cellN));
     }
 
@@ -33,7 +33,7 @@ public class CellTest : MonoBehaviour
         Cell cell = board.GetCell(4,4);
         Cell cellN = board.GetCell(4,3);
         cellN.cellType = Cell.CellType.Water;
-        List<Cell> got = cell.FreeNeighbors;
+        List<Cell> got = board.FreeNeighbors(cell).ToList();
         Assert.False(got.Contains(cellN));
     }
 
@@ -44,7 +44,7 @@ public class CellTest : MonoBehaviour
         Cell cellN = board.GetCell(4,3);
         cellN.cellType = Cell.CellType.Field;
         cellN.cellState = Cell.CellState.Occupied;
-        List<Cell> got = cell.FreeNeighbors;
+        List<Cell> got = board.FreeNeighbors(cell).ToList();
         Assert.False(got.Contains(cellN));
     }
 
@@ -68,7 +68,7 @@ public class CellTest : MonoBehaviour
     public void LocalPosition_Test() {
         Board board = new Board(10,10);
         Cell cell = board.GetCell(5,5);
-        Assert.That(cell.LocalPosition, Is.EqualTo(new Vector3(0,2,0)));
+        Assert.That(board.LocalPosition(cell), Is.EqualTo(new Vector3(0,2,0)));
     }
 
     [Test]
@@ -84,7 +84,7 @@ public class CellTest : MonoBehaviour
         Board board = new Board(10,10);
         Cell cell = board.GetCell(5,5);
         Cell cellN = board.GetCell(5,4);
-        Assert.True(cell.Ring(2).Contains(cellN));
+        Assert.True(board.Ring(cell, 2).Contains(cellN));
     }
 
     [Test]
@@ -92,7 +92,7 @@ public class CellTest : MonoBehaviour
         Board board = new Board(10,10);
         Cell cell = board.GetCell(5,5);
         Cell cellN = board.GetCell(5,4);
-        Assert.True(cell.Disc(3).Contains(cellN));
+        Assert.True(board.Disc(cell, 3).Contains(cellN));
     }
 
 }

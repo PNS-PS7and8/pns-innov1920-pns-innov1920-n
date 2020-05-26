@@ -14,8 +14,8 @@ public class UnitCard : CardBase {
     public int Deplacement => deplacement;
     public bool Range => range;
 
-    protected override void CardEffect(Cell target)
+    protected override void CardEffect(Board board, Cell target)
     {
-        Unit unit = new Unit(this, target);
+        board.Units.Add(new Unit(this, target.position));
     }
 }

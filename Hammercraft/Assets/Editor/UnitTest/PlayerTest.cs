@@ -14,7 +14,7 @@ public class PlayerTest : MonoBehaviour
         us[0] = u;
         ss[0] = s;
         Deck deck = new Deck(us, ss);
-        Player p = new Player(deck);
+        Player p = new Player(deck, 0);
         Assert.That(p.originalDeck.DrawUnit(), Is.EqualTo(p.deck.DrawUnit()));
     }
 
@@ -27,7 +27,7 @@ public class PlayerTest : MonoBehaviour
         us[0] = u;
         ss[0] = s;
         Deck deck = new Deck(us, ss);
-        Player p = new Player(deck);
+        Player p = new Player(deck, 0);
         Assert.That(p.originalDeck.DrawSpell(), Is.EqualTo(p.deck.DrawSpell()));
     }
 }

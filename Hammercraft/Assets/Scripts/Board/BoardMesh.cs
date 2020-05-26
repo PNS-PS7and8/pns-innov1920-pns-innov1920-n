@@ -57,7 +57,7 @@ public class BoardMesh : BoardBehaviour
 
     void GenerateHexagon(Cell cell, List<Vector3> vertices, List<Vector2> uv, List<List<int>> triangles) {
         GenerateHexagonTop(cell, vertices, uv, triangles);
-        foreach(var neighbor in cell.Neighbors) {
+        foreach(var neighbor in board.Neighbors(cell)) {
             if (CellSubMesh(cell) > CellSubMesh(neighbor)) {
                 GenerateHexagonSide(cell, neighbor, vertices, uv, triangles);
             }

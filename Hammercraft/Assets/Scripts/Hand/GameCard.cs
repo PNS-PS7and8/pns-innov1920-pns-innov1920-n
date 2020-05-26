@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-public class GameCard : MonoBehaviour
+public class GameCard : BoardBehaviour
 {
     public CardBase card = null;
     
@@ -30,8 +30,9 @@ public class GameCard : MonoBehaviour
     }
 
     public void Use(Cell cell) {
-        card.Use(cell);
+        card.Use(board, cell);
         Destroy(gameObject);
         player.RemoveCard(this);
+        boardManager.SubmitManager();
     }
 }
