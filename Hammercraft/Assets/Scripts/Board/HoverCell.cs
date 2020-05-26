@@ -37,7 +37,7 @@ public class HoverCell : BoardBehaviour
                 dictCells[cell].SetActive(true);
             } else if(cells.Contains(cell)) {
                 dictCells[cell].GetComponent<SpriteRenderer>().sprite = spriteFullCell;
-                dictCells[cell].GetComponent<SpriteRenderer>().color = Color.green;
+                dictCells[cell].GetComponent<SpriteRenderer>().color = new Color(0,1,0.7f,0.2f);
                 dictCells[cell].SetActive(true);
             } else {
                 dictCells[cell].GetComponent<SpriteRenderer>().sprite = spriteContourCell;
