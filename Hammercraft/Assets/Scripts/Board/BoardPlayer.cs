@@ -45,6 +45,7 @@ public class BoardPlayer : BoardBehaviour {
     private void SpawnGameCard(CardBase card) {
         
         GameObject go = Instantiate((card.GetType().IsAssignableFrom(typeof(UnitCard))) ? UnitCardPrefab : SpellCardPrefab, hand);
+        go.transform.localScale = new Vector3(3, 3, 3);
         GameCard gameCard = go.GetComponent<GameCard>();
         gameCards.Add(gameCard);
         gameCard.card = card;

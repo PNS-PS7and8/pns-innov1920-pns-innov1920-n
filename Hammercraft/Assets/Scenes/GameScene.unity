@@ -151,9 +151,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83e715b944ff7da44a6eb7bf2c53813a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UnitCardPrefab: {fileID: -927199367670048503, guid: 7767078f629d57a47af6af0c6b3f152f,
+  UnitCardPrefab: {fileID: 609897459420351686, guid: 9d32bd20d891781b0a6da272f87b5b98,
     type: 3}
-  SpellCardPrefab: {fileID: -927199367670048503, guid: b421cf770583ca24d82170353ef45558,
+  SpellCardPrefab: {fileID: 1765619134951339101, guid: 3030779ff99ccfb4386763d3dfded02c,
     type: 3}
   units:
   - {fileID: 11400000, guid: 915e745caf094056cb9a2d04299114c8, type: 2}
@@ -594,7 +594,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boardSize: {x: 50, y: 50}
   perlinNoiseScale: 0.1
-  perlinNoiseOffset: {x: 0, y: 0, z: 0}
+  perlinNoiseOffset: {x: 10, y: 10, z: 10}
   onReset:
     m_PersistentCalls:
       m_Calls:
