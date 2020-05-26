@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boardClicker: {fileID: 1959275063}
-  hoverEffect: {fileID: 1809312204}
+  hoverCell: {fileID: 1959275066}
   selectEffect: {fileID: 1987328300}
 --- !u!4 &362202548
 Transform:
@@ -462,6 +462,7 @@ GameObject:
   - component: {fileID: 1959275062}
   - component: {fileID: 1959275061}
   - component: {fileID: 1959275067}
+  - component: {fileID: 1959275066}
   m_Layer: 0
   m_Name: Board
   m_TagString: Untagged
@@ -599,6 +600,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1959275066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1959275059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 326315085340a514cb6d1aeb100b60e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hexagone: {fileID: 1963624991826392414, guid: 1f21267d98fd7304cae6b62b8c164858,
+    type: 3}
 --- !u!114 &1959275067
 MonoBehaviour:
   m_ObjectHideFlags: 0
