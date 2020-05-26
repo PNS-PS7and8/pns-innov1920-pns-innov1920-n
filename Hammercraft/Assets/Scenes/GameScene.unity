@@ -643,11 +643,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1959275059}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 326315085340a514cb6d1aeb100b60e0, type: 3}
+  m_Script: {fileID: 11500000, guid: 8b2349978a3ab2349aee2fc5c36b70d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hexagone: {fileID: 1963624991826392414, guid: 1f21267d98fd7304cae6b62b8c164858,
+  hoverCellPrefab: {fileID: 3608826703030457681, guid: 52f8402bf7f37024f9e8ac089f26637f,
     type: 3}
+  spriteFullCell: {fileID: 21300000, guid: 1d8dcf4ac6e4d68439bbf1fb1b1c389b, type: 3}
+  spriteContourCell: {fileID: 21300000, guid: 63b7949fdbcf7b6468afcef4046aa77d, type: 3}
 --- !u!114 &1959275067
 MonoBehaviour:
   m_ObjectHideFlags: 0
