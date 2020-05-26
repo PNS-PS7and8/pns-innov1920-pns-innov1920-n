@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerClickControls : MonoBehaviour {
     [SerializeField] private BoardClicker boardClicker = null;
     [SerializeField] private HoverCell hoverCell = null;
+    private List<Cell> cellsToHover = new List<Cell>();
     private Cell selectedCell = null;
     private GameCard selectedCard = null;
     private Unit selectedUnit = null;
@@ -17,10 +18,9 @@ public class PlayerClickControls : MonoBehaviour {
     }
 
     private void Hover() {
+        cellsToHover = new List<Cell>();
         if (boardClicker.HoverCell(out var hover)) {
-            hoverCell.ShowCells(hover);
-        } else {
-            hoverCell.ShowCells(new Cell[0]);
+            cellsToHover.Add(hover);
         }
     }
 
@@ -119,6 +119,8 @@ public class PlayerClickControls : MonoBehaviour {
         foreach(Cell cell in unit_cells_walkable.Keys) {
             Debug.DrawLine(cell.LocalPosition, unit_cells_walkable[cell].LocalPosition, Color.red);
         }
+        cellsToHover.AddRange(unit_cells_walkable.Keys);
+        hoverCell.ShowCells(cellsToHover);
 
         if (Input.mouseScrollDelta.y > 0) radius+=2;
         if (Input.mouseScrollDelta.y < 0) radius = Mathf.Max(radius-2, 0);
