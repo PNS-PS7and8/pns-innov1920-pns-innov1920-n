@@ -24,10 +24,7 @@ public class GameCard : MonoBehaviour
         if (card.GetType().IsAssignableFrom(typeof(UnitCard))) {
             attackText.text = ((UnitCard) card).Attack.ToString();
             healthText.text = ((UnitCard) card).Health.ToString();
-        } else {
-            attackText.text = "";
-            healthText.text = "";
-        }
+        } 
     }
 
     public void Use(Cell cell) {

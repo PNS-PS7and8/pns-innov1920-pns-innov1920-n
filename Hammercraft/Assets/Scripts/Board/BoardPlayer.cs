@@ -2,7 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BoardPlayer : BoardBehaviour {
-    [SerializeField] private GameObject gameCardPrefab;
+    [SerializeField] private GameObject UnitCardPrefab;
+    [SerializeField] private GameObject SpellCardPrefab;
     [SerializeField] private List<UnitCard> units = null;
     [SerializeField] private List<SpellCard> spells = null;
     [SerializeField] private Transform hand;
@@ -42,7 +43,8 @@ public class BoardPlayer : BoardBehaviour {
     }
 
     private void SpawnGameCard(CardBase card) {
-        GameObject go = Instantiate(gameCardPrefab, hand);
+        
+        GameObject go = Instantiate((card.GetType().IsAssignableFrom(typeof(UnitCard))) ? UnitCardPrefab : SpellCardPrefab, hand);
         GameCard gameCard = go.GetComponent<GameCard>();
         gameCards.Add(gameCard);
         gameCard.card = card;
