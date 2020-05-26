@@ -9,7 +9,8 @@ public class GameCardTests : MonoBehaviourBaseTest
     public bool GameCardUpdate_Test(){
         Board board = new Board();
         Cell cell = board.GetCell(1,1);
-        var gc = subject.AddComponent<GameCard>();
+        GameCard gc = subject.AddComponent<GameCard>();
+        CardBase a = gc.card;
         return true;
     }
 
