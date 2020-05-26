@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class PlayerClickControls : MonoBehaviour {
     [SerializeField] private BoardClicker boardClicker = null;
+    [SerializeField] private HoverCell hoverCell = null;
     private Cell selectedCell = null;
     private GameCard selectedCard = null;
     private Unit selectedUnit = null;
     private List<GameCard> gameCards;
     private Dictionary<Cell, Cell> unit_cells_walkable = new Dictionary<Cell, Cell>();
     
-    [SerializeField] private Transform hoverEffect = null;
     [SerializeField] private Transform selectEffect = null;
 
     private void Start() {
@@ -18,10 +18,9 @@ public class PlayerClickControls : MonoBehaviour {
 
     private void Hover() {
         if (boardClicker.HoverCell(out var hover)) {
-            hoverEffect.gameObject.SetActive(true);
-            hoverEffect.position = boardClicker.boardManager.transform.TransformPoint(boardClicker.board.CellToLocal(hover.position));
+            hoverCell.ShowCells(hover);
         } else {
-            hoverEffect.gameObject.SetActive(false);
+            hoverCell.ShowCells(new Cell[0]);
         }
     }
 
