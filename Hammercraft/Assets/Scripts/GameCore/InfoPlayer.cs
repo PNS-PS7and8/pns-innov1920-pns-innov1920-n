@@ -8,6 +8,6 @@ public class InfoPlayer : BoardBehaviour
 {
     [SerializeField] public TMP_Text text;
     private void Update() {
-        text.text = "Tour de : "+PhotonNetwork.PlayerList[boardManager.Manager.PlayerTurn].NickName;
+        text.text = "Tour de "+PhotonNetwork.PlayerList[boardManager.Manager.PlayerTurn].NickName;
     }
 }

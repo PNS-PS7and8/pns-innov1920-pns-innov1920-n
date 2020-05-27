@@ -9,6 +9,6 @@ public class InfoGold : BoardBehaviour
 {
     [SerializeField] public TMP_Text text;
     private void Update() {
-        text.text = boardManager.Manager.CurrentPlayer.CurrentGold.ToString();
+        text.text = boardManager.Manager.CurrentPlayer.CurrentGold.ToString() + " / " + boardManager.Manager.CurrentPlayer.Gold.ToString();
     }
 }
