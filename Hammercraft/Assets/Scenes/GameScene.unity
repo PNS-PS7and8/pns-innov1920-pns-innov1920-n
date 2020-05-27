@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -354,13 +354,8 @@ GameObject:
   - component: {fileID: 362202548}
   - component: {fileID: 362202545}
   - component: {fileID: 362202554}
-  - component: {fileID: 362202553}
-  - component: {fileID: 362202552}
-  - component: {fileID: 362202551}
-  - component: {fileID: 362202550}
-  - component: {fileID: 362202549}
-  - component: {fileID: 362202547}
   - component: {fileID: 362202546}
+  - component: {fileID: 362202549}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -409,24 +404,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boardClicker: {fileID: 1959275063}
-  selectUnit: {fileID: 362202551}
-  selectCell: {fileID: 362202552}
-  unitMoves: {fileID: 362202547}
---- !u!114 &362202547
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 362202544}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86db9b6c381313e438fa903412dad63b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boardClicker: {fileID: 1959275063}
-  selectUnit: {fileID: 362202551}
   hoverCell: {fileID: 1959275066}
+  color: {r: 0.1515336, g: 0, b: 1, a: 0.5882353}
+  pathColor: {r: 0.46925062, g: 0.64128435, b: 0.8962264, a: 1}
 --- !u!4 &362202548
 Transform:
   m_ObjectHideFlags: 0
@@ -453,63 +433,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 362202544}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bb18f4b31ee2f24ba0d84a009fc76cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectCell: {fileID: 362202552}
-  selectCard: {fileID: 362202553}
---- !u!114 &362202550
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 362202544}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b71b72a46beb31c45974768fe90c4a0a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectCell: {fileID: 362202552}
-  selectCard: {fileID: 362202553}
---- !u!114 &362202551
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 362202544}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76d1616ea97c2774587e62904c892bb9, type: 3}
+  m_Script: {fileID: 11500000, guid: 1366f7dd57db535f38e6e431723d5704, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   boardClicker: {fileID: 1959275063}
---- !u!114 &362202552
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 362202544}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 958e16fab3458c94383b6af4d425f399, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boardClicker: {fileID: 1959275063}
---- !u!114 &362202553
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 362202544}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1759702e36d6d5c41a281311b435b3bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  growDuration: 0.1
+  growAmount: 1.5
 --- !u!114 &362202554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -524,6 +453,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boardClicker: {fileID: 1959275063}
   hoverCell: {fileID: 1959275066}
+  friendlyColor: {r: 0.11988478, g: 0.052865803, b: 0.9339623, a: 1}
+  ennemyColor: {r: 1, g: 0.13725492, b: 0.14381295, a: 1}
+  hoverColor: {r: 1, g: 1, b: 1, a: 0.27450982}
 --- !u!1 &398155960
 GameObject:
   m_ObjectHideFlags: 0
@@ -6707,10 +6639,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b2349978a3ab2349aee2fc5c36b70d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverCellPrefab: {fileID: 3608826703030457681, guid: 52f8402bf7f37024f9e8ac089f26637f,
-    type: 3}
-  spriteFullCell: {fileID: 21300000, guid: 1d8dcf4ac6e4d68439bbf1fb1b1c389b, type: 3}
-  spriteContourCell: {fileID: 21300000, guid: 63b7949fdbcf7b6468afcef4046aa77d, type: 3}
+  sprite: {fileID: 21300000, guid: 63b7949fdbcf7b6468afcef4046aa77d, type: 3}
+  offset: 0.01
 --- !u!114 &1959275067
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -19,11 +19,6 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
 
     private void Awake() {
         PhotonPeer.RegisterType(typeof(GameManager), (byte) 'G', GameManager.Serialize, GameManager.Deserialize);
-        // Serializer.Register<Board>((byte) 'B');
-        // Serializer.Register<Cell>((byte) 'C');
-        // Serializer.Register<Unit>((byte) 'U');
-        // Serializer.Register<Player>((byte) 'P');
-        // Serializer.Register<Deck>((byte) 'D');
         Reset(NewGame());
         SubmitManager();
     }
@@ -79,7 +74,7 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
     }
 
     public void NextTurn(){
-        if (manager.MyTurn()){
+        if (manager.MyTurn() || !PhotonNetwork.IsConnected){
             manager.IncreaseTurn();
             manager.ResetGold();
             manager.NextTurn();

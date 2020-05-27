@@ -5,18 +5,46 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class BoardClicker : BoardBehaviour
 {
-    public bool ClickCell(out Cell cell) {
-        if (Input.GetMouseButtonDown(0)) {
-            return HoverCell(out cell);
+    public delegate void OnClickCardAction(GameCard card);
+    public delegate void OnClickCellAction(Cell cell);
+    public delegate void OnClickUnitAction(Cell cell, Unit unit);
+    
+    public event OnClickCardAction OnHoverCard;
+    public event OnClickCardAction OnClickCard;
+    public event OnClickCellAction OnHoverCell;
+    public event OnClickCellAction OnClickCell;
+    public event OnClickUnitAction OnHoverUnit;
+    public event OnClickUnitAction OnClickUnit;
+
+    void Update()
+    {
+        if (Raycast(out var hit)) {
+            if (HoverCard(hit, out var card)) {
+                if (Input.GetMouseButtonDown(0))
+                    OnClickCard?.Invoke(card);
+                else
+                    OnHoverCard?.Invoke(card);
+            }
+            else if (HoverCell(hit, out var cell)) {
+                Unit unit = board.GetUnit(cell);
+                if (unit != null && !unit.Dead) {
+                    if (Input.GetMouseButtonDown(0))
+                        OnClickUnit?.Invoke(cell, unit);
+                    else
+                        OnHoverUnit?.Invoke(cell, unit);
+                } else {
+                    if (Input.GetMouseButtonDown(0))
+                        OnClickCell?.Invoke(cell);
+                    else 
+                        OnHoverCell?.Invoke(cell);
+                }
+            }
         }
-        cell = null;
-        return false;
     }
 
-    public bool HoverCell(out Cell cell) {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hitinfo) && hitinfo.transform == transform) {
-            Vector2Int cellPos = board.LocalToCell(transform.InverseTransformPoint(hitinfo.point));
+    private bool HoverCell(RaycastHit hit, out Cell cell) {
+        if (hit.transform == boardManager.transform) {
+            Vector2Int cellPos = board.LocalToCell(transform.InverseTransformPoint(hit.point));
             if (board.HasCell(cellPos)) {
                 cell = board.GetCell(cellPos);
                 if (cell != null && cell.cellType != Cell.CellType.None)
@@ -25,5 +53,15 @@ public class BoardClicker : BoardBehaviour
         }
         cell = null;
         return false;
+    }
+
+    private bool HoverCard(RaycastHit hit, out GameCard card) {
+        card = hit.transform.GetComponent<GameCard>();
+        return card != null;
+    }
+
+    private bool Raycast(out RaycastHit hit) {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        return Physics.Raycast(ray, out hit);
     }
 }

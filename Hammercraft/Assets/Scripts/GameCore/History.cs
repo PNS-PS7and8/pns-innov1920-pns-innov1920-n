@@ -73,20 +73,20 @@ public class GameHistory
         history = new List<GameAction>();
     }
 
-    public IEnumerable<GameAction> Find(GameHistoryFilter filter){
-        return history.Where(action => filter(action));
+    public List<GameAction> Find(GameHistoryFilter filter){
+        return history.Where(action => filter(action)).ToList();
     }
 
-    public IOrderedEnumerable<GameAction> Find(GameHistoryFilter filter, GameHistoryOrdering ordering, bool reverseOrder = false) {
-        return Find(filter).OrderBy(action => (reverseOrder ? -1 : 1) * ordering(action));
+    public List<GameAction> Find(GameHistoryFilter filter, GameHistoryOrdering ordering, bool reverseOrder = false) {
+        return Find(filter).OrderBy(action => (reverseOrder ? -1 : 1) * ordering(action)).ToList();
     }
 
-    public IEnumerable<T> Find<T>(GameHistoryFilter<T> filter) where T : GameAction {
-        return history.OfType<T>().Where(action => filter(action));
+    public List<T> Find<T>(GameHistoryFilter<T> filter) where T : GameAction {
+        return history.OfType<T>().Where(action => filter(action)).ToList();
     }
 
-    public IOrderedEnumerable<T> Find<T>(GameHistoryFilter<T> filter, GameHistoryOrdering<T> ordering, bool reverseOrder = false) where T : GameAction {
-        return Find<T>(filter).OrderBy(action => (reverseOrder ? -1 : 1) * ordering(action)); 
+    public List<T> Find<T>(GameHistoryFilter<T> filter, GameHistoryOrdering<T> ordering, bool reverseOrder = false) where T : GameAction {
+        return Find<T>(filter).OrderBy(action => (reverseOrder ? -1 : 1) * ordering(action)).ToList(); 
     }
 
     public void Add(GameAction action){

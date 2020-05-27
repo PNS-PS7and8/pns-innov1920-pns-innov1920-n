@@ -83,7 +83,7 @@ public class GameManager {
     }
 
     public bool MyTurn(){
-        if (!PhotonNetwork.IsConnected || playerTurn+1 == PhotonNetwork.LocalPlayer.ActorNumber){
+        if (!PhotonNetwork.IsConnected && playerTurn%2==0 || playerTurn+1 == PhotonNetwork.LocalPlayer.ActorNumber){
             return true;
         }
         return false;
