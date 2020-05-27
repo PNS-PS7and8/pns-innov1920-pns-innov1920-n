@@ -1,5 +1,6 @@
 using System.Text;
 using UnityEngine;
+using Photon.Pun;
 
 [System.Serializable]
 public class GameManager {
@@ -22,6 +23,7 @@ public class GameManager {
     public Board Board => board;
     public Player CurrentPlayer => players[playerTurn];
     public History History => history;
+    public int PlayerTurn => playerTurn;
 
 
     public GameMode GameMode => setup.gameMode.GameMode();
@@ -75,5 +77,12 @@ public class GameManager {
     public static object Deserialize(byte[] data) {
         string json = Encoding.UTF8.GetString(data);
         return JsonUtility.FromJson<GameManager>(json);
+    }
+
+    public bool MyTurn(){
+        if (playerTurn+1 == PhotonNetwork.LocalPlayer.ActorNumber){
+            return true;
+        }
+        return false;
     }
 }

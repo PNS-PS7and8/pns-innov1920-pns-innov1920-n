@@ -73,18 +73,17 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
     {
         Debug.Log("Game manager synced");
     }
-
-    public void NextTurn(){
-        //need player.id via photon probablement, un truc comme ça .. ?
-        //Debug.Log(MasterManager.GameSettings.Nickname);
-        //if (player.id == manager.currentPlayer){}
-        manager.History.resetHistory();
-        manager.NextTurn();
-        manager.History.addHistory("player"+manager.CurrentPlayer);
-    }
     public override void OnLeftRoom()
     {
         SceneManager.LoadScene("Rooms");
+    }
+
+    public void NextTurn(){
+        if (manager.MyTurn()){
+            manager.History.resetHistory();
+            manager.NextTurn();
+            SubmitManager();
+        }
     }
 
 }

@@ -36,7 +36,8 @@ public class PlayerClickControls : BoardBehaviour {
             }
             if(board.GetUnit(cell) != null) {
                 Show_deplacements(board.GetUnit(cell));
-            } else if(unit_cells_walkable.ContainsKey(selectedCell) && selectedUnit.Health > 0 && boardManager.Manager.History.isAvailable("move"+selectedUnit.Id)) {
+            } else if(unit_cells_walkable.ContainsKey(selectedCell) && selectedUnit.Health > 0 && boardManager.Manager.History.isAvailable("move"+selectedUnit.Id)
+             && boardManager.Manager.MyTurn()) {
                 board.GetCell(selectedUnit).cellState = Cell.CellState.Free;
                 selectedUnit.position = selectedCell.position;
                 selectedCell.cellState = Cell.CellState.Occupied;
@@ -136,7 +137,7 @@ public class PlayerClickControls : BoardBehaviour {
             }
         }
 
-        if (selectedCell != null && selectedCard != null) {
+        if (selectedCell != null && selectedCard != null && boardManager.Manager.MyTurn()) {
             
             if (selectedCard.card.GetType().ToString() == "UnitCard"){ 
                 if (selectedCell.cellType == Cell.CellType.Field &&
