@@ -19,12 +19,13 @@ public class GameManager {
     [SerializeField] private int midturn;
     [SerializeField] private int playerTurn;
     [SerializeField] private Setup setup;
-    [SerializeField] private History history;
+    [SerializeField] private GameHistory history;
     
     public Board Board => board;
     public Player CurrentPlayer => players[playerTurn];
-    public History History => history;
+    public GameHistory History => history;
     public int PlayerTurn => playerTurn;
+    public int Turn => turn;
 
 
     public GameMode GameMode => setup.gameMode.GameMode();
@@ -47,7 +48,7 @@ public class GameManager {
     }
 
     public void StartGame(Setup setup, Deck playerOneDeck, Deck playerTwoDeck) {
-        history = new History();
+        history = new GameHistory();
         this.setup = setup;
         ResetBoard();
         turn = 1;
@@ -82,7 +83,7 @@ public class GameManager {
     }
 
     public bool MyTurn(){
-        if (playerTurn+1 == PhotonNetwork.LocalPlayer.ActorNumber){
+        if (!PhotonNetwork.IsConnected || playerTurn+1 == PhotonNetwork.LocalPlayer.ActorNumber){
             return true;
         }
         return false;

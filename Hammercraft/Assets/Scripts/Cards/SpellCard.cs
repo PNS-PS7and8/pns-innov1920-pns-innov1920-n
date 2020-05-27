@@ -5,6 +5,8 @@ public class SpellCard : CardBase
 {
     protected override void CardEffect(Board board, Cell target)
     {
-        board.GetUnit(target).TakeDamage(6);
+        Unit unit = board.GetUnit(target);
+        if (unit != null)
+            unit.TakeDamage(6);
     }
 }

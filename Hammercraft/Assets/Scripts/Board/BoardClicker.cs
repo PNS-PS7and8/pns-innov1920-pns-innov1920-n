@@ -19,7 +19,7 @@ public class BoardClicker : BoardBehaviour
             Vector2Int cellPos = board.LocalToCell(transform.InverseTransformPoint(hitinfo.point));
             if (board.HasCell(cellPos)) {
                 cell = board.GetCell(cellPos);
-                if (cell.cellType != Cell.CellType.None)
+                if (cell != null && cell.cellType != Cell.CellType.None)
                     return true;
             }
         }

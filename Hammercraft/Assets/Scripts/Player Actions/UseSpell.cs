@@ -13,7 +13,7 @@ public class UseSpell : BoardBehaviour
         Cell selectedCell = selectCell.SelectedCell;
         GameCard selectedCard = selectCard.SelectedCard;
         if (selectedCell != null && selectedCard != null && boardManager.Manager.MyTurn() && boardManager.Manager.CurrentPlayer.CurrentGold >= selectedCard.card.Cost) {
-            if (!(selectedCard.card.GetType().ToString() == "UnitCard")){
+            if (selectedCard.card.GetType().IsAssignableFrom(typeof(SpellCard))){
                 boardManager.Manager.CurrentPlayer.SetCurrentGold(boardManager.Manager.CurrentPlayer.CurrentGold - selectedCard.card.Cost);
                 selectedCard.Use(selectedCell);
                 selectedCard = null;

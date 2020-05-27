@@ -14,9 +14,12 @@ public class SelectUnit : BoardBehaviour
     void Update()
     {
         if (boardClicker.ClickCell(out var cell)) {
-            if(_selectedUnit == null || (_selectedUnit != null && board.GetUnit(cell) != null)) {
-                _selectedUnit = board.GetUnit(cell);
-                _cellUnit = cell;
+            Unit unit = board.GetUnit(cell);
+            if (unit != null && !unit.Dead) {
+                if(_selectedUnit == null || _selectedUnit != null) {
+                    _selectedUnit = unit;
+                    _cellUnit = cell;
+                }
             }
         }
     }

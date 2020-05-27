@@ -13,7 +13,7 @@ public class UnitDeploy : BoardBehaviour
         Cell selectedCell = selectCell.SelectedCell;
         GameCard selectedCard = selectCard.SelectedCard;
         if (selectedCell != null && selectedCard != null && boardManager.Manager.MyTurn() && boardManager.Manager.CurrentPlayer.CurrentGold >= selectedCard.card.Cost) {
-            if (selectedCard.card.GetType().ToString() == "UnitCard"){ 
+            if (selectedCard.card.GetType().IsAssignableFrom(typeof(UnitCard))){ 
                 if (selectedCell.cellType == Cell.CellType.Field &&
                     selectedCell.cellState == Cell.CellState.Free){
                     

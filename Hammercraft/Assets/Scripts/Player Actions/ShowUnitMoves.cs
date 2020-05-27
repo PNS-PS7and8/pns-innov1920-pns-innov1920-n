@@ -34,7 +34,7 @@ public class ShowUnitMoves : BoardBehaviour
     }
 
     public bool cellInCellsWalkable(Cell cell) {
-        return _unitCellsWalkable.ContainsKey(cell); 
+        return cell != null && _unitCellsWalkable.ContainsKey(cell); 
     }
 
     /* Algo parcours en profondeur DFS : affichage des cases où l'unité peut se rendre */

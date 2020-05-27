@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Linq;
 using UnityEngine;
 
 public class MoveUnit : BoardBehaviour
@@ -14,11 +13,12 @@ public class MoveUnit : BoardBehaviour
     {
         Unit selectedUnit = selectUnit.SelectedUnit;
         Cell selectedCell = selectCell.SelectedCell;
-        if(unitMoves.cellInCellsWalkable(selectedCell) && selectedUnit.Health > 0 && boardManager.Manager.History.isAvailable("move"+selectedUnit.Id) && boardManager.Manager.MyTurn()) {
+        bool canMove = boardManager.Manager.History.Find<MovementAction>(action => boardManager.Manager.Turn == action.Turn && action.UnitId == selectedUnit.Id).Count() == 0;
+        if(unitMoves.cellInCellsWalkable(selectedCell) && selectedUnit.Health > 0 && canMove && boardManager.Manager.MyTurn()) {
             board.GetCell(selectedUnit).cellState = Cell.CellState.Free;
             selectedUnit.position = selectedCell.position;
             selectedCell.cellState = Cell.CellState.Occupied;
-            boardManager.Manager.History.addHistory("move"+selectedUnit.Id);
+            boardManager.Manager.History.Add(new MovementAction(boardManager.Manager.CurrentPlayer.Id, boardManager.Manager.Turn, selectedUnit.Id, selectedUnit.position, selectedCell.position));
             selectUnit.SetSelectedUnit(board.GetUnit(selectedCell), selectedCell);
             selectCell.ResetSelectedCell();
             boardManager.SubmitManager();
