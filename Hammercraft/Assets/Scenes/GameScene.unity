@@ -762,6 +762,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21fc9ac0e71d6c7479d4fd62cbf950a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  text: {fileID: 40781552}
 --- !u!1 &1118172914
 GameObject:
   m_ObjectHideFlags: 0
@@ -6673,14 +6674,13 @@ MonoBehaviour:
       size: {x: 50, y: 50}
     players: []
     turn: 0
+    midturn: 0
     playerTurn: 0
     setup:
       boardSize: {x: 0, y: 0}
       noiseOffset: {x: 0, y: 0, z: 0}
       noiseScale: 0
       gameMode: 0
-    history:
-      HistoryList: []
 --- !u!4 &1959275065
 Transform:
   m_ObjectHideFlags: 0
