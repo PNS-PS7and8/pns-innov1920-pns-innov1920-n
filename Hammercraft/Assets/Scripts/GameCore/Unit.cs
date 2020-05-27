@@ -1,5 +1,6 @@
 using ExitGames.Client.Photon;
 using UnityEngine;
+using Photon.Pun;
 
 [System.Serializable]
 public class Unit : ITakeDamage, IDealDamage
@@ -52,7 +53,7 @@ public class Unit : ITakeDamage, IDealDamage
         this.deplacement = card.Deplacement;
         this.position = position;
         this.dead = false;
-        this.id = id;
+        this.id = PhotonNetwork.LocalPlayer.ActorNumber;
     }
 
     public void TakeDamage(int amount) {

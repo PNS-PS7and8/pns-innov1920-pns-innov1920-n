@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using UnityEngine;
+using Photon.Pun;
 
 public class MoveUnit : BoardBehaviour
 {
@@ -14,7 +15,8 @@ public class MoveUnit : BoardBehaviour
         Unit selectedUnit = selectUnit.SelectedUnit;
         Cell selectedCell = selectCell.SelectedCell;
         bool canMove = boardManager.Manager.History.Find<MovementAction>(action => boardManager.Manager.Turn == action.Turn && action.UnitId == selectedUnit.Id).Count() == 0;
-        if(unitMoves.cellInCellsWalkable(selectedCell) && selectedUnit.Health > 0 && canMove && boardManager.Manager.MyTurn()) {
+        if(unitMoves.cellInCellsWalkable(selectedCell) && selectedUnit.Health > 0 && canMove && boardManager.Manager.MyTurn() 
+        && selectedUnit.Id == PhotonNetwork.LocalPlayer.ActorNumber && selectCell.SelectedCell.position != selectedUnit.position) {
             board.GetCell(selectedUnit).cellState = Cell.CellState.Free;
             selectedUnit.position = selectedCell.position;
             selectedCell.cellState = Cell.CellState.Occupied;
