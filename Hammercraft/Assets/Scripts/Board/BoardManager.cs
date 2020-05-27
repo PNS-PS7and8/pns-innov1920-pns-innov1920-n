@@ -4,8 +4,9 @@ using ExitGames.Client.Photon;
 using Photon.Pun;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
-public class BoardManager : MonoBehaviourPun, IPunObservable {
+public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
     public Board board => manager.Board;
     public GameManager Manager => manager;
     [SerializeField] private Vector2Int boardSize = new Vector2Int(50, 50);
@@ -29,6 +30,9 @@ public class BoardManager : MonoBehaviourPun, IPunObservable {
 
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Space)) SubmitManager();
+        if (manager.GameState.Finished() && PhotonNetwork.IsConnectedAndReady) {
+            PhotonNetwork.LeaveRoom();
+        }
     }
 
     public void SubmitManager() {
@@ -43,6 +47,7 @@ public class BoardManager : MonoBehaviourPun, IPunObservable {
         setup.boardSize = boardSize;
         setup.noiseScale = perlinNoiseScale;
         setup.noiseOffset = perlinNoiseOffset;
+        setup.gameMode = GameModes.KillToWin;
         
         Deck deck = new Deck(
             new UnitCard[] {
@@ -77,4 +82,9 @@ public class BoardManager : MonoBehaviourPun, IPunObservable {
         manager.NextTurn();
         manager.History.addHistory("player"+manager.CurrentPlayer);
     }
+    public override void OnLeftRoom()
+    {
+        SceneManager.LoadScene("Rooms");
+    }
+
 }

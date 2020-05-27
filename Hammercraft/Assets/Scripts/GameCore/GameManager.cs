@@ -8,6 +8,7 @@ public class GameManager {
         public Vector2Int boardSize;
         public Vector3 noiseOffset;
         public float noiseScale;
+        public GameModes gameMode;
     }
 
     [SerializeField] private Board board;
@@ -23,6 +24,8 @@ public class GameManager {
     public History History => history;
 
 
+    public GameMode GameMode => setup.gameMode.GameMode();
+    public GameState GameState => GameMode.CurrentGameState(this);
     public void ResetBoard() {
         board = new Board(setup.boardSize);
         Cell center = board.GetCell(setup.boardSize.x/2, setup.boardSize.y/2);
@@ -58,6 +61,10 @@ public class GameManager {
 
     public void NextTurn() {
         playerTurn = (playerTurn + 1) % 2;
+    }
+
+    public Player GetPlayer(int playerId) {
+        return players[playerId];
     }
 
     public static byte[] Serialize(object manager) {
