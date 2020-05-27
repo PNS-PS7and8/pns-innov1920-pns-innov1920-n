@@ -16,6 +16,7 @@ public class GameManager {
     [SerializeField] private Player[] players;
 
     [SerializeField] private int turn;
+    [SerializeField] private int midturn;
     [SerializeField] private int playerTurn;
     [SerializeField] private Setup setup;
     [SerializeField] private History history;
@@ -49,7 +50,8 @@ public class GameManager {
         history = new History();
         this.setup = setup;
         ResetBoard();
-        turn = 0;
+        turn = 1;
+        midturn = 0;
         playerTurn = 0;
         players = new Player[2] {
             new Player(playerOneDeck, 0),
@@ -84,5 +86,27 @@ public class GameManager {
             return true;
         }
         return false;
+    }
+
+    public void IncreaseTurn(){
+        if (midturn == 1){
+            midturn = 0;
+            turn++;
+            IncreaseGold();
+        } else { 
+            midturn = 1; 
+        }
+    }
+
+    public void IncreaseGold(){
+        foreach (Player p in players){
+            p.SetGold(turn);
+        }
+    }
+
+    public void ResetGold(){
+        foreach (Player p in players){
+            p.SetCurrentGold(p.Gold);
+        }
     }
 }

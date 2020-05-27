@@ -81,6 +81,8 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
     public void NextTurn(){
         if (manager.MyTurn()){
             manager.History.resetHistory();
+            manager.IncreaseTurn();
+            manager.ResetGold();
             manager.NextTurn();
             SubmitManager();
         }

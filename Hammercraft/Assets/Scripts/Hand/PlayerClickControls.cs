@@ -137,12 +137,12 @@ public class PlayerClickControls : BoardBehaviour {
             }
         }
 
-        if (selectedCell != null && selectedCard != null && boardManager.Manager.MyTurn()) {
+        if (selectedCell != null && selectedCard != null && boardManager.Manager.MyTurn() && boardManager.Manager.CurrentPlayer.CurrentGold >= selectedCard.card.Cost) {
             
             if (selectedCard.card.GetType().ToString() == "UnitCard"){ 
                 if (selectedCell.cellType == Cell.CellType.Field &&
                     selectedCell.cellState == Cell.CellState.Free){
-                    
+                    boardManager.Manager.CurrentPlayer.SetCurrentGold(boardManager.Manager.CurrentPlayer.CurrentGold - selectedCard.card.Cost);
                     selectedCard.Use(selectedCell);
                     selectedCard = null;
                     selectedCell.cellState = Cell.CellState.Occupied;
@@ -150,6 +150,7 @@ public class PlayerClickControls : BoardBehaviour {
                     selectEffect.gameObject.SetActive(false);
                 }
             } else {
+                    boardManager.Manager.CurrentPlayer.SetCurrentGold(boardManager.Manager.CurrentPlayer.CurrentGold - selectedCard.card.Cost);
                     selectedCard.Use(selectedCell);
                     selectedCard = null;
                     selectedCell = null;
