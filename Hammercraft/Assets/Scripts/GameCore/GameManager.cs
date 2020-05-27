@@ -16,9 +16,12 @@ public class GameManager {
     [SerializeField] private int turn;
     [SerializeField] private int playerTurn;
     [SerializeField] private Setup setup;
+    [SerializeField] private History history;
     
     public Board Board => board;
     public Player CurrentPlayer => players[playerTurn];
+    public History History => history;
+
 
     public void ResetBoard() {
         board = new Board(setup.boardSize);
@@ -38,6 +41,7 @@ public class GameManager {
     }
 
     public void StartGame(Setup setup, Deck playerOneDeck, Deck playerTwoDeck) {
+        history = new History();
         this.setup = setup;
         ResetBoard();
         turn = 0;

@@ -36,17 +36,16 @@ public class PlayerClickControls : BoardBehaviour {
             }
             if(board.GetUnit(cell) != null) {
                 Show_deplacements(board.GetUnit(cell));
-            } else if(unit_cells_walkable.ContainsKey(selectedCell)) {
-                if (selectedUnit.Health > 0){
-                    board.GetCell(selectedUnit).cellState = Cell.CellState.Free;
-                    selectedUnit.position = selectedCell.position;
-                    selectedCell.cellState = Cell.CellState.Occupied;
-                    unit_cells_walkable = new Dictionary<Cell, Cell>();
-                    selectedUnit = board.GetUnit(cell);
-                    selectedCell = null;
-                    selectEffect.gameObject.SetActive(false);
-                    boardManager.SubmitManager();
-                }
+            } else if(unit_cells_walkable.ContainsKey(selectedCell) && selectedUnit.Health > 0 && boardManager.Manager.History.isAvailable("move"+selectedUnit.Id)) {
+                board.GetCell(selectedUnit).cellState = Cell.CellState.Free;
+                selectedUnit.position = selectedCell.position;
+                selectedCell.cellState = Cell.CellState.Occupied;
+                boardManager.Manager.History.addHistory("move"+selectedUnit.Id);
+                unit_cells_walkable = new Dictionary<Cell, Cell>();
+                selectedUnit = board.GetUnit(cell);
+                selectedCell = null;
+                selectEffect.gameObject.SetActive(false);
+                boardManager.SubmitManager();
             }
         } else {
             if (Input.GetMouseButtonDown(0)) {

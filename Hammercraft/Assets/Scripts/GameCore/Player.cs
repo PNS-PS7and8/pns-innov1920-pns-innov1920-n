@@ -10,6 +10,7 @@ public class Player {
     [SerializeField] private int id;
 
     public List<CardBase> Hand => hand;
+    public int Id => id;
 
     public Player(Deck deck, int id) {
         this.id = id;

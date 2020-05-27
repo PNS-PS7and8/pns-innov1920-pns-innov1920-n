@@ -7,6 +7,7 @@ using UnityEngine.Events;
 
 public class BoardManager : MonoBehaviourPun, IPunObservable {
     public Board board => manager.Board;
+    public GameManager Manager => manager;
     [SerializeField] private Vector2Int boardSize = new Vector2Int(50, 50);
     [SerializeField] private float perlinNoiseScale;
     [SerializeField] private Vector3 perlinNoiseOffset;
@@ -66,5 +67,14 @@ public class BoardManager : MonoBehaviourPun, IPunObservable {
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         Debug.Log("Game manager synced");
+    }
+
+    public void NextTurn(){
+        //need player.id via photon probablement, un truc comme ça .. ?
+        //Debug.Log(MasterManager.GameSettings.Nickname);
+        //if (player.id == manager.currentPlayer){}
+        manager.History.resetHistory();
+        manager.NextTurn();
+        manager.History.addHistory("player"+manager.CurrentPlayer);
     }
 }
