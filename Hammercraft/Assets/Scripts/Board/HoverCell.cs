@@ -10,6 +10,7 @@ public class HoverCell : BoardBehaviour
 
     private Dictionary<Cell, GameObject> dictCells;
     private List<Cell> cells;
+    private Cell mouseHover = null;
 
     void Start()
     {
@@ -23,6 +24,10 @@ public class HoverCell : BoardBehaviour
         }
     }
 
+    public void ShowMouseHover(Cell cell) {
+        mouseHover = cell;
+    }
+
     public void ShowCells(List<Cell> cellsToShow) {
         cells = cellsToShow;
     }
@@ -31,7 +36,7 @@ public class HoverCell : BoardBehaviour
     void Update()
     {
         foreach(Cell cell in dictCells.Keys) {
-            if (cells.Count > 0 && cell.position == cells[0].position) {
+            if (cell == mouseHover) {
                 dictCells[cell].GetComponent<SpriteRenderer>().sprite = spriteContourCell;
                 dictCells[cell].GetComponent<SpriteRenderer>().color = Color.white;
                 dictCells[cell].SetActive(true);

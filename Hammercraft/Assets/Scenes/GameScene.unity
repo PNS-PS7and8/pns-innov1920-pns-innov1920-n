@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -352,8 +352,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 362202548}
-  - component: {fileID: 362202547}
   - component: {fileID: 362202545}
+  - component: {fileID: 362202554}
+  - component: {fileID: 362202553}
+  - component: {fileID: 362202552}
+  - component: {fileID: 362202551}
+  - component: {fileID: 362202550}
+  - component: {fileID: 362202549}
+  - component: {fileID: 362202547}
+  - component: {fileID: 362202546}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -389,6 +396,22 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5e7664ff3db0ce1f392ecd678fbb57f0, type: 2}
   hand: {fileID: 398155961}
   spacing: 0.5
+--- !u!114 &362202546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 362202544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 582912dc0fc6e324dad804221c5216c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boardClicker: {fileID: 1959275063}
+  selectUnit: {fileID: 362202551}
+  selectCell: {fileID: 362202552}
+  unitMoves: {fileID: 362202547}
 --- !u!114 &362202547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -398,12 +421,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 362202544}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52cb1491f503526c59815e4e9daf00ca, type: 3}
+  m_Script: {fileID: 11500000, guid: 86db9b6c381313e438fa903412dad63b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   boardClicker: {fileID: 1959275063}
+  selectUnit: {fileID: 362202551}
   hoverCell: {fileID: 1959275066}
-  selectEffect: {fileID: 1987328300}
 --- !u!4 &362202548
 Transform:
   m_ObjectHideFlags: 0
@@ -421,6 +444,86 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &362202549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 362202544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bb18f4b31ee2f24ba0d84a009fc76cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectCell: {fileID: 362202552}
+  selectCard: {fileID: 362202553}
+--- !u!114 &362202550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 362202544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b71b72a46beb31c45974768fe90c4a0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectCell: {fileID: 362202552}
+  selectCard: {fileID: 362202553}
+--- !u!114 &362202551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 362202544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76d1616ea97c2774587e62904c892bb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boardClicker: {fileID: 1959275063}
+--- !u!114 &362202552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 362202544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 958e16fab3458c94383b6af4d425f399, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boardClicker: {fileID: 1959275063}
+--- !u!114 &362202553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 362202544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1759702e36d6d5c41a281311b435b3bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &362202554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 362202544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ce383f20b0018044b1bbdb523da5b50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boardClicker: {fileID: 1959275063}
+  hoverCell: {fileID: 1959275066}
 --- !u!1 &398155960
 GameObject:
   m_ObjectHideFlags: 0
@@ -659,7 +762,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21fc9ac0e71d6c7479d4fd62cbf950a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 40781552}
 --- !u!1 &1118172914
 GameObject:
   m_ObjectHideFlags: 0
@@ -6571,7 +6673,6 @@ MonoBehaviour:
       size: {x: 50, y: 50}
     players: []
     turn: 0
-    midturn: 0
     playerTurn: 0
     setup:
       boardSize: {x: 0, y: 0}
