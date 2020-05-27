@@ -16,7 +16,7 @@ public class UnitDeploy : BoardBehaviour
             if (selectedCard.card.GetType().IsAssignableFrom(typeof(UnitCard))){ 
                 if (selectedCell.cellType == Cell.CellType.Field &&
                     selectedCell.cellState == Cell.CellState.Free){
-                    
+                    boardManager.Manager.CurrentPlayer.SetCurrentGold(boardManager.Manager.CurrentPlayer.CurrentGold - selectedCard.card.Cost);
                     selectedCard.Use(selectedCell);
                     selectedCard = null;
                     selectedCell.cellState = Cell.CellState.Occupied;
