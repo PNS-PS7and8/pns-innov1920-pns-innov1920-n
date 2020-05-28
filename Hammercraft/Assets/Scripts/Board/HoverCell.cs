@@ -9,14 +9,14 @@ public class HoverCell : BoardBehaviour
     [SerializeField] private Sprite sprite;
     [SerializeField] private float offset = 0.01f;
 
-    private Dictionary<Cell, SpriteRenderer> instances;
-    private Dictionary<Cell, List<Color>> colors;
+    private Dictionary<Vector2Int, SpriteRenderer> instances;
+    private Dictionary<Vector2Int, List<Color>> colors;
 
 
     private void Start()
     {
-        instances = new Dictionary<Cell, SpriteRenderer>();
-        colors = new Dictionary<Cell, List<Color>>();
+        instances = new Dictionary<Vector2Int, SpriteRenderer>();
+        colors = new Dictionary<Vector2Int, List<Color>>();
 
         foreach(Cell cell in board.Cells()) {
             GameObject go = new GameObject(string.Format("Cell ({0}, {1})", cell.position.x, cell.position.y), typeof(SpriteRenderer));
@@ -25,12 +25,12 @@ public class HoverCell : BoardBehaviour
             go.transform.localPosition = board.LocalPosition(cell) + Vector3.up * offset;
             go.transform.localRotation = Quaternion.Euler(90, 0, 0);
             
-            instances[cell] = go.GetComponent<SpriteRenderer>();
-            instances[cell].sprite = sprite;
-            instances[cell].color = transparent;
-            instances[cell].enabled = false;
+            instances[cell.position] = go.GetComponent<SpriteRenderer>();
+            instances[cell.position].sprite = sprite;
+            instances[cell.position].color = transparent;
+            instances[cell.position].enabled = false;
 
-            colors[cell] = new List<Color>();
+            colors[cell.position] = new List<Color>();
         }
     }
 
@@ -40,10 +40,10 @@ public class HoverCell : BoardBehaviour
 
     public void ShowCells(Color color, IEnumerable<Cell> cells) {
         foreach (var cell in cells) {
-            if (instances.ContainsKey(cell) && !colors[cell].Contains(color)) {
-                colors[cell].Add(color);
-                instances[cell].color = color;
-                instances[cell].enabled = true;
+            if (instances.ContainsKey(cell.position) && !colors[cell.position].Contains(color)) {
+                colors[cell.position].Add(color);
+                instances[cell.position].color = color;
+                instances[cell.position].enabled = true;
             }
         }
     }
