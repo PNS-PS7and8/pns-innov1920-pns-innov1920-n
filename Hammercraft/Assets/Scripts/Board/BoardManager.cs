@@ -9,6 +9,7 @@ using System.Collections;
 using Photon.Realtime;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
     public Board board => manager.Board;
@@ -17,11 +18,13 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
     [SerializeField] private float perlinNoiseScale;
     [SerializeField] private Vector3 perlinNoiseOffset;
     [SerializeField] private Button EndTurnButton;
+    [SerializeField] private TMP_Text TimerText;
 
 
     public UnityEvent onReset;
 
     [SerializeField] private GameManager manager;
+    private Coroutine _timer = null;
 
     private void Awake() {
         PhotonPeer.RegisterType(typeof(GameManager), (byte) 'G', GameManager.Serialize, GameManager.Deserialize);
@@ -42,17 +45,34 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
         if (manager.GameState.Finished() && PhotonNetwork.IsConnectedAndReady) {
             StartCoroutine(waitForWin());
         }
-        if (manager.MyTurn())
+        if (manager.MyTurn() && _timer==null)
         {
+            _timer = StartCoroutine(Timer());
             EndTurnButton.enabled = true;
             EndTurnButton.gameObject.GetComponent<Image>().color = new Color(1,0.75f,0);
-            
             EndTurnButton.GetComponentInChildren<TMP_Text>().text = "END TURN";
-        } else
+        } else if (!manager.MyTurn() && _timer==null)
         {
+            _timer = StartCoroutine(Timer());
             EndTurnButton.enabled = false;
             EndTurnButton.gameObject.GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f);
             EndTurnButton.GetComponentInChildren<TMP_Text>().text = "ENNEMY TURN";
+        }
+    }
+
+    private IEnumerator Timer()
+    {
+        for(int i=45; i > 0; i--)
+        {
+            TimerText.text = i.ToString();
+            
+            TimerText.color = (i < 15) ? Color.red : Color.black;
+            
+            yield return new WaitForSecondsRealtime(1f);
+        }
+        if (manager.MyTurn() || !PhotonNetwork.IsConnected)
+        {
+            NextTurn();
         }
     }
 
@@ -112,7 +132,8 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
         if (manager.MyTurn() || !PhotonNetwork.IsConnected){
             manager.IncreaseTurn();
             manager.ResetGold();
-            
+            StopCoroutine(_timer);
+            _timer = null;
             manager.NextTurn();
             SubmitManager();
 
