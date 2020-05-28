@@ -39,10 +39,10 @@ public class MoveUnit : BoardBehaviour
 
     void OnSelectUnit(Cell cell, Unit unit)
     {
-        if (this.unit != null && cell.Distance(origin) <= this.unit.RangeAtq){ 
-            this.unit.DealDamage(unit); 
-            Deselect(); 
-        } else if(!unit.Dead && CanMove(unit) && manager.MyTurn() && unit.Player-1 == manager.CurrentPlayer.Id) {
+        if (this.unit != null && cell.Distance(origin) <= this.unit.RangeAtq && this.unit != unit){ 
+            this.unit.DealDamage(unit);
+            Deselect();
+        } else if(!unit.Dead && CanMove(unit) && manager.MyTurn() && unit.Player == manager.CurrentPlayer.Id) {
             this.unit = unit;
             this.origin = cell;
             hoverCell.ShowCells(color, PathFinding.CellsInReach(board, cell, unit.Deplacement));

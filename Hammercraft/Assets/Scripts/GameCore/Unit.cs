@@ -56,7 +56,7 @@ public class Unit : ITakeDamage, IDealDamage
         this.deplacement = card.Deplacement;
         this.position = position;
         this.dead = false;
-        this.player = PhotonNetwork.LocalPlayer.ActorNumber;
+        this.player = PhotonNetwork.LocalPlayer.ActorNumber-1;
         this.id = id;
         this.rangeAtq = (card.Range) ? 6 : 2;
     }

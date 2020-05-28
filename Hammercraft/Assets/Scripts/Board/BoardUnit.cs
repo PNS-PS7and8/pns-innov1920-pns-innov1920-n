@@ -11,7 +11,7 @@ public class BoardUnit : BoardBehaviour {
     private void Start() {
         SyncPosition();
         renderer = GetComponent<Renderer>();
-        renderer.material = (PhotonNetwork.LocalPlayer.ActorNumber == unit.Player) ? ally : ennemy;
+        renderer.material = (PhotonNetwork.LocalPlayer.ActorNumber-1 == unit.Player) ? ally : ennemy;
     }
 
     private void Update() {
