@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using Photon.Realtime;
 
 public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
     public Board board => manager.Board;
@@ -80,6 +81,11 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
     public override void OnLeftRoom()
     {
 
+        SceneManager.LoadScene("Rooms");
+    }
+
+    public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
+    {
         SceneManager.LoadScene("Rooms");
     }
 
