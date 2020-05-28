@@ -32,8 +32,9 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
         PhotonPeer.RegisterType(typeof(GameManager), (byte) 'G', GameManager.Serialize, GameManager.Deserialize);
         Reset(NewGame());
         SubmitManager();
-        startOfTurn = manager.PlayerTurn!=manager.CurrentPlayer.Id;
+        startOfTurn = manager.PlayerTurn==PhotonNetwork.LocalPlayer.ActorNumber-1;
         startOfEnnemyTurn = !startOfTurn;
+        
     }
 
     private IEnumerator waitForWin(){
@@ -149,11 +150,13 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
     {
 
         SceneManager.LoadScene("Rooms");
+        PhotonNetwork.JoinLobby();
     }
 
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
     {
         SceneManager.LoadScene("Rooms");
+        PhotonNetwork.JoinLobby();
     }
 
     public void NextTurn(){
