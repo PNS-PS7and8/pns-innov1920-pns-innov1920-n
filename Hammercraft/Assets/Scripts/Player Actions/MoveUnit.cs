@@ -39,10 +39,9 @@ public class MoveUnit : BoardBehaviour
 
     void OnSelectUnit(Cell cell, Unit unit)
     {
-        if(!unit.Dead && CanMove(unit) && manager.MyTurn() && unit.Player == manager.CurrentPlayer.Id) {
+        if(!unit.Dead && CanMove(unit) && manager.MyTurn() && unit.Id-1 == manager.CurrentPlayer.Id) {
             this.unit = unit;
             this.origin = cell;
-            
             hoverCell.ShowCells(color, PathFinding.CellsInReach(board, cell, unit.Deplacement));
         }
     }
