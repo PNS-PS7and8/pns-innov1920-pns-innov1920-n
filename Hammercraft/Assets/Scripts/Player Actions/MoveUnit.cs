@@ -46,6 +46,7 @@ public class MoveUnit : BoardBehaviour
             this.unit = unit;
             this.origin = cell;
             hoverCell.ShowCells(color, PathFinding.CellsInReach(board, cell, unit.Deplacement));
+            hoverCell.ShowCells(Color.yellow, PathFinding.CellsInReach(board, cell, unit.RangeAtq/2));
         }
     }
 
@@ -82,5 +83,6 @@ public class MoveUnit : BoardBehaviour
         
         hoverCell.HideCells(pathColor);
         hoverCell.HideCells(color);
+        hoverCell.HideCells(Color.yellow);
     }
 }
