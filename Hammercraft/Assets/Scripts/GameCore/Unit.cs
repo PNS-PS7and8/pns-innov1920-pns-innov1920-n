@@ -43,6 +43,7 @@ public class Unit : ITakeDamage, IDealDamage
         this.position = position;
         this.dead = false;
         this.id = id;
+        this.player = PhotonNetwork.LocalPlayer.ActorNumber;
     }
 
     public Unit(string cardResourcePath, Vector2Int position, int id) {
@@ -53,7 +54,8 @@ public class Unit : ITakeDamage, IDealDamage
         this.deplacement = card.Deplacement;
         this.position = position;
         this.dead = false;
-        this.id = PhotonNetwork.LocalPlayer.ActorNumber;
+        this.player = PhotonNetwork.LocalPlayer.ActorNumber;
+        this.id = id;
     }
 
     public void TakeDamage(int amount) {

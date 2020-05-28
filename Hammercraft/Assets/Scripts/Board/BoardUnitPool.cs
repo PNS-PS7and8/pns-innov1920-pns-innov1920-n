@@ -11,7 +11,9 @@ public class BoardUnitPool : BoardBehaviour {
     private void Update() {
         foreach (var unit in board.Units)
         {
+            
             if (!boardUnits.ContainsKey(unit.Id)) {
+                
                 boardUnits.Add(unit.Id, CreateBoardUnit(unit));
             }
         }
