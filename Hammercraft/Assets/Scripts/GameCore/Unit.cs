@@ -12,7 +12,7 @@ public class Unit : ITakeDamage, IDealDamage
     [SerializeField] private int attack;
     [SerializeField] private int deplacement;
     [SerializeField] private int player;
-    
+    [SerializeField] private int rangeAtq;
     private UnitCard card;
     
     public Vector2Int position;
@@ -31,6 +31,7 @@ public class Unit : ITakeDamage, IDealDamage
     public int Attack => attack;
     public int Deplacement => deplacement;
     public int Player => player;
+    public int RangeAtq => rangeAtq;
 
     private BoardUnit boardUnit;
 
@@ -44,6 +45,7 @@ public class Unit : ITakeDamage, IDealDamage
         this.dead = false;
         this.id = id;
         this.player = PhotonNetwork.LocalPlayer.ActorNumber;
+        this.rangeAtq = (card.Range) ? 6 : 2;
     }
 
     public Unit(string cardResourcePath, Vector2Int position, int id) {
@@ -56,6 +58,7 @@ public class Unit : ITakeDamage, IDealDamage
         this.dead = false;
         this.player = PhotonNetwork.LocalPlayer.ActorNumber;
         this.id = id;
+        this.rangeAtq = (card.Range) ? 6 : 2;
     }
 
     public void TakeDamage(int amount) {
