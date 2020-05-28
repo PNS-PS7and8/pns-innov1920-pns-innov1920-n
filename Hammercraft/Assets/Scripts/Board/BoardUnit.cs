@@ -1,12 +1,17 @@
 using UnityEngine;
 using TMPro;
-
+using Photon.Pun;
 public class BoardUnit : BoardBehaviour {
     public int unitId;
     private Unit unit => board.GetUnit(unitId);
+    private Renderer renderer;
+    [SerializeField] private Material ally;
+    [SerializeField] private Material ennemy;
 
     private void Start() {
         SyncPosition();
+        renderer = GetComponent<Renderer>();
+        renderer.material = (PhotonNetwork.LocalPlayer.ActorNumber == unit.Id) ? ally : ennemy;
     }
 
     private void Update() {

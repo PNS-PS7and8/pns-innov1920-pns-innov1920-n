@@ -93,3 +93,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitId: 0
+  ally: {fileID: 2100000, guid: 52c3ef643d68839408f34d4ce44425f8, type: 2}
+  ennemy: {fileID: 2100000, guid: 68b5dcfbc98aa69279b000981c94edd1, type: 2}
