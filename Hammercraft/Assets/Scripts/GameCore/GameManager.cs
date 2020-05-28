@@ -1,6 +1,7 @@
 using System.Text;
 using UnityEngine;
 using Photon.Pun;
+using System.Collections.Generic;
 
 [System.Serializable]
 public class GameManager {
@@ -13,7 +14,7 @@ public class GameManager {
     }
 
     [SerializeField] private Board board;
-    [SerializeField] private Player[] players;
+    [SerializeField] private List<Player> players;
 
     [SerializeField] private int turn;
     [SerializeField] private int midturn;
@@ -54,7 +55,7 @@ public class GameManager {
         turn = 1;
         midturn = 0;
         playerTurn = 0;
-        players = new Player[2] {
+        players = new List<Player> {
             new Player(playerOneDeck, 0),
             new Player(playerTwoDeck, 1)
         };
@@ -67,7 +68,7 @@ public class GameManager {
     public void NextTurn() {
         playerTurn = (playerTurn + 1) % 2;
     }
-
+    
     public Player GetPlayer(int playerId) {
         return players[playerId];
     }

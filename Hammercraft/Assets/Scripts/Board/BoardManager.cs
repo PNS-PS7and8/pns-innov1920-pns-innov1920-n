@@ -25,11 +25,15 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
 
     [SerializeField] private GameManager manager;
     private Coroutine _timer = null;
+    private bool startOfTurn = false;
+    private bool startOfEnnemyTurn;
 
     private void Awake() {
         PhotonPeer.RegisterType(typeof(GameManager), (byte) 'G', GameManager.Serialize, GameManager.Deserialize);
         Reset(NewGame());
         SubmitManager();
+        startOfTurn = manager.PlayerTurn!=manager.CurrentPlayer.Id;
+        startOfEnnemyTurn = !startOfTurn;
     }
 
     private IEnumerator waitForWin(){
@@ -45,19 +49,43 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
         if (manager.GameState.Finished() && PhotonNetwork.IsConnectedAndReady) {
             StartCoroutine(waitForWin());
         }
-        if (manager.MyTurn() && _timer==null)
+        if (manager.MyTurn() && startOfTurn)
         {
-            _timer = StartCoroutine(Timer());
-            EndTurnButton.enabled = true;
-            EndTurnButton.gameObject.GetComponent<Image>().color = new Color(1,0.75f,0);
-            EndTurnButton.GetComponentInChildren<TMP_Text>().text = "END TURN";
-        } else if (!manager.MyTurn() && _timer==null)
-        {
-            _timer = StartCoroutine(Timer());
-            EndTurnButton.enabled = false;
-            EndTurnButton.gameObject.GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f);
-            EndTurnButton.GetComponentInChildren<TMP_Text>().text = "ENNEMY TURN";
+            startOfTurn = false;
+            StartOfTurn();
         }
+        if (!manager.MyTurn() && startOfEnnemyTurn)
+        {
+            startOfEnnemyTurn = false;
+            StartOfEnnemyTurn();
+        }
+       
+    }
+
+    private void StartOfTurn()
+    {
+        startOfEnnemyTurn = true;
+        if (_timer != null)
+        {
+            StopCoroutine(_timer);
+        }
+        _timer = StartCoroutine(Timer());
+        EndTurnButton.enabled = true;
+        EndTurnButton.gameObject.GetComponent<Image>().color = new Color(1, 0.75f, 0);
+        EndTurnButton.GetComponentInChildren<TMP_Text>().text = "END TURN";
+    }
+
+    private void StartOfEnnemyTurn()
+    {
+        startOfTurn = true;
+        if(_timer != null)
+        {
+            StopCoroutine(_timer);
+        }
+        _timer = StartCoroutine(Timer());
+        EndTurnButton.enabled = (PhotonNetwork.IsConnected) ? false : true;
+        EndTurnButton.gameObject.GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f);
+        EndTurnButton.GetComponentInChildren<TMP_Text>().text = "ENNEMY TURN";
     }
 
     private IEnumerator Timer()
@@ -66,7 +94,7 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
         {
             TimerText.text = i.ToString();
             
-            TimerText.color = (i < 15) ? Color.red : Color.black;
+            TimerText.color = (i <= 15 && manager.MyTurn()) ? Color.red : Color.black;
             
             yield return new WaitForSecondsRealtime(1f);
         }
@@ -131,12 +159,9 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
     public void NextTurn(){
         if (manager.MyTurn() || !PhotonNetwork.IsConnected){
             manager.IncreaseTurn();
-            manager.ResetGold();
-            StopCoroutine(_timer);
-            _timer = null;
+            manager.ResetGold();    
             manager.NextTurn();
-            SubmitManager();
-
+            SubmitManager();    
         }
     }
 
