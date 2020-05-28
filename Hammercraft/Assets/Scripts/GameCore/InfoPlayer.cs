@@ -7,8 +7,10 @@ using Photon.Pun;
 public class InfoPlayer : BoardBehaviour
 {
     [SerializeField] public TMP_Text text;
+    [SerializeField] public TMP_Text text2;
     private void Update() {
         if (PhotonNetwork.IsConnectedAndReady)
-            text.text = "Tour de "+PhotonNetwork.PlayerList[manager.PlayerTurn].NickName;
+            text.text = BoardManager.getEnnemy().NickName;
+            text2.text = BoardManager.getPlayer().NickName;
     }
 }

@@ -6,6 +6,12 @@ using UnityEngine;
 
 public class refreshList : MonoBehaviour
 {
+
+    public void OnEnable()
+    {
+        on_click_refresh_list();
+    }
+
     public void on_click_refresh_list()
     {
         PhotonNetwork.JoinLobby(TypedLobby.Default);

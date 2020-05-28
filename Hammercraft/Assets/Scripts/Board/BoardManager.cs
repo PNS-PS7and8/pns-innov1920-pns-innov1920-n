@@ -7,6 +7,8 @@ using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using Photon.Realtime;
+using UnityEngine.UI;
+using TMPro;
 
 public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
     public Board board => manager.Board;
@@ -14,6 +16,8 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
     [SerializeField] private Vector2Int boardSize = new Vector2Int(50, 50);
     [SerializeField] private float perlinNoiseScale;
     [SerializeField] private Vector3 perlinNoiseOffset;
+    [SerializeField] private Button EndTurnButton;
+
 
     public UnityEvent onReset;
 
@@ -38,12 +42,27 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
         if (manager.GameState.Finished() && PhotonNetwork.IsConnectedAndReady) {
             StartCoroutine(waitForWin());
         }
+        if (manager.MyTurn())
+        {
+            EndTurnButton.enabled = true;
+            EndTurnButton.gameObject.GetComponent<Image>().color = new Color(1,0.75f,0);
+            
+            EndTurnButton.GetComponentInChildren<TMP_Text>().text = "END TURN";
+        } else
+        {
+            EndTurnButton.enabled = false;
+            EndTurnButton.gameObject.GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f);
+            EndTurnButton.GetComponentInChildren<TMP_Text>().text = "ENNEMY TURN";
+        }
     }
 
     public void SubmitManager() {
         if (PhotonNetwork.IsConnected)
             photonView.RPC("Reset", RpcTarget.All, manager);
     }
+
+    public static Photon.Realtime.Player getEnnemy() => PhotonNetwork.PlayerListOthers[0];
+    public static Photon.Realtime.Player getPlayer() => PhotonNetwork.LocalPlayer;
 
     private GameManager NewGame() {
         GameManager manager = new GameManager();
@@ -93,8 +112,10 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
         if (manager.MyTurn() || !PhotonNetwork.IsConnected){
             manager.IncreaseTurn();
             manager.ResetGold();
+            
             manager.NextTurn();
             SubmitManager();
+
         }
     }
 
