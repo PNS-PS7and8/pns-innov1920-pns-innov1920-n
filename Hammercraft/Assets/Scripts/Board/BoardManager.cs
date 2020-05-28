@@ -5,6 +5,7 @@ using Photon.Pun;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
     public Board board => manager.Board;
@@ -23,10 +24,18 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
         SubmitManager();
     }
 
+    private IEnumerator waitForWin(){
+            WinText text = WinText.FindObjectOfType<WinText>();
+            text.OnWin();
+            SubmitManager();
+            yield return new WaitForSecondsRealtime(1f);
+            PhotonNetwork.LeaveRoom();
+    }
+
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Space)) SubmitManager();
         if (manager.GameState.Finished() && PhotonNetwork.IsConnectedAndReady) {
-            PhotonNetwork.LeaveRoom();
+            StartCoroutine(waitForWin());
         }
     }
 
@@ -70,6 +79,7 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
     }
     public override void OnLeftRoom()
     {
+
         SceneManager.LoadScene("Rooms");
     }
 
