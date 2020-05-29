@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Tset
   m_EditorClassIdentifier: 
   resourcePath: Cards/Tset
-  name: Tset
-  description: Tset Tset Tset
+  name: Fireball
+  description: Deal 6 dmg to the target
   cost: 1

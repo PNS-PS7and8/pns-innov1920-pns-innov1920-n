@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Test
   m_EditorClassIdentifier: 
   resourcePath: Cards/Test
-  name: The Test
-  description: This is he absolute test.
+  name: The Noob
+  description: Simple unit low cost and weak
   cost: 1
   model: {fileID: 4993303932133754498, guid: 47e148659971e5e47bc11c58e725a37d, type: 3}
   health: 1
