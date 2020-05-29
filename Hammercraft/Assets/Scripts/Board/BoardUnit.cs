@@ -11,7 +11,7 @@ public class BoardUnit : BoardBehaviour {
     private void Start() {
         SyncPosition();
         renderer = GetComponent<Renderer>();
-        renderer.material = (manager.PlayerTurn == unit.Player) ? ally : ennemy;
+        renderer.material = (PlayersExtension.LocalPlayer() == unit.Player) ? ally : ennemy;
     }
 
     private void Update() {
