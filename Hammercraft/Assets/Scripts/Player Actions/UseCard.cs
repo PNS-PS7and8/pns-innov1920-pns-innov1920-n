@@ -32,9 +32,14 @@ public class UseCard : BoardBehaviour
 
     void OnClickCell(Cell cell) {
         if (card != null && manager.MyTurn()) {
-            if (manager.CurrentPlayer.CurrentGold >= card.card.Cost && cell.cellState == Cell.CellState.Free && cell.cellType == Cell.CellType.Field) {
-                manager.CurrentPlayer.SetCurrentGold(manager.CurrentPlayer.CurrentGold - card.card.Cost);
-                card.Use(cell);
+            if (manager.CurrentPlayer.CurrentGold >= card.card.Cost) {
+                if (cell.cellState == Cell.CellState.Free && cell.cellType == Cell.CellType.Field && card.card.GetType().ToString() == "UnitCard"){
+                    manager.CurrentPlayer.SetCurrentGold(manager.CurrentPlayer.CurrentGold - card.card.Cost);
+                    card.Use(cell);
+                } else if (card.card.GetType().ToString() != "UnitCard"){
+                    manager.CurrentPlayer.SetCurrentGold(manager.CurrentPlayer.CurrentGold - card.card.Cost);
+                    card.Use(cell);
+                }
             }
         }
         card = null;
