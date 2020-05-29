@@ -24,10 +24,8 @@ public class UseCard : BoardBehaviour
 
     void OnClickCard(GameCard card)
     {
-        if (this.card == card){} else {
-            this.card = card;
-            StartCoroutine(GrowCard(card));
-        }
+        this.card = card;
+        StartCoroutine(GrowCard(card));
     }
 
     void OnClickCell(Cell cell) {
