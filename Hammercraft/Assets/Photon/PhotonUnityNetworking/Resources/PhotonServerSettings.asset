@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AppSettings:
     AppIdRealtime: 39f16a5b-c569-4196-a868-614e894ea996
-    AppIdChat: cc0ea2ae-a7d8-4b9c-98d5-9199e12c1414
+    AppIdChat: 
     AppIdVoice: 
     AppVersion: 
     UseNameServer: 1
@@ -31,17 +31,10 @@ MonoBehaviour:
   RunInBackground: 1
   StartInOfflineMode: 0
   RpcList:
+  - ChangeText_RPC
   - ClickRpc
   - DestroyRpc
-  - DestroySpaceship
-  - Fire
-  - RespawnSpaceship
-  - UpdateText
-  - ChangeText_RPC
-  - ChangeText1_RPC
-  - ChangeText2_RPC
-  - Sync
   - Reset
   DisableAutoOpenWizard: 1
   ShowSettings: 1
-  DevRegionSetOnce: 1
+  DevRegionSetOnce: 0

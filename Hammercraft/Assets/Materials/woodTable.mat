@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: woodTable
+  m_Shader: {fileID: -6465566751694194690, guid: a149308ca62c35440a441f3fbe91b865,
+    type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _SampleTexture2DLOD_47807C3B_Texture_1:
+        m_Texture: {fileID: 2800000, guid: ca8b924b888c1b14e8279156ba81c77c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2DLOD_60EA829E_Texture_1:
+        m_Texture: {fileID: 2800000, guid: afd56cd8595ae154dace1935e6e1deef, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_39986EE_Texture_1:
+        m_Texture: {fileID: 2800000, guid: bf22e8f991f2e7c43af3e8e6962837d2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_41FAFAAF_Texture_1:
+        m_Texture: {fileID: 2800000, guid: afd56cd8595ae154dace1935e6e1deef, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_5C02C394_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 50c9439e037e4e94687844300c377123, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_F2E49C3A_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 28a8b0755354c904994ced0ca4760ee1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats: []
+    m_Colors: []
