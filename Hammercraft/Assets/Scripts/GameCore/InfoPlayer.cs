@@ -10,7 +10,7 @@ public class InfoPlayer : BoardBehaviour
     [SerializeField] public TMP_Text text2;
     private void Update() {
         if (PhotonNetwork.IsConnectedAndReady)
-            text.text = BoardManager.getEnnemy().NickName;
-            text2.text = BoardManager.getPlayer().NickName;
+            text.text = BoardManager.RemotePhotonPlayer.NickName;
+            text2.text = BoardManager.LocalPhotonPlayer.NickName;
     }
 }

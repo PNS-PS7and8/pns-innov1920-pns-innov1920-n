@@ -42,7 +42,7 @@ public class MoveUnit : BoardBehaviour
         if (this.unit != null && cell.Distance(origin) <= this.unit.RangeAtq && this.unit != unit){ 
             this.unit.DealDamage(unit);
             Deselect();
-        } else if(!unit.Dead && CanMove(unit) && manager.MyTurn() && unit.Player == manager.CurrentPlayer.Id) {
+        } else if(!unit.Dead && CanMove(unit) && manager.MyTurn() && unit.Player == manager.PlayerTurn) {
             this.unit = unit;
             this.origin = cell;
             hoverCell.ShowCells(color, PathFinding.CellsInReach(board, cell, unit.Deplacement));

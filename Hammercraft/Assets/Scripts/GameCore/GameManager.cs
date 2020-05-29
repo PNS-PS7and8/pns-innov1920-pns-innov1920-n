@@ -15,17 +15,18 @@ public class GameManager {
 
     [SerializeField] private Board board;
     [SerializeField] private List<Player> players;
-
     [SerializeField] private int turn;
     [SerializeField] private int midturn;
-    [SerializeField] private int playerTurn;
+    [SerializeField] private PlayerRole playerTurn;
     [SerializeField] private Setup setup;
     [SerializeField] private GameHistory history;
     
     public Board Board => board;
-    public Player CurrentPlayer => players[playerTurn];
+    public Player LocalPlayer => players[PlayersExtension.LocalPlayerIndex()];
+    public Player RemotePlayer => players[PlayersExtension.RemotePlayerIndex()];
+    public Player CurrentPlayer => players[(int)playerTurn];
     public GameHistory History => history;
-    public int PlayerTurn => playerTurn;
+    public PlayerRole PlayerTurn => playerTurn;
     public int Turn => turn;
 
 
@@ -48,7 +49,7 @@ public class GameManager {
         }
     }
 
-    public void StartGame(Setup setup, Deck playerOneDeck, Deck playerTwoDeck) {
+    public GameManager(Setup setup, Deck playerOneDeck, Deck playerTwoDeck) {
         history = new GameHistory();
         this.setup = setup;
         ResetBoard();
@@ -61,12 +62,12 @@ public class GameManager {
         };
     }
 
-    public bool CanPlay(Player player) {
-        return player == players[playerTurn];
+    public bool CanPlay(PlayerRole player) {
+        return player == playerTurn;
     }
 
     public void NextTurn() {
-        playerTurn = (playerTurn + 1) % 2;
+        playerTurn = playerTurn.Other();
     }
     
     public Player GetPlayer(int playerId) {
@@ -84,10 +85,7 @@ public class GameManager {
     }
 
     public bool MyTurn(){
-        if (!PhotonNetwork.IsConnected && playerTurn%2==0 || playerTurn+1 == PhotonNetwork.LocalPlayer.ActorNumber){
-            return true;
-        }
-        return false;
+        return playerTurn == PlayersExtension.LocalPlayer();
     }
 
     public void IncreaseTurn(){

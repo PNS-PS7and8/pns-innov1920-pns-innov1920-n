@@ -2,6 +2,9 @@ using System.Collections.Generic;
 
 public static class PathFinding {
     public static bool ComputePath(Board board, Cell origin, Cell destination, int maxDistance, out List<Cell> path) {
+        if (origin == destination) {
+            path = new List<Cell> { origin, destination };
+        }
         var tree = DepthFirstSearch(board, origin, maxDistance);
         if ((tree.ContainsKey(origin) || tree.ContainsValue(origin)) &&
             (tree.ContainsKey(destination) || tree.ContainsValue(destination)))

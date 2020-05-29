@@ -4,7 +4,6 @@ using NUnit.Framework;
 public class GameManagerTest {
         [Test]
     public void Serialize() {
-        GameManager manager = new GameManager();
         
         GameManager.Setup setup = new GameManager.Setup();
         setup.boardSize = new Vector2Int(10,10);
@@ -19,7 +18,7 @@ public class GameManagerTest {
             }
         );
 
-        manager.StartGame(setup, deck, deck);
+        GameManager manager = new GameManager(setup, deck, deck);
 
         byte[] serialized = GameManager.Serialize(manager);
         

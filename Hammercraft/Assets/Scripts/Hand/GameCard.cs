@@ -30,7 +30,7 @@ public class GameCard : BoardBehaviour
     }
 
     public void Use(Cell cell) {
-        card.Use(board, cell);
+        card.Use(board, cell, manager.PlayerTurn);
         Destroy(gameObject);
         player.RemoveCard(this);
         boardManager.SubmitManager();

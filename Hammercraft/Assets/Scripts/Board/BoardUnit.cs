@@ -4,14 +4,14 @@ using Photon.Pun;
 public class BoardUnit : BoardBehaviour {
     public int unitId;
     private Unit unit => board.GetUnit(unitId);
-    private Renderer renderer;
+    private new Renderer renderer;
     [SerializeField] private Material ally;
     [SerializeField] private Material ennemy;
 
     private void Start() {
         SyncPosition();
         renderer = GetComponent<Renderer>();
-        renderer.material = (PhotonNetwork.LocalPlayer.ActorNumber-1 == unit.Player) ? ally : ennemy;
+        renderer.material = (manager.PlayerTurn == unit.Player) ? ally : ennemy;
     }
 
     private void Update() {

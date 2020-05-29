@@ -1,15 +1,13 @@
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 using ExitGames.Client.Photon;
 using Photon.Pun;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using System.Collections;
-using Photon.Realtime;
 using UnityEngine.UI;
 using TMPro;
-using System;
+
+using PHashTable = ExitGames.Client.Photon.Hashtable;
 
 public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
     public Board board => manager.Board;
@@ -30,11 +28,21 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
 
     private void Awake() {
         PhotonPeer.RegisterType(typeof(GameManager), (byte) 'G', GameManager.Serialize, GameManager.Deserialize);
-        Reset(NewGame());
-        SubmitManager();
-        startOfTurn = manager.PlayerTurn==PhotonNetwork.LocalPlayer.ActorNumber-1;
-        startOfEnnemyTurn = !startOfTurn;
         
+        Reset(NewGame());
+
+        
+        if (PhotonNetwork.LocalPlayer.ActorNumber == PhotonNetwork.PlayerList[0].ActorNumber) {
+            PlayersExtension.RegisterLocalPlayer(PlayerRole.PlayerOne);
+            SubmitManager();
+        } else {
+            PlayersExtension.RegisterLocalPlayer(PlayerRole.PlayerTwo);
+        }
+    }
+
+    private void Start() {
+        startOfTurn = manager.MyTurn();
+        startOfEnnemyTurn = !startOfTurn;
     }
 
     private IEnumerator waitForWin(){
@@ -110,12 +118,10 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
             photonView.RPC("Reset", RpcTarget.All, manager);
     }
 
-    public static Photon.Realtime.Player getEnnemy() => PhotonNetwork.PlayerListOthers[0];
-    public static Photon.Realtime.Player getPlayer() => PhotonNetwork.LocalPlayer;
+    public static Photon.Realtime.Player RemotePhotonPlayer => PhotonNetwork.PlayerListOthers[0];
+    public static Photon.Realtime.Player LocalPhotonPlayer => PhotonNetwork.LocalPlayer;
 
     private GameManager NewGame() {
-        GameManager manager = new GameManager();
-        
         GameManager.Setup setup = new GameManager.Setup();
         setup.boardSize = boardSize;
         setup.noiseScale = perlinNoiseScale;
@@ -131,7 +137,7 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
             }
         );
 
-        manager.StartGame(setup, deck, deck);
+        GameManager manager = new GameManager(setup, deck, deck);
         
         return manager;
     }

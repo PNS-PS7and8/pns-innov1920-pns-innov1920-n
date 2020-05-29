@@ -125,14 +125,14 @@ public class Board {
 
     public IEnumerable<Cell> FreeNeighbors(Cell cell) => Ring(cell, 2).Where(c => c.cellState == Cell.CellState.Free && c.cellType == Cell.CellType.Field);
 
-    public IEnumerable<Unit> PlayerUnits(int player) {
+    public IEnumerable<Unit> PlayerUnits(PlayerRole player) {
         foreach(var unit in units) {
             if (unit.Player == player)
                 yield return unit;
         }
     }
 
-    public void AddUnit(string unitResource, Cell target) {
-        units.Add(new Unit(unitResource, target.position, units.Count));
+    public void AddUnit(string unitResource, Cell target, PlayerRole owner) {
+        units.Add(new Unit(unitResource, target.position, units.Count, owner));
     }
 }

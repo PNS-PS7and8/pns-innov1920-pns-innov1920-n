@@ -8,6 +8,7 @@ public abstract class CardBase : ScriptableObject{
     [SerializeField, TextArea] protected string description = "";
     [SerializeField] protected int cost = 1;
     
+    public string ResourcePath => resourcePath;
 
     public int Cost => cost;
     public string Description => description;
@@ -15,9 +16,9 @@ public abstract class CardBase : ScriptableObject{
     public string Name => name;
     
 
-    public void Use(Board board, Cell target) {
-        CardEffect(board, target);
+    public void Use(Board board, Cell target, PlayerRole player) {
+        CardEffect(board, target, player);
     }
 
-    protected abstract void CardEffect(Board board, Cell target);
+    protected abstract void CardEffect(Board board, Cell target, PlayerRole player);
 }

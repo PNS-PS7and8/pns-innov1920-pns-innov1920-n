@@ -6,8 +6,8 @@ public class KillToWin : GameMode
         bool winP2 = false;
         foreach(var unit in gameManager.Board.Units) {
             if (unit.Dead) {
-                winP1 |= unit.Player == 0;
-                winP2 |= unit.Player == 1;
+                winP1 |= unit.Player == PlayerRole.PlayerOne;
+                winP2 |= unit.Player == PlayerRole.PlayerTwo;
             }
         }
         if (winP1 && !winP2) return GameState.WinPlayerOne;

@@ -11,7 +11,7 @@ public class Unit : ITakeDamage, IDealDamage
     [SerializeField] private int health;
     [SerializeField] private int attack;
     [SerializeField] private int deplacement;
-    [SerializeField] private int player;
+    [SerializeField] private PlayerRole player;
     [SerializeField] private int rangeAtq;
     private UnitCard card;
     
@@ -30,25 +30,17 @@ public class Unit : ITakeDamage, IDealDamage
     public int Health => health;
     public int Attack => attack;
     public int Deplacement => deplacement;
-    public int Player => player;
+    public PlayerRole Player => player;
     public int RangeAtq => rangeAtq;
 
     private BoardUnit boardUnit;
 
     /* This should never be used when using networking */ 
-    public Unit(UnitCard card, Vector2Int position, int id) {
-        this.card = card;
-        this.health = Card.Health;
-        this.attack = Card.Attack;
-        this.deplacement = Card.Deplacement;
-        this.position = position;
-        this.dead = false;
-        this.id = id;
-        this.player = PhotonNetwork.LocalPlayer.ActorNumber;
-        this.rangeAtq = (card.Range) ? 6 : 2;
+    public Unit(UnitCard card, Vector2Int position, int id, PlayerRole owner) : this(card.ResourcePath, position, id, owner) {
+
     }
 
-    public Unit(string cardResourcePath, Vector2Int position, int id) {
+    public Unit(string cardResourcePath, Vector2Int position, int id, PlayerRole owner) {
         this.cardResourcePath = cardResourcePath;
         this.card = Resources.Load<UnitCard>(cardResourcePath);
         this.health = card.Health;
@@ -56,7 +48,7 @@ public class Unit : ITakeDamage, IDealDamage
         this.deplacement = card.Deplacement;
         this.position = position;
         this.dead = false;
-        this.player = PhotonNetwork.LocalPlayer.ActorNumber-1;
+        this.player = owner;
         this.id = id;
         this.rangeAtq = (card.Range) ? 6 : 2;
     }

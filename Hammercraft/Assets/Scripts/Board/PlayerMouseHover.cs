@@ -31,7 +31,7 @@ public class PlayerMouseHover : BoardBehaviour
 
     void OnHoverUnit(Cell cell, Unit unit) {
         Clear();
-        if (unit.Player == manager.CurrentPlayer.Id)
+        if (unit.Player == manager.PlayerTurn)
             hoverCell.ShowCells(friendlyColor, cell);
         else
             hoverCell.ShowCells(ennemyColor, cell);
