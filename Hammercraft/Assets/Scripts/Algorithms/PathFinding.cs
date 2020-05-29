@@ -10,7 +10,7 @@ public static class PathFinding {
             (tree.ContainsKey(destination) || tree.ContainsValue(destination)))
         {
             path = new List<Cell>();
-            path.Add(origin);
+            path.Add(destination);
             while(tree[destination] != origin) {
                 destination = tree[destination];
                 path.Add(destination);
