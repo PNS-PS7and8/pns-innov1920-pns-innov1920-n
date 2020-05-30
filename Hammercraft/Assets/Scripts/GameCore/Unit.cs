@@ -35,14 +35,9 @@ public class Unit : ITakeDamage, IDealDamage
 
     private BoardUnit boardUnit;
 
-    /* This should never be used when using networking */ 
-    public Unit(UnitCard card, Vector2Int position, int id, PlayerRole owner) : this(card.ResourcePath, position, id, owner) {
-
-    }
-
-    public Unit(string cardResourcePath, Vector2Int position, int id, PlayerRole owner) {
-        this.cardResourcePath = cardResourcePath;
-        this.card = Resources.Load<UnitCard>(cardResourcePath);
+    /* This should never be used directly when using networking */ 
+    public Unit(UnitCard card, Vector2Int position, int id, PlayerRole owner) {
+        this.cardResourcePath = card.ResourcePath;
         this.health = card.Health;
         this.attack = card.Attack;
         this.deplacement = card.Deplacement;

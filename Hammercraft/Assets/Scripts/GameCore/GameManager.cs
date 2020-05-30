@@ -57,8 +57,8 @@ public class GameManager {
         midturn = 0;
         playerTurn = 0;
         players = new List<Player> {
-            new Player(playerOneDeck, 0),
-            new Player(playerTwoDeck, 1)
+            new Player(playerOneDeck, PlayerRole.PlayerOne),
+            new Player(playerTwoDeck, PlayerRole.PlayerTwo)
         };
     }
 
@@ -70,8 +70,8 @@ public class GameManager {
         playerTurn = playerTurn.Other();
     }
     
-    public Player GetPlayer(int playerId) {
-        return players[playerId];
+    public Player GetPlayer(PlayerRole role) {
+        return players[(int)role];
     }
 
     public static byte[] Serialize(object manager) {

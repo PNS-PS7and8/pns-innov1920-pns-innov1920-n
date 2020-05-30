@@ -5,13 +5,13 @@ using System.Linq;
 
 [System.Serializable]
 public class GameAction {
-    [SerializeField] protected int player;
+    [SerializeField] protected PlayerRole player;
     [SerializeField] protected int turn;
 
-    public int Player => player;
+    public PlayerRole Player => player;
     public int Turn => turn;
 
-    public GameAction(int player, int turn) {
+    public GameAction(PlayerRole player, int turn) {
         this.player = player;
         this.turn = turn;
     }
@@ -26,7 +26,7 @@ public class MovementAction : GameAction {
     public Vector2Int Origin => path[0];
     public Vector2Int Destination => path[path.Length-1];
 
-    public MovementAction(int player, int turn, int unitId, params Vector2Int[] path) : base(player, turn) {
+    public MovementAction(PlayerRole player, int turn, int unitId, params Vector2Int[] path) : base(player, turn) {
         this.unitId = unitId;
         this.path = path;
     }
@@ -40,7 +40,7 @@ public class CardPlayAction : GameAction {
     public string CardResourcePath => cardResourcePath;
     public CardBase Card => Resources.Load<CardBase>(cardResourcePath);
 
-    public CardPlayAction(int player, int turn, string cardResourcePath, params Vector2Int[] targetPositions) : base(player, turn) {
+    public CardPlayAction(PlayerRole player, int turn, string cardResourcePath, params Vector2Int[] targetPositions) : base(player, turn) {
         this.cardResourcePath = cardResourcePath;
         this.targetPositions = targetPositions;
     }
@@ -50,13 +50,13 @@ public class CardPlayAction : GameAction {
 public class SpellCastAction : CardPlayAction {
     public SpellCard SpellCard => Resources.Load<SpellCard>(cardResourcePath);
     
-    public SpellCastAction(int player, int turn, string cardResourcePath, params Vector2Int[] targetPositions) : base(player, turn, cardResourcePath, targetPositions) {}
+    public SpellCastAction(PlayerRole player, int turn, string cardResourcePath, params Vector2Int[] targetPositions) : base(player, turn, cardResourcePath, targetPositions) {}
 }
 
 public class UnitDeployAction : CardPlayAction {
     public UnitCard UnitCard => Resources.Load<UnitCard>(cardResourcePath);
 
-    public UnitDeployAction(int player, int turn, string cardResourcePath, params Vector2Int[] targetPositions) : base(player, turn, cardResourcePath, targetPositions) {}
+    public UnitDeployAction(PlayerRole player, int turn, string cardResourcePath, params Vector2Int[] targetPositions) : base(player, turn, cardResourcePath, targetPositions) {}
 }
 
 [System.Serializable]

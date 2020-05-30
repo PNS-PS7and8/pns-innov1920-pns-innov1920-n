@@ -7,9 +7,9 @@ using Photon.Pun;
 public class WinText : BoardBehaviour
 {
     [SerializeField] public TMP_Text text;
-    public void OnWin() {
+    public void OnWin(GameState state) {
         string txt = "";
-        if (PhotonNetwork.LocalPlayer.ActorNumber-1 == boardManager.Manager.CurrentPlayer.Id){
+        if (PlayersExtension.LocalPlayer() == state.Winner()){
             txt = "You win !";
         } else {
             txt = "You loose !";

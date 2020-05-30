@@ -568,22 +568,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83e715b944ff7da44a6eb7bf2c53813a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UnitCardPrefab: {fileID: 609897459420351686, guid: 9d32bd20d891781b0a6da272f87b5b98,
-    type: 3}
-  SpellCardPrefab: {fileID: 1765619134951339101, guid: 3030779ff99ccfb4386763d3dfded02c,
-    type: 3}
-  units:
-  - {fileID: 11400000, guid: cb3c9a209e97ff88e8a3e6bdff5bf925, type: 2}
-  - {fileID: 11400000, guid: cb3c9a209e97ff88e8a3e6bdff5bf925, type: 2}
-  - {fileID: 11400000, guid: cb3c9a209e97ff88e8a3e6bdff5bf925, type: 2}
-  - {fileID: 11400000, guid: cb3c9a209e97ff88e8a3e6bdff5bf925, type: 2}
-  spells:
-  - {fileID: 11400000, guid: 5e7664ff3db0ce1f392ecd678fbb57f0, type: 2}
-  - {fileID: 11400000, guid: 5e7664ff3db0ce1f392ecd678fbb57f0, type: 2}
-  - {fileID: 11400000, guid: 5e7664ff3db0ce1f392ecd678fbb57f0, type: 2}
-  - {fileID: 11400000, guid: 5e7664ff3db0ce1f392ecd678fbb57f0, type: 2}
-  hand: {fileID: 398155961}
-  spacing: 0.5
 --- !u!114 &362202546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -658,6 +642,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 398155961}
+  - component: {fileID: 398155962}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -673,12 +658,28 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 398155960}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.5, y: -1, z: 3}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: 0, y: 0, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1289623610}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &398155962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398155960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12afce433fbb7c60495b974594e14c97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spacing: 0
+  cardPrefab: {fileID: 8277479172846306894, guid: 4b674b4f4f2e5443aa6c8d1826436268,
+    type: 3}
+  role: 0
 --- !u!1 &573347663
 GameObject:
   m_ObjectHideFlags: 0

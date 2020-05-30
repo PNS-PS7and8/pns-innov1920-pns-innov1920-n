@@ -132,7 +132,7 @@ public class Board {
         }
     }
 
-    public void AddUnit(string unitResource, Cell target, PlayerRole owner) {
-        units.Add(new Unit(unitResource, target.position, units.Count, owner));
+    public void AddUnit(UnitCard card, Cell target, PlayerRole owner) {
+        units.Add(new Unit(card, target.position, units.Count, owner));
     }
 }

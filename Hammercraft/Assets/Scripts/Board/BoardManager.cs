@@ -31,12 +31,13 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
         
         Reset(NewGame());
 
-        
-        if (PhotonNetwork.LocalPlayer.ActorNumber == PhotonNetwork.PlayerList[0].ActorNumber) {
-            PlayersExtension.RegisterLocalPlayer(PlayerRole.PlayerOne);
-            SubmitManager();
-        } else {
-            PlayersExtension.RegisterLocalPlayer(PlayerRole.PlayerTwo);
+        if (PhotonNetwork.IsConnectedAndReady) {
+            if (PhotonNetwork.LocalPlayer.ActorNumber == PhotonNetwork.PlayerList[0].ActorNumber) {
+                PlayersExtension.RegisterLocalPlayer(PlayerRole.PlayerOne);
+                SubmitManager();
+            } else {
+                PlayersExtension.RegisterLocalPlayer(PlayerRole.PlayerTwo);
+            }
         }
     }
 
@@ -47,7 +48,7 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
 
     private IEnumerator waitForWin(){
             WinText text = WinText.FindObjectOfType<WinText>();
-            text.OnWin();
+            text.OnWin(Manager.GameState);
             SubmitManager();
             yield return new WaitForSecondsRealtime(1f);
             PhotonNetwork.LeaveRoom();
@@ -128,14 +129,9 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
         setup.noiseOffset = perlinNoiseOffset;
         setup.gameMode = GameModes.KillToWin;
         
-        Deck deck = new Deck(
-            new UnitCard[] {
-                UnitCard.CreateInstance<UnitCard>(), UnitCard.CreateInstance<UnitCard>()
-            },
-            new SpellCard[] {
-                SpellCard.CreateInstance<SpellCard>(), SpellCard.CreateInstance<SpellCard>()
-            }
-        );
+        UnitCard c1 = Resources.Load<UnitCard>("Cards/Test");
+        SpellCard c2 = Resources.Load<SpellCard>("Cards/Tset");
+        Deck deck = new Deck( new UnitCard[] { c1, c1, c1, c1 }, new SpellCard[] { c2, c2, c2, c2 } );
 
         GameManager manager = new GameManager(setup, deck, deck);
         

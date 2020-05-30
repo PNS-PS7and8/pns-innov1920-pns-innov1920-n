@@ -10,6 +10,12 @@ public static class GameStateExtension {
     public static bool Finished(this GameState state) {
         return (int)(state & GameState.Finished) != 0;
     }
+
+    public static PlayerRole Winner(this GameState state) {
+        if ((state & GameState.WinPlayerOne) != 0) return PlayerRole.PlayerOne;
+        else if ((state & GameState.WinPlayerTwo) != 0) return PlayerRole.PlayerTwo;
+        else return PlayerRole.Spectator;
+    }
 }
 
 [System.Serializable]

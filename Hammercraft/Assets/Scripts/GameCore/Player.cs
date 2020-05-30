@@ -7,16 +7,16 @@ public class Player {
     public Deck deck { get; private set; }
 
     [SerializeField] private List<CardBase> hand;
-    [SerializeField] private int id;
+    [SerializeField] private PlayerRole role;
     [SerializeField] private int gold;
     [SerializeField] private int currentGold;
     public List<CardBase> Hand => hand;
-    public int Id => id;
+    public PlayerRole Role => role;
     public int Gold => gold;
     public int CurrentGold => currentGold;
 
-    public Player(Deck deck, int id) {
-        this.id = id;
+    public Player(Deck deck, PlayerRole role) {
+        this.role = role;
         originalDeck = deck;
         this.gold = 1;
         this.currentGold = gold;
@@ -31,5 +31,17 @@ public class Player {
 
     public void SetCurrentGold(int newgold){
         currentGold = newgold;
+    }
+
+    public void DrawUnit() {
+        hand.Add(deck.DrawUnit());
+    }
+
+    public void DrawSpell() {
+        hand.Add(deck.DrawSpell());
+    }
+
+    public void UseCard(CardBase card) {
+        hand.Remove(card);
     }
 }

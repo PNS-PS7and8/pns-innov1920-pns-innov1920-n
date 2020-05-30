@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Photon.Pun;
 
 public class MoveUnit : BoardBehaviour
 {
@@ -59,21 +58,21 @@ public class MoveUnit : BoardBehaviour
                 
                 unit.position = cell.position;
 
-                manager.History.Add(new MovementAction(manager.CurrentPlayer.Id, manager.Turn, unit.Id, path.Select(c => c.position).ToArray()));
+                manager.History.Add(new MovementAction(manager.CurrentPlayer.Role, manager.Turn, unit.Id, path.Select(c => c.position).ToArray()));
                 boardManager.SubmitManager();
 
+                Deselect();
+            } else {
                 Deselect();
             }
         }
     }
 
     private void OnHoverCell(Cell cell) {
+        hoverCell.HideCells(pathColor);
         if (unit == null || origin == null) return;
         if (PathFinding.ComputePath(board, origin, cell, unit.Deplacement, out var path)) {
-            hoverCell.HideCells(pathColor);
             hoverCell.ShowCells(pathColor, path);
-        } else {
-            Deselect();
         }
     }
 

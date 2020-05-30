@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1765619134951339103}
-  - component: {fileID: 1765619134951339100}
   - component: {fileID: 1339652938497104264}
   m_Layer: 0
   m_Name: Spell Prefab
@@ -34,25 +33,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
---- !u!114 &1765619134951339100
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1765619134951339101}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f89df28cc8eebb50fb5f6a4dd7eeb7ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  card: {fileID: 0}
-  costText: {fileID: 6355918220375631662}
-  nameText: {fileID: 74230726674781616}
-  descriptionText: {fileID: 6339065933647594959}
-  RANGEorCACText: {fileID: 0}
-  attackText: {fileID: 0}
-  healthText: {fileID: 0}
 --- !u!65 &1339652938497104264
 BoxCollider:
   m_ObjectHideFlags: 0

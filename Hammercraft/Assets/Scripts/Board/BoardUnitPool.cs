@@ -20,6 +20,7 @@ public class BoardUnitPool : BoardBehaviour {
     }
 
     private BoardUnit CreateBoardUnit(Unit unit) {
+        print(unit.Card);
         GameObject go = Instantiate(unit.Card.Model, board.LocalPosition(unit), Quaternion.identity, transform);
         BoardUnit boardUnit = go.transform.GetComponent<BoardUnit>();
         boardUnit.unitId = unit.Id;

@@ -25,7 +25,6 @@ public class UseCard : BoardBehaviour
     void OnClickCard(GameCard card)
     {
         this.card = card;
-        StartCoroutine(GrowCard(card));
     }
 
     void OnClickCell(Cell cell) {
@@ -47,21 +46,5 @@ public class UseCard : BoardBehaviour
         if (card != null)
             if (card.card.GetType().IsAssignableFrom(typeof(SpellCard)))
                 OnClickCell(cell);
-    }
-
-    IEnumerator GrowCard(GameCard card) {
-        Vector3 originalScale = card.transform.localScale;
-        for(float t = 0; t < growDuration && card != null; t += Time.deltaTime) {
-            card.transform.localScale = originalScale * Mathf.Lerp(1, growAmount, t / growDuration);
-            yield return new WaitForEndOfFrame();
-        }
-        while (card == this.card)
-            yield return new WaitForFixedUpdate();
-        for(float t = 0; t < growDuration && card != null; t += Time.deltaTime) {
-            card.transform.localScale = originalScale * Mathf.Lerp(1, growAmount, 1 - t / growDuration);
-            yield return new WaitForEndOfFrame();
-        }
-        if (card != null)
-            card.transform.localScale = originalScale;
     }
 }
