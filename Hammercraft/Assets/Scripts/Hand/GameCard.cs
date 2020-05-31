@@ -4,8 +4,10 @@ using DG.Tweening;
 
 public class GameCard : BoardBehaviour
 {
-    [SerializeField, Range(1f, 2f)] private float scaleUp = 1.2f;
-    [SerializeField, Range(0f, 1f)] private float offsetZ = 0.1f;
+    [SerializeField, Range(1f, 2f)] private float scaleUp = 1.5f;
+    [SerializeField, Range(0f, 1f)] private float offsetY = 0.2f;
+    [SerializeField, Range(0f, 1f)] private float offsetZ = 0.2f;
+    [SerializeField] private Transform OverCard = null;
     public CardBase card = null;
     
     [SerializeField] private Transform unitModel = null;
@@ -37,6 +39,9 @@ public class GameCard : BoardBehaviour
             } else {
                 unitModel.gameObject.SetActive(false);
                 spellModel.gameObject.SetActive(true);
+                RANGEorCACText.text = "";
+                attackText.text = "";
+                healthText.text = "";
             }
         } else {
             unitModel.gameObject.SetActive(false);
@@ -58,14 +63,18 @@ public class GameCard : BoardBehaviour
     }
 
     private void OnMouseEnter() {
-        transform.DOScale(Vector3.one * scaleUp, 0.2f);
-        transform.DOLocalMoveZ(-offsetZ, 0.2f);
+        transform.DOScale(Vector3.one * scaleUp, 0.1f);
+        transform.DOLocalMoveY(offsetY, 0.1f);
+        transform.DOLocalMoveZ(-offsetZ, 0.1f);
+        OverCard.gameObject.SetActive(true);
         DOTween.Play(transform);
     }
 
     private void OnMouseExit() {
-        transform.DOScale(Vector3.one, 0.2f);
-        transform.DOLocalMoveZ(0, 0.2f);
+        transform.DOScale(Vector3.one,0.2f);
+        transform.DOLocalMoveY(0, 0.1f);
+        transform.DOLocalMoveZ(0, 0.1f);
+        OverCard.gameObject.SetActive(false);
         DOTween.Play(transform);
     }
 }
