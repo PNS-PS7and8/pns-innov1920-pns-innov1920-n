@@ -56,10 +56,13 @@ public class GameCard : BoardBehaviour
         }
     }
 
-    public void Use(Cell cell) {
-        manager.LocalPlayer.UseCard(card);
-        card.Use(board, cell, manager.PlayerTurn);
-        boardManager.SubmitManager();
+    public bool Use(Cell cell) {
+        if (card.Use(board, cell, manager.PlayerTurn)) {
+            manager.LocalPlayer.UseCard(card);
+            boardManager.SubmitManager();
+            return true;
+        }
+        return false;
     }
 
     private void OnMouseEnter() {

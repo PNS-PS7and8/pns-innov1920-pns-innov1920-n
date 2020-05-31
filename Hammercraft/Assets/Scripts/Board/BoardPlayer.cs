@@ -13,6 +13,8 @@ public class BoardPlayer : BoardBehaviour {
         player = manager.LocalPlayer;
         player.DrawUnit();
         player.DrawUnit();
+        player.DrawUnit();
+        player.DrawUnit();
         player.DrawSpell();
         player.DrawSpell();
     }

@@ -8,7 +8,7 @@ public class PlayerTest : MonoBehaviour
     [Test]
     public void Player1_Test(){
         UnitCard u = ScriptableObject.CreateInstance<UnitCard>();
-        SpellCard s = ScriptableObject.CreateInstance<SpellCard>();
+        SpellCard s = ScriptableObject.CreateInstance<DamageSpell>();
         UnitCard[] us = new UnitCard[1];
         SpellCard[] ss = new SpellCard[1];
         us[0] = u;
@@ -21,7 +21,7 @@ public class PlayerTest : MonoBehaviour
         [Test]
     public void Player2_Test(){
         UnitCard u = ScriptableObject.CreateInstance<UnitCard>();
-        SpellCard s = ScriptableObject.CreateInstance<SpellCard>();
+        SpellCard s = ScriptableObject.CreateInstance<DamageSpell>();
         UnitCard[] us = new UnitCard[1];
         SpellCard[] ss = new SpellCard[1];
         us[0] = u;

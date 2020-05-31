@@ -615,6 +615,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boardClicker: {fileID: 1959275063}
+  hoverCell: {fileID: 1959275066}
   growDuration: 0.1
   growAmount: 1.5
 --- !u!114 &362202554

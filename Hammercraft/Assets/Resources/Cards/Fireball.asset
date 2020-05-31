@@ -9,10 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8afc24c2df59b4d93842637ad3e620ba, type: 3}
-  m_Name: Tset
+  m_Script: {fileID: 11500000, guid: 7ff5f8f21005cdfdbaef19f379ddb51c, type: 3}
+  m_Name: Fireball
   m_EditorClassIdentifier: 
-  resourcePath: Cards/Tset
+  resourcePath: Cards/Fireball
   name: Fireball
-  description: Deal 6 dmg to the target
-  cost: 1
+  description: "By the rage inside my heart, you shall burn ! \n\nDeals 4 damage"
+  cost: 3
+  castMask: 1850
+  damage: 4

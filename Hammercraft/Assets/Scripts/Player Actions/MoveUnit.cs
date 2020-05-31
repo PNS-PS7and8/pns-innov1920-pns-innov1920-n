@@ -44,14 +44,15 @@ public class MoveUnit : BoardBehaviour
         } else if(!unit.Dead && CanMove(unit) && manager.MyTurn() && unit.Player == manager.PlayerTurn) {
             this.unit = unit;
             this.origin = cell;
-            hoverCell.ShowCells(color, PathFinding.CellsInReach(board, cell, unit.Deplacement));
-            hoverCell.ShowCells(Color.yellow, PathFinding.CellsInReach(board, cell, unit.RangeAtq/2));
+            
+            hoverCell.ShowCells(color, UnitMovement.AvailableCells(unit.MovementMask, board, cell, unit.Movement));
+            hoverCell.ShowCells(Color.yellow, UnitMovement.AvailableCells(unit.MovementMask, board, cell, unit.RangeAtq/2));
         }
     }
 
     private void OnSelectCell(Cell cell) {
         if (origin != null && unit != null && cell.position != unit.position) {
-            if (PathFinding.ComputePath(board, origin, cell, unit.Deplacement, out var path)) {
+            if (UnitMovement.CanMove(unit.MovementMask, board, origin, cell, unit.Movement, out var path)) {
                 
                 origin.cellState = Cell.CellState.Free;
                 cell.cellState = Cell.CellState.Occupied;
@@ -71,7 +72,7 @@ public class MoveUnit : BoardBehaviour
     private void OnHoverCell(Cell cell) {
         hoverCell.HideCells(pathColor);
         if (unit == null || origin == null) return;
-        if (PathFinding.ComputePath(board, origin, cell, unit.Deplacement, out var path)) {
+        if (UnitMovement.CanMove(unit.MovementMask, board, origin, cell, unit.Movement, out var path)) {
             hoverCell.ShowCells(pathColor, path);
         }
     }

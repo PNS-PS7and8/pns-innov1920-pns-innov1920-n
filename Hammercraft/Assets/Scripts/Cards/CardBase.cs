@@ -7,6 +7,7 @@ public abstract class CardBase : ScriptableObject{
     [SerializeField] protected new string name = "";
     [SerializeField, TextArea] protected string description = "";
     [SerializeField] protected int cost = 1;
+    [SerializeField] public CastMask castMask = 0;
     
     public string ResourcePath => resourcePath;
 
@@ -16,9 +17,15 @@ public abstract class CardBase : ScriptableObject{
     public string Name => name;
     
 
-    public void Use(Board board, Cell target, PlayerRole player) {
-        CardEffect(board, target, player);
+    public bool Use(Board board, Cell target, PlayerRole player) {
+        if (CardCast.CanCast(castMask, board, target)) {
+            CardEffect(board, target, player);
+            return true;
+        }
+        return false;
     }
 
     protected abstract void CardEffect(Board board, Cell target, PlayerRole player);
 }
+
+public abstract class SpellCard : CardBase {}

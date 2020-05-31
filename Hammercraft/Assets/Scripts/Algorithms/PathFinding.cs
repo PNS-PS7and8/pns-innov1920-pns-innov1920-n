@@ -1,11 +1,12 @@
 using System.Collections.Generic;
+using System.Linq;
 
 public static class PathFinding {
-    public static bool ComputePath(Board board, Cell origin, Cell destination, int maxDistance, out List<Cell> path) {
+    public static bool ComputePath(Board board, Cell origin, Cell destination, int maxDistance, UnitMoveMask moveMask, out List<Cell> path) {
         if (origin == destination) {
             path = new List<Cell> { origin, destination };
         }
-        var tree = DepthFirstSearch(board, origin, maxDistance);
+        var tree = DepthFirstSearch(board, origin, maxDistance, moveMask);
         if ((tree.ContainsKey(origin) || tree.ContainsValue(origin)) &&
             (tree.ContainsKey(destination) || tree.ContainsValue(destination)))
         {
@@ -23,8 +24,8 @@ public static class PathFinding {
         return false;
     }
 
-    public static IEnumerable<Cell> CellsInReach(Board board, Cell center, int maxDistance) {
-        var tree = DepthFirstSearch(board, center, maxDistance);
+    public static IEnumerable<Cell> CellsInReach(Board board, Cell center, int maxDistance, UnitMoveMask moveMask) {
+        var tree = DepthFirstSearch(board, center, maxDistance, moveMask);
         foreach(var cell in tree.Keys)
             yield return cell;
         foreach(var cell in tree.Values)
@@ -32,14 +33,14 @@ public static class PathFinding {
                 yield return cell;
     }
 
-    private static Dictionary<Cell, Cell> DepthFirstSearch(Board board, Cell center, int maxDistance) {
+    private static Dictionary<Cell, Cell> DepthFirstSearch(Board board, Cell center, int maxDistance, UnitMoveMask moveMask) {
         Dictionary<Cell, Cell> tree = new Dictionary<Cell, Cell>();
 
         Dictionary<Cell, int> distances = new Dictionary<Cell, int>();
         distances.Add(center, 0);
 
         List<Cell> reachable = new List<Cell>();
-        foreach(Cell cell in board.FreeNeighbors(center)) {
+        foreach(Cell cell in board.Neighbors(center).Where(c => UnitMovement.CheckCell(moveMask, board, c))) {
             tree[cell] = center;
             distances.Add(cell, 1);
             reachable.Add(cell);
@@ -51,7 +52,7 @@ public static class PathFinding {
 
             if(distance+1 <= maxDistance) {
                 distance++;
-                foreach(Cell neighbor in board.FreeNeighbors(cell)) {
+                foreach(Cell neighbor in board.Neighbors(cell).Where(c => UnitMovement.CheckCell(moveMask, board, c))) {
                     if(!distances.ContainsKey(neighbor) || distances[neighbor] > distance) {
                         distances[neighbor] = distance;
                         tree[neighbor] = cell;

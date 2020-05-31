@@ -14,7 +14,7 @@ public class GameManagerTest {
                 UnitCard.CreateInstance<UnitCard>(), UnitCard.CreateInstance<UnitCard>()
             },
             new SpellCard[] {
-                SpellCard.CreateInstance<SpellCard>(), SpellCard.CreateInstance<SpellCard>()
+                SpellCard.CreateInstance<DamageSpell>(), SpellCard.CreateInstance<DamageSpell>()
             }
         );
 

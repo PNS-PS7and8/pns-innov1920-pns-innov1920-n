@@ -10,7 +10,8 @@ public class Unit : ITakeDamage, IDealDamage
     [SerializeField] private bool dead;
     [SerializeField] private int health;
     [SerializeField] private int attack;
-    [SerializeField] private int deplacement;
+    [SerializeField] private int movement;
+    [SerializeField] private UnitMoveMask movementMask;
     [SerializeField] private PlayerRole player;
     [SerializeField] private int rangeAtq;
     private UnitCard card;
@@ -29,7 +30,8 @@ public class Unit : ITakeDamage, IDealDamage
     public bool Dead => dead;
     public int Health => health;
     public int Attack => attack;
-    public int Deplacement => deplacement;
+    public int Movement => movement;
+    public UnitMoveMask MovementMask => movementMask;
     public PlayerRole Player => player;
     public int RangeAtq => rangeAtq;
 
@@ -40,12 +42,13 @@ public class Unit : ITakeDamage, IDealDamage
         this.cardResourcePath = card.ResourcePath;
         this.health = card.Health;
         this.attack = card.Attack;
-        this.deplacement = card.Deplacement;
+        this.movement = card.Movement;
         this.position = position;
         this.dead = false;
         this.player = owner;
         this.id = id;
         this.rangeAtq = (card.Range) ? 6 : 2;
+        this.movementMask = card.MovementMask;
     }
 
     public void TakeDamage(int amount) {

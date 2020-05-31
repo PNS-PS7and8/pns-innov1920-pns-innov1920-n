@@ -1,12 +1,15 @@
 using UnityEngine;
 
-[CreateAssetMenu]
-public class SpellCard : CardBase
+[CreateAssetMenu(menuName="Cards/Spells/Damage")]
+
+public class DamageSpell : SpellCard
 {
+    [SerializeField] private int damage;
+
     protected override void CardEffect(Board board, Cell target, PlayerRole player)
     {
         Unit unit = board.GetUnit(target);
         if (unit != null)
-            unit.TakeDamage(6);
+            unit.TakeDamage(damage);
     }
 }
