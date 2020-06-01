@@ -5,33 +5,36 @@ public class Hand : BoardBehaviour {
     [SerializeField] private float spacing = 0.1f;
     [SerializeField] private GameCard cardPrefab;
     [SerializeField] private PlayerRole role;
-    private GameCard[] cards;
+    public Player player { get; private set; }
+    public GameCard[] Cards { get; private set; }
+
+    public float Spacing { get { return spacing; } }
 
     private void Start() {
-        cards = new GameCard[10];
-        for (int i = 0; i < cards.Length; i++)
+        Cards = new GameCard[10];
+        for (int i = 0; i < Cards.Length; i++)
         {
             GameObject cardObject = Instantiate(cardPrefab.gameObject, transform);
-            cards[i] = cardObject.GetComponent<GameCard>();
+            Cards[i] = cardObject.GetComponent<GameCard>();
             cardObject.SetActive(false);
         }
     }
 
-    private void Update() {
-        Player player = manager.LocalPlayer;
-        for (int i = 0; i < cards.Length; i++)
+    public void UpdateHand() {
+        player = manager.LocalPlayer;
+        for (int i = 0; i < Cards.Length; i++)
         {
             if (i < player.Hand.Count) {
-                cards[i].card = player.Hand[i];
-                if (cards[i] != null) {
-                    cards[i].gameObject.SetActive(true);
-                    Vector3 pos = cards[i].transform.localPosition;
+                Cards[i].card = player.Hand[i];
+                if (Cards[i] != null) {
+                    Cards[i].gameObject.SetActive(true);
+                    Vector3 pos = Cards[i].transform.localPosition;
                     pos.x = ((float) i - ((float) player.Hand.Count / 2f)) * spacing;
-                    cards[i].transform.localPosition = pos;
+                    Cards[i].transform.localPosition = pos;
                 }
             } else {
-                cards[i].card = null;
-                cards[i].gameObject.SetActive(false);
+                Cards[i].card = null;
+                Cards[i].gameObject.SetActive(false);
             }
         }
     }

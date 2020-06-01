@@ -17,6 +17,7 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
     [SerializeField] private Vector3 perlinNoiseOffset;
     [SerializeField] private Button EndTurnButton;
     [SerializeField] private TMP_Text TimerText;
+    [SerializeField] private DeckUnit DeckUnit;
 
 
     public UnityEvent onReset;
@@ -83,6 +84,7 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
         EndTurnButton.enabled = true;
         EndTurnButton.gameObject.GetComponent<Image>().color = new Color(1, 0.75f, 0);
         EndTurnButton.GetComponentInChildren<TMP_Text>().text = "END TURN";
+        DeckUnit.DrawUnit(manager.CurrentPlayer.DrawUnit());
     }
 
     private void StartOfEnnemyTurn()

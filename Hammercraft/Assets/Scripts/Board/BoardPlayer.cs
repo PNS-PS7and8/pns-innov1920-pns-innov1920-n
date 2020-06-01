@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class BoardPlayer : BoardBehaviour {
     private Player player;
+    [SerializeField] private DeckUnit deckUnit;
     
     public override void OnResetBoard(BoardManager boardManager) {
         base.OnResetBoard(boardManager);
@@ -11,10 +12,10 @@ public class BoardPlayer : BoardBehaviour {
     
     private void Start() {
         player = manager.LocalPlayer;
-        player.DrawUnit();
-        player.DrawUnit();
-        player.DrawUnit();
-        player.DrawUnit();
+        deckUnit.DrawUnit(player.DrawUnit());
+        deckUnit.DrawUnit(player.DrawUnit());
+       // deckUnit.DrawUnit(player.DrawUnit());
+       // deckUnit.DrawUnit(player.DrawUnit());
         player.DrawSpell();
         player.DrawSpell();
     }

@@ -33,12 +33,16 @@ public class Player {
         currentGold = newgold;
     }
 
-    public void DrawUnit() {
-        hand.Add(deck.DrawUnit());
+    public UnitCard DrawUnit() {
+        UnitCard t = deck.DrawUnit();
+        hand.Add(t);
+        return t;
     }
 
-    public void DrawSpell() {
-        hand.Add(deck.DrawSpell());
+    public SpellCard DrawSpell() {
+        SpellCard t = deck.DrawSpell();
+        hand.Add(t);
+        return t;
     }
 
     public void UseCard(CardBase card) {
