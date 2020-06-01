@@ -28,7 +28,8 @@ public class DeckUnit : MonoBehaviour
         _unitCard.transform.SetParent(hand.gameObject.transform);
         DrawSequence.Append(_unitCard.transform.DOLocalMove(new Vector3(0, 0.2f, 0), 0.4f));
         DrawSequence.Join(_unitCard.transform.DOLocalRotate(new Vector3(-90, 0, 0), 0.5f));
-        DrawSequence.Join(_unitCard.transform.DOScale(Vector3.one, 0.4f));
+        DrawSequence.Join(_unitCard.transform.DOScale(Vector3.one*2, 0.4f));
+        
         if (card)
         {
             Name.text = card.Name;
@@ -46,9 +47,11 @@ public class DeckUnit : MonoBehaviour
            x = (hand.player.Hand.Count-0.5f-hand.player.Hand.Count / 2f)*hand.Spacing;
 
         }
-        DrawSequence.Append(_unitCard.transform.DOLocalMove(new Vector3(x,0f, 0f), 0.4f));
-        DrawSequence.Join(_unitCard.transform.DOLocalRotate(new Vector3(-90f, 0, 0), 0.4f));
-       
+        DrawSequence.Append(_unitCard.transform.DOLocalMove(new Vector3(x,0.2f, 0f), 0.2f));
+        DrawSequence.Append(_unitCard.transform.DOLocalMove(new Vector3(x, 0f, 0f), 0.2f));
+        DrawSequence.Join(_unitCard.transform.DOLocalRotate(new Vector3(-90f, 0, 0), 0.2f));
+        DrawSequence.Join(_unitCard.transform.DOScale(Vector3.one, 0.2f));
+
         DOTween.Play(DrawSequence);
 
     }

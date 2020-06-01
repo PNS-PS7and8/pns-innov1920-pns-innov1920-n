@@ -59,6 +59,7 @@ public class GameCard : BoardBehaviour
     public bool Use(Cell cell) {
         if (card.Use(board, cell, manager.PlayerTurn)) {
             manager.LocalPlayer.UseCard(card);
+            boardManager.Hand.UpdateHand();
             boardManager.SubmitManager();
             return true;
         }

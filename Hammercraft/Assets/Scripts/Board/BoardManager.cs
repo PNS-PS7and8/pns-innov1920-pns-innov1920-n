@@ -8,6 +8,7 @@ using UnityEngine.UI;
 using TMPro;
 
 using PHashTable = ExitGames.Client.Photon.Hashtable;
+using DG.Tweening;
 
 public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
     public Board board => manager.Board;
@@ -15,9 +16,12 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
     [SerializeField] private Vector2Int boardSize = new Vector2Int(50, 50);
     [SerializeField] private float perlinNoiseScale;
     [SerializeField] private Vector3 perlinNoiseOffset;
-    [SerializeField] private Button EndTurnButton;
+    [SerializeField] private Transform EndTurnButton;
     [SerializeField] private TMP_Text TimerText;
     [SerializeField] private DeckUnit DeckUnit;
+    [SerializeField] private Hand _hand;
+
+    public Hand Hand { get { return _hand; } }
 
 
     public UnityEvent onReset;
@@ -81,32 +85,32 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
             StopCoroutine(_timer);
         }
         _timer = StartCoroutine(Timer());
-        EndTurnButton.enabled = true;
-        EndTurnButton.gameObject.GetComponent<Image>().color = new Color(1, 0.75f, 0);
-        EndTurnButton.GetComponentInChildren<TMP_Text>().text = "END TURN";
+        EndTurnButton.gameObject.GetComponent<BoxCollider>().enabled = true;
+        EndTurnButton.DORotate(new Vector3(90, 0, 180), 0.2f);
         DeckUnit.DrawUnit(manager.CurrentPlayer.DrawUnit());
+        DOTween.Play(EndTurnButton);
     }
 
     private void StartOfEnnemyTurn()
     {
         startOfTurn = true;
-        if(_timer != null)
+        if (_timer != null)
         {
             StopCoroutine(_timer);
         }
         _timer = StartCoroutine(Timer());
-        EndTurnButton.enabled = (PhotonNetwork.IsConnected) ? false : true;
-        EndTurnButton.gameObject.GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f);
-        EndTurnButton.GetComponentInChildren<TMP_Text>().text = "ENNEMY TURN";
+        EndTurnButton.gameObject.GetComponent<BoxCollider>().enabled = (PhotonNetwork.IsConnected) ? false : true;
+        EndTurnButton.DORotate(new Vector3(-90, 0, 180), 0.2f);
+        DOTween.Play(EndTurnButton);
     }
 
     private IEnumerator Timer()
     {
-        for(int i=45; i > 0; i--)
+        for(int i=60; i > 0; i--)
         {
             TimerText.text = i.ToString();
             
-            TimerText.color = (i <= 15 && manager.MyTurn()) ? Color.red : Color.black;
+            TimerText.enabled = (i <= 15 && manager.MyTurn());
             
             yield return new WaitForSecondsRealtime(1f);
         }

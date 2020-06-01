@@ -24,7 +24,7 @@ public class DeckSpell : MonoBehaviour
         _spellCard.transform.SetParent(hand.gameObject.transform);
         DrawSequence.Append(_spellCard.transform.DOLocalMove(new Vector3(0, 0.2f, 0), 0.4f));
         DrawSequence.Join(_spellCard.transform.DOLocalRotate(new Vector3(-90, 0, 0), 0.5f));
-        DrawSequence.Join(_spellCard.transform.DOScale(Vector3.one, 0.4f));
+        DrawSequence.Join(_spellCard.transform.DOScale(Vector3.one*2, 0.4f));
         if (card)
         {
             Name.text = card.Name;
@@ -38,9 +38,10 @@ public class DeckSpell : MonoBehaviour
         {
             x = (hand.player.Hand.Count - 0.5f - hand.player.Hand.Count / 2f) * hand.Spacing;
         }
-        DrawSequence.Append(_spellCard.transform.DOLocalMove(new Vector3(x, 0f, 0f), 0.4f));
+        DrawSequence.Append(_spellCard.transform.DOLocalMove(new Vector3(x, 0.2f, 0f), 0.2f));
+        DrawSequence.Append(_spellCard.transform.DOLocalMove(new Vector3(x, 0f, 0f), 0.2f));
         DrawSequence.Join(_spellCard.transform.DOLocalRotate(new Vector3(-90f, 0, 0), 0.4f));
-
+        DrawSequence.Join(_spellCard.transform.DOScale(Vector3.one, 0.2f));
         DOTween.Play(DrawSequence);
     }
 
