@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d6fdbecdfe08ec05a72e4deaf5b058f, type: 3}
   m_Name: Eagle
   m_EditorClassIdentifier: 
-  resourcePath: Cards/Eagle
+  resourcePath: Cards/Unit/Eagle
   name: The Eagle
   description: Simple unit low cost and weak, Flies above mountains
   cost: 1

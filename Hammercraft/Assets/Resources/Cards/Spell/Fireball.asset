@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ff5f8f21005cdfdbaef19f379ddb51c, type: 3}
   m_Name: Fireball
   m_EditorClassIdentifier: 
-  resourcePath: Cards/Fireball
+  resourcePath: Cards/Spell/Fireball
   name: Fireball
   description: "By the rage inside my heart, you shall burn ! \n\nDeals 4 damage"
   cost: 3

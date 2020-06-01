@@ -2,7 +2,11 @@ using UnityEngine;
 
 [System.Serializable]
 public abstract class CardBase : ScriptableObject{
-    [SerializeField] protected string resourcePath;
+#if UNITY_EDITOR
+    [SerializeField] public string resourcePath;    
+#else
+    [SerializeField] protected string resourcePath;    
+#endif
     protected Sprite image = null;
     [SerializeField] protected new string name = "";
     [SerializeField, TextArea] protected string description = "";
