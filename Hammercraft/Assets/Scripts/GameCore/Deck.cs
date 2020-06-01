@@ -4,15 +4,30 @@ using UnityEngine;
 
 [System.Serializable]
 public class Deck {
+    public string name {get; set;}
     private List<UnitCard> units;
     private List<SpellCard> spells;
 
+    public Deck(string name) {
+        this.name = name;
+        this.units = new List<UnitCard>();
+        this.spells = new List<SpellCard>();
+    }
+
+    public Deck(string name, UnitCard[] units, SpellCard[] spells) {
+        this.name = name;
+        this.units = new List<UnitCard>(units);
+        this.spells = new List<SpellCard>(spells);
+    } 
+
     public Deck(UnitCard[] units, SpellCard[] spells) {
+        this.name = "";
         this.units = new List<UnitCard>(units);
         this.spells = new List<SpellCard>(spells);
     }
 
     public Deck(Deck original) {
+        this.name = original.name;
         this.units = new List<UnitCard>(original.units);
         this.spells = new List<SpellCard>(original.spells);
     }
