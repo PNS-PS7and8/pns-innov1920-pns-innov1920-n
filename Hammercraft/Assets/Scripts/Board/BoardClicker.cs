@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class BoardClicker : BoardBehaviour
 {
+    [SerializeField] private Camera Camera;
     public delegate void OnClickCardAction(GameCard card);
     public delegate void OnClickCellAction(Cell cell);
     public delegate void OnClickUnitAction(Cell cell, Unit unit);
@@ -61,7 +62,9 @@ public class BoardClicker : BoardBehaviour
     }
 
     private bool Raycast(out RaycastHit hit) {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = Camera.ScreenPointToRay(Input.mousePosition);
         return Physics.Raycast(ray, out hit);
     }
+
+  
 }

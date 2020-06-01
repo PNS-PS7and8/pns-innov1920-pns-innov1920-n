@@ -43,6 +43,7 @@ public class DeckSpell : MonoBehaviour
         DrawSequence.Join(_spellCard.transform.DOLocalRotate(new Vector3(-90f, 0, 0), 0.4f));
         DrawSequence.Join(_spellCard.transform.DOScale(Vector3.one, 0.2f));
         DOTween.Play(DrawSequence);
+        
     }
 
     IEnumerator wait()
