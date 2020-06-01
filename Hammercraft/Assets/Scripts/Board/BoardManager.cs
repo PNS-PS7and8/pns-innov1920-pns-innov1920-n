@@ -131,10 +131,10 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
         setup.noiseOffset = perlinNoiseOffset;
         setup.gameMode = GameModes.KillToWin;
         
-        UnitCard c1 = Resources.Load<UnitCard>("Cards/Noob");
-        UnitCard c2 = Resources.Load<UnitCard>("Cards/Fish");
-        UnitCard c3 = Resources.Load<UnitCard>("Cards/Eagle");
-        SpellCard c4 = Resources.Load<SpellCard>("Cards/Fireball");
+        UnitCard c1 = Resources.Load<UnitCard>("Cards/Unit/Noob");
+        UnitCard c2 = Resources.Load<UnitCard>("Cards/Unit/Fish");
+        UnitCard c3 = Resources.Load<UnitCard>("Cards/Unit/Eagle");
+        SpellCard c4 = Resources.Load<SpellCard>("Cards/Spell/Fireball");
         Deck deck = new Deck( new UnitCard[] { c1, c1, c2, c2, c3, c3 }, new SpellCard[] { c4, c4, c4, c4, c4 } );
 
         GameManager manager = new GameManager(setup, deck, deck);
