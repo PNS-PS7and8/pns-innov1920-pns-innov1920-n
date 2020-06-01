@@ -40,10 +40,15 @@ public class DeckUnit : MonoBehaviour
         }
         StartCoroutine(wait());
         DrawSequence.AppendInterval(1);
-        float x = (hand.player.Hand.Count-0.5f-hand.player.Hand.Count / 2f)*hand.Spacing;
+        float x = 0;
+        if(hand.player != null)
+        {
+           x = (hand.player.Hand.Count-0.5f-hand.player.Hand.Count / 2f)*hand.Spacing;
+
+        }
         DrawSequence.Append(_unitCard.transform.DOLocalMove(new Vector3(x,0f, 0f), 0.4f));
         DrawSequence.Join(_unitCard.transform.DOLocalRotate(new Vector3(-90f, 0, 0), 0.4f));
-        DrawSequence.AppendInterval(3f);
+       
         DOTween.Play(DrawSequence);
 
     }
