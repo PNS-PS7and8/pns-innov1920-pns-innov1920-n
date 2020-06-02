@@ -26,7 +26,7 @@ public class DeckCardList : MonoBehaviour
 
     public void DeleteCard(CollectionCard cc){
         //
-        Reload();//Delete all & LoadDeck();
+        //Reload();//Delete all & LoadDeck();
     }
 
     public void LoadDeck(Deck deck){
