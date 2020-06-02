@@ -27,7 +27,7 @@ public class DeckCardList : MonoBehaviour
         if (type == "UnitCard"){
             currentDeck.units.Add((UnitCard)cb);
         } else {
-            currentDeck.spells.Add((SpellCard)cc);
+            currentDeck.spells.Add((SpellCard)cb);
         }
         LoadDeck(currentDeck);
     }
