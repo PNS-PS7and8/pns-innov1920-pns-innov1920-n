@@ -4,16 +4,16 @@ using UnityEngine;
 using System.Linq;
 public class DeckCardList : MonoBehaviour
 {
-    [SerializeField] private GameCard cardPrefab;
-    public GameCard[] Cards { get; private set; }
+    [SerializeField] private CollectionCard cardPrefab;
+    public CollectionCard[] Cards { get; private set; }
 
     void Start()
     {
-        Cards = new GameCard[10];
+        Cards = new CollectionCard[10];
         for (int i = 0; i < Cards.Length; i++)
         {
             GameObject cardObject = Instantiate(cardPrefab.gameObject, transform);
-            Cards[i] = cardObject.GetComponent<GameCard>();
+            Cards[i] = cardObject.GetComponent<CollectionCard>();
             cardObject.SetActive(false);
         }
     }
@@ -26,19 +26,30 @@ public class DeckCardList : MonoBehaviour
 
     public void LoadDeck(Deck deck){
         List<UnitCard> lu = deck.units;
+        List<SpellCard> ls = deck.spells;
         //List<CardBase> lu = deck.units.Cast<CardBase>().ToList();
-        //Debug.Log(lu[0].Name);
-        //List<SpellCard> ls = deck.spells;
-        float spacing = 100f;
-        for (int i = 0; i<Cards.Length; i++){
-            Cards[i].card = lu[1];
+        float spacing = 190f;
+        for (int i = 0; i<lu.Capacity; i++){
+            Cards[i].card = lu[i];
             Cards[i].gameObject.SetActive(true);
             Vector3 pos = Cards[i].transform.localPosition;
-            Vector3 scale = new Vector3(2000,2000,2000);
+            Vector3 scale = new Vector3(1800,1800,1800);
             Cards[i].transform.localScale = scale;
-            pos.x = (-500)+(i * spacing);
+            pos.x = (-370)+(i * spacing);
             pos.z = -10;
+            pos.y = 200;
             Cards[i].transform.localPosition = pos;
+        }
+        for (int i = 0; i<ls.Capacity; i++){
+            Cards[lu.Capacity+i].card = ls[i];
+            Cards[lu.Capacity+i].gameObject.SetActive(true);
+            Vector3 pos = Cards[i].transform.localPosition;
+            Vector3 scale = new Vector3(1800,1800,1800);
+            Cards[lu.Capacity+i].transform.localScale = scale;
+            pos.x = (-370)+(i * spacing);
+            pos.z = -10;
+            pos.y = -200;
+            Cards[lu.Capacity+i].transform.localPosition = pos;
         }
     }
 }
