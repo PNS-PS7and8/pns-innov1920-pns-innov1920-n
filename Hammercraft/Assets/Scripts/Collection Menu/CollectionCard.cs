@@ -71,7 +71,6 @@ public class CollectionCard : BoardBehaviour
     private void OnMouseDown() {
         DeckCardList dc = Object.FindObjectOfType<DeckCardList>();
         dc.DeleteCard(this);
-        Debug.Log("hi");
     }
 
 }
