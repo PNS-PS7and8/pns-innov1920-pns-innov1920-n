@@ -20,7 +20,7 @@ public class DeckUnit : MonoBehaviour
     {
         
         _unitCard.transform.SetParent(transform);
-        _unitCard.transform.localScale = Vector3.one * 90;
+        _unitCard.transform.localScale = Vector3.one;
         _unitCard.transform.localPosition = new Vector3(0, 0, 0);
         _unitCard.transform.eulerAngles = new Vector3(180, 90, 0);
         _unitCard.SetActive(true);

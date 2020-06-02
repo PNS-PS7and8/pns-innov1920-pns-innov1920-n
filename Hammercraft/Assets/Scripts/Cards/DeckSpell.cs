@@ -16,7 +16,7 @@ public class DeckSpell : MonoBehaviour
     public void DrawSpell(SpellCard card = null)
     {
         _spellCard.transform.SetParent(transform);
-        _spellCard.transform.localScale = Vector3.one * 90;
+        _spellCard.transform.localScale = Vector3.one;
         _spellCard.transform.localPosition = new Vector3(0, 0, 0);
         _spellCard.transform.eulerAngles = new Vector3(180, 90, 0);
         _spellCard.SetActive(true);
