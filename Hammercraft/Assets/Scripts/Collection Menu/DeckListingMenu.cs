@@ -10,14 +10,18 @@ public class DeckListingMenu : MonoBehaviour
     private Transform _content;
 
     private Dictionary<string,DeckListing> ListDecks = new Dictionary<string, DeckListing>();
+    public Deck selectedDeck;
 
     public void Start() {
-        UnitCard c1 = Resources.Load<UnitCard>("Cards/Noob");
-        UnitCard c2 = Resources.Load<UnitCard>("Cards/Fish");
-        UnitCard c3 = Resources.Load<UnitCard>("Cards/Eagle");
-        SpellCard c4 = Resources.Load<SpellCard>("Cards/Fireball");
-        Deck basicDeck = new Deck("Basic deck", new UnitCard[] { c1, c1, c2, c2, c3, c3 }, new SpellCard[] { c4, c4, c4, c4, c4 } );
+        UnitCard c1 = Resources.Load<UnitCard>("Cards/Unit/Noob");
+        UnitCard c2 = Resources.Load<UnitCard>("Cards/Unit/Fish");
+        UnitCard c3 = Resources.Load<UnitCard>("Cards/Unit/Eagle");
+        SpellCard c4 = Resources.Load<SpellCard>("Cards/Spell/Fireball");
+        UnitCard[] u = new UnitCard[] { c1, c1, c2, c2, c3, c3 };
+        SpellCard[] s = new SpellCard[] { c4, c4, c4, c4, c4 };
+        Deck basicDeck = new Deck("Basic deck", u, s);
         DeckListing listing = Instantiate(_deckListing, _content);
+        listing.SetDeckInfo(basicDeck);
         ListDecks["Basic deck"] = listing;
         ListDecks["Basic deck"].SetDeckInfo(basicDeck);
     }

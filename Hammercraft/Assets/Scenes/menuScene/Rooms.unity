@@ -506,6 +506,7 @@ GameObject:
   - component: {fileID: 91472768}
   - component: {fileID: 91472767}
   - component: {fileID: 91472766}
+  - component: {fileID: 91472769}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -572,12 +573,43 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 91472765}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 408, y: 227, z: -385}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &91472769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 91472765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!1 &173675886
 GameObject:
   m_ObjectHideFlags: 0
@@ -589,6 +621,7 @@ GameObject:
   - component: {fileID: 173675887}
   - component: {fileID: 173675889}
   - component: {fileID: 173675888}
+  - component: {fileID: 173675890}
   m_Layer: 5
   m_Name: DeckCardsList
   m_TagString: Untagged
@@ -615,7 +648,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -40}
+  m_AnchoredPosition: {x: 0, y: -22}
   m_SizeDelta: {x: 1100, y: 850}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &173675888
@@ -655,6 +688,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 173675886}
   m_CullTransparentMesh: 0
+--- !u!114 &173675890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173675886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da20d78f52877ca41ad4205215824256, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardPrefab: {fileID: 8277479172846306894, guid: 4b674b4f4f2e5443aa6c8d1826436268,
+    type: 3}
 --- !u!1 &226007246
 GameObject:
   m_ObjectHideFlags: 0
@@ -2370,7 +2417,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 543872987}
   m_HandleRect: {fileID: 543872986}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -4195,6 +4242,9 @@ MonoBehaviour:
   _deckListing: {fileID: -6630094003000932816, guid: 2d8675f8a5d0564499722d75b6edb179,
     type: 3}
   _content: {fileID: 1831408411}
+  selectedDeck:
+    units: []
+    spells: []
 --- !u!114 &1706485219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5003,7 +5053,7 @@ Canvas:
   m_GameObject: {fileID: 1854389054}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 2
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -5024,7 +5074,7 @@ RectTransform:
   m_GameObject: {fileID: 1854389054}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.41944444, y: 0.41944444, z: 0.41944444}
   m_Children:
   - {fileID: 1326775101}
   - {fileID: 865025437}
@@ -5036,9 +5086,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 403, y: 226.5}
+  m_SizeDelta: {x: 1921.5894, y: 1080}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1909374060
 GameObject:
   m_ObjectHideFlags: 0

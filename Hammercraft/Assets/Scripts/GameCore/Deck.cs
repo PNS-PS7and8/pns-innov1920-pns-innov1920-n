@@ -5,8 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class Deck {
     public string name {get; set;}
-    private List<UnitCard> units;
-    private List<SpellCard> spells;
+    public List<UnitCard> units;
+    public List<SpellCard> spells;
 
     public Deck(string name) {
         this.name = name;
