@@ -67,4 +67,9 @@ public class CollectionCard : BoardBehaviour
         //OverCard.gameObject.SetActive(false);
         //DOTween.Play(transform);
     }
+
+    private void OnMouseDown() {
+        
+    }
+    
 }
