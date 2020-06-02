@@ -73,6 +73,7 @@ public class DeckCardList : MonoBehaviour
             currentDeck.spells.Remove((SpellCard)cc.card);
         }
         cc.gameObject.SetActive(false);
+        cc.transform.localScale = new Vector3 (1800,1800,1800);
     }
 
     public void LoadDeck(Deck deck){

@@ -57,15 +57,11 @@ public class CollectionCard : BoardBehaviour
     }
 
     private void OnMouseEnter() {
-        //transform.DOScale(Vector3.one * scaleUp, 0.1f);
-        //OverCard.gameObject.SetActive(true);
-        //DOTween.Play(transform);
+        transform.localScale = new Vector3 (2800,2800,2800);
     }
 
     private void OnMouseExit() {
-        //transform.DOScale(Vector3.one,0.2f);
-        //OverCard.gameObject.SetActive(false);
-        //DOTween.Play(transform);
+        transform.localScale = new Vector3 (1800,1800,1800);
     }
 
     private void OnMouseDown() {
