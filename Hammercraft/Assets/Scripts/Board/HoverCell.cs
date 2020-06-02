@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class HoverCell : BoardBehaviour
@@ -24,6 +23,7 @@ public class HoverCell : BoardBehaviour
             go.transform.parent = transform;
             go.transform.localPosition = board.LocalPosition(cell) + Vector3.up * offset;
             go.transform.localRotation = Quaternion.Euler(90, 0, 0);
+            go.transform.localScale = Vector3.one;
             
             instances[cell.position] = go.GetComponent<SpriteRenderer>();
             instances[cell.position].sprite = sprite;
