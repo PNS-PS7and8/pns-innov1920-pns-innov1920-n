@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public class EndTurnButton : MonoBehaviour
 {
     [SerializeField] private BoardManager BoardManager;
-    public void OnPointerDown()
+    public void OnMouseDown()
     {
         BoardManager.NextTurn();
     }

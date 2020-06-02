@@ -18,7 +18,7 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
     [SerializeField] private Vector3 perlinNoiseOffset;
     [SerializeField] private Transform EndTurnButton;
     [SerializeField] private TMP_Text TimerText;
-    [SerializeField] private DeckUnit DeckUnit;
+    [SerializeField] private BoardCardDraw[] draws;
     [SerializeField] private Hand _hand;
 
     public Hand Hand { get { return _hand; } }
@@ -87,8 +87,13 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
         _timer = StartCoroutine(Timer());
         EndTurnButton.gameObject.GetComponent<BoxCollider>().enabled = true;
         EndTurnButton.DORotate(new Vector3(90, 0, 180), 0.2f);
-        DeckUnit.DrawUnit(manager.CurrentPlayer.DrawUnit());
         DOTween.Play(EndTurnButton);
+
+        if (draws != null) {
+            foreach(var d in draws) {
+                d.AllowDraw();
+            }
+        }
     }
 
     private void StartOfEnnemyTurn()
@@ -100,7 +105,7 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
         }
         _timer = StartCoroutine(Timer());
         EndTurnButton.gameObject.GetComponent<BoxCollider>().enabled = (PhotonNetwork.IsConnected) ? false : true;
-        EndTurnButton.DORotate(new Vector3(-90, 0, 180), 0.2f);
+        EndTurnButton.DORotate(new Vector3(-90, 0, 180), 0.2f, RotateMode.LocalAxisAdd);
         DOTween.Play(EndTurnButton);
     }
 

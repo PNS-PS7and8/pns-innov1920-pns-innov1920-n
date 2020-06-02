@@ -24,17 +24,15 @@ public class BoardPlayer : BoardBehaviour {
         float time = 3f;
         yield return new WaitForSecondsRealtime(time);
         deckUnit.DrawUnit(manager.CurrentPlayer.DrawUnit());
-        yield return new WaitForSecondsRealtime(time);
-        deckUnit.DrawUnit(manager.CurrentPlayer.DrawUnit());
-        yield return new WaitForSecondsRealtime(time);
-        deckUnit.DrawUnit(manager.CurrentPlayer.DrawUnit());
-        yield return new WaitForSecondsRealtime(time);
-        deckUnit.DrawUnit(manager.CurrentPlayer.DrawUnit());
-        yield return new WaitForSecondsRealtime(time);
-        deckSpell.DrawSpell(manager.CurrentPlayer.DrawSpell());
-        yield return new WaitForSecondsRealtime(time);
-        deckSpell.DrawSpell(manager.CurrentPlayer.DrawSpell());
         
         
+    }
+
+    public void DrawUnit() {
+        deckUnit.DrawUnit(manager.CurrentPlayer.DrawUnit());
+    }
+
+    public void DrawSpell() {
+        deckSpell.DrawSpell(manager.CurrentPlayer.DrawSpell());
     }
 }
