@@ -8,8 +8,10 @@ public class DeckCardList : MonoBehaviour
     public CollectionCard[] CardUnit { get; private set; }
     public CollectionCard[] CardSpell { get; private set; }
     private Deck currentDeck;
+    private Deck savedDeck;
     private int MAX = 5;
     private float spacing = 190f;
+
 
     void Start()
     {
@@ -27,6 +29,17 @@ public class DeckCardList : MonoBehaviour
             CardSpell[i] = cardObject.GetComponent<CollectionCard>();
             cardObject.SetActive(false);
         }
+    }
+
+    void Reset(){
+        foreach(CollectionCard card in CardUnit){
+            Destroy(card.gameObject);
+        }
+        foreach(CollectionCard card in CardSpell){
+            Destroy(card.gameObject);
+        }
+        currentDeck = null;
+        savedDeck = null;
     }
 
     public void AddCard(CardBase cb){
@@ -49,8 +62,7 @@ public class DeckCardList : MonoBehaviour
                     break;
                 }
             }
-        }
-        
+        }  
     }
 
     public void DeleteCard(CollectionCard cc){
@@ -64,12 +76,17 @@ public class DeckCardList : MonoBehaviour
     }
 
     public void LoadDeck(Deck deck){
+        Reset();
+        Start();
+        savedDeck = deck;
         currentDeck = deck;
         List<UnitCard> lu = deck.units;
         List<SpellCard> ls = deck.spells;
-        for (int i = 0; i<lu.Count() && i<MAX; i++){
-            CardUnit[i].card = lu[i];
-            CardUnit[i].gameObject.SetActive(true);
+        for (int i = 0; i<MAX; i++){
+            if (lu.Count > i){
+                CardUnit[i].card = lu[i];
+                CardUnit[i].gameObject.SetActive(true);
+            }
             Vector3 pos = CardUnit[i].transform.localPosition;
             Vector3 scale = new Vector3(1800,1800,1800);
             CardUnit[i].transform.localScale = scale;
@@ -79,9 +96,11 @@ public class DeckCardList : MonoBehaviour
             CardUnit[i].transform.localPosition = pos;
         }
         
-        for (int i = 0; i<ls.Count() && i<MAX; i++){
-            CardSpell[i].card = ls[i];
-            CardSpell[i].gameObject.SetActive(true);
+        for (int i = 0; i<MAX; i++){
+            if (ls.Count > i){
+                CardSpell[i].card = ls[i];
+                CardSpell[i].gameObject.SetActive(true);
+            }
             Vector3 pos = CardSpell[i].transform.localPosition;
             Vector3 scale = new Vector3(1800,1800,1800);
             CardSpell[i].transform.localScale = scale;

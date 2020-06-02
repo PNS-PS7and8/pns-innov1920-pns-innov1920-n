@@ -9,7 +9,7 @@ public class DeckListing : MonoBehaviour, IPointerDownHandler
 {
     [SerializeField]
     private TMP_Text _name;
-    public Deck Deck {get; private set;}
+    public Deck Deck {get; set;}
 
     public void Update(){
     

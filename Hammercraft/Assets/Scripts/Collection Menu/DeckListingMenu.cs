@@ -25,6 +25,14 @@ public class DeckListingMenu : MonoBehaviour
         ListDecks["Basic deck"] = listing;
         ListDecks["Basic deck"].SetDeckInfo(basicDeck);
     }
+
+    public void setDeck(Deck NewDeck){
+        foreach(string name in ListDecks.Keys){
+            if (name == NewDeck.name){
+                ListDecks[name].Deck = NewDeck;
+            }
+        }
+    }
     
     public void on_click_create_deck(string name) {
         DeckListing listing = null;
