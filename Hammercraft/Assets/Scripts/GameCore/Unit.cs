@@ -54,7 +54,6 @@ public class Unit : ITakeDamage, IDealDamage
         this.id = id;
         this.rangeAtq = (card.Range) ? 6 : 2;
         this.movementMask = card.MovementMask;
-        
     }
 
 
@@ -72,9 +71,5 @@ public class Unit : ITakeDamage, IDealDamage
 
     private void Die() {
         dead = true;
-       // Point.UnitIsDead?.Invoke(cost, Player);
-        
     }
-
-    
 }

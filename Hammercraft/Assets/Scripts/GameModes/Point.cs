@@ -1,38 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Linq;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class Point : GameMode
 {
-    public delegate void OnUnitDie(int cost, PlayerRole player);
-    int pointToWin = 2;
-    int PointPlayer1 = 0;
-    int PointPlayer2 = 0;
-    public static event OnUnitDie UnitIsDead;
-    
-
-    public Point()
-    {
-        UnitIsDead += UnitDead;
-
-    }
-
     public override GameState CurrentGameState(GameManager gameManager)
     {                   
-        if (PointPlayer1 > pointToWin) { return GameState.WinPlayerOne; }
-        else if (PointPlayer2 > pointToWin) { return GameState.WinPlayerTwo; }
+        int p1 = gameManager.Board.Units.Where(u=>u.Dead && u.Player == PlayerRole.PlayerOne).Select(u => u.Cost).Sum();
+        int p2 = gameManager.Board.Units.Where(u=>u.Dead && u.Player == PlayerRole.PlayerTwo).Select(u => u.Cost).Sum();
+        Debug.Log(p1 +" " + p2);
+        if (p1 > 2) { return GameState.WinPlayerTwo; }
+        else if (p2 > 2) { return GameState.WinPlayerOne; }
         else return GameState.NotFinished;
-        
     }
-
-    void UnitDead(int cost, PlayerRole player)
-    {
-        PointPlayer2 += 1;
-        Debug.Log(PointPlayer2 + "player2");
-    }
-
-    
-
-
 }

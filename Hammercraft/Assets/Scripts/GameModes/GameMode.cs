@@ -36,6 +36,5 @@ public static class GameModesExtension {
 
 [System.Serializable]
 public abstract class GameMode {
-    public int x;
     public abstract GameState CurrentGameState(GameManager gameManager);
 }
