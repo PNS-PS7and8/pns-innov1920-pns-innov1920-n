@@ -44,7 +44,7 @@ public class DeckCardList : MonoBehaviour
 
     public void AddCard(CardBase cb){
         string type = cb.GetType().ToString();
-        if (type == "UnitCard" && currentDeck.units.Count() < MAX){
+        if (cb.GetType().IsAssignableFrom(typeof(UnitCard)) && currentDeck.units.Count() < MAX){
             currentDeck.units.Add((UnitCard)cb);
             for (int i = 0; i < CardUnit.Count(); i++){
                 if(CardUnit[i].gameObject.active == false){
@@ -66,8 +66,7 @@ public class DeckCardList : MonoBehaviour
     }
 
     public void DeleteCard(CollectionCard cc){
-        string type = cc.card.GetType().ToString();
-        if (type == "UnitCard"){
+        if (cc.card.GetType().IsAssignableFrom(typeof(UnitCard))){
             currentDeck.units.Remove((UnitCard)cc.card);
         } else {
             currentDeck.spells.Remove((SpellCard)cc.card);
@@ -79,7 +78,6 @@ public class DeckCardList : MonoBehaviour
     public void LoadDeck(Deck deck){
         Reset();
         Start();
-        savedDeck = deck;
         currentDeck = deck;
         List<UnitCard> lu = deck.units;
         List<SpellCard> ls = deck.spells;
