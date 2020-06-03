@@ -41,4 +41,50 @@ public class DeckTest : MonoBehaviour
         Deck deck = new Deck(us, ss);
         Assert.That(deck.DrawSpell().resourcePath, Is.EqualTo(s.resourcePath));
     }
+
+    [Test]
+    public void AddCardUnit_Test(){
+        UnitCard u1 = Resources.Load<UnitCard>("Cards/Unit/Noob");
+        SpellCard s1 = Resources.Load<SpellCard>("Cards/Spell/Fireball");
+        UnitCard[] u = new UnitCard[] {u1};
+        SpellCard[] s = new SpellCard[] {s1};
+        Deck deck = new Deck(u, s);
+        UnitCard u2 = Resources.Load<UnitCard>("Cards/Unit/Pro");
+        deck.AddCard(u2);
+        Assert.True(deck.units.Count == 2);
+    }
+
+    [Test]
+    public void AddCardSpell_Test(){
+        UnitCard u1 = Resources.Load<UnitCard>("Cards/Unit/Noob");
+        SpellCard s1 = Resources.Load<SpellCard>("Cards/Spell/Fireball");
+        UnitCard[] u = new UnitCard[] {u1};
+        SpellCard[] s = new SpellCard[] {s1};
+        Deck deck = new Deck(u, s);
+        SpellCard s2 = Resources.Load<SpellCard>("Cards/Spell/Heal");
+        deck.AddCard(s2);
+        Assert.True(deck.spells.Count == 2);
+    }
+
+    [Test]
+    public void RemoveCardUnit_Test(){
+        UnitCard u1 = Resources.Load<UnitCard>("Cards/Unit/Noob");
+        SpellCard s1 = Resources.Load<SpellCard>("Cards/Spell/Fireball");
+        UnitCard[] u = new UnitCard[] {u1};
+        SpellCard[] s = new SpellCard[] {s1};
+        Deck deck = new Deck(u, s);
+        deck.RemoveCard(u1);
+        Assert.True(deck.units.Count == 0);
+    }
+
+    [Test]
+    public void RemoveCardSpell_Test(){
+        UnitCard u1 = Resources.Load<UnitCard>("Cards/Unit/Noob");
+        SpellCard s1 = Resources.Load<SpellCard>("Cards/Spell/Fireball");
+        UnitCard[] u = new UnitCard[] {u1};
+        SpellCard[] s = new SpellCard[] {s1};
+        Deck deck = new Deck(u, s);
+        deck.RemoveCard(s1);
+        Assert.True(deck.spells.Count == 0);
+    }
 }

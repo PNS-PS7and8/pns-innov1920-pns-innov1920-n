@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using NUnit.Framework;
+using System.Linq;
 
 public class BoardTest
 {
@@ -79,5 +80,47 @@ public class BoardTest
         Vector2Int v = new Vector2Int (5,5);
         Vector3 vEx = new Vector3 (0,2,0);
         Assert.That(board.LocalToCell(vEx), Is.EqualTo(v));
+    }
+
+    [Test]
+    public void AddUnitCard_Test() {
+        Board board = new Board(10,10);
+        Vector3 v = new Vector3 (0,2,0);
+        UnitCard c1 = Resources.Load<UnitCard>("Cards/Unit/Noob");
+        Cell cell = board.GetCell(new Vector2Int(2,2));
+        Unit u = new Unit(c1, cell.position, 1, 0);
+        board.AddUnit(c1, cell, 0);
+        Assert.That(board.Units[0].Card, Is.EqualTo(u.Card));
+    }
+
+    [Test]
+    public void AddUnitPosition_Test() {
+        Board board = new Board(10,10);
+        Vector3 v = new Vector3 (0,2,0);
+        UnitCard c1 = Resources.Load<UnitCard>("Cards/Unit/Noob");
+        Cell cell = board.GetCell(new Vector2Int(2,2));
+        Unit u = new Unit(c1, cell.position, 1, 0);
+        board.AddUnit(c1, cell, 0);
+        Assert.That(board.Units[0].position, Is.EqualTo(cell.position));
+    }
+
+    [Test]
+    public void FreeNeighbors_Test() {
+        Board board = new Board(10,10);
+        Vector3 v = new Vector3 (0,2,0);
+        Cell cell1 = board.GetCell(new Vector2Int(2,2));
+        Cell cell2 = board.GetCell(new Vector2Int(2,3));
+        cell2.cellType = Cell.CellType.Field;
+        Assert.True(board.FreeNeighbors(cell1).Contains(cell2));
+    }
+
+    [Test]
+    public void NotFreeNeighbors_Test() {
+        Board board = new Board(10,10);
+        Vector3 v = new Vector3 (0,2,0);
+        Cell cell1 = board.GetCell(new Vector2Int(2,2));
+        Cell cell2 = board.GetCell(new Vector2Int(2,3));
+        cell2.cellType = Cell.CellType.Water;
+        Assert.False(board.FreeNeighbors(cell1).Contains(cell2));
     }
 }
