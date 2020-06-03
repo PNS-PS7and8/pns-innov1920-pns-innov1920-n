@@ -20,25 +20,25 @@ public class DeckTest : MonoBehaviour
 
     [Test]
     public void DrawUnit_Test(){
-        UnitCard u = ScriptableObject.CreateInstance<UnitCard>();
-        SpellCard s = ScriptableObject.CreateInstance<DamageSpell>();
+        UnitCard u = Resources.Load<UnitCard>("Cards/Unit/Noob");
+        SpellCard s = Resources.Load<SpellCard>("Cards/Spell/Fireball");
         UnitCard[] us = new UnitCard[1];
         SpellCard[] ss = new SpellCard[1];
         us[0] = u;
         ss[0] = s;
         Deck deck = new Deck(us, ss);
-        Assert.That(deck.DrawUnit(), Is.EqualTo(u));
+        Assert.That(deck.DrawUnit().resourcePath, Is.EqualTo(u.resourcePath));
     }
 
     [Test]
     public void DrawSpell_Test(){
-        UnitCard u = ScriptableObject.CreateInstance<UnitCard>();
-        SpellCard s = ScriptableObject.CreateInstance<DamageSpell>();
+        UnitCard u = Resources.Load<UnitCard>("Cards/Unit/Noob");
+        SpellCard s = Resources.Load<SpellCard>("Cards/Spell/Fireball");
         UnitCard[] us = new UnitCard[1];
-        SpellCard[] ss = new DamageSpell[1];
+        SpellCard[] ss = new SpellCard[1];
         us[0] = u;
         ss[0] = s;
         Deck deck = new Deck(us, ss);
-        Assert.That(deck.DrawSpell(), Is.EqualTo(s));
+        Assert.That(deck.DrawSpell().resourcePath, Is.EqualTo(s.resourcePath));
     }
 }

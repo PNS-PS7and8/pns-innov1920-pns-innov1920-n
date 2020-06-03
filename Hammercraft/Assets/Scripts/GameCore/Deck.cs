@@ -5,47 +5,65 @@ using UnityEngine;
 [System.Serializable]
 public class Deck {
     public string name {get; set;}
-    public List<UnitCard> units;
-    public List<SpellCard> spells;
+    
+    [SerializeField] private List<string> serializedUnits;
+    [SerializeField] private List<string> serializedSpells;
+    
+    public List<UnitCard> units => serializedUnits.Select(c => Resources.Load<UnitCard>(c)).ToList();
+    public List<SpellCard> spells => serializedSpells.Select(c => Resources.Load<SpellCard>(c)).ToList();
 
     public Deck(string name) {
         this.name = name;
-        this.units = new List<UnitCard>();
-        this.spells = new List<SpellCard>();
     }
 
     public Deck(string name, UnitCard[] units, SpellCard[] spells) {
         this.name = name;
-        this.units = new List<UnitCard>(units);
-        this.spells = new List<SpellCard>(spells);
+        this.serializedUnits = units.Select(u => u.ResourcePath).ToList();
+        this.serializedSpells = spells.Select(s => s.ResourcePath).ToList();
     } 
 
     public Deck(UnitCard[] units, SpellCard[] spells) {
         this.name = "";
-        this.units = new List<UnitCard>(units);
-        this.spells = new List<SpellCard>(spells);
+        this.serializedUnits = units.Select(u => u.ResourcePath).ToList();
+        this.serializedSpells = spells.Select(s => s.ResourcePath).ToList();
     }
 
     public Deck(Deck original) {
         this.name = original.name;
-        this.units = new List<UnitCard>(original.units);
-        this.spells = new List<SpellCard>(original.spells);
+        this.serializedUnits = new List<string>(original.serializedUnits);
+        this.serializedSpells = new List<string>(original.serializedSpells);
     }
 
     public void Shuffle() {
-        units = units.OrderBy(unit => Random.value).ToList();
-        spells = spells.OrderBy(spell => Random.value).ToList();
+        serializedUnits = serializedUnits.OrderBy(unit => Random.value).ToList();
+        serializedSpells = serializedSpells.OrderBy(spell => Random.value).ToList();
     }
 
     public UnitCard DrawUnit() {
-        var card = units[0];
-        units.RemoveAt(0);
-        return card;
+        var card = serializedUnits[0];
+        serializedUnits.RemoveAt(0);
+        return Resources.Load<UnitCard>(card);
     }
 
     public SpellCard DrawSpell() {
-        var card = spells[0];
-        spells.RemoveAt(0);
-        return card;
+        var card = serializedSpells[0];
+        serializedSpells.RemoveAt(0);
+        return Resources.Load<SpellCard>(card);
+    }
+
+    public void AddCard(CardBase card) {
+        if (card.GetType().IsSubclassOf(typeof(UnitCard))) {
+            serializedUnits.Add(card.ResourcePath);
+        } else {
+            serializedSpells.Add(card.ResourcePath);
+        }
+    }
+
+    public void RemoveCard(CardBase card) {
+        if (card.GetType().IsAssignableFrom(typeof(UnitCard))) {
+            serializedUnits.Remove(card.ResourcePath);
+        } else {
+            serializedSpells.Remove(card.ResourcePath);
+        }
     }
 }

@@ -50,7 +50,7 @@ public class DeckCardList : MonoBehaviour
     public void AddCard(CardBase cb){
         string type = cb.GetType().ToString();
         if (cb.GetType().IsAssignableFrom(typeof(UnitCard)) && currentDeck.units.Count() < MAX){
-            currentDeck.units.Add((UnitCard)cb);
+            currentDeck.AddCard(cb);
             for (int i = 0; i < CardUnit.Count(); i++){
                 if(CardUnit[i].gameObject.active == false){
                     CardUnit[i].card = cb;
@@ -59,7 +59,7 @@ public class DeckCardList : MonoBehaviour
                 }
             }
         } else if (currentDeck.spells.Count() < MAX){
-            currentDeck.spells.Add((SpellCard)cb);
+            currentDeck.AddCard(cb);
             for (int i = 0; i < CardSpell.Count(); i++){
                 if(CardSpell[i].gameObject.active == false){
                     CardSpell[i].card = cb;
@@ -72,9 +72,9 @@ public class DeckCardList : MonoBehaviour
 
     public void DeleteCard(CollectionCard cc){
         if (cc.card.GetType().IsAssignableFrom(typeof(UnitCard))){
-            currentDeck.units.Remove((UnitCard)cc.card);
+            currentDeck.RemoveCard(cc.card);
         } else {
-            currentDeck.spells.Remove((SpellCard)cc.card);
+            currentDeck.RemoveCard(cc.card);
         }
         cc.gameObject.SetActive(false);
         cc.transform.localScale = new Vector3 (1800,1800,1800);

@@ -3,8 +3,11 @@ using UnityEngine;
 
 [System.Serializable]
 public class Player {
-    public Deck originalDeck  { get; private set; }
-    public Deck deck { get; private set; }
+    [SerializeField] private Deck originalDeck;
+    [SerializeField] private Deck deck;
+    
+    public Deck OriginalDeck => originalDeck;
+    public Deck Deck => deck;
 
     [SerializeField] private List<CardBase> hand;
     [SerializeField] private PlayerRole role;
@@ -21,7 +24,7 @@ public class Player {
         this.gold = 1;
         this.currentGold = gold;
         this.deck = new Deck(deck);
-        this.deck.Shuffle();
+        this.Deck.Shuffle();
         hand = new List<CardBase>();
     }
 
@@ -34,13 +37,13 @@ public class Player {
     }
 
     public UnitCard DrawUnit() {
-        UnitCard t = deck.DrawUnit();
+        UnitCard t = Deck.DrawUnit();
         hand.Add(t);
         return t;
     }
 
     public SpellCard DrawSpell() {
-        SpellCard t = deck.DrawSpell();
+        SpellCard t = Deck.DrawSpell();
         hand.Add(t);
         return t;
     }
