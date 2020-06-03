@@ -54,9 +54,6 @@ public class MoveUnit : BoardBehaviour
         if (origin != null && unit != null && cell.position != unit.position) {
             if (UnitMovement.CanMove(unit.MovementMask, board, origin, cell, unit.Movement, out var path)) {
                 
-                origin.cellState = Cell.CellState.Free;
-                cell.cellState = Cell.CellState.Occupied;
-                
                 unit.position = cell.position;
 
                 manager.History.Add(new MovementAction(manager.CurrentPlayer.Role, manager.Turn, unit.Id, path.Select(c => c.position).ToArray()));

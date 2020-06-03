@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [System.Serializable]
@@ -9,11 +10,11 @@ public class Player {
     public Deck OriginalDeck => originalDeck;
     public Deck Deck => deck;
 
-    [SerializeField] private List<CardBase> hand;
+    [SerializeField] private List<string> serializedHand;
     [SerializeField] private PlayerRole role;
     [SerializeField] private int gold;
     [SerializeField] private int currentGold;
-    public List<CardBase> Hand => hand;
+    public List<CardBase> Hand => serializedHand.Select(c => Resources.Load<CardBase>(c)).ToList();
     public PlayerRole Role => role;
     public int Gold => gold;
     public int CurrentGold => currentGold;
@@ -25,7 +26,7 @@ public class Player {
         this.currentGold = gold;
         this.deck = new Deck(deck);
         this.Deck.Shuffle();
-        hand = new List<CardBase>();
+        serializedHand = new List<string>();
     }
 
     public void SetGold(int newgold){
@@ -38,17 +39,17 @@ public class Player {
 
     public UnitCard DrawUnit() {
         UnitCard t = Deck.DrawUnit();
-        hand.Add(t);
+        serializedHand.Add(t.ResourcePath);
         return t;
     }
 
     public SpellCard DrawSpell() {
         SpellCard t = Deck.DrawSpell();
-        hand.Add(t);
+        serializedHand.Add(t.ResourcePath);
         return t;
     }
 
     public void UseCard(CardBase card) {
-        hand.Remove(card);
+        serializedHand.Remove(card.ResourcePath);
     }
 }

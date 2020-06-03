@@ -123,8 +123,6 @@ public class Board {
                 yield return c;
     }
 
-    public IEnumerable<Cell> FreeNeighbors(Cell cell) => Ring(cell, 2).Where(c => c.cellState == Cell.CellState.Free && c.cellType == Cell.CellType.Field);
-
     public IEnumerable<Unit> PlayerUnits(PlayerRole player) {
         foreach(var unit in units) {
             if (unit.Player == player)

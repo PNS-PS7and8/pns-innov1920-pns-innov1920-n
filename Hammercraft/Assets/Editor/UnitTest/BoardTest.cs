@@ -103,24 +103,4 @@ public class BoardTest
         board.AddUnit(c1, cell, 0);
         Assert.That(board.Units[0].position, Is.EqualTo(cell.position));
     }
-
-    [Test]
-    public void FreeNeighbors_Test() {
-        Board board = new Board(10,10);
-        Vector3 v = new Vector3 (0,2,0);
-        Cell cell1 = board.GetCell(new Vector2Int(2,2));
-        Cell cell2 = board.GetCell(new Vector2Int(2,3));
-        cell2.cellType = Cell.CellType.Field;
-        Assert.True(board.FreeNeighbors(cell1).Contains(cell2));
-    }
-
-    [Test]
-    public void NotFreeNeighbors_Test() {
-        Board board = new Board(10,10);
-        Vector3 v = new Vector3 (0,2,0);
-        Cell cell1 = board.GetCell(new Vector2Int(2,2));
-        Cell cell2 = board.GetCell(new Vector2Int(2,3));
-        cell2.cellType = Cell.CellType.Water;
-        Assert.False(board.FreeNeighbors(cell1).Contains(cell2));
-    }
 }

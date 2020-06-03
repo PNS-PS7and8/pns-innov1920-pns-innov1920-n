@@ -18,37 +18,6 @@ public class CellTest : MonoBehaviour
     }
 
     [Test]
-    public void FreeNeighborsField_Test() {
-        Board board = new Board(10,10);
-        Cell cell = board.GetCell(4,4);
-        Cell cellN = board.GetCell(4,3);
-        cellN.cellType = Cell.CellType.Field;
-        List<Cell> got = board.FreeNeighbors(cell).ToList();
-        Assert.True(got.Contains(cellN));
-    }
-
-    [Test]
-    public void FreeNeighborsWater_Test() {
-        Board board = new Board(10,10);
-        Cell cell = board.GetCell(4,4);
-        Cell cellN = board.GetCell(4,3);
-        cellN.cellType = Cell.CellType.Water;
-        List<Cell> got = board.FreeNeighbors(cell).ToList();
-        Assert.False(got.Contains(cellN));
-    }
-
-        [Test]
-    public void FreeNeighborsOccupied_Test() {
-        Board board = new Board(10,10);
-        Cell cell = board.GetCell(4,4);
-        Cell cellN = board.GetCell(4,3);
-        cellN.cellType = Cell.CellType.Field;
-        cellN.cellState = Cell.CellState.Occupied;
-        List<Cell> got = board.FreeNeighbors(cell).ToList();
-        Assert.False(got.Contains(cellN));
-    }
-
-    [Test]
     public void HeightWater_Test() {
         Cell cell = new Cell();
         cell.cellType = (Cell.CellType)CellType.Water;

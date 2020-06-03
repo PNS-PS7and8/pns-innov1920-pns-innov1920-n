@@ -28,10 +28,11 @@ public static class CardCast {
     }
 
     private static bool TestUnitCondition(CastMask value, Board board, Cell target) {
+        var unit = board.GetUnit(target);
         return
             value == CastMask.AnyPosition ||
-            Check(value, CastMask.EmptyCell) && board.GetUnit(target) == null ||
-            Check(value, CastMask.OnUnit) && board.GetUnit(target) != null ||
+            Check(value, CastMask.EmptyCell) && (unit == null || unit.Dead) ||
+            Check(value, CastMask.OnUnit) && unit != null && !unit.Dead ||
             Check(value, CastMask.NearUnit) && board.Neighbors(target).Any(cell => board.GetUnit(cell) != null);
     }
 

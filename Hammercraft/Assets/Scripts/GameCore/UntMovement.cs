@@ -53,7 +53,8 @@ public static class UnitMovement {
 
     public static bool CheckCell(UnitMoveMask value, Board board, Cell cell) {
         return
-            TestTerrain(value, board, cell);
+            TestTerrain(value, board, cell) &&
+            TestUnits(value, board, cell);
     }
 
     private static bool TestTerrain(UnitMoveMask value, Board board, Cell cell) {
@@ -62,5 +63,10 @@ public static class UnitMovement {
             Check(value, UnitMoveMask.OnWater) && cell.cellType == Cell.CellType.Water ||
             Check(value, UnitMoveMask.OnField) && cell.cellType == Cell.CellType.Field ||
             Check(value, UnitMoveMask.OnMountain) && cell.cellType == Cell.CellType.Mountain;
+    }
+
+    private static bool TestUnits(UnitMoveMask value, Board board, Cell cell) {
+        var unit = board.GetUnit(cell);
+        return unit == null || unit.Dead;
     }
 }

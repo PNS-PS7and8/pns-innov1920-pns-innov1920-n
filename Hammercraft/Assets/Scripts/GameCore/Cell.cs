@@ -7,7 +7,6 @@ public class Cell {
     public enum CellState { Free, Occupied, Blocked }
     public enum CellType { Water, Field, Mountain, None }
 
-    public CellState cellState;
     public CellType cellType;
 
     public readonly Vector2Int position;
@@ -15,13 +14,11 @@ public class Cell {
     public Cell() {
         this.position = new Vector2Int();
         this.cellType = CellType.Field;
-        this.cellState = CellState.Free;
     }
 
     public Cell(Vector2Int position, CellType cellType = CellType.Field) {
         this.position = position;
         this.cellType = cellType;
-        this.cellState = CellState.Free;
     }
 
     public float Height { get {
