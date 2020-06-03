@@ -52,7 +52,7 @@ public class Deck {
     }
 
     public void AddCard(CardBase card) {
-        if (card.GetType().IsSubclassOf(typeof(UnitCard))) {
+        if (card.GetType().IsAssignableFrom(typeof(UnitCard))) {
             serializedUnits.Add(card.ResourcePath);
         } else {
             serializedSpells.Add(card.ResourcePath);

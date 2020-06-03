@@ -7,8 +7,7 @@ public class DeckCardList : MonoBehaviour
     [SerializeField] private CollectionCard cardPrefab;
     public CollectionCard[] CardUnit { get; private set; }
     public CollectionCard[] CardSpell { get; private set; }
-    private Deck currentDeck;
-    private Deck savedDeck;
+    private Deck currentDeck = null;
     private int MAX = 5;
     private float spacing = 190f;
 
@@ -39,7 +38,6 @@ public class DeckCardList : MonoBehaviour
             Destroy(card.gameObject);
         }
         currentDeck = null;
-        savedDeck = null;
     }
 
     public void Save(){
@@ -48,34 +46,34 @@ public class DeckCardList : MonoBehaviour
     }
 
     public void AddCard(CardBase cb){
-        string type = cb.GetType().ToString();
-        if (cb.GetType().IsAssignableFrom(typeof(UnitCard)) && currentDeck.units.Count() < MAX){
-            currentDeck.AddCard(cb);
-            for (int i = 0; i < CardUnit.Count(); i++){
-                if(CardUnit[i].gameObject.active == false){
-                    CardUnit[i].card = cb;
-                    CardUnit[i].gameObject.SetActive(true);
-                    break;
+        if (currentDeck != null){
+
+            if (cb.GetType().IsAssignableFrom(typeof(UnitCard)) && currentDeck.units.Count() < MAX){
+                for (int i = 0; i < CardUnit.Count(); i++){
+                    if(CardUnit[i].gameObject.activeSelf == false){
+                        CardUnit[i].card = cb;
+                        CardUnit[i].gameObject.SetActive(true);
+                        currentDeck.AddCard(cb);
+                        break;
+                    }
                 }
-            }
-        } else if (currentDeck.spells.Count() < MAX){
-            currentDeck.AddCard(cb);
-            for (int i = 0; i < CardSpell.Count(); i++){
-                if(CardSpell[i].gameObject.active == false){
-                    CardSpell[i].card = cb;
-                    CardSpell[i].gameObject.SetActive(true);
-                    break;
+            } 
+            
+            if (!cb.GetType().IsAssignableFrom(typeof(UnitCard)) && currentDeck.spells.Count() < MAX){
+                for (int i = 0; i < CardSpell.Count(); i++){
+                    if(CardSpell[i].gameObject.activeSelf == false){
+                        CardSpell[i].card = cb;
+                        CardSpell[i].gameObject.SetActive(true);
+                        currentDeck.AddCard(cb);
+                        break;
+                    }
                 }
-            }
-        }  
+            }  
+        }
     }
 
     public void DeleteCard(CollectionCard cc){
-        if (cc.card.GetType().IsAssignableFrom(typeof(UnitCard))){
-            currentDeck.RemoveCard(cc.card);
-        } else {
-            currentDeck.RemoveCard(cc.card);
-        }
+        currentDeck.RemoveCard(cc.card);
         cc.gameObject.SetActive(false);
         cc.transform.localScale = new Vector3 (1800,1800,1800);
     }
