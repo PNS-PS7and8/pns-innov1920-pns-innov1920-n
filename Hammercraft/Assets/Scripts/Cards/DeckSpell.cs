@@ -36,7 +36,7 @@ public class DeckSpell : MonoBehaviour
         float x = 0;
         if (hand.player != null)
         {
-            x = (hand.player.Hand.Count - 0.5f - hand.player.Hand.Count / 2f) * hand.Spacing;
+            x = (hand.player.Hand.Count - hand.player.Hand.Count / 2f) * hand.Spacing;
         }
         DrawSequence.Append(_spellCard.transform.DOLocalMove(new Vector3(x, 0.2f, 0f), 0.2f));
         DrawSequence.Append(_spellCard.transform.DOLocalMove(new Vector3(x, 0f, 0f), 0.2f));
