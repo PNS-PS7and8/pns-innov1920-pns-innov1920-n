@@ -11,6 +11,8 @@ public class DeckCardList : MonoBehaviour
     [SerializeField] private TMP_Text SpellCountText;
     [SerializeField] private TMP_Text SaveText;
     [SerializeField] private TMP_Text DuplicateText;
+    [SerializeField] private TMP_Text DeckName;
+    [SerializeField] private TMP_Text InvalidDeck;
     public CollectionCard[] CardUnit { get; private set; }
     public CollectionCard[] CardSpell { get; private set; }
     private Deck currentDeck = null;
@@ -69,16 +71,28 @@ public class DeckCardList : MonoBehaviour
         return false;
     }
 
+    bool IsValidDeck(){
+        if(currentDeck.spells.Count() == 5 && currentDeck.units.Count() == 5){
+            return true;
+        } else {
+            InvalidDeck.gameObject.SetActive(true);    
+            return false;
+        }
+    }
+
     void TextUpdate(){
         SaveText.gameObject.SetActive(false);
         DuplicateText.gameObject.SetActive(false);
+        InvalidDeck.gameObject.SetActive(false);
     }
 
     public void Save(){
         TextUpdate();
+        if (IsValidDeck()){
         DeckListingMenu dlm = Object.FindObjectOfType<DeckListingMenu>();
         dlm.setDeck(currentDeck);
         SaveText.gameObject.SetActive(true);
+        }
     }
 
     public void AddCard(CardBase cb){
@@ -131,6 +145,7 @@ public class DeckCardList : MonoBehaviour
     public void LoadDeck(Deck deck){
         Reset();
         Start();
+        DeckName.text = deck.name;
         currentDeck = deck;
         List<UnitCard> lu = deck.units;
         List<SpellCard> ls = deck.spells;

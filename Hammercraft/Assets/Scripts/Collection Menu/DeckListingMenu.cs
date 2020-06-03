@@ -21,11 +21,11 @@ public class DeckListingMenu : MonoBehaviour
         SpellCard c6 = Resources.Load<SpellCard>("Cards/Spell/Rage");
         UnitCard[] u = new UnitCard[] { c1, c1, c2, c2, c3 };
         SpellCard[] s = new SpellCard[] { c4, c4, c5, c5, c6 };
-        Deck basicDeck = new Deck("Basic deck", u, s);
+        Deck basicDeck = new Deck("Deck One", u, s);
         DeckListing listing = Instantiate(_deckListing, _content);
         listing.SetDeckInfo(basicDeck);
-        ListDecks["Basic deck"] = listing;
-        ListDecks["Basic deck"].SetDeckInfo(basicDeck);
+        ListDecks["Deck One"] = listing;
+        ListDecks["Deck One"].SetDeckInfo(basicDeck);
     }
 
     public void setDeck(Deck NewDeck){
