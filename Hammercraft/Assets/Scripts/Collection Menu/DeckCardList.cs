@@ -143,9 +143,9 @@ public class DeckCardList : MonoBehaviour
                 CardUnit[i].gameObject.SetActive(true);
             }
             Vector3 pos = CardUnit[i].transform.localPosition;
-            Vector3 scale = new Vector3(1800,1800,1800);
+            Vector3 scale = new Vector3(2000,2000,2000);
             CardUnit[i].transform.localScale = scale;
-            pos.x = (-370)+(i * spacing);
+            pos.x = (-380)+(i * spacing);
             pos.z = -10;
             pos.y = 200;
             CardUnit[i].transform.localPosition = pos;
@@ -157,7 +157,7 @@ public class DeckCardList : MonoBehaviour
                 CardSpell[i].gameObject.SetActive(true);
             }
             Vector3 pos = CardSpell[i].transform.localPosition;
-            Vector3 scale = new Vector3(1800,1800,1800);
+            Vector3 scale = new Vector3(2000,2000,2000);
             CardSpell[i].transform.localScale = scale;
             pos.x = (-370)+(i * spacing);
             pos.z = -10;

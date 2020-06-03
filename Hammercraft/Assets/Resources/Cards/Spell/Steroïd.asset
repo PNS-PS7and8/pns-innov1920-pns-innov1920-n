@@ -14,8 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourcePath: "Cards/Spell/Stero\xEFd"
   name: "Stero\xEFd"
-  description: Increase by a small amount the damages, movements, and range of your
-    unit
+  description: 'Increase all stats of your unit.
+
+
+    Increase atq, movement, range
+    stats by 1'
   cost: 4
   castMask: 0
   atq: 1
