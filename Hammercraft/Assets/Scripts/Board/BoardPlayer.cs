@@ -23,7 +23,7 @@ public class BoardPlayer : BoardBehaviour {
         
         float time = 3f;
         yield return new WaitForSecondsRealtime(time);
-        deckUnit.DrawUnit(manager.CurrentPlayer.DrawUnit());
+        deckUnit.DrawUnit(manager.LocalPlayer.DrawUnit());
         
         
     }
