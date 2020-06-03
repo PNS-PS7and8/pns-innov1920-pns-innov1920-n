@@ -7364,7 +7364,7 @@ MonoBehaviour:
       boardSize: {x: 0, y: 0}
       noiseOffset: {x: 0, y: 0, z: 0}
       noiseScale: 0
-      gameMode: 0
+      gameMode: 1
 --- !u!4 &1959275065
 Transform:
   m_ObjectHideFlags: 0

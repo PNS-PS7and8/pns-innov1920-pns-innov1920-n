@@ -27,6 +27,7 @@ public class Unit : ITakeDamage, IDealDamage
     }}
 
     public int Id => id;
+    public int Cost => card.Cost;
     public bool Dead => dead;
     public int Health => health;
     public int Attack => attack;
