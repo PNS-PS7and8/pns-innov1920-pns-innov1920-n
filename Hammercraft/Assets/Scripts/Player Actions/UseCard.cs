@@ -9,6 +9,7 @@ public class UseCard : BoardBehaviour
 
     [SerializeField] private float growDuration = 0.2f;
     [SerializeField] private float growAmount = 1.5f;
+    [SerializeField] private int cardCost = 0;
     private GameCard card;
 
     private void OnEnable() {
@@ -25,10 +26,13 @@ public class UseCard : BoardBehaviour
 
     void OnClickCard(GameCard card)
     {
+        
         if (manager.MyTurn()) {
             if (manager.CurrentPlayer.CurrentGold >= card.card.Cost) {
                 this.card = card;
+                this.cardCost = card.card.Cost;
                 hoverCell.HideCells(Color.green);
+                
                 hoverCell.ShowCells(Color.green, 
                     board.Cells().Where(cell => CardCast.CanCast(card.card.castMask, board, cell))
                 );
@@ -37,10 +41,13 @@ public class UseCard : BoardBehaviour
     }
 
     void OnClickCell(Cell cell) {
-        if (card != null && manager.MyTurn()) {
-            if (manager.CurrentPlayer.CurrentGold >= card.card.Cost) {
+        if (this.card != null && manager.MyTurn()) {
+            if (manager.CurrentPlayer.CurrentGold >= this.card.card.Cost) {
                 if (card.Use(cell)) {
-                    manager.CurrentPlayer.SetCurrentGold(manager.CurrentPlayer.CurrentGold - card.card.Cost);
+                   
+                    manager.CurrentPlayer.SetCurrentGold(manager.CurrentPlayer.CurrentGold - this.cardCost);
+                    this.card = null;
+                    this.cardCost = 0;
                 }
             }
         }
