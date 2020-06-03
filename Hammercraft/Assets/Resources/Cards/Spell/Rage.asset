@@ -14,7 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourcePath: Cards/Spell/Rage
   name: Rage
-  description: Increase the damages of one of your units
+  description: 'Increase the damages of one of your units.
+
+
+    Increase atq stat
+    by 4'
   cost: 4
   castMask: 0
   atq: 4
