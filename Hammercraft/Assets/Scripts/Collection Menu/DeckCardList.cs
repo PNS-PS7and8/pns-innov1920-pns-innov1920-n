@@ -16,6 +16,8 @@ public class DeckCardList : MonoBehaviour
     private Deck currentDeck = null;
     private int MAX = 5;
     private float spacing = 190f;
+    private int unitCount = 0;
+    private int spellCount = 0;
 
 
     void Start()
@@ -62,19 +64,25 @@ public class DeckCardList : MonoBehaviour
 
         if (cpt < 2){
             return true;
-        }return false;
+        }
+        DuplicateText.gameObject.SetActive(true);
+        return false;
     }
 
     void TextUpdate(){
-
+        SaveText.gameObject.SetActive(false);
+        DuplicateText.gameObject.SetActive(false);
     }
 
     public void Save(){
+        TextUpdate();
         DeckListingMenu dlm = Object.FindObjectOfType<DeckListingMenu>();
         dlm.setDeck(currentDeck);
+        SaveText.gameObject.SetActive(true);
     }
 
     public void AddCard(CardBase cb){
+        TextUpdate();
         if (currentDeck != null){
 
             if (cb.GetType().IsAssignableFrom(typeof(UnitCard)) && currentDeck.units.Count() < MAX && IsNotTriplicate(cb)){
@@ -83,6 +91,7 @@ public class DeckCardList : MonoBehaviour
                         CardUnit[i].card = cb;
                         CardUnit[i].gameObject.SetActive(true);
                         currentDeck.AddCard(cb);
+                        unitCount++;
                         break;
                     }
                 }
@@ -94,17 +103,29 @@ public class DeckCardList : MonoBehaviour
                         CardSpell[i].card = cb;
                         CardSpell[i].gameObject.SetActive(true);
                         currentDeck.AddCard(cb);
+                        spellCount++;
                         break;
                     }
                 }
             }  
         }
+        DisplayCount();
     }
 
     public void DeleteCard(CollectionCard cc){
+        TextUpdate();
         currentDeck.RemoveCard(cc.card);
         cc.gameObject.SetActive(false);
         cc.transform.localScale = new Vector3 (1800,1800,1800);
+        if (cc.card.GetType().IsAssignableFrom(typeof(UnitCard))){
+            unitCount--;
+        } else {spellCount--;}
+        DisplayCount();
+    }
+
+    void DisplayCount(){
+        UnitCountText.text = unitCount+"/"+MAX;
+        SpellCountText.text = spellCount+"/"+MAX;
     }
 
     public void LoadDeck(Deck deck){
@@ -113,6 +134,9 @@ public class DeckCardList : MonoBehaviour
         currentDeck = deck;
         List<UnitCard> lu = deck.units;
         List<SpellCard> ls = deck.spells;
+        unitCount = lu.Count();
+        spellCount = ls.Count();
+        DisplayCount();
         for (int i = 0; i<MAX; i++){
             if (lu.Count > i){
                 CardUnit[i].card = lu[i];
