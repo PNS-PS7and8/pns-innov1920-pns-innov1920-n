@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using System.Text;
 
 [System.Serializable]
 public class Deck {
@@ -68,5 +69,15 @@ public class Deck {
         } else {
             serializedSpells.Remove(card.ResourcePath);
         }
+    }
+
+    public static byte[] Serialize(object deck) {
+        string json = JsonUtility.ToJson(deck);
+        return Encoding.UTF8.GetBytes(json);
+    }
+
+    public static object Deserialize(byte[] data) {
+        string json = Encoding.UTF8.GetString(data);
+        return JsonUtility.FromJson<Deck>(json);
     }
 }

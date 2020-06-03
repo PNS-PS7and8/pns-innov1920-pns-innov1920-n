@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class CardsListing : MonoBehaviour, IPointerEnterHandler
+public class CardsListing : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private TMP_Text _name;
     [SerializeField] private TMP_Text _cost;
@@ -13,6 +13,7 @@ public class CardsListing : MonoBehaviour, IPointerEnterHandler
 
     public CardBase card;
     private CollectionCard collectionCard;
+    private bool isHovered;
 
     public void SetCardInfo(CardBase card) {
         this.card = card;
@@ -24,6 +25,10 @@ public class CardsListing : MonoBehaviour, IPointerEnterHandler
         GameObject cardObject = Instantiate(cardPrefab.gameObject, transform);
         collectionCard = cardObject.GetComponent<CollectionCard>();
         cardObject.SetActive(false);
+        collectionCard.card = card;
+        
+
+        isHovered = false;
     }
 
     public void on_click_card() {
@@ -31,16 +36,24 @@ public class CardsListing : MonoBehaviour, IPointerEnterHandler
         dc.AddCard(card);
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        collectionCard.card = card;
-        collectionCard.gameObject.SetActive(true);
-        collectionCard.transform.localScale = new Vector3(1800,1800,1800);
-        collectionCard.transform.localPosition = Input.mousePosition;
+    private void Update() {
+        if(isHovered) {
+            //collectionCard.transform.localScale = new Vector3(1800,1800,1800);
+            collectionCard.transform.position = new Vector3(Input.mousePosition.x-80, Input.mousePosition.y-100, -10);
+        } else {
+            
+        }
     }
 
-    public void OnMouseExit()
+    public void OnPointerEnter(PointerEventData eventData)
     {
+        isHovered = true;
+        collectionCard.gameObject.SetActive(true);
+    }
+
+    public void OnPointerExit(PointerEventData data)
+    {
+        isHovered = false;
         collectionCard.gameObject.SetActive(false);
     }
 }

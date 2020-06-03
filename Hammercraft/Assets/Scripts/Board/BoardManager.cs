@@ -35,15 +35,7 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
         PhotonPeer.RegisterType(typeof(GameManager), (byte) 'G', GameManager.Serialize, GameManager.Deserialize);
         
         Reset(NewGame());
-
-        if (PhotonNetwork.IsConnectedAndReady) {
-            if (PhotonNetwork.LocalPlayer.ActorNumber == PhotonNetwork.PlayerList[0].ActorNumber) {
-                PlayersExtension.RegisterLocalPlayer(PlayerRole.PlayerOne);
-                SubmitManager();
-            } else {
-                PlayersExtension.RegisterLocalPlayer(PlayerRole.PlayerTwo);
-            }
-        }
+        SubmitManager();
     }
 
     private void Start() {
@@ -138,14 +130,14 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
         setup.boardSize = boardSize;
         setup.noiseScale = perlinNoiseScale;
         setup.noiseOffset = perlinNoiseOffset;
-        
+        /*
         UnitCard c1 = Resources.Load<UnitCard>("Cards/Unit/Noob");
         UnitCard c2 = Resources.Load<UnitCard>("Cards/Unit/Noob");
         UnitCard c3 = Resources.Load<UnitCard>("Cards/Unit/Noob");
         SpellCard c4 = Resources.Load<SpellCard>("Cards/Spell/Fireball");
         Deck deck = new Deck( new UnitCard[] { c1, c1, c2, c2, c3, c3 }, new SpellCard[] { c4, c4, c4, c4, c4 } );
-
-        GameManager manager = new GameManager(setup, deck, deck);
+        */
+        GameManager manager = new GameManager(setup, PlayersExtension.GetDeckLocalPlayer(), PlayersExtension.GetDeckRemotePlayer());
         
         return manager;
     }

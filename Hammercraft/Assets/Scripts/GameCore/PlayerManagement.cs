@@ -9,6 +9,7 @@ public enum PlayerRole {
 }
 
 public static class PlayersExtension {
+    private Dictionnary<int, Deck> playersDeck = new Dictionnary<int, Deck>();
     public static PlayerRole Other(this PlayerRole player) {
         switch(player) {
             case PlayerRole.PlayerOne: return PlayerRole.PlayerTwo;
@@ -26,9 +27,32 @@ public static class PlayersExtension {
         }
     }
 
-    public static void RegisterLocalPlayer(PlayerRole role) {
-        Hashtable hash = new Hashtable {{PhotonNetwork.LocalPlayer.UserId, (int) role}};
+    public static void RegisterLocalPlayer(PlayerRole role, Deck deck) {
+        Hashtable hash = new Hashtable {{PhotonNetwork.LocalPlayer.UserId, deck}};
         PhotonNetwork.CurrentRoom.SetCustomProperties(hash);
+    }
+
+    public static Deck GetDeckLocalPlayer() {
+        if (PhotonNetwork.InRoom) {
+            int key = 0;
+            Hashtable props = PhotonNetwork.CurrentRoom.CustomProperties;
+            foreach(object o in props.Keys) {
+                Debug.Log(o+ " "+ props[o]);
+            }
+            if (props.ContainsKey(key))
+                return (Deck) props[key];
+        }
+        return null;
+    }
+
+    public static Deck GetDeckRemotePlayer() {
+        if (PhotonNetwork.InRoom && PhotonNetwork.CurrentRoom.PlayerCount > 1) {
+            int key = 1;
+            Hashtable props = PhotonNetwork.CurrentRoom.CustomProperties;
+            if (props.ContainsKey(key))
+                return (Deck) props[key];
+        }
+        return null;
     }
 
     public static PlayerRole LocalPlayer() {

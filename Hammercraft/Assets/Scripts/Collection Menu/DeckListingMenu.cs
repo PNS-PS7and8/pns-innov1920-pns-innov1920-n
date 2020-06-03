@@ -9,7 +9,7 @@ public class DeckListingMenu : MonoBehaviour
     [SerializeField]
     private Transform _content;
 
-    private Dictionary<string,DeckListing> ListDecks = new Dictionary<string, DeckListing>();
+    public Dictionary<string,DeckListing> ListDecks = new Dictionary<string, DeckListing>();
     public Deck selectedDeck;
 
     public void Start() {
