@@ -2,9 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using TMPro;
+
 public class DeckCardList : MonoBehaviour
 {
     [SerializeField] private CollectionCard cardPrefab;
+    [SerializeField] private TMP_Text UnitCountText;
+    [SerializeField] private TMP_Text SpellCountText;
+    [SerializeField] private TMP_Text SaveText;
+    [SerializeField] private TMP_Text DuplicateText;
     public CollectionCard[] CardUnit { get; private set; }
     public CollectionCard[] CardSpell { get; private set; }
     private Deck currentDeck = null;
@@ -40,6 +46,29 @@ public class DeckCardList : MonoBehaviour
         currentDeck = null;
     }
 
+    bool IsNotTriplicate(CardBase cb){
+        int cpt = 0;
+        if (cb.GetType().IsAssignableFrom(typeof(UnitCard))){
+            for (int i = 0; i < currentDeck.units.Count(); i++){
+                if (currentDeck.units[i].Name == cb.Name){cpt++;}
+            }
+        }
+
+        if (!cb.GetType().IsAssignableFrom(typeof(UnitCard))){
+            for (int i = 0; i < currentDeck.spells.Count(); i++){
+                if (currentDeck.spells[i].Name == cb.Name){cpt++;}
+            }
+        }
+
+        if (cpt < 2){
+            return true;
+        }return false;
+    }
+
+    void TextUpdate(){
+
+    }
+
     public void Save(){
         DeckListingMenu dlm = Object.FindObjectOfType<DeckListingMenu>();
         dlm.setDeck(currentDeck);
@@ -48,7 +77,7 @@ public class DeckCardList : MonoBehaviour
     public void AddCard(CardBase cb){
         if (currentDeck != null){
 
-            if (cb.GetType().IsAssignableFrom(typeof(UnitCard)) && currentDeck.units.Count() < MAX){
+            if (cb.GetType().IsAssignableFrom(typeof(UnitCard)) && currentDeck.units.Count() < MAX && IsNotTriplicate(cb)){
                 for (int i = 0; i < CardUnit.Count(); i++){
                     if(CardUnit[i].gameObject.activeSelf == false){
                         CardUnit[i].card = cb;
@@ -59,7 +88,7 @@ public class DeckCardList : MonoBehaviour
                 }
             } 
             
-            if (!cb.GetType().IsAssignableFrom(typeof(UnitCard)) && currentDeck.spells.Count() < MAX){
+            if (!cb.GetType().IsAssignableFrom(typeof(UnitCard)) && currentDeck.spells.Count() < MAX && IsNotTriplicate(cb)){
                 for (int i = 0; i < CardSpell.Count(); i++){
                     if(CardSpell[i].gameObject.activeSelf == false){
                         CardSpell[i].card = cb;
