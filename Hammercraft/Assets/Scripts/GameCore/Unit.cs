@@ -9,11 +9,11 @@ public class Unit : ITakeDamage, IDealDamage
     [SerializeField] private int id;
     [SerializeField] private bool dead;
     [SerializeField] private int health;
-    [SerializeField] private int attack;
-    [SerializeField] private int movement;
+    [SerializeField] public int attack;
+    [SerializeField] public int movement;
     [SerializeField] private UnitMoveMask movementMask;
     [SerializeField] private PlayerRole player;
-    [SerializeField] private int rangeAtq;
+    [SerializeField] public int rangeAtq;
     private UnitCard card;
     
     public Vector2Int position;
