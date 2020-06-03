@@ -1,6 +1,8 @@
 using ExitGames.Client.Photon;
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.Events;
+using System;
 
 [System.Serializable]
 public class Unit : ITakeDamage, IDealDamage
@@ -11,6 +13,7 @@ public class Unit : ITakeDamage, IDealDamage
     [SerializeField] private int health;
     [SerializeField] public int attack;
     [SerializeField] public int movement;
+    [SerializeField] public int cost;
     [SerializeField] private UnitMoveMask movementMask;
     [SerializeField] private PlayerRole player;
     [SerializeField] public int rangeAtq;
@@ -27,7 +30,7 @@ public class Unit : ITakeDamage, IDealDamage
     }}
 
     public int Id => id;
-    public int Cost => card.Cost;
+    public int Cost => cost;
     public bool Dead => dead;
     public int Health => health;
     public int Attack => attack;
@@ -44,19 +47,23 @@ public class Unit : ITakeDamage, IDealDamage
         this.health = card.Health;
         this.attack = card.Attack;
         this.movement = card.Movement;
+        this.cost = card.Cost;
         this.position = position;
         this.dead = false;
         this.player = owner;
         this.id = id;
         this.rangeAtq = (card.Range) ? 6 : 2;
         this.movementMask = card.MovementMask;
+        
     }
+
 
     public void TakeDamage(int amount) {
         health -= amount;
         if (health <= 0) {
             Die();
         }
+        
     }
 
     public void DealDamage(ITakeDamage target) {
@@ -65,5 +72,9 @@ public class Unit : ITakeDamage, IDealDamage
 
     private void Die() {
         dead = true;
+       // Point.UnitIsDead?.Invoke(cost, Player);
+        
     }
+
+    
 }

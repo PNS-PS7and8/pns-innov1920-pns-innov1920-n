@@ -20,14 +20,14 @@ public static class GameStateExtension {
 
 [System.Serializable]
 public enum GameModes {
-    KillToWin,
+ //   KillToWin,
     Point
 }
 
 public static class GameModesExtension {
     public static GameMode GameMode(this GameModes mode) {
         switch(mode) {
-            case GameModes.KillToWin: return new KillToWin();
+       //     case GameModes.KillToWin: return new KillToWin();
             case GameModes.Point: return new Point();
             default: return null;
         }

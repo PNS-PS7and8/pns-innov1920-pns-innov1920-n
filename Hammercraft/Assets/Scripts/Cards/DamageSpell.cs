@@ -10,6 +10,9 @@ public class DamageSpell : SpellCard
     {
         Unit unit = board.GetUnit(target);
         if (unit != null)
+        {
             unit.TakeDamage(damage);
+              
+        }
     }
 }

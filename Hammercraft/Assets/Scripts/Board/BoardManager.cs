@@ -23,7 +23,7 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
 
     public Hand Hand { get { return _hand; } }
 
-
+    
     public UnityEvent onReset;
 
     [SerializeField] private GameManager manager;
@@ -105,7 +105,7 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
         }
         _timer = StartCoroutine(Timer());
         EndTurnButton.gameObject.GetComponent<BoxCollider>().enabled = (PhotonNetwork.IsConnected) ? false : true;
-        EndTurnButton.DORotate(new Vector3(-90, 0, 180), 0.2f, RotateMode.LocalAxisAdd);
+        EndTurnButton.DORotate(new Vector3(-90, 0, 180), 0.2f);
         DOTween.Play(EndTurnButton);
     }
 
@@ -138,11 +138,10 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
         setup.boardSize = boardSize;
         setup.noiseScale = perlinNoiseScale;
         setup.noiseOffset = perlinNoiseOffset;
-        setup.gameMode = GameModes.KillToWin;
         
         UnitCard c1 = Resources.Load<UnitCard>("Cards/Unit/Noob");
-        UnitCard c2 = Resources.Load<UnitCard>("Cards/Unit/Fish");
-        UnitCard c3 = Resources.Load<UnitCard>("Cards/Unit/Eagle");
+        UnitCard c2 = Resources.Load<UnitCard>("Cards/Unit/Noob");
+        UnitCard c3 = Resources.Load<UnitCard>("Cards/Unit/Noob");
         SpellCard c4 = Resources.Load<SpellCard>("Cards/Spell/Fireball");
         Deck deck = new Deck( new UnitCard[] { c1, c1, c2, c2, c3, c3 }, new SpellCard[] { c4, c4, c4, c4, c4 } );
 
@@ -176,6 +175,7 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
 
     public void NextTurn(){
         if (manager.MyTurn() || !PhotonNetwork.IsConnected){
+            
             manager.IncreaseTurn();
             manager.ResetGold();    
             manager.NextTurn();

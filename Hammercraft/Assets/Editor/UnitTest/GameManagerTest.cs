@@ -7,7 +7,7 @@ public class GameManagerTest {
         
         GameManager.Setup setup = new GameManager.Setup();
         setup.boardSize = new Vector2Int(10,10);
-        setup.gameMode = GameModes.KillToWin;
+        setup.gameMode = GameModes.Point;
         
         Deck deck = new Deck(
             new UnitCard[] {
