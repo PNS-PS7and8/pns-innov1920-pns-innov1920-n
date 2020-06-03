@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ff5f8f21005cdfdbaef19f379ddb51c, type: 3}
   m_Name: Heal
   m_EditorClassIdentifier: 
-  resourcePath: Cards/Spell/Fireball
+  resourcePath: Cards/Spell/Heal
   name: Heal
   description: Heal a unit, and can even overheal !
   cost: 2

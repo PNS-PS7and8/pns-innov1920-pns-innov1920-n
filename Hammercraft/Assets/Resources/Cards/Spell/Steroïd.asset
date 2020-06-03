@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bb01eb12b85eb44897a6d99f0bf8005, type: 3}
   m_Name: "Stero\xEFd"
   m_EditorClassIdentifier: 
-  resourcePath: 
+  resourcePath: "Cards/Spell/Stero\xEFd"
   name: "Stero\xEFd"
   description: Increase by a small amount the damages, movements, and range of your
     unit

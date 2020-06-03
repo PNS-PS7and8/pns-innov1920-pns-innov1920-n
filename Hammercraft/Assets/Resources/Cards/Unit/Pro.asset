@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d6fdbecdfe08ec05a72e4deaf5b058f, type: 3}
   m_Name: Pro
   m_EditorClassIdentifier: 
-  resourcePath: Cards/Unit/Noob
+  resourcePath: Cards/Unit/Pro
   name: The Pro
   description: The strong unit that cost a lot, but is really strong !
   cost: 6
