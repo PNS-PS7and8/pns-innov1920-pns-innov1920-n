@@ -42,6 +42,11 @@ public class DeckCardList : MonoBehaviour
         savedDeck = null;
     }
 
+    public void Save(){
+        DeckListingMenu dlm = Object.FindObjectOfType<DeckListingMenu>();
+        dlm.setDeck(currentDeck);
+    }
+
     public void AddCard(CardBase cb){
         string type = cb.GetType().ToString();
         if (cb.GetType().IsAssignableFrom(typeof(UnitCard)) && currentDeck.units.Count() < MAX){
