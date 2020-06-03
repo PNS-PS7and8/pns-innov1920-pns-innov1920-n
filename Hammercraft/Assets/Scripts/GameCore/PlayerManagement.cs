@@ -9,7 +9,6 @@ public enum PlayerRole {
 }
 
 public static class PlayersExtension {
-    private Dictionnary<int, Deck> playersDeck = new Dictionnary<int, Deck>();
     public static PlayerRole Other(this PlayerRole player) {
         switch(player) {
             case PlayerRole.PlayerOne: return PlayerRole.PlayerTwo;
