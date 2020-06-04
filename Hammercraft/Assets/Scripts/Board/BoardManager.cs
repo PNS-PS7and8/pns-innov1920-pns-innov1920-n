@@ -20,7 +20,8 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
     [SerializeField] private TMP_Text TimerText;
     [SerializeField] private BoardCardDraw[] draws;
     [SerializeField] private Hand _hand;
-    [SerializeField] public TMP_Text scoreText;
+    [SerializeField] public TMP_Text scoreText1;
+    [SerializeField] public TMP_Text scoreText2;
     [SerializeField] public TMP_Text infoWin;
     [SerializeField] public GameObject YourTurnButton;
 
@@ -71,11 +72,19 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
             StartOfEnnemyTurn();
         }
       
-        UpdateScore(manager.GetScore(PhotonNetwork.LocalPlayer.ActorNumber), manager.GetScore(-1));
+        UpdateScore(manager.GetScore(PhotonNetwork.LocalPlayer.ActorNumber), manager.GetScore(-1),1);
     }
 
-    public void UpdateScore(int localscore, int maxscore){
-        scoreText.text = localscore.ToString()+ " / " + maxscore.ToString();
+    public void UpdateScore(int localscore, int maxscore,int score){
+        if(score == 1)
+        {
+            scoreText1.text = localscore.ToString()+ " / " + maxscore.ToString();
+
+        } else
+        {
+            scoreText2.text = localscore.ToString() + " / " + maxscore.ToString();
+
+        }
     }
 
     private void StartOfTurn()
@@ -146,6 +155,8 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
         setup.boardSize = boardSize;
         setup.noiseScale = perlinNoiseScale;
         setup.noiseOffset = perlinNoiseOffset;
+        Deck deck1 = null;
+        Deck deck2 = null;
         /*
         UnitCard c1 = Resources.Load<UnitCard>("Cards/Unit/Noob");
         UnitCard c2 = Resources.Load<UnitCard>("Cards/Unit/Noob");
@@ -153,8 +164,23 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
         SpellCard c4 = Resources.Load<SpellCard>("Cards/Spell/Fireball");
         Deck deck = new Deck( new UnitCard[] { c1, c1, c2, c2, c3, c3 }, new SpellCard[] { c4, c4, c4, c4, c4 } );
         */
-        Deck deck1 = PlayersExtension.GetDeckLocalPlayer();
-        Deck deck2 = PlayersExtension.GetDeckRemotePlayer();
+        if (PhotonNetwork.IsConnected)
+        {
+
+            deck1 = PlayersExtension.GetDeckLocalPlayer();
+            deck2 = PlayersExtension.GetDeckRemotePlayer();
+        } else
+        {
+            
+            UnitCard c1 = Resources.Load<UnitCard>("Cards/Unit/Noob");
+            UnitCard c2 = Resources.Load<UnitCard>("Cards/Unit/Noob");
+            UnitCard c3 = Resources.Load<UnitCard>("Cards/Unit/Noob");
+            SpellCard c4 = Resources.Load<SpellCard>("Cards/Spell/Fireball");
+            deck1 = new Deck( new UnitCard[] { c1, c1, c2, c2, c3, c3 }, new SpellCard[] { c4, c4, c4, c4, c4 } );
+            deck2 = new Deck(new UnitCard[] { c1, c1, c2, c2, c3, c3 }, new SpellCard[] { c4, c4, c4, c4, c4 });
+
+        }
+
         GameManager manager = new GameManager(setup, deck1, deck2);
         
         return manager;
