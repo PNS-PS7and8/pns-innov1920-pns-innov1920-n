@@ -2058,7 +2058,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1124944185
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2251,7 +2251,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1348450636
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2361,7 +2361,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 2
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c76ffb5985c526a448eff2a456bea792, type: 2}
   m_sharedMaterial: {fileID: 917161498348442749, guid: c76ffb5985c526a448eff2a456bea792,
@@ -2431,13 +2431,13 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: -0.43021393, w: 0}
   m_textInfo:
     textComponent: {fileID: 1402310490}
-    characterCount: 1
+    characterCount: 0
     spriteCount: 0
     spaceCount: 0
-    wordCount: 1
+    wordCount: 0
     linkCount: 0
-    lineCount: 1
-    pageCount: 1
+    lineCount: 0
+    pageCount: 0
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -3155,7 +3155,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 2
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c76ffb5985c526a448eff2a456bea792, type: 2}
   m_sharedMaterial: {fileID: 917161498348442749, guid: c76ffb5985c526a448eff2a456bea792,
@@ -3225,13 +3225,13 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: -0.43021393, w: 0}
   m_textInfo:
     textComponent: {fileID: 1714842897}
-    characterCount: 1
+    characterCount: 0
     spriteCount: 0
     spaceCount: 0
-    wordCount: 1
+    wordCount: 0
     linkCount: 0
-    lineCount: 1
-    pageCount: 1
+    lineCount: 0
+    pageCount: 0
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -3279,7 +3279,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1802142376
 MonoBehaviour:
   m_ObjectHideFlags: 0

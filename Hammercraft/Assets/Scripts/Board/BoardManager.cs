@@ -78,11 +78,11 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
     public void UpdateScore(int localscore, int maxscore,int score){
         if(score == 1)
         {
-            scoreText1.text = localscore.ToString()+ " / " + maxscore.ToString();
+            scoreText1.text = "My Score\n" + localscore.ToString()+ " / " + maxscore.ToString();
 
         } else
         {
-            scoreText2.text = localscore.ToString() + " / " + maxscore.ToString();
+            scoreText2.text = "Ennemy Score\n" + localscore.ToString() + " / " + maxscore.ToString();
 
         }
     }
