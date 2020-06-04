@@ -37,4 +37,5 @@ public static class GameModesExtension {
 [System.Serializable]
 public abstract class GameMode {
     public abstract GameState CurrentGameState(GameManager gameManager);
+    public abstract int GetScore(int player, GameManager gameManager);
 }

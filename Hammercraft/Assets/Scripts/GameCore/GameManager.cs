@@ -62,6 +62,10 @@ public class GameManager {
         };
     }
 
+    public int GetScore(int player){
+        return GameMode.GetScore(player, this);
+    }
+
     public bool CanPlay(PlayerRole player) {
         return player == playerTurn;
     }

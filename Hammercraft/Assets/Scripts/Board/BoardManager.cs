@@ -20,6 +20,8 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
     [SerializeField] private TMP_Text TimerText;
     [SerializeField] private BoardCardDraw[] draws;
     [SerializeField] private Hand _hand;
+    [SerializeField] public TMP_Text scoreText;
+
 
     public Hand Hand { get { return _hand; } }
 
@@ -74,7 +76,11 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
             startOfEnnemyTurn = false;
             StartOfEnnemyTurn();
         }
-       
+        UpdateScore(manager.GetScore(PhotonNetwork.LocalPlayer.ActorNumber), manager.GetScore(-1));
+    }
+
+    public void UpdateScore(int localscore, int maxscore){
+        scoreText.text = localscore.ToString()+ " / " + maxscore.ToString();
     }
 
     private void StartOfTurn()
