@@ -15,6 +15,7 @@ public class Unit : ITakeDamage, IDealDamage
     [SerializeField] public int movement;
     [SerializeField] public int cost;
     [SerializeField] private UnitMoveMask movementMask;
+    [SerializeField] private UnitMoveMask atqMask;
     [SerializeField] private PlayerRole player;
     [SerializeField] public int rangeAtq;
     private UnitCard card;
@@ -36,6 +37,7 @@ public class Unit : ITakeDamage, IDealDamage
     public int Attack => attack;
     public int Movement => movement;
     public UnitMoveMask MovementMask => movementMask;
+    public UnitMoveMask AtqMask => atqMask;
     public PlayerRole Player => player;
     public int RangeAtq => rangeAtq;
 
@@ -54,6 +56,7 @@ public class Unit : ITakeDamage, IDealDamage
         this.id = id;
         this.rangeAtq = (card.Range) ? 6 : 2;
         this.movementMask = card.MovementMask;
+        this.atqMask = card.AtqMask;
     }
 
 

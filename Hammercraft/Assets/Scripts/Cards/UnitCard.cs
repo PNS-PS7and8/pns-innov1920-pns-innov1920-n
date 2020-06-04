@@ -7,6 +7,7 @@ public class UnitCard : CardBase {
     [SerializeField] private int attack = 1;
     [SerializeField] private int movement = 5;
     [SerializeField] private UnitMoveMask movementMask;
+    [SerializeField] private UnitMoveMask atqMask;
     [SerializeField] protected bool range;
 
     public GameObject Model => model;
@@ -14,6 +15,7 @@ public class UnitCard : CardBase {
     public int Attack => attack;
     public int Movement => movement;
     public UnitMoveMask MovementMask => movementMask;
+    public UnitMoveMask AtqMask => atqMask;
     public bool Range => range;
 
     protected override void CardEffect(Board board, Cell target, PlayerRole player)

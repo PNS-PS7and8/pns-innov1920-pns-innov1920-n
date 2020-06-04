@@ -20,7 +20,7 @@ MonoBehaviour:
     Increase atq stat
     by 4'
   cost: 4
-  castMask: 0
+  castMask: 314
   atq: 4
   movement: 0
   range: 0

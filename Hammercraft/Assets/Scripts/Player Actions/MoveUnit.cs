@@ -44,9 +44,8 @@ public class MoveUnit : BoardBehaviour
         } else if(!unit.Dead && CanMove(unit) && manager.MyTurn() && unit.Player == manager.PlayerTurn) {
             this.unit = unit;
             this.origin = cell;
-            
             hoverCell.ShowCells(color, UnitMovement.AvailableCells(unit.MovementMask, board, cell, unit.Movement));
-            hoverCell.ShowCells(Color.yellow, UnitMovement.AvailableCells(unit.MovementMask, board, cell, unit.RangeAtq/2));
+            hoverCell.ShowCells(Color.yellow, UnitMovement.AvailableCells(unit.AtqMask, board, cell, unit.RangeAtq));
         }
     }
 

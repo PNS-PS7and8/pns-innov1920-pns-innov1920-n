@@ -17,7 +17,7 @@ MonoBehaviour:
   description: 'Heal a unit, and can even overheal !
 
 
-    Heal 2 health'
+    Heal 2 health.'
   cost: 2
-  castMask: 1850
+  castMask: 314
   damage: -2

@@ -20,6 +20,7 @@ MonoBehaviour:
   model: {fileID: 4993303932133754498, guid: 47e148659971e5e47bc11c58e725a37d, type: 3}
   health: 2
   attack: 1
-  movement: 10
+  movement: 5
   movementMask: 1017
+  atqMask: 1021
   range: 0
