@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ff5f8f21005cdfdbaef19f379ddb51c, type: 3}
   m_Name: Tidal wave
   m_EditorClassIdentifier: 
-  resourcePath: Cards/Spell/Fireball
+  resourcePath: Cards/Spell/Tidal wave
   name: Tidal wave
   description: "The calm before the tempest. \nCan't hit mountain units.\nDeals 4
     damages."

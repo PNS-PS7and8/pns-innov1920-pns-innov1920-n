@@ -40,6 +40,7 @@ public class MoveUnit : BoardBehaviour
     {
         if (this.unit != null && cell.Distance(origin) <= this.unit.RangeAtq && this.unit != unit){ 
             this.unit.DealDamage(unit);
+            manager.History.Add(new MovementAction(manager.CurrentPlayer.Role, manager.Turn, this.unit.Id, new Vector2Int(0,0)));
             Deselect();
         } else if(!unit.Dead && CanMove(unit) && manager.MyTurn() && unit.Player == manager.PlayerTurn) {
             this.unit = unit;
