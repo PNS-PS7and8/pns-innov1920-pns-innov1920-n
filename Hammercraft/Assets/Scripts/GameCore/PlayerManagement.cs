@@ -26,36 +26,56 @@ public static class PlayersExtension {
         }
     }
 
-    public static void RegisterLocalPlayer(PlayerRole role) {
-        Hashtable hash = new Hashtable {{PhotonNetwork.LocalPlayer.UserId, (int) role}};
-        PhotonNetwork.CurrentRoom.SetCustomProperties(hash);
+    public static void RegisterLocalPlayer(PlayerRole role, Deck deck) {
+        Hashtable hash = new Hashtable {
+            { "role", role },
+            { "deck", deck }};
+        LocalPhotonPlayer().SetCustomProperties(hash);
+    }
+
+    public static Deck GetDeckLocalPlayer() {
+        if (PhotonNetwork.InRoom) {
+            return (Deck) LocalPhotonPlayer().CustomProperties["deck"];
+        }
+        return null;
+    }
+
+    public static Deck GetDeckRemotePlayer() {
+        if (PhotonNetwork.InRoom && PhotonNetwork.CurrentRoom.PlayerCount > 1) {
+            return (Deck) RemotePhotonPlayer().CustomProperties["deck"];
+        }
+        return null;
     }
 
     public static PlayerRole LocalPlayer() {
         if (PhotonNetwork.InRoom) {
-            string key = PhotonNetwork.LocalPlayer.UserId;
-            Hashtable props = PhotonNetwork.CurrentRoom.CustomProperties;
-            if (props.ContainsKey(key))
-                return (PlayerRole) props[key];
+            return (PlayerRole) LocalPhotonPlayer().CustomProperties["role"];
         }
         return PlayerRole.PlayerOne;
     }
 
     public static PlayerRole RemotePlayer() {
         if (PhotonNetwork.InRoom && PhotonNetwork.CurrentRoom.PlayerCount > 1) {
-            string key = PhotonNetwork.PlayerListOthers[0].UserId;
-            Hashtable props = PhotonNetwork.CurrentRoom.CustomProperties;
-            if (props.ContainsKey(key))
-                return (PlayerRole) props[key];
+            return (PlayerRole) RemotePhotonPlayer().CustomProperties["role"];
         }
         return PlayerRole.PlayerTwo;
     }
 
     public static int LocalPlayerIndex() {
+        Debug.Log("Local " +LocalPlayer());
         return (int) LocalPlayer();
     }
 
     public static int RemotePlayerIndex() {
+        Debug.Log("Remote " +RemotePlayer());
         return (int) RemotePlayer();
-    }    
+    }
+
+    public static Photon.Realtime.Player LocalPhotonPlayer() {
+        return PhotonNetwork.LocalPlayer;
+    }
+
+    public static Photon.Realtime.Player RemotePhotonPlayer() {
+        return PhotonNetwork.LocalPlayer.GetNext();
+    }
 }

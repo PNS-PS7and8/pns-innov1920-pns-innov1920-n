@@ -18,6 +18,10 @@ public class CurrentRoom : MonoBehaviourPunCallbacks
     private RawImage StrangeNebula;
     [SerializeField]
     private TMP_Text ThreeDots;
+    [SerializeField]
+    private GameObject ChooseDeck;
+    [SerializeField]
+    private GameObject Waiting;
     
 
     public override void OnEnable()
@@ -56,9 +60,9 @@ public class CurrentRoom : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.CurrentRoom.PlayerCount >= 2 && _timer==null)
         {
-             
             Text_Timer.gameObject.SetActive(true);
             _timer = StartCoroutine(Timer());
+            ChooseDeck.SetActive(true);
             StrangeNebula.gameObject.SetActive(false);
         } 
         if (PhotonNetwork.CurrentRoom.PlayerCount < 2 && _timer != null)
@@ -67,6 +71,7 @@ public class CurrentRoom : MonoBehaviourPunCallbacks
             _timer = null;
             Text_Timer.text = "5";
             Text_Timer.gameObject.SetActive(false);
+            ChooseDeck.SetActive(false);
             StrangeNebula.gameObject.SetActive(true);
         }
         StrangeNebula.transform.Rotate(new Vector3(0, 0, -2));
@@ -74,9 +79,8 @@ public class CurrentRoom : MonoBehaviourPunCallbacks
 
     private IEnumerator Timer()
     {
-        for(int i=5; i >= 0; i--)
+        for(int i=15; i >= 0; i--)
         {
-            
             Text_Timer.text = i.ToString();
             yield return new WaitForSecondsRealtime(1f);
         }
