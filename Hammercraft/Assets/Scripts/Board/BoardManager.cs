@@ -167,8 +167,8 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
         if (PhotonNetwork.IsConnected)
         {
 
-            deck1 = PlayersExtension.GetDeckLocalPlayer();
-            deck2 = PlayersExtension.GetDeckRemotePlayer();
+            deck2 = PlayersExtension.GetDeckLocalPlayer();
+            deck1 = PlayersExtension.GetDeckRemotePlayer();
         } else
         {
             

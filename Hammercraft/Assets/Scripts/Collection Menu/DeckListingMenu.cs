@@ -13,7 +13,7 @@ public class DeckListingMenu : MonoBehaviour
     public Dictionary<string,DeckListing> ListDecks = new Dictionary<string, DeckListing>();
     public Deck selectedDeck;
 
-    public void Start() {
+    public void Awake() {
         UnitCard c1 = Resources.Load<UnitCard>("Cards/Unit/Noob");
         UnitCard c2 = Resources.Load<UnitCard>("Cards/Unit/Fish");
         UnitCard c3 = Resources.Load<UnitCard>("Cards/Unit/Eagle");
@@ -29,9 +29,7 @@ public class DeckListingMenu : MonoBehaviour
     }
 
     private void OnEnable() {
-        if (ListDecks.Count == 0){
         FetchServer();  
-        }
     }
 
     public void setDeck(Deck NewDeck){
@@ -56,10 +54,11 @@ public class DeckListingMenu : MonoBehaviour
         string user = PlayerPrefs.GetString("username");
         foreach (var deckName in AccessDatabase.GetDecksOf(user)) {
             var deck = AccessDatabase.GetDeck(user, deckName);
-
-            DeckListing listing = Instantiate(_deckListing, _content);
-            ListDecks[deck.Name] = listing;
-            ListDecks[deck.Name].SetDeckInfo(deck);
+            if (!ListDecks.ContainsKey(deck.Name)){
+                DeckListing listing = Instantiate(_deckListing, _content);
+                ListDecks[deck.Name] = listing;
+                ListDecks[deck.Name].SetDeckInfo(deck);
+            }
         }
     }
 }
