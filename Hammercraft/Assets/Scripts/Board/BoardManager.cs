@@ -66,6 +66,8 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
             startOfEnnemyTurn = false;
             StartOfEnnemyTurn();
         }
+        PlayersExtension.LocalPlayerIndex();
+        PlayersExtension.RemotePlayerIndex();
        
     }
 
@@ -137,7 +139,9 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
         SpellCard c4 = Resources.Load<SpellCard>("Cards/Spell/Fireball");
         Deck deck = new Deck( new UnitCard[] { c1, c1, c2, c2, c3, c3 }, new SpellCard[] { c4, c4, c4, c4, c4 } );
         */
-        GameManager manager = new GameManager(setup, PlayersExtension.GetDeckLocalPlayer(), PlayersExtension.GetDeckRemotePlayer());
+        Deck deck1 = PlayersExtension.GetDeckLocalPlayer();
+        Deck deck2 = PlayersExtension.GetDeckRemotePlayer();
+        GameManager manager = new GameManager(setup, deck1, deck2);
         
         return manager;
     }

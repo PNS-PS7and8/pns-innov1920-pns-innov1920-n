@@ -19,13 +19,19 @@ public class DeckListingMenu : MonoBehaviour
         SpellCard c4 = Resources.Load<SpellCard>("Cards/Spell/Fireball");
         SpellCard c5 = Resources.Load<SpellCard>("Cards/Spell/Heal");
         SpellCard c6 = Resources.Load<SpellCard>("Cards/Spell/Rage");
-        UnitCard[] u = new UnitCard[] { c1, c1, c2, c2, c3 };
-        SpellCard[] s = new SpellCard[] { c4, c4, c5, c5, c6 };
-        Deck basicDeck = new Deck("Deck One", u, s);
-        DeckListing listing = Instantiate(_deckListing, _content);
-        listing.SetDeckInfo(basicDeck);
-        ListDecks["Deck One"] = listing;
-        ListDecks["Deck One"].SetDeckInfo(basicDeck);
+        UnitCard[] u1 = new UnitCard[] { c1, c1, c1, c1, c1 };
+        SpellCard[] s1 = new SpellCard[] { c4, c4, c4, c4, c4 };
+        Deck basicDeck1 = new Deck("Deck One", u1, s1);
+        UnitCard[] u2 = new UnitCard[] { c2, c2, c2, c2, c2 };
+        SpellCard[] s2 = new SpellCard[] { c5, c5, c5, c5, c5 };
+        Deck basicDeck2 = new Deck("Deck Two", u2, s2);
+        DeckListing listing1 = Instantiate(_deckListing, _content);
+        DeckListing listing2 = Instantiate(_deckListing, _content);
+
+        ListDecks["Deck One"] = listing1;
+        ListDecks["Deck One"].SetDeckInfo(basicDeck1);
+        ListDecks["Deck Two"] = listing2;
+        ListDecks["Deck Two"].SetDeckInfo(basicDeck2);
     }
 
     public void setDeck(Deck NewDeck){
