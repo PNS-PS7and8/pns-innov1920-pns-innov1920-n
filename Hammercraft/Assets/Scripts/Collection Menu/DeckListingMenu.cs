@@ -29,7 +29,9 @@ public class DeckListingMenu : MonoBehaviour
     }
 
     private void OnEnable() {
-        FetchServer();
+        if (ListDecks.Count == 0){
+        FetchServer();  
+        }
     }
 
     public void setDeck(Deck NewDeck){
