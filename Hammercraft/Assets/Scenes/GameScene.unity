@@ -1404,7 +1404,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &884236911
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3155,6 +3155,7 @@ MonoBehaviour:
   - {fileID: 2068237606}
   _hand: {fileID: 398155962}
   scoreText: {fileID: 1402310490}
+  infoWin: {fileID: 884236913}
   onReset:
     m_PersistentCalls:
       m_Calls:

@@ -21,6 +21,7 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
     [SerializeField] private BoardCardDraw[] draws;
     [SerializeField] private Hand _hand;
     [SerializeField] public TMP_Text scoreText;
+    [SerializeField] public TMP_Text infoWin;
 
 
     public Hand Hand { get { return _hand; } }
@@ -46,7 +47,7 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
     }
 
     private IEnumerator waitForWin(){
-            WinText text = WinText.FindObjectOfType<WinText>();
+            WinText text = infoWin.GetComponent<WinText>();
             text.OnWin(Manager.GameState);
             SubmitManager();
             yield return new WaitForSecondsRealtime(1f);

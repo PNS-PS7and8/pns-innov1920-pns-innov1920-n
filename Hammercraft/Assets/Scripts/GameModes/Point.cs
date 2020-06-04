@@ -6,7 +6,7 @@ public class Point : GameMode
 
     [SerializeField] private int p1 = 0;
     [SerializeField] private int p2 = 0;
-    [SerializeField] private int ScoreToWin = 2;
+    [SerializeField] private int ScoreToWin = 1;
     public override GameState CurrentGameState(GameManager gameManager)
     {      
         countDeath(gameManager);
