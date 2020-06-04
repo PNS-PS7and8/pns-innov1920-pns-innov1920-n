@@ -22,6 +22,7 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
     [SerializeField] private Hand _hand;
     [SerializeField] public TMP_Text scoreText;
     [SerializeField] public TMP_Text infoWin;
+    [SerializeField] public GameObject YourTurnButton;
 
 
     public Hand Hand { get { return _hand; } }
@@ -79,6 +80,7 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
 
     private void StartOfTurn()
     {
+        StartCoroutine(YourTurn());
         startOfEnnemyTurn = true;
         if (_timer != null)
         {
@@ -94,6 +96,12 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
                 d.AllowDraw();
             }
         }
+    }
+
+    IEnumerator YourTurn(){
+        YourTurnButton.SetActive(true) ;
+        yield return new WaitForSecondsRealtime(2f);
+        YourTurnButton.SetActive(false);
     }
 
     private void StartOfEnnemyTurn()

@@ -8,10 +8,14 @@ public class BoardCardDraw : MonoBehaviour {
     [SerializeField] private BoardPlayer player;
     [SerializeField] private Draw draw;
     [SerializeField] private BoardCardDraw[] others;
+    [SerializeField] private GameObject arrow1;
+    [SerializeField] private GameObject arrow2;
     private bool canDraw = false;
 
     public void AllowDraw() {
         canDraw = true;
+        arrow1.SetActive(true);
+        arrow2.SetActive(true);
         if (others != null) {
             foreach(var o in others) {
                 o.canDraw = true;
@@ -27,9 +31,12 @@ public class BoardCardDraw : MonoBehaviour {
                 player.DrawSpell();
             }
             canDraw = false;
+            arrow1.SetActive(false);
+            arrow2.SetActive(false);
             if (others != null) {
             foreach(var o in others) {
                 o.canDraw = false;
+                
             }
         }
         }
