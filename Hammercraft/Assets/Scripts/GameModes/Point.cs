@@ -27,8 +27,8 @@ public class Point : GameMode
     }
 
     private void countDeath(GameManager gameManager){
-        p1 = gameManager.Board.Units.Where(u=>u.Dead && u.Player == PlayerRole.PlayerOne).Select(u => u.Cost).Sum();
-        p2 = gameManager.Board.Units.Where(u=>u.Dead && u.Player == PlayerRole.PlayerTwo).Select(u => u.Cost).Sum();
+        p1 = gameManager.Board.AllUnits.Where(u=>u.Dead && u.Player == PlayerRole.PlayerOne).Select(u => u.Cost).Sum();
+        p2 = gameManager.Board.AllUnits.Where(u=>u.Dead && u.Player == PlayerRole.PlayerTwo).Select(u => u.Cost).Sum();
     }
 
 
