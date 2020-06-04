@@ -14,7 +14,7 @@ public class BoardPlayer : BoardBehaviour {
     
     private void Start() {
         player = manager.LocalPlayer;
-        StartCoroutine(CardDraw());
+        //StartCoroutine(CardDraw());
         
     }
 
