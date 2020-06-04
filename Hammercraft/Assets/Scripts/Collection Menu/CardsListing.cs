@@ -15,22 +15,17 @@ public class CardsListing : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     private CollectionCard collectionCard;
 
 
-    public void SetCardInfo(CardBase card) {
-        this.card = card;
+    public void SetCardInfo(CardBase NewCard) {
+        this.card = NewCard;
         Image image = GetComponent<Image>();
-        image.color = (card is SpellCard)? Color.red : Color.blue;
-        _name.text = card.Name;
-        _cost.text = card.Cost.ToString();
-
+        image.color = (NewCard is SpellCard)? Color.red : Color.blue;
+        _name.text = NewCard.Name;
+        _cost.text = NewCard.Cost.ToString();
+        this.card = NewCard;
         GameObject cardObject = Instantiate(cardPrefab.gameObject, transform);
         collectionCard = cardObject.GetComponent<CollectionCard>();
+        card = NewCard;
         cardObject.SetActive(false);
-        collectionCard.card = card;
-        collectionCard.transform.localScale = new Vector3(1800,1800,1800);
-
-        Vector3 pos = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0));
-        pos.z += 200;
-        collectionCard.transform.localPosition = pos;
     }
 
     public void on_click_card() {
@@ -40,6 +35,9 @@ public class CardsListing : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        collectionCard.card = card;
+        collectionCard.transform.localScale = new Vector3(3000,3000,3000);
+        collectionCard.transform.localPosition = new Vector3(-350, -10, -50);
         collectionCard.gameObject.SetActive(true);
     }
 
