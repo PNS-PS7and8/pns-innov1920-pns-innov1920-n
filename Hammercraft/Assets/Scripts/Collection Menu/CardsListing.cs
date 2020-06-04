@@ -13,7 +13,7 @@ public class CardsListing : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public CardBase card;
     private CollectionCard collectionCard;
-    private bool isHovered;
+
 
     public void SetCardInfo(CardBase card) {
         this.card = card;
@@ -26,9 +26,11 @@ public class CardsListing : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         collectionCard = cardObject.GetComponent<CollectionCard>();
         cardObject.SetActive(false);
         collectionCard.card = card;
-        
+        collectionCard.transform.localScale = new Vector3(1800,1800,1800);
 
-        isHovered = false;
+        Vector3 pos = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0));
+        pos.z += 200;
+        collectionCard.transform.localPosition = pos;
     }
 
     public void on_click_card() {
@@ -36,24 +38,13 @@ public class CardsListing : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         dc.AddCard(card);
     }
 
-    private void Update() {
-        if(isHovered) {
-            //collectionCard.transform.localScale = new Vector3(1800,1800,1800);
-            collectionCard.transform.position = new Vector3(Input.mousePosition.x-80, Input.mousePosition.y-100, -10);
-        } else {
-            
-        }
-    }
-
     public void OnPointerEnter(PointerEventData eventData)
     {
-        isHovered = true;
         collectionCard.gameObject.SetActive(true);
     }
 
     public void OnPointerExit(PointerEventData data)
     {
-        isHovered = false;
         collectionCard.gameObject.SetActive(false);
     }
 }
