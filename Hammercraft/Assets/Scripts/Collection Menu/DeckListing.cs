@@ -17,7 +17,7 @@ public class DeckListing : MonoBehaviour, IPointerDownHandler
 
     public void SetDeckInfo(Deck deck) {
         Deck = deck;
-        _name.text = deck.name;
+        _name.text = deck.Name;
     }
 
     public void OnPointerDown(PointerEventData eventData) {

@@ -2,13 +2,16 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using System.Text;
+using UnityEngine.Serialization;
 
 [System.Serializable]
 public class Deck {
-    public string name {get; set;}
+    [SerializeField] private string owner;
+    [SerializeField] private string name;
+    public string Name => name;
     
-    [SerializeField] private List<string> serializedUnits;
-    [SerializeField] private List<string> serializedSpells;
+    [SerializeField, FormerlySerializedAs("units")] private List<string> serializedUnits;
+    [SerializeField, FormerlySerializedAs("spells")] private List<string> serializedSpells;
     
     public List<UnitCard> units => serializedUnits.Select(c => Resources.Load<UnitCard>(c)).ToList();
     public List<SpellCard> spells => serializedSpells.Select(c => Resources.Load<SpellCard>(c)).ToList();
@@ -19,6 +22,12 @@ public class Deck {
         serializedUnits = new List<string>();
         serializedSpells = new List<string>();
     }
+
+    public Deck(string name, string[] unitResources, string[] spellResources) {
+        this.name = name;
+        this.serializedUnits = new List<string>(unitResources);
+        this.serializedSpells = new List<string>(spellResources);
+    } 
 
     public Deck(string name, UnitCard[] units, SpellCard[] spells) {
         this.name = name;

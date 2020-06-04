@@ -34,7 +34,7 @@ public class RoomDeckListMenu : MonoBehaviour
     }
 
     private void DisplayDecks() {
-        _deckListingMenu.Start(); // A enlever quand on aura BDD
+        _deckListingMenu.FetchServer(); // A enlever quand on aura BDD
         foreach (DeckListing deckListing in _deckListingMenu.ListDecks.Values)
         {
             Deck deck = deckListing.Deck;            

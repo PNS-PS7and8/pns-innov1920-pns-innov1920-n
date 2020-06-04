@@ -12,7 +12,7 @@ public class RoomDeckListing : MonoBehaviour
     
     public void SetDeckInfo(Deck deck) {
         Deck = deck;
-        _name.text = deck.name;
+        _name.text = deck.Name;
     }
 
     public void on_click_deck() {

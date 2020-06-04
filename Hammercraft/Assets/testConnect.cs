@@ -12,8 +12,10 @@ public class testConnect : MonoBehaviourPunCallbacks
     void Start()
     {
         print("connecting to server.");
-        PhotonNetwork.NickName = MasterManager.GameSettings.Nickname;
-        PhotonNetwork.GameVersion = MasterManager.GameSettings.GameVersion;
+        if (PlayerPrefs.HasKey("username")) {
+            PhotonNetwork.NickName = PlayerPrefs.GetString("username");
+
+        }
         PhotonNetwork.ConnectUsingSettings();
     }
 

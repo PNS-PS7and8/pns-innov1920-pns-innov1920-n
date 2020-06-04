@@ -145,7 +145,7 @@ public class DeckCardList : MonoBehaviour
     public void LoadDeck(Deck deck){
         Reset();
         Start();
-        DeckName.text = deck.name;
+        DeckName.text = deck.Name;
         currentDeck = deck;
         List<UnitCard> lu = deck.units;
         List<SpellCard> ls = deck.spells;

@@ -96,7 +96,7 @@ public class GameManagerTest {
         GameManager manager = new GameManager(setup, deck, deck);
         byte[] serialized = GameManager.Serialize(manager);
         Player p = new Player(deck, 0);
-        Assert.That(manager.GetPlayer(0).Deck.name, Is.EqualTo(p.Deck.name));
+        Assert.That(manager.GetPlayer(0).Deck.Name, Is.EqualTo(p.Deck.Name));
     }
 
     [Test]
