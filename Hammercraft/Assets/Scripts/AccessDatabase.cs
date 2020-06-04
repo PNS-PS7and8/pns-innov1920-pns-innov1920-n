@@ -35,6 +35,22 @@ public static class AccessDatabase {
         return new Deck(deck.name, deck.units, deck.spells);
     }
 
+    public static void SaveDeck(string user, Deck deck) {
+        HttpClient client = new HttpClient(); {
+            var url = GetUrl($"/u/{user}/{deck.Name}");
+            var remoteDeck = new RemoteDeck() {
+                owner = user,
+                name = deck.Name,
+                units = deck.SerializedUnits.ToArray(),
+                spells = deck.SerializedSpells.ToArray()
+            };
+            var json = JsonUtility.ToJson(remoteDeck);
+            var content = new ByteArrayContent(System.Text.Encoding.UTF8.GetBytes(json));
+            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+            var res = client.PostAsync(url, content).Result;
+        }
+    }
+
     private static Uri GetUrl(string path) {
         return new Uri($"{protocol}://{host}:{port}{path}");
     }

@@ -12,6 +12,8 @@ public class Deck {
     
     [SerializeField, FormerlySerializedAs("units")] private List<string> serializedUnits;
     [SerializeField, FormerlySerializedAs("spells")] private List<string> serializedSpells;
+    public List<string> SerializedUnits => serializedUnits;
+    public List<string> SerializedSpells => serializedSpells;
     
     public List<UnitCard> units => serializedUnits.Select(c => Resources.Load<UnitCard>(c)).ToList();
     public List<SpellCard> spells => serializedSpells.Select(c => Resources.Load<SpellCard>(c)).ToList();

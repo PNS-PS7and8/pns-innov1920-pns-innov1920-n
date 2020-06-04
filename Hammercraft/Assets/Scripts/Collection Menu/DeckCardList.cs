@@ -89,9 +89,10 @@ public class DeckCardList : MonoBehaviour
     public void Save(){
         TextUpdate();
         if (IsValidDeck()){
-        DeckListingMenu dlm = Object.FindObjectOfType<DeckListingMenu>();
-        dlm.setDeck(currentDeck);
-        SaveText.gameObject.SetActive(true);
+            DeckListingMenu dlm = Object.FindObjectOfType<DeckListingMenu>();
+            dlm.setDeck(currentDeck);
+            SaveText.gameObject.SetActive(true);
+            AccessDatabase.SaveDeck(PlayerPrefs.GetString("username"), currentDeck);
         }
     }
 
