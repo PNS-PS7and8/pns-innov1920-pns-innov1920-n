@@ -34,11 +34,15 @@ public class CardsListingMenu : MonoBehaviour
     }
 
     public void valueChanged() {
-        //Destroy(cardsToDisplay["Fireball"]);
-        //Debug.Log(cardsToDisplay["Fireball"]);
-        /*
-        foreach(string name in cardsToDisplay.Keys) {
-            cardsToDisplay[name].SetActive(name.ToLower().Contains(field.text));
-        }*/
+        foreach(CardBase cb in listCards) {
+            if (cardsToDisplay[cb.Name] != null)
+                Destroy(cardsToDisplay[cb.Name].gameObject);
+        }
+        foreach(CardBase cb in listCards) {
+            if(cb.Name.ToLower().Contains(field.text.ToLower())) {
+                cardsToDisplay[cb.Name] = Instantiate(_cardsListing, _content);
+                cardsToDisplay[cb.Name].SetCardInfo(cb);
+            }
+        }
     }
 }
