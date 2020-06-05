@@ -31,7 +31,7 @@ public class PlayerTest : MonoBehaviour
         Assert.That(p.OriginalDeck.DrawSpell(), Is.EqualTo(p.Deck.DrawSpell()));
     }
 
-    [Test]
+    /*[Test]
     public void PlayerUseCardSpell_Test(){
         UnitCard u = ScriptableObject.CreateInstance<UnitCard>();
         SpellCard s = ScriptableObject.CreateInstance<DamageSpell>();
@@ -87,5 +87,5 @@ public class PlayerTest : MonoBehaviour
         Player p = new Player(deck, 0);
         UnitCard a = p.DrawUnit();
         Assert.True(p.Hand.Count == 1);
-    }
+    }*/
 }
