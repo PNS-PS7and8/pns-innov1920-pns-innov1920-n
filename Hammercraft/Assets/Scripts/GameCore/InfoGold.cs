@@ -3,9 +3,16 @@ using TMPro;
 
 public class InfoGold : BoardBehaviour
 {
-    [SerializeField] private PlayerRole role;
+    [System.Serializable] public enum LocalOrRemote {
+        Local, Remote
+    };
+
+    [SerializeField] private LocalOrRemote role;
     [SerializeField] public TMP_Text text;
     private void Update() {
-        text.text = manager.GetPlayer(role).CurrentGold.ToString() + " / " + manager.GetPlayer(role).Gold.ToString();
+        if (role == LocalOrRemote.Local)
+            text.text = manager.LocalPlayer.CurrentGold.ToString() + " / " + manager.LocalPlayer.Gold.ToString();
+        else if (role == LocalOrRemote.Remote)
+            text.text = manager.RemotePlayer.CurrentGold.ToString() + " / " + manager.RemotePlayer.Gold.ToString();
     }
 }
