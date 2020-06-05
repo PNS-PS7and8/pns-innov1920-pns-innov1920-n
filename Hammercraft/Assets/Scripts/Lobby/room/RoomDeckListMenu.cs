@@ -48,6 +48,7 @@ public class RoomDeckListMenu : MonoBehaviour
 
     public void SetSelectedDeck(Deck deck) {
         button.SetActive(true);
+        Debug.Log(deck.Name);
         selectedDeck = deck;
     }
 
