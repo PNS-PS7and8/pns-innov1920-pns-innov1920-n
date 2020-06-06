@@ -58,10 +58,12 @@ public class CollectionCard : BoardBehaviour
 
     private void OnMouseEnter() {
         transform.localScale = new Vector3 (3000,3000,3000);
+        transform.localPosition -= new Vector3(0,0,30) ;
     }
 
     private void OnMouseExit() {
-        transform.localScale = new Vector3(2000,2000,2000);
+        transform.localScale = new Vector3(1500,1500,1500);
+        transform.localPosition += new Vector3(0,0,30) ;
     }
 
     private void OnMouseDown() {

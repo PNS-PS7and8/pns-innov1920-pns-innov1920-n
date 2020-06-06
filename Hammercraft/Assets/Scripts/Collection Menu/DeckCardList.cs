@@ -16,10 +16,12 @@ public class DeckCardList : MonoBehaviour
     public CollectionCard[] CardUnit { get; private set; }
     public CollectionCard[] CardSpell { get; private set; }
     private Deck currentDeck = null;
-    private int MAX = 5;
-    private float spacing = 190f;
+    private int MAX = 10;
+    private float spacing = 210f;
     private int unitCount = 0;
     private int spellCount = 0;
+
+    private Vector3 size = new Vector3(1700,1700,1700);
 
 
     void Start()
@@ -72,7 +74,7 @@ public class DeckCardList : MonoBehaviour
     }
 
     bool IsValidDeck(){
-        if(currentDeck.spells.Count() == 5 && currentDeck.units.Count() == 5){
+        if(currentDeck.spells.Count() == MAX && currentDeck.units.Count() == MAX){
             return true;
         } else {
             InvalidDeck.gameObject.SetActive(true);    
@@ -105,6 +107,7 @@ public class DeckCardList : MonoBehaviour
                     if(CardUnit[i].gameObject.activeSelf == false){
                         CardUnit[i].card = cb;
                         CardUnit[i].gameObject.SetActive(true);
+                        CardUnit[i].transform.localScale = size;
                         currentDeck.AddCard(cb);
                         unitCount++;
                         break;
@@ -131,7 +134,8 @@ public class DeckCardList : MonoBehaviour
         TextUpdate();
         currentDeck.RemoveCard(cc.card);
         cc.gameObject.SetActive(false);
-        cc.transform.localScale = new Vector3 (1800,1800,1800);
+        cc.transform.localScale = size;
+        cc.transform.localPosition += new Vector3(0,0,30) ;
         if (cc.card.GetType().IsAssignableFrom(typeof(UnitCard))){
             unitCount--;
         } else {spellCount--;}
@@ -159,11 +163,17 @@ public class DeckCardList : MonoBehaviour
                 CardUnit[i].gameObject.SetActive(true);
             }
             Vector3 pos = CardUnit[i].transform.localPosition;
-            Vector3 scale = new Vector3(2000,2000,2000);
+            Vector3 scale = size;
             CardUnit[i].transform.localScale = scale;
-            pos.x = (-380)+(i * spacing);
-            pos.z = -10;
-            pos.y = 200;
+            if (i > 4){
+                pos.x = (-375)+((i-5) * spacing);
+                pos.z = -20;
+                pos.y = 115;
+            } else {
+                pos.x = (-490)+(i * spacing);
+                pos.z = -10;
+                pos.y = 265;
+            }
             CardUnit[i].transform.localPosition = pos;
         }
         
@@ -173,11 +183,17 @@ public class DeckCardList : MonoBehaviour
                 CardSpell[i].gameObject.SetActive(true);
             }
             Vector3 pos = CardSpell[i].transform.localPosition;
-            Vector3 scale = new Vector3(2000,2000,2000);
+            Vector3 scale = size;
             CardSpell[i].transform.localScale = scale;
-            pos.x = (-370)+(i * spacing);
-            pos.z = -10;
-            pos.y = -200;
+            if (i > 4){
+                pos.x = (-375)+((i-5) * spacing);
+                pos.z = -20;
+                pos.y = -295;
+            } else {
+                pos.x = (-490)+(i * spacing);
+                pos.z = -10;
+                pos.y = -145;
+            }
             CardSpell[i].transform.localPosition = pos;
         }
     }

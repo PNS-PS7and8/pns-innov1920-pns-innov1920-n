@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ff5f8f21005cdfdbaef19f379ddb51c, type: 3}
-  m_Name: Tidal wave
+  m_Name: Tidal wave 1
   m_EditorClassIdentifier: 
-  resourcePath: Cards/Spell/Tidal wave2
-  name: Tidal wave
+  resourcePath: Cards/Spell/Big Tidal wave
+  name: Big Tidal wave
   description: "The calm before the tempest. \nCan't hit mountain units.\nDeals 4
     damages."
-  cost: 3
+  cost: 4
   castMask: 1818
-  damage: 4
+  damage: 5

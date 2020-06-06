@@ -36,8 +36,10 @@ public class CardsListing : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public void OnPointerEnter(PointerEventData eventData)
     {
         collectionCard.card = card;
-        collectionCard.transform.localScale = new Vector3(3000,3000,3000);
-        collectionCard.transform.localPosition = new Vector3(-350, -10, -50);
+        Vector3 posList = transform.localPosition;
+        collectionCard.transform.localScale = new Vector3(4000,4000,4000);
+        collectionCard.transform.localPosition = new Vector3(-500, -300, -50);
+        collectionCard.transform.localPosition -= posList;
         collectionCard.gameObject.SetActive(true);
     }
 

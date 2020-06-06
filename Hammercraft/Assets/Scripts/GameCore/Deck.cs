@@ -17,7 +17,7 @@ public class Deck {
     
     public List<UnitCard> units => serializedUnits.Select(c => Resources.Load<UnitCard>(c)).ToList();
     public List<SpellCard> spells => serializedSpells.Select(c => Resources.Load<SpellCard>(c)).ToList();
-    private int MAX = 5;
+    private int MAX = 10;
 
     public Deck(string name) {
         this.name = name;

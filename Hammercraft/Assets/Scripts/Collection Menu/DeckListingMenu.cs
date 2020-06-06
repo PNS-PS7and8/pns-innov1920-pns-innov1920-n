@@ -20,8 +20,8 @@ public class DeckListingMenu : MonoBehaviour
         SpellCard c4 = Resources.Load<SpellCard>("Cards/Spell/Fireball");
         SpellCard c5 = Resources.Load<SpellCard>("Cards/Spell/Heal");
         SpellCard c6 = Resources.Load<SpellCard>("Cards/Spell/Rage");
-        UnitCard[] u1 = new UnitCard[] { c1, c1, c2, c2, c3 };
-        SpellCard[] s1 = new SpellCard[] { c4, c4, c5, c5, c6 };
+        UnitCard[] u1 = new UnitCard[] { c1, c1, c2, c2, c3 , c3, c3, c3, c3, c3 };
+        SpellCard[] s1 = new SpellCard[] { c4, c4, c5, c5, c6, c6, c6, c6, c6, c6 };
         Deck basicDeck1 = new Deck("Deck One", u1, s1);
         DeckListing listing1 = Instantiate(_deckListing, _content);
         ListDecks["Deck One"] = listing1;

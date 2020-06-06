@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ff5f8f21005cdfdbaef19f379ddb51c, type: 3}
-  m_Name: Tidal wave
+  m_Name: Big Fireball
   m_EditorClassIdentifier: 
-  resourcePath: Cards/Spell/Tidal wave2
-  name: Tidal wave
-  description: "The calm before the tempest. \nCan't hit mountain units.\nDeals 4
-    damages."
-  cost: 3
-  castMask: 1818
-  damage: 4
+  resourcePath: Cards/Spell/Big Fireball
+  name: Big Fireball
+  description: "By the rage inside my heart, you shall burn ! \nCan't hit water units.\nDeals
+    4 damages."
+  cost: 4
+  castMask: 1842
+  damage: 5
