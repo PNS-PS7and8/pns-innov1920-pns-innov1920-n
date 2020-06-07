@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class DeckListingMenu : MonoBehaviour
 {
@@ -40,14 +41,17 @@ public class DeckListingMenu : MonoBehaviour
         }
     }
     
-    public void on_click_create_deck(string name) {
-        DeckListing listing = null;
-        if(!ListDecks.ContainsKey(name)) {
-            listing = Instantiate(_deckListing, _content);
-        }
-        if(listing != null || ListDecks.ContainsKey(name)) {
-            ListDecks[name] = (listing!=null) ? listing : ListDecks[name];
-            ListDecks[name].SetDeckInfo(new Deck(name));
+    public void on_click_create_deck(TMP_InputField field) {
+        string name = field.text;
+        if(name != "") {
+            DeckListing listing = null;
+            if(!ListDecks.ContainsKey(name)) {
+                listing = Instantiate(_deckListing, _content);
+            }
+            if(listing != null || ListDecks.ContainsKey(name)) {
+                ListDecks[name] = (listing!=null) ? listing : ListDecks[name];
+                ListDecks[name].SetDeckInfo(new Deck(name));
+            }
         }
     }
     public void FetchServer() {
