@@ -62,10 +62,14 @@ public class DeckListingMenu : MonoBehaviour
         string user = PlayerPrefs.GetString("username");
         foreach (var deckName in AccessDatabase.GetDecksOf(user)) {
             var deck = AccessDatabase.GetDeck(user, deckName);
-            if (!ListDecks.ContainsKey(deck.Name)){
-                DeckListing listing = Instantiate(_deckListing, _content);
-                ListDecks[deck.Name] = listing;
-                ListDecks[deck.Name].SetDeckInfo(deck);
+            if (!ListDecks.ContainsKey(deck.Name) || deckName == "Deck One"){
+                if(deckName=="Deck One"){
+                    ListDecks[deck.Name].SetDeckInfo(deck);
+                } else {
+                    DeckListing listing = Instantiate(_deckListing, _content);
+                    ListDecks[deck.Name] = listing;
+                    ListDecks[deck.Name].SetDeckInfo(deck);
+                }
             }
         }
     }
