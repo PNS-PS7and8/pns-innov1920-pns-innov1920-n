@@ -1445,7 +1445,7 @@ GameObject:
   - component: {fileID: 275288687}
   - component: {fileID: 275288686}
   m_Layer: 5
-  m_Name: List
+  m_Name: ListCards
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

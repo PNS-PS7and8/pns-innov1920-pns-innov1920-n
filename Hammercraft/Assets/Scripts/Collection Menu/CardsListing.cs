@@ -23,6 +23,8 @@ public class CardsListing : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         _cost.text = NewCard.Cost.ToString();
         this.card = NewCard;
         GameObject cardObject = Instantiate(cardPrefab.gameObject, transform);
+        GameObject ListObj = GameObject.Find("ListCards");
+        cardObject.transform.parent = ListObj.transform;
         collectionCard = cardObject.GetComponent<CollectionCard>();
         card = NewCard;
         cardObject.SetActive(false);
@@ -36,10 +38,8 @@ public class CardsListing : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public void OnPointerEnter(PointerEventData eventData)
     {
         collectionCard.card = card;
-        Vector3 posList = transform.localPosition;
         collectionCard.transform.localScale = new Vector3(4000,4000,4000);
-        collectionCard.transform.localPosition = new Vector3(-500, -300, -50);
-        collectionCard.transform.localPosition -= posList;
+        collectionCard.transform.localPosition = new Vector3(1150, 0, -50);
         collectionCard.gameObject.SetActive(true);
     }
 
