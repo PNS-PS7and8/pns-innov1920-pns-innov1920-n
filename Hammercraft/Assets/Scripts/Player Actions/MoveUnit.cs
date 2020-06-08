@@ -13,6 +13,7 @@ public class MoveUnit : BoardBehaviour
     private Cell origin;
     private Unit unit;
     private Unit infoUnit;
+    private Cell hover;
 
     private void Update() {
         if(unit != null){
@@ -51,7 +52,7 @@ public class MoveUnit : BoardBehaviour
         boardClicker.OnHoverUnit -= OnInfoUnit;
         boardClicker.OnClickUnit -= OnSelectUnit;
         boardClicker.OnClickCell -= OnSelectCell;
-        boardClicker.OnHoverCell += OnHoverCell;
+        boardClicker.OnHoverCell -= OnHoverCell;
         boardClicker.OnClickCard -= _ => Deselect();
     }
 
@@ -91,10 +92,13 @@ public class MoveUnit : BoardBehaviour
     }
 
     private void OnHoverCell(Cell cell) {
-        hoverCell.HideCells(pathColor);
-        if (unit == null || origin == null) return;
-        if (UnitMovement.CanMove(unit.MovementMask, board, origin, cell, unit.Movement, out var path)) {
-            hoverCell.ShowCells(pathColor, path);
+        if (hover != cell) {
+            hover = cell;
+            hoverCell.HideCells(pathColor);
+            if (unit == null || origin == null) return;
+            if (UnitMovement.CanMove(unit.MovementMask, board, origin, cell, unit.Movement, out var path)) {
+                hoverCell.ShowCells(pathColor, path);
+            }
         }
     }
 
