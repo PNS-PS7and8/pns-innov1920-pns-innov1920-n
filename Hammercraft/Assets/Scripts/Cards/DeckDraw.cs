@@ -15,9 +15,9 @@ public class DeckDraw : MonoBehaviour
     [SerializeField] private GameObject _spellCard;
     [SerializeField] private GameObject UnitDeck;
     [SerializeField] private GameObject SpellDeck;
-    [SerializeField] private Button validate;
+    [SerializeField] private GameObject validate;
     [SerializeField] private BoardPlayer BoardPlayer;
-
+    private Button ValidateButton;
     private List<CardBase> listCardMulligan = new List<CardBase>();
     private List<GameObject> cardsMulligan = new List<GameObject>();
     private List<int> toReplace = new List<int>();
@@ -58,7 +58,8 @@ public class DeckDraw : MonoBehaviour
 
     private IEnumerator MulliganCoroutine(Tuple<List<UnitCard>, List<SpellCard>> v)
     {
-
+       ValidateButton = validate.GetComponentInChildren<Button>(true);
+       validate.SetActive(true);
        float x = (v.Item2.Count == 1) ? 0 : -0.5f ;
        Sequence DrawSequence = DOTween.Sequence();
        foreach(UnitCard unit in v.Item1)
@@ -113,7 +114,7 @@ public class DeckDraw : MonoBehaviour
             S.GetComponentInChildren<Canvas>().GetComponentInChildren<Collider>(true).gameObject.SetActive(true);
             x++;
         }
-        validate.gameObject.SetActive(true);
+        ValidateButton.gameObject.SetActive(true);
 
 
     }
@@ -207,6 +208,7 @@ public class DeckDraw : MonoBehaviour
 
     public void Validate()
     {
+        
         StartCoroutine(UpdateTextReplace());
         
 
@@ -216,13 +218,14 @@ public class DeckDraw : MonoBehaviour
     {
         float x = (listCardMulligan.Count == 3) ? 0 : -0.9f;
         Sequence ReplaceSequence = DOTween.Sequence();
-        validate.enabled = false;
+        ValidateButton.gameObject.SetActive(false);
         List<CardBase> toAddCard = new List<CardBase>();
         List<CardBase> toRemoveCard = new List<CardBase>();
         foreach(GameObject c in cardsMulligan)
         {
             c.GetComponentInChildren<Canvas>().GetComponentInChildren<Collider>(true).gameObject.SetActive(false);
         }
+        toReplace.Sort();
         foreach (int i in toReplace)
         {
             ReplaceSequence = DOTween.Sequence();

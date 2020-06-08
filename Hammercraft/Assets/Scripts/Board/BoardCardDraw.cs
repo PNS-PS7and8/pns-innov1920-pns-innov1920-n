@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class BoardCardDraw : MonoBehaviour {
@@ -10,6 +11,7 @@ public class BoardCardDraw : MonoBehaviour {
     [SerializeField] private BoardCardDraw[] others;
     [SerializeField] private GameObject arrow1;
     [SerializeField] private GameObject arrow2;
+    [SerializeField] private BoardManager BoardManager;
     private bool canDraw = false;
 
     public void AllowDraw() {
@@ -24,21 +26,27 @@ public class BoardCardDraw : MonoBehaviour {
     }
 
     private void OnMouseDown() {
-        if (canDraw) {
-            if (draw == Draw.Unit) {
-                player.DrawUnit();
-            } else {
-                player.DrawSpell();
-            }
-            canDraw = false;
-            arrow1.SetActive(false);
-            arrow2.SetActive(false);
-            if (others != null) {
-            foreach(var o in others) {
-                o.canDraw = false;
+        
+        if (BoardManager.Manager.Turn != 1 || !BoardManager.ValidateButton.activeInHierarchy)
+        {
+
+            if (canDraw) {
+                if (draw == Draw.Unit) {
+                    player.DrawUnit();
+                } else {
+                    player.DrawSpell();
+                }
+                canDraw = false;
+                arrow1.SetActive(false);
+                arrow2.SetActive(false);
+                if (others != null) {
+                    foreach(var o in others) {
+                        o.canDraw = false;
                 
+                    }
+                }
             }
-        }
         }
     }
+
 }

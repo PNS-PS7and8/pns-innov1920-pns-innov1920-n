@@ -13,6 +13,7 @@ using DG.Tweening;
 public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
     public Board board => manager.Board;
     public GameManager Manager => manager;
+    public GameObject ValidateButton => validateButton;
     [SerializeField] private Vector2Int boardSize = new Vector2Int(50, 50);
     [SerializeField] private float perlinNoiseScale;
     [SerializeField] private Vector3 perlinNoiseOffset;

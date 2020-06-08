@@ -305,17 +305,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 26081172}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 509535599}
-  m_Father: {fileID: 712622299}
-  m_RootOrder: 5
+  m_Father: {fileID: 1027697429}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -0.25}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0.2, y: 0.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &87721157
@@ -1578,7 +1578,7 @@ RectTransform:
   - {fileID: 884236911}
   - {fileID: 1348450636}
   - {fileID: 1802142378}
-  - {fileID: 26081176}
+  - {fileID: 1027697429}
   m_Father: {fileID: 918756173}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1668,6 +1668,7 @@ MonoBehaviour:
   - {fileID: 2068237606}
   arrow1: {fileID: 1348450635}
   arrow2: {fileID: 1802142375}
+  BoardManager: {fileID: 1959275064}
 --- !u!65 &786605505
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2238,7 +2239,7 @@ MonoBehaviour:
   _spellCard: {fileID: 135175594}
   UnitDeck: {fileID: 2189773095987709960}
   SpellDeck: {fileID: 2068237603}
-  validate: {fileID: 26081173}
+  validate: {fileID: 1027697428}
   BoardPlayer: {fileID: 362202545}
 --- !u!4 &998112850
 Transform:
@@ -2256,6 +2257,81 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1027697428
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1027697429}
+  - component: {fileID: 1027697431}
+  - component: {fileID: 1027697430}
+  m_Layer: 5
+  m_Name: ValidateButton
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1027697429
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1027697428}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 26081176}
+  m_Father: {fileID: 712622299}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -0.25000006}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1027697430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1027697428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.7176471}
+  m_RaycastTarget: 0
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1027697431
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1027697428}
+  m_CullTransparentMesh: 1
 --- !u!1 &1084381435
 GameObject:
   m_ObjectHideFlags: 0
@@ -4090,7 +4166,7 @@ MonoBehaviour:
   infoWin: {fileID: 884236913}
   YourTurnButton: {fileID: 1124944184}
   BoardPlayer: {fileID: 362202545}
-  validateButton: {fileID: 26081172}
+  validateButton: {fileID: 1027697428}
   onReset:
     m_PersistentCalls:
       m_Calls:
@@ -6918,6 +6994,7 @@ MonoBehaviour:
   - {fileID: 786605504}
   arrow1: {fileID: 1348450635}
   arrow2: {fileID: 1802142375}
+  BoardManager: {fileID: 1959275064}
 --- !u!65 &2068237607
 BoxCollider:
   m_ObjectHideFlags: 0
