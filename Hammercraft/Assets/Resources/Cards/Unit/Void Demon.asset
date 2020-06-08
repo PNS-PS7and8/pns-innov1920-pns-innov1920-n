@@ -18,11 +18,11 @@ MonoBehaviour:
 
     Kill the allies unit on 2 range cells to steal
     their atq & hp.'
-  cost: 6
-  castMask: 1341
+  cost: 4
+  castMask: 1340
   model: {fileID: 4993303932133754498, guid: 47e148659971e5e47bc11c58e725a37d, type: 3}
-  health: 6
-  attack: 5
+  health: 3
+  attack: 3
   movement: 5
   movementMask: 925
   atqMask: 925
