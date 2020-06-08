@@ -33,7 +33,7 @@ public class CurrentRoom : MonoBehaviourPunCallbacks
             foreach (KeyValuePair<int, Photon.Realtime.Player> player in PhotonNetwork.CurrentRoom.Players)
             {
                 if(player.Value.NickName != PhotonNetwork.NickName)
-                    _OtherPlayer.text = player.Value.NickName;
+                    _OtherPlayer.text = "";
                     ThreeDots.gameObject.SetActive(false);
             }
         } 
@@ -44,7 +44,7 @@ public class CurrentRoom : MonoBehaviourPunCallbacks
         foreach (KeyValuePair<int, Photon.Realtime.Player> player in PhotonNetwork.CurrentRoom.Players)
         {
             if (player.Value.NickName != PhotonNetwork.NickName)
-                _OtherPlayer.text = player.Value.NickName;
+                _OtherPlayer.text = "";
                 ThreeDots.gameObject.SetActive(false);
         }
     }
