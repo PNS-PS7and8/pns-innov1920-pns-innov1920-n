@@ -67,7 +67,6 @@ public class Player {
 
     public void addThisCard(CardBase card)
     {
-        Debug.Log("test");
         serializedHand.Add(card.ResourcePath);
     }
     

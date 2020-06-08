@@ -1,21 +1,34 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
+using TMPro;
 public class MoveUnit : BoardBehaviour
 {
     [SerializeField] private BoardClicker boardClicker = null;
     [SerializeField] private HoverCell hoverCell = null;
     [SerializeField] private Color color = Color.white;
     [SerializeField] private Color pathColor = Color.white;
+    [SerializeField] private TMP_Text infoUnits;
 
     private Cell origin;
     private Unit unit;
+    private Unit infoUnit;
 
     private void Update() {
-        if(unit != null && unit.Health <= 0){
-            Deselect();
+        if(unit != null){
+            if (unit.Health <= 0){
+                Deselect();
+            }
         }
+        if(infoUnit != null){
+            SetInfo();
+        }
+    }
+
+    private void SetInfo(){
+        string move;
+        if (CanMove(infoUnit)){move = "Can move";} else { move = "Can't move";}
+        infoUnits.text = infoUnit.Card.Name+"\nHP: "+infoUnit.Health+"\nATQ: "+infoUnit.Attack+"\n"+move;
     }
 
     private bool CanMove(Unit unit) {
@@ -27,6 +40,7 @@ public class MoveUnit : BoardBehaviour
     }
     
     private void OnEnable() {
+        boardClicker.OnHoverUnit += OnInfoUnit;
         boardClicker.OnClickUnit += OnSelectUnit;
         boardClicker.OnClickCell += OnSelectCell;
         boardClicker.OnHoverCell += OnHoverCell;
@@ -34,10 +48,15 @@ public class MoveUnit : BoardBehaviour
     }
 
     private void OnDisable() {
+        boardClicker.OnHoverUnit -= OnInfoUnit;
         boardClicker.OnClickUnit -= OnSelectUnit;
         boardClicker.OnClickCell -= OnSelectCell;
         boardClicker.OnHoverCell += OnHoverCell;
         boardClicker.OnClickCard -= _ => Deselect();
+    }
+
+    private void OnInfoUnit(Cell HovCell, Unit unit) {
+        this.infoUnit = unit;
     }
 
     void OnSelectUnit(Cell cell, Unit unit)
