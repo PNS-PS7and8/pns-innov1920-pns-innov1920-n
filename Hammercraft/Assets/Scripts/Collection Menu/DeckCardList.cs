@@ -9,10 +9,9 @@ public class DeckCardList : MonoBehaviour
     [SerializeField] private CollectionCard cardPrefab;
     [SerializeField] private TMP_Text UnitCountText;
     [SerializeField] private TMP_Text SpellCountText;
-    [SerializeField] private TMP_Text SaveText;
-    [SerializeField] private TMP_Text DuplicateText;
+    [SerializeField] private TMP_Text saveMessage;
     [SerializeField] private TMP_Text DeckName;
-    [SerializeField] private TMP_Text InvalidDeck;
+
     public CollectionCard[] CardUnit { get; private set; }
     public CollectionCard[] CardSpell { get; private set; }
     private Deck currentDeck = null;
@@ -63,11 +62,12 @@ public class DeckCardList : MonoBehaviour
                 if (currentDeck.spells[i].Name == cb.Name){cpt++;}
             }
         }
-        Debug.Log(cpt);
         if (cpt < 2){
             return true;
         }
-        DuplicateText.gameObject.SetActive(true);
+        saveMessage.gameObject.SetActive(true);
+        saveMessage.color = new Color(250/255f, 34/255f, 48/255f, 1);
+        saveMessage.text = "Two copies of the same card maximum!";
         return false;
     }
 
@@ -75,15 +75,15 @@ public class DeckCardList : MonoBehaviour
         if(currentDeck.spells.Count() == MAX && currentDeck.units.Count() == MAX){
             return true;
         } else {
-            InvalidDeck.gameObject.SetActive(true);    
+            saveMessage.gameObject.SetActive(true);
+            saveMessage.color = new Color(250/255f, 34/255f, 48/255f, 1);
+            saveMessage.text = "Your deck must have 10 units & spells to be saved!";   
             return false;
         }
     }
 
     void TextUpdate(){
-        SaveText.gameObject.SetActive(false);
-        DuplicateText.gameObject.SetActive(false);
-        InvalidDeck.gameObject.SetActive(false);
+        saveMessage.gameObject.SetActive(false);
     }
 
     public void Save(){
@@ -91,7 +91,9 @@ public class DeckCardList : MonoBehaviour
         if (IsValidDeck()){
             DeckListingMenu dlm = Object.FindObjectOfType<DeckListingMenu>();
             dlm.setDeck(currentDeck);
-            SaveText.gameObject.SetActive(true);
+            saveMessage.gameObject.SetActive(true);
+            saveMessage.color = new Color(27/255f, 140/255f, 30/255f, 1);
+            saveMessage.text = "Deck saved!";
             AccessDatabase.SaveDeck(PlayerPrefs.GetString("username"), currentDeck);
         }
     }
