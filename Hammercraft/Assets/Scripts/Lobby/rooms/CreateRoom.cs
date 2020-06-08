@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -17,11 +18,21 @@ public class CreateRoom : MonoBehaviourPunCallbacks
     private bool IsPrivate = false;
     [SerializeField]
     private GameObject _roomCanvas;
+    [SerializeField]
+    private TMP_Dropdown _dropDown;
+    [SerializeField]
+    private TMP_Text _selectedGameMode; //_selectedGameMode.text pour avoir le mode sélectionné
 
     public override void OnEnable()
     {
+        _dropDown.ClearOptions();
         base.OnEnable();
         _roomNamePlaceholder.text = PhotonNetwork.NickName + "'s Game";
+        FillDropDown();
+    }
+
+    private void FillDropDown() {
+        _dropDown.AddOptions(new List<string>(Enum.GetNames(typeof(GameModes))));
     }
     public void CreateRoom_button()
     {
