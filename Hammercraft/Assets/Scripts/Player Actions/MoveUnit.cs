@@ -12,7 +12,11 @@ public class MoveUnit : BoardBehaviour
     private Cell origin;
     private Unit unit;
 
-
+    private void Update() {
+        if(unit != null && unit.Health <= 0){
+            Deselect();
+        }
+    }
 
     private bool CanMove(Unit unit) {
         return manager.History.Find<MovementAction>(action => {

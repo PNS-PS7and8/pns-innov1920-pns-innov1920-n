@@ -3,8 +3,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName="Cards/Units/Default")]
 public class UnitCard : CardBase {
     [SerializeField] private GameObject model = null;
-    [SerializeField] private int health = 1;
-    [SerializeField] private int attack = 1;
+    [SerializeField] public int health = 1;
+    [SerializeField] public int attack = 1;
     [SerializeField] private int movement = 5;
     [SerializeField] private UnitMoveMask movementMask;
     [SerializeField] private UnitMoveMask atqMask;
