@@ -67,7 +67,7 @@ public class Deck {
     }
 
     public void AddCard(CardBase card) {
-        if (card.GetType().IsAssignableFrom(typeof(UnitCard))) {
+        if (card.GetType().IsAssignableFrom(typeof(UnitCard)) || card.GetType().IsSubclassOf(typeof(UnitCard)) ) {
             serializedUnits.Add(card.ResourcePath);
         } else {
             serializedSpells.Add(card.ResourcePath);
@@ -75,7 +75,7 @@ public class Deck {
     }
 
     public void RemoveCard(CardBase card) {
-        if (card.GetType().IsAssignableFrom(typeof(UnitCard))) {
+        if (card.GetType().IsAssignableFrom(typeof(UnitCard)) || card.GetType().IsSubclassOf(typeof(UnitCard)) ) {
             serializedUnits.Remove(card.ResourcePath);
         } else {
             serializedSpells.Remove(card.ResourcePath);

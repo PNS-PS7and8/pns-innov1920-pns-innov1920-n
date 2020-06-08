@@ -194,7 +194,6 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        Debug.Log("Game manager synced");
     }
     public override void OnLeftRoom()
     {

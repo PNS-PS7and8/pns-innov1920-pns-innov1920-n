@@ -29,8 +29,7 @@ public class CollectionCard : BoardBehaviour
             nameText.text = card.Name;
             descriptionText.text = card.Description;
             //image.sprite = card.Image;
-        
-            if (card.GetType().IsAssignableFrom(typeof(UnitCard))) {
+            if ((card.GetType().IsAssignableFrom(typeof(UnitCard)) || card.GetType().IsSubclassOf(typeof(UnitCard)))) {
                 unitModel.gameObject.SetActive(true);
                 spellModel.gameObject.SetActive(false);
                 RANGEorCACText.text = (((UnitCard) card).Range) ? "Range" : "Melee";

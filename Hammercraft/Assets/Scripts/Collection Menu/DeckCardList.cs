@@ -54,18 +54,16 @@ public class DeckCardList : MonoBehaviour
 
     bool IsNotTriplicate(CardBase cb){
         int cpt = 0;
-        if (cb.GetType().IsAssignableFrom(typeof(UnitCard))){
+        if ( (cb.GetType().IsAssignableFrom(typeof(UnitCard)) || cb.GetType().IsSubclassOf(typeof(UnitCard)) )){
             for (int i = 0; i < currentDeck.units.Count(); i++){
                 if (currentDeck.units[i].Name == cb.Name){cpt++;}
             }
-        }
-
-        if (!cb.GetType().IsAssignableFrom(typeof(UnitCard))){
+        } else if (!cb.GetType().IsAssignableFrom(typeof(UnitCard))){
             for (int i = 0; i < currentDeck.spells.Count(); i++){
                 if (currentDeck.spells[i].Name == cb.Name){cpt++;}
             }
         }
-
+        Debug.Log(cpt);
         if (cpt < 2){
             return true;
         }
@@ -102,7 +100,7 @@ public class DeckCardList : MonoBehaviour
         TextUpdate();
         if (currentDeck != null){
 
-            if (cb.GetType().IsAssignableFrom(typeof(UnitCard)) && currentDeck.units.Count() < MAX && IsNotTriplicate(cb)){
+            if ( (cb.GetType().IsAssignableFrom(typeof(UnitCard)) || cb.GetType().IsSubclassOf(typeof(UnitCard)) ) && currentDeck.units.Count() < MAX && IsNotTriplicate(cb)){
                 for (int i = 0; i < CardUnit.Count(); i++){
                     if(CardUnit[i].gameObject.activeSelf == false){
                         CardUnit[i].card = cb;
@@ -113,9 +111,7 @@ public class DeckCardList : MonoBehaviour
                         break;
                     }
                 }
-            } 
-            
-            if (!cb.GetType().IsAssignableFrom(typeof(UnitCard)) && currentDeck.spells.Count() < MAX && IsNotTriplicate(cb)){
+            } else if (!cb.GetType().IsAssignableFrom(typeof(UnitCard)) && currentDeck.spells.Count() < MAX && IsNotTriplicate(cb)){
                 for (int i = 0; i < CardSpell.Count(); i++){
                     if(CardSpell[i].gameObject.activeSelf == false){
                         CardSpell[i].card = cb;
@@ -136,7 +132,7 @@ public class DeckCardList : MonoBehaviour
         cc.gameObject.SetActive(false);
         cc.transform.localScale = size;
         cc.transform.localPosition += new Vector3(0,0,30) ;
-        if (cc.card.GetType().IsAssignableFrom(typeof(UnitCard))){
+        if (cc.card.GetType().IsAssignableFrom(typeof(UnitCard)) || cc.card.GetType().IsSubclassOf(typeof(UnitCard))){
             unitCount--;
         } else {spellCount--;}
         DisplayCount();

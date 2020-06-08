@@ -1,7 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName="Cards/Spells/Damage")]
-
+[CreateAssetMenu(menuName="Cards/Spells/Buff")]
 public class BuffSpell : SpellCard
 {
     [SerializeField] private int atq;

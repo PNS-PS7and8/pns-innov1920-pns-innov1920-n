@@ -62,12 +62,10 @@ public static class PlayersExtension {
     }
 
     public static int LocalPlayerIndex() {
-        Debug.Log("Local " +LocalPlayer());
         return (int) LocalPlayer();
     }
 
     public static int RemotePlayerIndex() {
-        Debug.Log("Remote " +RemotePlayer());
         return (int) RemotePlayer();
     }
 
