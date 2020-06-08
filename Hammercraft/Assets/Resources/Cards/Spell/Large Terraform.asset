@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a1a80d4cfec39f50bf9fb09e9fb3508, type: 3}
-  m_Name: High tide
+  m_Name: Large Terraform
   m_EditorClassIdentifier: 
-  resourcePath: Cards/Spell/High tide
-  name: High tide
-  description: Change a cell into water.
-  cost: 2
-  castMask: 2033
-  terrain: 0
-  range: 2
+  resourcePath: Cards/Spell/Large Terraform
+  name: L Terraform
+  description: Change cells into field in an aoe of 1 range.
+  cost: 3
+  castMask: 2025
+  terrain: 1
+  range: 4
