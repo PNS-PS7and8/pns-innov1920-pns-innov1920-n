@@ -11,12 +11,14 @@ public class HoverCell : BoardBehaviour
 
     private Dictionary<Vector2Int, SpriteRenderer> instances;
     private Dictionary<Color, List<Vector2Int>> colorToPos;
+    private List<Color> stack;
 
 
     private void Start()
     {
         instances = new Dictionary<Vector2Int, SpriteRenderer>();
         colorToPos = new Dictionary<Color, List<Vector2Int>>();
+        stack = new List<Color>();
 
         foreach(Cell cell in board.Cells()) {
             GameObject go = new GameObject(string.Format("Cell ({0}, {1})", cell.position.x, cell.position.y), typeof(SpriteRenderer));
@@ -28,8 +30,18 @@ public class HoverCell : BoardBehaviour
             
             instances[cell.position] = go.GetComponent<SpriteRenderer>();
             instances[cell.position].sprite = sprite;
-            instances[cell.position].color = transparent;
             instances[cell.position].enabled = false;
+        }
+    }
+
+    private void Update() {
+        foreach (var kv in colorToPos)
+        {
+            foreach (var pos in kv.Value)
+            {
+                instances[pos].color = kv.Key;
+                instances[pos].enabled = true;
+            }
         }
     }
 
@@ -38,26 +50,25 @@ public class HoverCell : BoardBehaviour
     }
 
     public void ShowCells(Color color, IEnumerable<Cell> cells) {
+        if (!stack.Contains(color)) stack.Add(color);
         if (!colorToPos.ContainsKey(color)) {
-            colorToPos.Add(color, cells.Select(c => c.position).ToList());
+            colorToPos.Add(color, new List<Vector2Int>());
         }
         foreach (var cell in cells) {
             if (instances.ContainsKey(cell.position)) {
                 instances[cell.position].color = color;
                 instances[cell.position].enabled = true;
+                if (!colorToPos[color].Contains(cell.position))
+                    colorToPos[color].Add(cell.position);
             }
         }
     }
 
     public void HideCells(Color color) {
         if (colorToPos.ContainsKey(color)) {
-            foreach (var cell in colorToPos[color]) {
-                var colors = colorToPos.Where(kv => kv.Key != color && kv.Value.Contains(cell)).Select(kv => kv.Key).ToArray();
-                if (colors.Length > 0) {
-                    instances[cell].color = colors[0];
-                } else {
-                    instances[cell].enabled = false;
-                }
+            foreach (var pos in colorToPos[color])
+            {
+                instances[pos].enabled = false;
             }
             colorToPos.Remove(color);
         }
