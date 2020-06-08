@@ -42,12 +42,14 @@ public class Player {
 
     public UnitCard DrawUnit() {
         UnitCard t = Deck.DrawUnit();
-        serializedHand.Add(t.ResourcePath);
+        if (serializedHand.Count <= 10)
+            serializedHand.Add(t.ResourcePath);
         return t;
     }
 
     public void addCard(CardBase card){
-        serializedHand.Add(card.ResourcePath);
+        if (serializedHand.Count <= 10)
+            serializedHand.Add(card.ResourcePath);
     }
     
     public Tuple<List<UnitCard>,List<SpellCard>> DrawMulligan(PlayerRole playerRole)
@@ -64,16 +66,12 @@ public class Player {
 
         return Tuple.Create(U,S);
     }
-
-    public void addThisCard(CardBase card)
-    {
-        serializedHand.Add(card.ResourcePath);
-    }
     
 
     public SpellCard DrawSpell() {
         SpellCard t = Deck.DrawSpell();
-        serializedHand.Add(t.ResourcePath);
+        if (serializedHand.Count <= 10)
+            serializedHand.Add(t.ResourcePath);
         return t;
     }
 

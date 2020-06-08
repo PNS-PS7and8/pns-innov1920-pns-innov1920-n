@@ -17,12 +17,15 @@ public class DeckDraw : MonoBehaviour
     [SerializeField] private GameObject SpellDeck;
     [SerializeField] private GameObject validate;
     [SerializeField] private BoardPlayer BoardPlayer;
+    [SerializeField] private ParticleSystem DiscardParticle;
     private Button ValidateButton;
     private List<CardBase> listCardMulligan = new List<CardBase>();
     private List<GameObject> cardsMulligan = new List<GameObject>();
     private List<int> toReplace = new List<int>();
+
     private class CardEvent : UnityEvent<GameObject> { }
     public static UnityEvent<GameObject> eventReplaceCards;
+    
 
 
     public void Start()
@@ -122,78 +125,135 @@ public class DeckDraw : MonoBehaviour
     public void Draw(CardBase card = null)
     {
         Sequence DrawSequence = DOTween.Sequence();
-        float x = 0;
-        
-        if (card.GetType() == typeof(UnitCard))
+        if (BoardPlayer.manager.CurrentPlayer.Hand.Count > 10)
         {
-            _unitCard.transform.SetParent(UnitDeck.transform);
-            _unitCard.transform.localScale = Vector3.one;
-            _unitCard.transform.localPosition = new Vector3(0, 0, 0);
-            _unitCard.transform.eulerAngles = new Vector3(180, 90, 0);
-            _unitCard.SetActive(true);
             DrawSequence = DOTween.Sequence();
-            _unitCard.transform.SetParent(hand.gameObject.transform);
-            DrawSequence.Append(_unitCard.transform.DOLocalMove(new Vector3(0, 0.2f, 0), 0.4f));
-            DrawSequence.Join(_unitCard.transform.DOLocalRotate(new Vector3(-90, 0, 0), 0.5f));
-            DrawSequence.Join(_unitCard.transform.DOScale(Vector3.one*2, 0.4f));
-            if (card)
+            if (card.GetType() == typeof(UnitCard))
             {
-                TMP_Text[] texts = _unitCard.GetComponentInChildren<Canvas>().GetComponentsInChildren<TMP_Text>();
-                
-                texts[0].text = card.Name;
-                texts[1].text = card.Description;
-                texts[2].text = card.Cost.ToString();
-                texts[3].text = ((UnitCard) card).Attack.ToString();
-                texts[4].text = ((UnitCard) card).Health.ToString();
-                texts[5].text = (((UnitCard) card).Range) ? "Range" : "Melee";
+                _unitCard.transform.SetParent(UnitDeck.transform);
+                _unitCard.transform.localScale = Vector3.one;
+                _unitCard.transform.localPosition = new Vector3(0, 0, 0);
+                _unitCard.transform.eulerAngles = new Vector3(180, 90, 0);
+                _unitCard.SetActive(true);
+                DrawSequence = DOTween.Sequence();
+                _unitCard.transform.SetParent(hand.gameObject.transform);
+                DrawSequence.Append(_unitCard.transform.DOLocalMove(new Vector3(0, 0.2f, 0), 0.4f));
+                DrawSequence.Join(_unitCard.transform.DOLocalRotate(new Vector3(-90, 0, 0), 0.5f));
+                DrawSequence.Join(_unitCard.transform.DOScale(Vector3.one * 2, 0.4f));
+                if (card)
+                {
+                    TMP_Text[] texts = _unitCard.GetComponentInChildren<Canvas>().GetComponentsInChildren<TMP_Text>();
+
+                    texts[0].text = card.Name;
+                    texts[1].text = card.Description;
+                    texts[2].text = card.Cost.ToString();
+                    texts[3].text = ((UnitCard)card).Attack.ToString();
+                    texts[4].text = ((UnitCard)card).Health.ToString();
+                    texts[5].text = (((UnitCard)card).Range) ? "Range" : "Melee";
+                }
+                StartCoroutine(Discard());
+                DOTween.Play(DrawSequence);
             }
-            StartCoroutine(wait());
-            DrawSequence.AppendInterval(1);
-            if(hand.player != null)
+            else
             {
-               x = (hand.player.Hand.Count-hand.player.Hand.Count / 2f)*hand.Spacing;
+                _spellCard.transform.SetParent(SpellDeck.transform);
+                _spellCard.transform.localScale = Vector3.one;
+                _spellCard.transform.localPosition = new Vector3(0, 0, 0);
+                _spellCard.transform.eulerAngles = new Vector3(180, 90, 0);
+                _spellCard.SetActive(true);
+                DrawSequence = DOTween.Sequence();
+                _spellCard.transform.SetParent(hand.gameObject.transform);
+                DrawSequence.Append(_spellCard.transform.DOLocalMove(new Vector3(0, 0.2f, 0), 0.4f));
+                DrawSequence.Join(_spellCard.transform.DOLocalRotate(new Vector3(-90, 0, 0), 0.5f));
+                DrawSequence.Join(_spellCard.transform.DOScale(Vector3.one * 2, 0.4f));
+                if (card)
+                {
+                    TMP_Text[] texts = _spellCard.GetComponentInChildren<Canvas>().GetComponentsInChildren<TMP_Text>();
+                    texts[0].text = card.Name;
+                    texts[1].text = card.Description;
+                    texts[2].text = card.Cost.ToString();
+                }
+                StartCoroutine(Discard());
+                DOTween.Play(DrawSequence);
             }
-            DrawSequence.Append(_unitCard.transform.DOLocalMove(new Vector3(x,0.2f, 0f), 0.2f));
-            DrawSequence.Append(_unitCard.transform.DOLocalMove(new Vector3(x, 0f, 0f), 0.2f));
-            DrawSequence.Join(_unitCard.transform.DOLocalRotate(new Vector3(-90f, 0, 0), 0.2f));
-            DrawSequence.Join(_unitCard.transform.DOScale(Vector3.one, 0.2f));
-
-            DOTween.Play(DrawSequence);
-            
-           
-
-        } else
+        } 
+        else
         {
+            float x = 0;
 
-            _spellCard.transform.SetParent(SpellDeck.transform);
-            _spellCard.transform.localScale = Vector3.one;
-            _spellCard.transform.localPosition = new Vector3(0, 0, 0);
-            _spellCard.transform.eulerAngles = new Vector3(180, 90, 0);
-            _spellCard.SetActive(true);
-            DrawSequence = DOTween.Sequence();
-            _spellCard.transform.SetParent(hand.gameObject.transform);
-            DrawSequence.Append(_spellCard.transform.DOLocalMove(new Vector3(0, 0.2f, 0), 0.4f));
-            DrawSequence.Join(_spellCard.transform.DOLocalRotate(new Vector3(-90, 0, 0), 0.5f));
-            DrawSequence.Join(_spellCard.transform.DOScale(Vector3.one * 2, 0.4f));
-            if (card)
+            if (card.GetType() == typeof(UnitCard))
             {
-                TMP_Text[] texts = _spellCard.GetComponentInChildren<Canvas>().GetComponentsInChildren<TMP_Text>();
-                texts[0].text = card.Name;
-                texts[1].text = card.Description;
-                texts[2].text = card.Cost.ToString();
-            }
-            StartCoroutine(wait());
-            DrawSequence.AppendInterval(1);
-            if (hand.player != null)
-            {
-                x = (hand.player.Hand.Count - hand.player.Hand.Count / 2f) * hand.Spacing;
-            }
-            DrawSequence.Append(_spellCard.transform.DOLocalMove(new Vector3(x, 0.2f, 0f), 0.2f));
-            DrawSequence.Append(_spellCard.transform.DOLocalMove(new Vector3(x, 0f, 0f), 0.2f));
-            DrawSequence.Join(_spellCard.transform.DOLocalRotate(new Vector3(-90f, 0, 0), 0.2f));
-            DrawSequence.Join(_spellCard.transform.DOScale(Vector3.one, 0.2f));
+                _unitCard.transform.SetParent(UnitDeck.transform);
+                _unitCard.transform.localScale = Vector3.one;
+                _unitCard.transform.localPosition = new Vector3(0, 0, 0);
+                _unitCard.transform.eulerAngles = new Vector3(180, 90, 0);
+                _unitCard.SetActive(true);
+                DrawSequence = DOTween.Sequence();
+                _unitCard.transform.SetParent(hand.gameObject.transform);
+                DrawSequence.Append(_unitCard.transform.DOLocalMove(new Vector3(0, 0.2f, 0), 0.4f));
+                DrawSequence.Join(_unitCard.transform.DOLocalRotate(new Vector3(-90, 0, 0), 0.5f));
+                DrawSequence.Join(_unitCard.transform.DOScale(Vector3.one * 2, 0.4f));
+                if (card)
+                {
+                    TMP_Text[] texts = _unitCard.GetComponentInChildren<Canvas>().GetComponentsInChildren<TMP_Text>();
 
-            DOTween.Play(DrawSequence);
+                    texts[0].text = card.Name;
+                    texts[1].text = card.Description;
+                    texts[2].text = card.Cost.ToString();
+                    texts[3].text = ((UnitCard)card).Attack.ToString();
+                    texts[4].text = ((UnitCard)card).Health.ToString();
+                    texts[5].text = (((UnitCard)card).Range) ? "Range" : "Melee";
+                }
+                StartCoroutine(wait());
+                DrawSequence.AppendInterval(1);
+                if (hand.player != null)
+                {
+                    x = (hand.player.Hand.Count - 0.5f - hand.player.Hand.Count / 2f) * hand.Spacing;
+                }
+                DrawSequence.Append(_unitCard.transform.DOLocalMove(new Vector3(x, 0.2f, 0f), 0.2f));
+                DrawSequence.Append(_unitCard.transform.DOLocalMove(new Vector3(x, 0f, 0f), 0.2f));
+                DrawSequence.Join(_unitCard.transform.DOLocalRotate(new Vector3(-90f, 0, 0), 0.2f));
+                DrawSequence.Join(_unitCard.transform.DOScale(Vector3.one, 0.2f));
+
+                DOTween.Play(DrawSequence);
+
+
+
+            }
+            else
+            {
+
+                _spellCard.transform.SetParent(SpellDeck.transform);
+                _spellCard.transform.localScale = Vector3.one;
+                _spellCard.transform.localPosition = new Vector3(0, 0, 0);
+                _spellCard.transform.eulerAngles = new Vector3(180, 90, 0);
+                _spellCard.SetActive(true);
+                DrawSequence = DOTween.Sequence();
+                _spellCard.transform.SetParent(hand.gameObject.transform);
+                DrawSequence.Append(_spellCard.transform.DOLocalMove(new Vector3(0, 0.2f, 0), 0.4f));
+                DrawSequence.Join(_spellCard.transform.DOLocalRotate(new Vector3(-90, 0, 0), 0.5f));
+                DrawSequence.Join(_spellCard.transform.DOScale(Vector3.one * 2, 0.4f));
+                if (card)
+                {
+                    TMP_Text[] texts = _spellCard.GetComponentInChildren<Canvas>().GetComponentsInChildren<TMP_Text>();
+                    texts[0].text = card.Name;
+                    texts[1].text = card.Description;
+                    texts[2].text = card.Cost.ToString();
+                }
+                StartCoroutine(wait());
+                DrawSequence.AppendInterval(1);
+                if (hand.player != null)
+                {
+                    x = (hand.player.Hand.Count - 0.5f - hand.player.Hand.Count / 2f) * hand.Spacing;
+                }
+                DrawSequence.Append(_spellCard.transform.DOLocalMove(new Vector3(x, 0.2f, 0f), 0.2f));
+                DrawSequence.Append(_spellCard.transform.DOLocalMove(new Vector3(x, 0f, 0f), 0.2f));
+                DrawSequence.Join(_spellCard.transform.DOLocalRotate(new Vector3(-90f, 0, 0), 0.2f));
+                DrawSequence.Join(_spellCard.transform.DOScale(Vector3.one, 0.2f));
+
+                DOTween.Play(DrawSequence);
+            }
+
         }
     
     }
@@ -202,6 +262,15 @@ public class DeckDraw : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(1.9f);
         hand.UpdateHand();
+        _unitCard.SetActive(false);
+        _spellCard.SetActive(false);
+    }
+
+    IEnumerator Discard()
+    {
+        yield return new WaitForSecondsRealtime(1.0f);
+        DiscardParticle.Play();
+        yield return new WaitForSecondsRealtime(0.5f);
         _unitCard.SetActive(false);
         _spellCard.SetActive(false);
     }
@@ -290,7 +359,7 @@ public class DeckDraw : MonoBehaviour
         yield return new WaitForSecondsRealtime(2f);
         foreach (CardBase card in listCardMulligan)
         {
-            BoardPlayer.manager.CurrentPlayer.addThisCard(card);
+            BoardPlayer.manager.CurrentPlayer.addCard(card);
         }
         validate.gameObject.SetActive(false);
         foreach (GameObject c in cardsMulligan)

@@ -12,6 +12,9 @@ public class BoardCardDraw : MonoBehaviour {
     [SerializeField] private GameObject arrow1;
     [SerializeField] private GameObject arrow2;
     [SerializeField] private BoardManager BoardManager;
+    [SerializeField] private GameObject DeckSpell;
+    [SerializeField] private GameObject DeckUnit;
+
     private bool canDraw = false;
 
     public void AllowDraw() {
@@ -28,8 +31,7 @@ public class BoardCardDraw : MonoBehaviour {
     private void OnMouseDown() {
         
         if (BoardManager.Manager.Turn != 1 || !BoardManager.ValidateButton.activeInHierarchy)
-        {
-
+        { 
             if (canDraw) {
                 if (draw == Draw.Unit) {
                     player.DrawUnit();
@@ -39,6 +41,19 @@ public class BoardCardDraw : MonoBehaviour {
                 canDraw = false;
                 arrow1.SetActive(false);
                 arrow2.SetActive(false);
+                if (draw == Draw.Unit)
+                {
+                    if (BoardManager.Manager.CurrentPlayer.Deck.units.Count == 0)
+                    {
+                        DeckUnit.SetActive(false);
+                    }
+                } else
+                {
+                    if (BoardManager.Manager.CurrentPlayer.Deck.spells.Count == 0)
+                    {
+                        DeckSpell.SetActive(false);
+                    }
+                }
                 if (others != null) {
                     foreach(var o in others) {
                         o.canDraw = false;
@@ -46,6 +61,7 @@ public class BoardCardDraw : MonoBehaviour {
                     }
                 }
             }
+
         }
     }
 

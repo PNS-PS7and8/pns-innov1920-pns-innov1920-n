@@ -187,8 +187,8 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
             UnitCard c2 = Resources.Load<UnitCard>("Cards/Unit/Eagle");
             UnitCard c3 = Resources.Load<UnitCard>("Cards/Unit/Fish");
             SpellCard c4 = Resources.Load<SpellCard>("Cards/Spell/Fireball");
-            deck1 = new Deck( new UnitCard[] { c1, c1, c2, c2, c3, c3 }, new SpellCard[] { c4, c4, c4, c4, c4 } );
-            deck2 = new Deck(new UnitCard[] { c1, c1, c2, c2, c3, c3 }, new SpellCard[] { c4, c4, c4, c4, c4 });
+            deck1 = new Deck( new UnitCard[] { c1, c1, c2, c2, c3, c3, c2, c3, c3}, new SpellCard[] { c4, c4, c4, c4, c4 } );
+            deck2 = new Deck(new UnitCard[] { c1, c1, c2, c2, c3, c3, c2, c3, c3 }, new SpellCard[] { c4, c4, c4, c4, c4 });
 
         }
 
