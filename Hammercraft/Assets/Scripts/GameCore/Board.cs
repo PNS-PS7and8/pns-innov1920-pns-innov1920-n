@@ -29,7 +29,7 @@ public class Board {
         ResetGrid();
     }
 
-    private int CellIndex(int x, int y) {
+    public int CellIndex(int x, int y) {
         return x % size.x + y * size.x;
     }
 
@@ -113,7 +113,7 @@ public class Board {
     public IEnumerable<Cell> Neighbors(Cell cell) => Ring(cell, 2);
     public IEnumerable<Cell> Ring(Cell cell, int distance) {
         return 
-            cells
+            Cells()
             .Where(c => cell.Distance(c) == distance)
             .OrderBy(c => Mathf.Atan2((c.position - cell.position).y, (c.position - cell.position).x));
     }
