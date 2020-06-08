@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class BoardPlayer : BoardBehaviour {
     private Player player;
-    [SerializeField] private DeckUnit deckUnit;
-    [SerializeField] private DeckSpell deckSpell;
+    [SerializeField] private DeckDraw deckdraw;
 
     public override void OnResetBoard(BoardManager boardManager) {
         base.OnResetBoard(boardManager);
@@ -14,25 +13,16 @@ public class BoardPlayer : BoardBehaviour {
     
     private void Start() {
         player = manager.LocalPlayer;
-        //StartCoroutine(CardDraw());
-        
+       // deckdraw.Mulligan(manager.LocalPlayer.DrawMulligan(manager.PlayerTurn));
     }
 
-    IEnumerator CardDraw()
-    {
-        
-        float time = 3f;
-        yield return new WaitForSecondsRealtime(time);
-        deckUnit.DrawUnit(manager.LocalPlayer.DrawUnit());
-        
-        
-    }
+    
 
     public void DrawUnit() {
-        deckUnit.DrawUnit(manager.CurrentPlayer.DrawUnit());
+        deckdraw.Draw(manager.CurrentPlayer.DrawUnit());
     }
 
     public void DrawSpell() {
-        deckSpell.DrawSpell(manager.CurrentPlayer.DrawSpell());
+        deckdraw.Draw(manager.CurrentPlayer.DrawSpell());
     }
 }

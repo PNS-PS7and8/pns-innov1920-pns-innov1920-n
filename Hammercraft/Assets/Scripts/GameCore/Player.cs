@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -16,6 +17,8 @@ public class Player {
     [SerializeField] private int currentGold;
     public List<CardBase> Hand => serializedHand.Select(c => Resources.Load<CardBase>(c)).ToList();
     public PlayerRole Role => role;
+
+
     public int Gold => gold;
     public int CurrentGold => currentGold;
 
@@ -41,6 +44,26 @@ public class Player {
         UnitCard t = Deck.DrawUnit();
         serializedHand.Add(t.ResourcePath);
         return t;
+    }
+
+    public Tuple<List<UnitCard>,List<SpellCard>,Player> DrawMulligan(PlayerRole playerRole)
+    {
+        List<UnitCard> U = new List<UnitCard>();
+        List<SpellCard> S = new List<SpellCard>();
+        U.Add(Deck.DrawUnit());
+        U.Add(Deck.DrawUnit());
+        S.Add(Deck.DrawSpell());
+        if (playerRole.Equals(PlayerRole.PlayerTwo))
+        {
+            S.Add(Deck.DrawSpell());
+        }
+
+        return Tuple.Create(U,S,this);
+    }
+
+    public void addThisCard(CardBase card)
+    {
+        serializedHand.Add(card.resourcePath);
     }
 
     public SpellCard DrawSpell() {
