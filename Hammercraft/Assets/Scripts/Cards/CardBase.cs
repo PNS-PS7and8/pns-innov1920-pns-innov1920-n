@@ -21,15 +21,15 @@ public abstract class CardBase : ScriptableObject{
     public string Name => name;
     
 
-    public bool Use(Board board, Cell target, PlayerRole player) {
+    public bool Use(Board board, Cell target, PlayerRole player, Player objPlayer) {
         if (CardCast.CanCast(castMask, board, target)) {
-            CardEffect(board, target, player);
+            CardEffect(board, target, player, objPlayer);
             return true;
         }
         return false;
     }
 
-    protected abstract void CardEffect(Board board, Cell target, PlayerRole player);
+    protected abstract void CardEffect(Board board, Cell target, PlayerRole player, Player objPlayer);
 }
 
 public abstract class SpellCard : CardBase {}

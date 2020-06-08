@@ -8,10 +8,11 @@ public class ChangeTerrainSpell : SpellCard
     [SerializeField] private Cell.CellType terrain;
     [SerializeField] private int range;
 
-    protected override void CardEffect(Board board, Cell target, PlayerRole player)
+    protected override void CardEffect(Board board, Cell target, PlayerRole player, Player objPlayer)
     {
         List<Cell> cells = board.Disc(target, range).ToList();
         foreach(Cell cell in cells){
+            if(board.GetUnit(cell) == null)
             cell.cellType = terrain;
         }
     }

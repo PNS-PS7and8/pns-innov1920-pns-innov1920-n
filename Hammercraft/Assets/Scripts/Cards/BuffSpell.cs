@@ -7,7 +7,7 @@ public class BuffSpell : SpellCard
     [SerializeField] private int movement;
     [SerializeField] private int range;
 
-    protected override void CardEffect(Board board, Cell target, PlayerRole player)
+    protected override void CardEffect(Board board, Cell target, PlayerRole player, Player objPlayer)
     {
         Unit unit = board.GetUnit(target);
         if (unit != null){

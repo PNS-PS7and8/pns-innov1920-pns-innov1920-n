@@ -7,7 +7,7 @@ public class AoeDeployCard : UnitCard {
     [SerializeField] protected int aoeDmg;
     [SerializeField] protected int aoeRange;
 
-    protected override void CardEffect(Board board, Cell target, PlayerRole player)
+    protected override void CardEffect(Board board, Cell target, PlayerRole player, Player objPlayer)
     {
         
         List<Cell> cells = board.Disc(target, aoeRange).ToList();

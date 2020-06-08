@@ -18,7 +18,7 @@ public class UnitCard : CardBase {
     public UnitMoveMask AtqMask => atqMask;
     public bool Range => range;
 
-    protected override void CardEffect(Board board, Cell target, PlayerRole player)
+    protected override void CardEffect(Board board, Cell target, PlayerRole player, Player objPlayer)
     {
         board.AddUnit(this, target, player);
     }

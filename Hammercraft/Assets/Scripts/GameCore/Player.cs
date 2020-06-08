@@ -43,6 +43,10 @@ public class Player {
         return t;
     }
 
+    public void addCard(CardBase card){
+        serializedHand.Add(card.ResourcePath);
+    }
+
     public SpellCard DrawSpell() {
         SpellCard t = Deck.DrawSpell();
         serializedHand.Add(t.ResourcePath);

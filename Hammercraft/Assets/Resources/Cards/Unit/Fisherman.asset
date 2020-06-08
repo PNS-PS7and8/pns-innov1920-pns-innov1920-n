@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14c2cc1430d54554f9b3550b2ac0a135, type: 3}
+  m_Name: Fisherman
+  m_EditorClassIdentifier: 
+  resourcePath: Cards/Unit/Fisherman
+  name: Fisherman
+  description: 'Fish is love, Fish is life.
+
+    Give 2 Fishes to your hand.'
+  cost: 5
+  castMask: 1817
+  model: {fileID: 4993303932133754498, guid: 47e148659971e5e47bc11c58e725a37d, type: 3}
+  health: 4
+  attack: 2
+  movement: 5
+  movementMask: 909
+  atqMask: 925
+  range: 0
+  summon: {fileID: 11400000, guid: 6e0a4777b8d5148f6a80a3b08d1207e0, type: 2}
+  number: 2
