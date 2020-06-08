@@ -46,7 +46,7 @@ public class Player {
         return t;
     }
 
-    public Tuple<List<UnitCard>,List<SpellCard>,Player> DrawMulligan(PlayerRole playerRole)
+    public Tuple<List<UnitCard>,List<SpellCard>> DrawMulligan(PlayerRole playerRole)
     {
         List<UnitCard> U = new List<UnitCard>();
         List<SpellCard> S = new List<SpellCard>();
@@ -58,13 +58,15 @@ public class Player {
             S.Add(Deck.DrawSpell());
         }
 
-        return Tuple.Create(U,S,this);
+        return Tuple.Create(U,S);
     }
 
     public void addThisCard(CardBase card)
     {
-        serializedHand.Add(card.resourcePath);
+        Debug.Log("test");
+        serializedHand.Add(card.ResourcePath);
     }
+    
 
     public SpellCard DrawSpell() {
         SpellCard t = Deck.DrawSpell();

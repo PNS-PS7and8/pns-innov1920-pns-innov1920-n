@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BoardPlayer : BoardBehaviour {
-    private Player player;
+    public Player player { get; private set; }
     [SerializeField] private DeckDraw deckdraw;
 
     public override void OnResetBoard(BoardManager boardManager) {
@@ -12,11 +12,13 @@ public class BoardPlayer : BoardBehaviour {
     }
     
     private void Start() {
-        player = manager.LocalPlayer;
-       // deckdraw.Mulligan(manager.LocalPlayer.DrawMulligan(manager.PlayerTurn));
+        player = manager.CurrentPlayer;
     }
 
-    
+    public void Mulligan()
+    {
+        deckdraw.Mulligan(manager.CurrentPlayer.DrawMulligan(manager.PlayerTurn));
+    }
 
     public void DrawUnit() {
         deckdraw.Draw(manager.CurrentPlayer.DrawUnit());

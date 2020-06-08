@@ -24,6 +24,8 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
     [SerializeField] public TMP_Text scoreText2;
     [SerializeField] public TMP_Text infoWin;
     [SerializeField] public GameObject YourTurnButton;
+    [SerializeField] private BoardPlayer BoardPlayer;
+    [SerializeField] private GameObject validateButton;
 
 
     public Hand Hand { get { return _hand; } }
@@ -89,6 +91,7 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
 
     private void StartOfTurn()
     {
+       
         StartCoroutine(YourTurn());
         startOfEnnemyTurn = true;
         if (_timer != null)
@@ -108,7 +111,15 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
     }
 
     IEnumerator YourTurn(){
-        YourTurnButton.SetActive(true) ;
+        print(manager.Turn);
+        if (manager.Turn == 1)
+        {
+            BoardPlayer.Mulligan();
+            yield return new WaitUntil(() => validateButton.activeInHierarchy);
+            yield return new WaitWhile(() => validateButton.activeInHierarchy);
+        }
+        
+        YourTurnButton.SetActive(true);
         yield return new WaitForSecondsRealtime(2f);
         YourTurnButton.SetActive(false);
     }
@@ -128,7 +139,14 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
 
     private IEnumerator Timer()
     {
-        for(int i=60; i > 0; i--)
+        TimerText.enabled = false;
+        if (manager.Turn == 1)
+        {
+            yield return new WaitUntil(() => validateButton.activeInHierarchy);
+            yield return new WaitWhile(() => validateButton.activeInHierarchy);
+        }
+        
+        for (int i=60; i > 0; i--)
         {
             TimerText.text = i.ToString();
             
@@ -157,13 +175,6 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
         setup.noiseOffset = perlinNoiseOffset;
         Deck deck1 = null;
         Deck deck2 = null;
-        /*
-        UnitCard c1 = Resources.Load<UnitCard>("Cards/Unit/Noob");
-        UnitCard c2 = Resources.Load<UnitCard>("Cards/Unit/Noob");
-        UnitCard c3 = Resources.Load<UnitCard>("Cards/Unit/Noob");
-        SpellCard c4 = Resources.Load<SpellCard>("Cards/Spell/Fireball");
-        Deck deck = new Deck( new UnitCard[] { c1, c1, c2, c2, c3, c3 }, new SpellCard[] { c4, c4, c4, c4, c4 } );
-        */
         if (PhotonNetwork.IsConnected)
         {
 
@@ -173,8 +184,8 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
         {
             
             UnitCard c1 = Resources.Load<UnitCard>("Cards/Unit/Noob");
-            UnitCard c2 = Resources.Load<UnitCard>("Cards/Unit/Noob");
-            UnitCard c3 = Resources.Load<UnitCard>("Cards/Unit/Noob");
+            UnitCard c2 = Resources.Load<UnitCard>("Cards/Unit/Eagle");
+            UnitCard c3 = Resources.Load<UnitCard>("Cards/Unit/Fish");
             SpellCard c4 = Resources.Load<SpellCard>("Cards/Spell/Fireball");
             deck1 = new Deck( new UnitCard[] { c1, c1, c2, c2, c3, c3 }, new SpellCard[] { c4, c4, c4, c4, c4 } );
             deck2 = new Deck(new UnitCard[] { c1, c1, c2, c2, c3, c3 }, new SpellCard[] { c4, c4, c4, c4, c4 });
@@ -194,7 +205,7 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        Debug.Log("Game manager synced");
+       // Debug.Log("Game manager synced");
     }
     public override void OnLeftRoom()
     {
