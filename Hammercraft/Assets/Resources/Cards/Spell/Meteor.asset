@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ff5f8f21005cdfdbaef19f379ddb51c, type: 3}
-  m_Name: Fireball
+  m_Name: Meteor
   m_EditorClassIdentifier: 
-  resourcePath: Cards/Spell/Fireball
-  name: Fireball
+  resourcePath: Cards/Spell/Meteor
+  name: Meteor
   description: 'Can''t hit water units.
 
-    Deals 4 damages.'
-  cost: 3
+    Deals 10 damages.'
+  cost: 10
   castMask: 1842
-  damage: 4
+  damage: 10
