@@ -35,39 +35,17 @@ public class RoomDeckListMenu : MonoBehaviour
 
     private void DisplayDecks() {
         _deckListingMenu.FetchServer();
-        if (_deckListingMenu.ListDecks.Count == 0){
-            UnitCard u1 = Resources.Load<UnitCard>("Cards/Unit/Noob");
-            UnitCard u2 = Resources.Load<UnitCard>("Cards/Unit/Fish");
-            UnitCard u3 = Resources.Load<UnitCard>("Cards/Unit/Eagle");
-            UnitCard u4 = Resources.Load<UnitCard>("Cards/Unit/Pro");
-            UnitCard u5 = Resources.Load<UnitCard>("Cards/Unit/Big Eagle");
-            SpellCard s1 = Resources.Load<SpellCard>("Cards/Spell/Fireball");
-            SpellCard s2 = Resources.Load<SpellCard>("Cards/Spell/Heal");
-            SpellCard s3 = Resources.Load<SpellCard>("Cards/Spell/Rage");
-            SpellCard s4 = Resources.Load<SpellCard>("Cards/Spell/Tidal wave");
-            SpellCard s5 = Resources.Load<SpellCard>("Cards/Spell/Big Fireball");
-            UnitCard[] us1 = new UnitCard[] { u1, u1, u2, u2, u3 , u3, u4, u4, u5, u5 };
-            SpellCard[] ss1 = new SpellCard[] { s1, s1, s2, s2, s3 , s3, s4, s4, s5, s5 };
-            Deck deck = new Deck("Default Deck", us1, ss1);
+        foreach (DeckListing deckListing in _deckListingMenu.ListDecks.Values)
+        {
+            Deck deck = deckListing.Deck;            
             RoomDeckListing listing = Instantiate(_roomDeckListing, _content);
             listing.SetDeckInfo(deck);
             ListDecks[deck] = listing;
             ListDecks[deck].SetDeckInfo(deck);
-            selectedDeck = deck;
-            ListDecks[selectedDeck].SetBgColor(new Color(200/255f, 125/255f, 65/255f));
-        } else {
-            foreach (DeckListing deckListing in _deckListingMenu.ListDecks.Values)
-            {
-                Deck deck = deckListing.Deck;            
-                RoomDeckListing listing = Instantiate(_roomDeckListing, _content);
-                listing.SetDeckInfo(deck);
-                ListDecks[deck] = listing;
-                ListDecks[deck].SetDeckInfo(deck);
-                if(selectedDeck == null) {
-                    selectedDeck = deck;
-                    ListDecks[selectedDeck].SetBgColor(new Color(200/255f, 125/255f, 65/255f));
-                }
-            } 
+            if(selectedDeck == null) {
+                selectedDeck = deck;
+                ListDecks[selectedDeck].SetBgColor(new Color(200/255f, 125/255f, 65/255f));
+            }
         }
     }
 
