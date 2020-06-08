@@ -12,7 +12,7 @@ public class DeckListingMenu : MonoBehaviour
     private Transform _content;
 
     public Dictionary<string,DeckListing> ListDecks = new Dictionary<string, DeckListing>();
-    public Deck selectedDeck;
+    private Deck selectedDeck = null;
 
     private void OnEnable() {
         FetchServer();  
@@ -24,6 +24,14 @@ public class DeckListingMenu : MonoBehaviour
                 ListDecks[name].Deck = NewDeck;
             }
         }
+    }
+
+    public void ClickDeck(Deck deck) {
+        if(selectedDeck != null) {
+            ListDecks[selectedDeck.Name].SetBgColor(new Color(130/255f, 130/255f, 130/255f));
+        }
+        selectedDeck = deck;
+        ListDecks[selectedDeck.Name].SetBgColor(new Color(65/255f, 200/255f, 65/255f));
     }
     
     public void on_click_create_deck(TMP_InputField field) {

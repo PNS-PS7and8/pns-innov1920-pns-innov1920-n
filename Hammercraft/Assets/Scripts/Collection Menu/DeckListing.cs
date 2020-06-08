@@ -8,12 +8,10 @@ using UnityEngine.EventSystems;
 public class DeckListing : MonoBehaviour, IPointerDownHandler 
 {
     [SerializeField]
-    private TMP_Text _name;
+    private TMP_Text _name = null;
+    [SerializeField]
+    private Image image = null;
     public Deck Deck {get; set;}
-
-    public void Update(){
-    
-    }
 
     public void SetDeckInfo(Deck deck) {
         Deck = deck;
@@ -23,5 +21,11 @@ public class DeckListing : MonoBehaviour, IPointerDownHandler
     public void OnPointerDown(PointerEventData eventData) {
         DeckCardList dc = Object.FindObjectOfType<DeckCardList>();
         dc.LoadDeck(Deck);
+        DeckListingMenu dlm = Object.FindObjectOfType<DeckListingMenu>();
+        dlm.ClickDeck(Deck);
+    }
+
+    public void SetBgColor(Color color) {
+        image.color = color;
     }
 }
