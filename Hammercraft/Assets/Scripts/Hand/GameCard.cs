@@ -1,6 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 public class GameCard : BoardBehaviour
 {
@@ -69,7 +70,8 @@ public class GameCard : BoardBehaviour
         transform.DOScale(Vector3.one * scaleUp, 0.1f);
         transform.DOLocalMoveY(offsetY, 0.1f);
         transform.DOLocalMoveZ(-offsetZ, 0.1f);
-        OverCard.gameObject.SetActive(true);
+        if(Int16.Parse(costText.text) <= manager.LocalPlayer.CurrentGold)
+            OverCard.gameObject.SetActive(true);
         DOTween.Play(transform);
     }
 
