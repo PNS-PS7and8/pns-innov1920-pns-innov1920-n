@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class BoardUnitPool : BoardBehaviour {
@@ -21,8 +22,9 @@ public class BoardUnitPool : BoardBehaviour {
 
     private BoardUnit CreateBoardUnit(Unit unit) {
         GameObject go = Instantiate(unit.Card.Model, board.LocalPosition(unit), Quaternion.identity, transform);
+        go.GetComponentsInChildren<Collider>().ToList().ForEach(x => x.enabled = false);
         BoardUnit boardUnit;
-        if (!go.transform.TryGetComponent<BoardUnit>(out boardUnit)) {
+        if (!go.transform.TryGetComponent(out boardUnit)) {
             boardUnit = go.AddComponent<BoardUnit>();
         }
         boardUnit.unitId = unit.Id;
