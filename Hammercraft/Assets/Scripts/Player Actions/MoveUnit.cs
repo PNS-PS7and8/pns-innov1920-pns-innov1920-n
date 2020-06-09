@@ -28,6 +28,7 @@ public class MoveUnit : BoardBehaviour
 
     private void SetInfo(){
         string move;
+        if(infoUnit.Health <= 0){infoUnits.gameObject.SetActive(false);} else {infoUnits.gameObject.SetActive(true);}
         if (CanMove(infoUnit)){move = "Can move";} else { move = "Can't move";}
         infoUnits.text = infoUnit.Card.Name+"\nHP: "+infoUnit.Health+"\nATQ: "+infoUnit.Attack+"\n"+move;
     }
@@ -64,7 +65,9 @@ public class MoveUnit : BoardBehaviour
     {
         if (this.unit != null && cell.Distance(origin) <= this.unit.RangeAtq && this.unit != unit){ 
             this.unit.DealDamage(unit);
-            unit.DealDamage(this.unit);
+            if (unit.RangeAtq*2>=cell.Distance(origin)){
+                unit.DealDamage(this.unit);
+            }
             manager.History.Add(new MovementAction(manager.CurrentPlayer.Role, manager.Turn, this.unit.Id, new Vector2Int(0,0)));
             Deselect();
         } else if(!unit.Dead && CanMove(unit) && manager.MyTurn() && unit.Player == manager.PlayerTurn) {

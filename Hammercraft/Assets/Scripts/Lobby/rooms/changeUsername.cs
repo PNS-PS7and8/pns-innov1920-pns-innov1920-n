@@ -28,6 +28,5 @@ public class changeUsername : MonoBehaviourPunCallbacks
         var response = client.PostAsync("http://games.strange-nebula.com:3000/u/" + PlayerPrefs.GetString("username"), null).Result;
 
         var responseString = response.Content.ReadAsStringAsync().Result;
-        Debug.Log(responseString);
     }
 }

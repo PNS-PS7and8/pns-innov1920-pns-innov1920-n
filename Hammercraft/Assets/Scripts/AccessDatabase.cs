@@ -22,7 +22,6 @@ public static class AccessDatabase {
         HttpClient client = new HttpClient();
         var url = GetUrl($"/u/{user}");
         var res = client.GetAsync(url).Result.Content.ReadAsStringAsync().Result;
-        Debug.Log(res);
         var list = JsonUtility.FromJson<RemoteDeckList>(res);
         return list.decks;
     }
