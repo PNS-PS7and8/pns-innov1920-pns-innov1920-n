@@ -62,7 +62,7 @@ public class GameManager {
         };
     }
 
-    public int GetScore(int player){
+    public int GetScore(PlayerRole player){
         return GameMode.GetScore(player, this);
     }
 

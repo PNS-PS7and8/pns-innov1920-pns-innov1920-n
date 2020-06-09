@@ -76,7 +76,7 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
             StartOfEnnemyTurn();
         }
       
-        UpdateScore(manager.GetScore(PhotonNetwork.LocalPlayer.ActorNumber), manager.GetScore(-1),1);
+        UpdateScore(manager.GetScore(PlayersExtension.LocalPlayer()), manager.GetScore(PlayerRole.Spectator),1);
     }
 
     public void UpdateScore(int localscore, int maxscore,int score){
@@ -175,10 +175,15 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
     public static Photon.Realtime.Player LocalPhotonPlayer => PhotonNetwork.LocalPlayer;
 
     private GameManager NewGame() {
+        GameModes mode = GameModes.Point;
+        if (PhotonNetwork.InRoom) {
+            mode = (GameModes) PhotonNetwork.CurrentRoom.CustomProperties["GameMode"];
+        }
         GameManager.Setup setup = new GameManager.Setup();
         setup.boardSize = boardSize;
         setup.noiseScale = perlinNoiseScale;
         setup.noiseOffset = perlinNoiseOffset;
+        setup.gameMode = mode;
         Deck deck1 = null;
         Deck deck2 = null;
         if (PhotonNetwork.IsConnected)

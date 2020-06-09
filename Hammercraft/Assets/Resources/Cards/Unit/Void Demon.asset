@@ -27,4 +27,5 @@ MonoBehaviour:
   movementMask: 925
   atqMask: 925
   range: 0
+  modelScale: 1
   killRange: 6

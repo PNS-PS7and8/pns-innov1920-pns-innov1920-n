@@ -22,7 +22,8 @@ public class CreateRoom : MonoBehaviourPunCallbacks
     private TMP_Dropdown _dropDown = null;
     [SerializeField]
     private TMP_Text _selectedGameMode = null; //_selectedGameMode.text pour avoir le mode sélectionné
-
+    private GameModes mode;
+    
     public override void OnEnable()
     {
         _dropDown.ClearOptions();
@@ -36,22 +37,31 @@ public class CreateRoom : MonoBehaviourPunCallbacks
     }
     public void CreateRoom_button()
     {
-        if (_roomName.text.Length > 0 && PhotonNetwork.IsConnected)
-        {
-            print("creating room...");
-            RoomOptions RoomOptions = new RoomOptions();
-            RoomOptions.MaxPlayers = 2;
-            RoomOptions.IsVisible = !IsPrivate;
-            PhotonNetwork.CreateRoom(_roomName.text, RoomOptions, TypedLobby.Default);
-        } else
-        {
-            return;
+        string name = "";
+        if (_roomName.text.Length == 0) {
+            name = _roomNamePlaceholder.text;
+        } else {
+            name = _roomName.text;
         }
+        if (name.Length > 0 && PhotonNetwork.IsConnected)
+        {
+            if (Enum.TryParse<GameModes>(_selectedGameMode.text, out mode)) {
+                print("creating room...");
+                RoomOptions RoomOptions = new RoomOptions();
+                RoomOptions.MaxPlayers = 2;
+                RoomOptions.IsVisible = !IsPrivate;
+                                
+                PhotonNetwork.CreateRoom(name, RoomOptions, TypedLobby.Default);
+            }
+        }
+        return;
     }
 
     public override void OnCreatedRoom()
     {
-        print("Created room successfully");
+        PhotonNetwork.CurrentRoom.SetCustomProperties(
+            new ExitGames.Client.Photon.Hashtable { {"GameMode", (int) mode}}
+        );
     }
 
     public void on_click_change_private()

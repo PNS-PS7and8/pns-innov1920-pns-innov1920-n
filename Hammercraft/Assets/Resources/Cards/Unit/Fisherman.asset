@@ -26,5 +26,6 @@ MonoBehaviour:
   movementMask: 909
   atqMask: 925
   range: 0
+  modelScale: 1
   summon: {fileID: 11400000, guid: 6e0a4777b8d5148f6a80a3b08d1207e0, type: 2}
   number: 2

@@ -26,5 +26,6 @@ MonoBehaviour:
   movementMask: 137
   atqMask: 157
   range: 0
+  modelScale: 1
   aoeDmg: 5
   aoeRange: 12
