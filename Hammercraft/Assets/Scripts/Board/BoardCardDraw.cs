@@ -9,8 +9,7 @@ public class BoardCardDraw : MonoBehaviour {
     [SerializeField] private BoardPlayer player;
     [SerializeField] private Draw draw;
     [SerializeField] private BoardCardDraw[] others;
-    [SerializeField] private GameObject arrow1;
-    [SerializeField] private GameObject arrow2;
+    [SerializeField] private GameObject drawUI;
     [SerializeField] private BoardManager BoardManager;
     [SerializeField] private GameObject DeckSpell;
     [SerializeField] private GameObject DeckUnit;
@@ -18,9 +17,19 @@ public class BoardCardDraw : MonoBehaviour {
     private bool canDraw = false;
 
     public void AllowDraw() {
+        StartCoroutine(AllowDrawCo());
+    }
+
+    IEnumerator AllowDrawCo()
+    {
+        if (BoardManager.Manager.Turn == 1)
+        {
+            yield return new WaitUntil(() => BoardManager.ValidateButton.activeInHierarchy);
+            yield return new WaitWhile(() => BoardManager.ValidateButton.activeInHierarchy);
+
+        }
         canDraw = true;
-        arrow1.SetActive(true);
-        arrow2.SetActive(true);
+        drawUI.SetActive(true);
         if (others != null) {
             foreach(var o in others) {
                 o.canDraw = true;
@@ -28,7 +37,7 @@ public class BoardCardDraw : MonoBehaviour {
         }
     }
 
-    private void OnMouseDown() {
+    public void DrawAtStartOfTurn() {
         
         if (BoardManager.Manager.Turn != 1 || !BoardManager.ValidateButton.activeInHierarchy)
         { 
@@ -39,8 +48,7 @@ public class BoardCardDraw : MonoBehaviour {
                     player.DrawSpell();
                 }
                 canDraw = false;
-                arrow1.SetActive(false);
-                arrow2.SetActive(false);
+                drawUI.SetActive(false);
                 if (draw == Draw.Unit)
                 {
                     if (BoardManager.Manager.CurrentPlayer.Deck.units.Count == 0)

@@ -17,7 +17,8 @@ public class DeckDraw : MonoBehaviour
     [SerializeField] private GameObject SpellDeck;
     [SerializeField] private GameObject validate;
     [SerializeField] private BoardPlayer BoardPlayer;
-    [SerializeField] private ParticleSystem DiscardParticle;
+    [SerializeField] private ParticleSystem DiscardParticleUnit;
+    [SerializeField] private ParticleSystem DiscardParticleSpell;
     private Button ValidateButton;
     private List<CardBase> listCardMulligan = new List<CardBase>();
     private List<GameObject> cardsMulligan = new List<GameObject>();
@@ -151,7 +152,7 @@ public class DeckDraw : MonoBehaviour
                     texts[4].text = ((UnitCard)card).Health.ToString();
                     texts[5].text = (((UnitCard)card).Range) ? "Range" : "Melee";
                 }
-                StartCoroutine(Discard());
+                StartCoroutine(DiscardUnit());
                 DOTween.Play(DrawSequence);
             }
             else
@@ -173,7 +174,7 @@ public class DeckDraw : MonoBehaviour
                     texts[1].text = card.Description;
                     texts[2].text = card.Cost.ToString();
                 }
-                StartCoroutine(Discard());
+                StartCoroutine(DiscardSpell());
                 DOTween.Play(DrawSequence);
             }
         } 
@@ -266,10 +267,21 @@ public class DeckDraw : MonoBehaviour
         _spellCard.SetActive(false);
     }
 
-    IEnumerator Discard()
+    IEnumerator DiscardSpell()
     {
         yield return new WaitForSecondsRealtime(1.0f);
-        DiscardParticle.Play();
+        DiscardParticleSpell.transform.localScale = Vector3.one * 0.2f;
+        DiscardParticleSpell.Play();
+        yield return new WaitForSecondsRealtime(0.5f);
+        _unitCard.SetActive(false);
+        _spellCard.SetActive(false);
+    }
+
+    IEnumerator DiscardUnit()
+    {
+        yield return new WaitForSecondsRealtime(1.0f);
+        DiscardParticleUnit.transform.localScale = Vector3.one * 0.2f;
+        DiscardParticleUnit.Play();
         yield return new WaitForSecondsRealtime(0.5f);
         _unitCard.SetActive(false);
         _spellCard.SetActive(false);

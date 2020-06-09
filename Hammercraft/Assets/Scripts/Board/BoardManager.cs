@@ -27,6 +27,7 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
     [SerializeField] public GameObject YourTurnButton;
     [SerializeField] private BoardPlayer BoardPlayer;
     [SerializeField] private GameObject validateButton;
+    [SerializeField] private GameObject DrawUI;
 
 
     public Hand Hand { get { return _hand; } }
@@ -117,7 +118,10 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
             BoardPlayer.Mulligan();
             yield return new WaitUntil(() => validateButton.activeInHierarchy);
             yield return new WaitWhile(() => validateButton.activeInHierarchy);
+
         }
+            yield return new WaitUntil(() => DrawUI.activeInHierarchy);
+            yield return new WaitWhile(() => DrawUI.activeInHierarchy);
         
         YourTurnButton.SetActive(true);
         yield return new WaitForSecondsRealtime(2f);
@@ -145,7 +149,9 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
             yield return new WaitUntil(() => validateButton.activeInHierarchy);
             yield return new WaitWhile(() => validateButton.activeInHierarchy);
         }
-        
+        yield return new WaitUntil(() => DrawUI.activeInHierarchy);
+        yield return new WaitWhile(() => DrawUI.activeInHierarchy);
+
         for (int i=60; i > 0; i--)
         {
             TimerText.text = i.ToString();
