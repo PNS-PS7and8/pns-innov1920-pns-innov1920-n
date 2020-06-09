@@ -20,7 +20,7 @@ MonoBehaviour:
     on deployement.'
   cost: 2
   castMask: 1809
-  model: {fileID: 4993303932133754498, guid: 47e148659971e5e47bc11c58e725a37d, type: 3}
+  model: {fileID: 6667349562693488409, guid: 25dca67001422c04d8a535a7cd2006c4, type: 3}
   health: 1
   attack: 1
   movement: 5

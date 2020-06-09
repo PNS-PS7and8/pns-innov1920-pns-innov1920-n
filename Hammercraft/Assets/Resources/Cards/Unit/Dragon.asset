@@ -19,12 +19,13 @@ MonoBehaviour:
     Give 3 Fireballs to your hand'
   cost: 6
   castMask: 1825
-  model: {fileID: 4993303932133754498, guid: 47e148659971e5e47bc11c58e725a37d, type: 3}
+  model: {fileID: 139696, guid: eb58e8f2831a51f45a44a261e6710cdd, type: 3}
   health: 3
   attack: 6
   movement: 20
   movementMask: 914
   atqMask: 1017
   range: 1
+  modelScale: 0.3
   summon: {fileID: 11400000, guid: 5e7664ff3db0ce1f392ecd678fbb57f0, type: 2}
   number: 3

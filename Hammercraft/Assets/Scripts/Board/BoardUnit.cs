@@ -5,13 +5,10 @@ public class BoardUnit : BoardBehaviour {
     public int unitId;
     private Unit unit => board.GetUnit(unitId);
     private new Renderer renderer;
-    [SerializeField] private Material ally;
-    [SerializeField] private Material ennemy;
 
     private void Start() {
         SyncPosition();
         renderer = GetComponent<Renderer>();
-        renderer.material = (PlayersExtension.LocalPlayer() == unit.Player) ? ally : ennemy;
     }
 
     private void Update() {
@@ -20,8 +17,10 @@ public class BoardUnit : BoardBehaviour {
     }
 
     private void SyncPosition() {
-        if (unit != null)
+        if (unit != null) {
             transform.position = boardManager.transform.TransformPoint(board.LocalPosition(unit));
+            transform.localScale = Vector3.one * unit.Card.ModelScale;
+        }
     }
 
     private void DisableIfNeeded() {

@@ -19,12 +19,13 @@ MonoBehaviour:
     Give 3 Tidal waves to your hand.'
   cost: 6
   castMask: 1801
-  model: {fileID: 4993303932133754498, guid: 47e148659971e5e47bc11c58e725a37d, type: 3}
+  model: {fileID: 132742, guid: a3e7850e56f7e2d4a8cb9e150f10c835, type: 3}
   health: 6
   attack: 3
   movement: 5
   movementMask: 901
   atqMask: 909
   range: 0
+  modelScale: 0.3
   summon: {fileID: 11400000, guid: ea5e0fc758a992f468090c4cb8270870, type: 2}
   number: 3

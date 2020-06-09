@@ -17,7 +17,7 @@ MonoBehaviour:
   description: Simple unit low cost and weak, Flies above mountains
   cost: 1
   castMask: 289
-  model: {fileID: 4993303932133754498, guid: 47e148659971e5e47bc11c58e725a37d, type: 3}
+  model: {fileID: 1879581886640764, guid: 8a98dc7c3255b1f43b1885fecabf80f2, type: 3}
   health: 1
   attack: 1
   movement: 20
