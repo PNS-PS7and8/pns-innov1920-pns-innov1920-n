@@ -21,8 +21,8 @@ MonoBehaviour:
   cost: 3
   castMask: 1340
   model: {fileID: 1204596009998050, guid: 59ccd1309cd2ac94a8700faf3ab6a78d, type: 3}
-  health: -14977
-  attack: 8
+  health: 2
+  attack: 2
   movement: 5
   movementMask: 925
   atqMask: 925
