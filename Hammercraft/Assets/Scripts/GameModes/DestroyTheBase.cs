@@ -30,9 +30,8 @@ public class DestroyTheBase : GameMode {
     }
 
     private Unit GetBase(PlayerRole player, GameManager gameManager) {
-        var units = gameManager.Board.Units.Where(u => u.Player == player && u.Card.Name == "Player Base").ToList();
-        if (units.Count > 0) return units[0];
-        else return null;
+        var unit = gameManager.Board.GetUnit(gameManager.Board.GetCell(GetBasePosition(player, gameManager)), true);
+        return unit;
     }
 
     private void AddBase(PlayerRole player, GameManager gameManager) {

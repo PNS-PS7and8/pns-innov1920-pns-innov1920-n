@@ -110,30 +110,32 @@ public class Board {
     public Vector3 LocalPosition(Unit unit) => CellToLocal(unit.position);
     public Vector3 LocalPosition(Cell cell) => CellToLocal(cell.position);
 
-    public IEnumerable<Cell> Neighbors(Cell cell, bool addDummy=false) {
-        int x = cell.position.x;
-        int y = cell.position.y;
+    public IEnumerable<Cell> Neighbors(Vector2Int pos, bool addDummy=false) {
         int[] dx = new int[] {1,1,0,-1,-1,0};
         int[] dy = new int[] {0,-1,-1,0,1,1};
         for (int i = 0; i < 6; i++) {
-            if (addDummy || HasCell(x+dx[i], y+dy[i])) {
+            if (addDummy || HasCell(pos.x+dx[i], pos.y+dy[i])) {
                 if (addDummy)
-                    yield return new Cell(new Vector2Int(x+dx[i], y+dy[i]), Cell.CellType.None);
+                    yield return new Cell(new Vector2Int(pos.x+dx[i], pos.y+dy[i]), Cell.CellType.None);
                 else
-                    yield return GetCell(x+dx[i], y+dy[i]);
+                    yield return GetCell(pos.x+dx[i], pos.y+dy[i]);
             }
         }
     }
 
+    public IEnumerable<Cell> Neighbors(Cell cell, bool addDummy=false) {
+        return Neighbors(cell.position, addDummy);
+    }
+
     public IEnumerable<Cell> Ring(Cell cell, int distance) {
-        Vector2Int pos = cell.position + new Vector2Int(distance, 0);
+        Vector2Int pos = cell.position + new Vector2Int(-distance, distance);
         for (int i = 0; i < 6; i++)
         {
             for (int j = 0; j < distance; j++)
             {
                 if (HasCell(pos))
                     yield return GetCell(pos);
-                pos = Neighbors(cell, true).ElementAt(i).position;
+                pos = Neighbors(pos, true).ElementAt(i).position;
             }
         }
     }
