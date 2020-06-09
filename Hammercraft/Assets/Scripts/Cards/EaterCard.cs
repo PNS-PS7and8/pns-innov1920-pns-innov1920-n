@@ -8,28 +8,22 @@ public class EaterCard : UnitCard {
 
     protected override void CardEffect(Board board, Cell target, PlayerRole player, Player objPlayer)
     {
-        EaterCard me = this;
+        base.CardEffect(board, target, player, objPlayer);
+        Unit spawned = board.GetUnit(target);
         int cptAtq = 0;
         int cptHp = 0;
         List<Cell> cells = board.Disc(target, killRange).ToList();
         
         foreach (Cell cell in cells){
             Unit currentUnit = board.GetUnit(cell);
-            if (currentUnit != null && currentUnit.Player == player){
+            if (currentUnit != null && currentUnit != spawned && currentUnit.Player == player){
                 cptAtq += currentUnit.Attack;
-                cptHp += currentUnit.Health;        
+                cptHp += currentUnit.Health;
+                currentUnit.TakeDamage(999);
             }
         }
-        me.attack += cptAtq;
-        me.health += cptHp;
-        board.AddUnit(me, target, player); 
-
-        foreach (Cell cell in cells){
-            Unit currentUnit = board.GetUnit(cell);
-            if (currentUnit != null && currentUnit.Player == player && cell != target){
-                board.GetUnit(cell).TakeDamage(999);           
-            }
-        }
-        
+        Debug.Log(cptAtq);
+        spawned.attack += cptAtq;
+        spawned.TakeDamage(-cptHp);
     }
 }

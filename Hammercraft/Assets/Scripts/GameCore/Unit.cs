@@ -61,7 +61,7 @@ public class Unit : ITakeDamage, IDealDamage
 
 
     public void TakeDamage(int amount) {
-        health -= amount;
+        health = Mathf.Max(0, health - amount);
         if (health <= 0) {
             Die();
         }

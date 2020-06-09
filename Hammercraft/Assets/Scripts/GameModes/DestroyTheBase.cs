@@ -8,9 +8,11 @@ public class DestroyTheBase : GameMode {
         Unit b2 = GetBase(PlayerRole.PlayerTwo, gameManager);
         if (b1 == null) {
             AddBase(PlayerRole.PlayerOne, gameManager);
+            b1 = GetBase(PlayerRole.PlayerOne, gameManager);
         }
         if (b2 == null) {
             AddBase(PlayerRole.PlayerTwo, gameManager);
+            b2 = GetBase(PlayerRole.PlayerTwo, gameManager);
         }
         if (b1.Dead && b2.Dead) return GameState.Draw;
         else if (b1.Dead) return GameState.WinPlayerTwo;
