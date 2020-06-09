@@ -39,6 +39,7 @@ public class HoverCell : BoardBehaviour
         {
             foreach (var pos in kv.Value)
             {
+                instances[pos].transform.localPosition = board.CellToLocal(pos) + Vector3.up * offset;
                 instances[pos].color = kv.Key;
                 instances[pos].enabled = true;
             }
