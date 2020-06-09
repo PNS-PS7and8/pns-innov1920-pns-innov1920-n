@@ -42,13 +42,13 @@ public class Player {
 
     public UnitCard DrawUnit() {
         UnitCard t = Deck.DrawUnit();
-        if (serializedHand.Count <= 10)
+        if (serializedHand.Count < 10)
             serializedHand.Add(t.ResourcePath);
         return t;
     }
 
     public void addCard(CardBase card){
-        if (serializedHand.Count <= 10)
+        if (serializedHand.Count < 10)
             serializedHand.Add(card.ResourcePath);
     }
     
@@ -70,7 +70,7 @@ public class Player {
 
     public SpellCard DrawSpell() {
         SpellCard t = Deck.DrawSpell();
-        if (serializedHand.Count <= 10)
+        if (serializedHand.Count < 10)
             serializedHand.Add(t.ResourcePath);
         return t;
     }

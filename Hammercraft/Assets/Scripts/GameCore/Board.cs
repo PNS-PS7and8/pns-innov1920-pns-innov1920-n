@@ -85,19 +85,19 @@ public class Board {
     }
 
 
-    public Unit GetUnit(Cell cell) {
-        IEnumerable<Unit> e = units.Where(u => u.position == cell.position);
+    public Unit GetUnit(Cell cell, bool dead = false) {
+        IEnumerable<Unit> e = units.Where(u => u.position == cell.position && (dead || !u.Dead));
         if (e.Count() > 0) {
-            return e.First();
+            return e.Last();
         } else {
             return null;
         }
     }
     
-    public Unit GetUnit(int unitId) {
-        IEnumerable<Unit> e = units.Where(u => u.Id == unitId);
+    public Unit GetUnit(int unitId, bool dead = false) {
+        IEnumerable<Unit> e = units.Where(u => u.Id == unitId && (dead || !u.Dead));
         if (e.Count() > 0) {
-            return e.First();
+            return e.Last();
         } else {
             return null;
         }

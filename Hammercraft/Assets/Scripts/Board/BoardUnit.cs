@@ -3,7 +3,7 @@ using TMPro;
 using Photon.Pun;
 public class BoardUnit : BoardBehaviour {
     public int unitId;
-    private Unit unit => board.GetUnit(unitId);
+    private Unit unit => board.GetUnit(unitId, true);
     private new Renderer renderer;
 
     private void Start() {
@@ -24,7 +24,7 @@ public class BoardUnit : BoardBehaviour {
     }
 
     private void DisableIfNeeded() {
-        if (unit.Dead)
+        if (unit.Dead || unit == null)
             gameObject.SetActive(false);
     }
 }
