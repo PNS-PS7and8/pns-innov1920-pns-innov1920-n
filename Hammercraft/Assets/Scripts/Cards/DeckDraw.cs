@@ -128,7 +128,7 @@ public class DeckDraw : MonoBehaviour
         if (BoardPlayer.manager.CurrentPlayer.Hand.Count > 10)
         {
             DrawSequence = DOTween.Sequence();
-            if (card.GetType() == typeof(UnitCard))
+            if ((card.GetType().IsAssignableFrom(typeof(UnitCard)) || card.GetType().IsSubclassOf(typeof(UnitCard)) ))
             {
                 _unitCard.transform.SetParent(UnitDeck.transform);
                 _unitCard.transform.localScale = Vector3.one;
@@ -181,7 +181,7 @@ public class DeckDraw : MonoBehaviour
         {
             float x = 0;
 
-            if (card.GetType() == typeof(UnitCard))
+            if ((card.GetType().IsAssignableFrom(typeof(UnitCard)) || card.GetType().IsSubclassOf(typeof(UnitCard))))
             {
                 _unitCard.transform.SetParent(UnitDeck.transform);
                 _unitCard.transform.localScale = Vector3.one;
@@ -299,7 +299,7 @@ public class DeckDraw : MonoBehaviour
         {
             ReplaceSequence = DOTween.Sequence();
             float posX = i * 0.18f - 0.18f;
-            if (listCardMulligan[i - 1].GetType() == typeof(UnitCard))
+            if ((listCardMulligan[i - 1].GetType().IsAssignableFrom(typeof(UnitCard)) || listCardMulligan[i - 1].GetType().IsSubclassOf(typeof(UnitCard))))
             {
                 UnitCard unitReplace = BoardPlayer.manager.CurrentPlayer.Deck.DrawUnit();
        
