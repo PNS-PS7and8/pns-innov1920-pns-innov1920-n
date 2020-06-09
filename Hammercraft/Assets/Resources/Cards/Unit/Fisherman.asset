@@ -19,13 +19,13 @@ MonoBehaviour:
     Give 2 Fishes to your hand.'
   cost: 5
   castMask: 1817
-  model: {fileID: 4993303932133754498, guid: 47e148659971e5e47bc11c58e725a37d, type: 3}
+  model: {fileID: 100000, guid: 28f113bc1593119448bfebc93373c1ad, type: 3}
   health: 4
   attack: 2
   movement: 5
   movementMask: 909
   atqMask: 925
   range: 0
-  modelScale: 1
+  modelScale: 2
   summon: {fileID: 11400000, guid: 6e0a4777b8d5148f6a80a3b08d1207e0, type: 2}
   number: 2

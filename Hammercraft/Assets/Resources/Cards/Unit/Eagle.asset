@@ -24,4 +24,4 @@ MonoBehaviour:
   movementMask: 1010
   atqMask: 1017
   range: 1
-  modelScale: 1
+  modelScale: 3
