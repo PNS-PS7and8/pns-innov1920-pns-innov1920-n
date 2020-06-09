@@ -1,18 +1,19 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BoardCardDraw : MonoBehaviour {
     public enum Draw {
         Unit, Spell
     }
     
-    [SerializeField] private BoardPlayer player;
+    [SerializeField] private BoardPlayer player = null;
     [SerializeField] private Draw draw;
-    [SerializeField] private BoardCardDraw[] others;
-    [SerializeField] private GameObject drawUI;
-    [SerializeField] private BoardManager BoardManager;
-    [SerializeField] private GameObject DeckSpell;
-    [SerializeField] private GameObject DeckUnit;
+    [SerializeField] private BoardCardDraw[] others = null;
+    [SerializeField] private GameObject drawUI = null;
+    [SerializeField] private BoardManager BoardManager = null;
+    [SerializeField] private GameObject DeckSpell = null;
+    [SerializeField] private GameObject DeckUnit = null;
 
     private bool canDraw = false;
 
@@ -54,12 +55,14 @@ public class BoardCardDraw : MonoBehaviour {
                     if (BoardManager.Manager.CurrentPlayer.Deck.units.Count == 0)
                     {
                         DeckUnit.SetActive(false);
+                        drawUI.GetComponentsInChildren<Button>(true)[1].gameObject.SetActive(false);
                     }
                 } else
                 {
                     if (BoardManager.Manager.CurrentPlayer.Deck.spells.Count == 0)
                     {
                         DeckSpell.SetActive(false);
+                        drawUI.GetComponentsInChildren<Button>(true)[0].gameObject.SetActive(false);
                     }
                 }
                 if (others != null) {
