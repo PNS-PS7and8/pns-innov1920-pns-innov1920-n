@@ -8,7 +8,7 @@ public class MoveBoard : MonoBehaviour
     [SerializeField] private float minZoom = 0.013f;
     private float CurrentZoom = 0;
     [SerializeField] private float Sensitivity = 0.002f;
-    [SerializeField] private float distance = -0.1f;
+    //[SerializeField] private float distance = -0.1f;
     [SerializeField] private float decalage = 0.05f;
     [SerializeField] private float magni = 0.2f;
     Vector3 p = Vector3.zero;

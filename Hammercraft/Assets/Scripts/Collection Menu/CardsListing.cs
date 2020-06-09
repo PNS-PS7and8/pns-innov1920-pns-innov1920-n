@@ -7,9 +7,9 @@ using UnityEngine.EventSystems;
 
 public class CardsListing : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] private TMP_Text _name;
-    [SerializeField] private TMP_Text _cost;
-    [SerializeField] private CollectionCard cardPrefab;
+    [SerializeField] private TMP_Text _name = null;
+    [SerializeField] private TMP_Text _cost = null;
+    [SerializeField] private CollectionCard cardPrefab = null;
 
     public CardBase card;
     private CollectionCard collectionCard;

@@ -5,8 +5,8 @@ using UnityEngine.Events;
 
 public class buttonReplace : MonoBehaviour
 {
-    [SerializeField] private GameObject replaceCross;
-    [SerializeField] private GameObject card;
+    [SerializeField] private GameObject replaceCross = null;
+    [SerializeField] private GameObject card = null;
 
     public void OnMouseDown()
     {

@@ -8,7 +8,7 @@ public class MoveUnit : BoardBehaviour
     [SerializeField] private HoverCell hoverCell = null;
     [SerializeField] private Color color = Color.white;
     [SerializeField] private Color pathColor = Color.white;
-    [SerializeField] private TMP_Text infoUnits;
+    [SerializeField] private TMP_Text infoUnits = null;
 
     private Cell origin;
     private Unit unit;

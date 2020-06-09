@@ -6,7 +6,7 @@ public class HoverCell : BoardBehaviour
 {
     private readonly Color transparent = new Color(0,0,0,0); 
     
-    [SerializeField] private Sprite sprite;
+    [SerializeField] private Sprite sprite = null;
     [SerializeField] private float offset = 0.01f;
 
     private Dictionary<Vector2Int, SpriteRenderer> instances;

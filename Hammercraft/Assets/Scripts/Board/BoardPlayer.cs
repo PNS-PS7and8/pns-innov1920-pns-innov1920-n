@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BoardPlayer : BoardBehaviour {
     public Player player { get; private set; }
-    [SerializeField] private DeckDraw deckdraw;
+    [SerializeField] private DeckDraw deckdraw = null;
 
     public override void OnResetBoard(BoardManager boardManager) {
         base.OnResetBoard(boardManager);

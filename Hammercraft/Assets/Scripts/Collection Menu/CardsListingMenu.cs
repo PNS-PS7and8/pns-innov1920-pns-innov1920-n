@@ -8,10 +8,10 @@ using TMPro;
 public class CardsListingMenu : MonoBehaviour
 {
     [SerializeField]
-    private CardsListing _cardsListing;
+    private CardsListing _cardsListing = null;
     [SerializeField]
-    private Transform _content;
-    [SerializeField] private TMP_InputField field;
+    private Transform _content = null;
+    [SerializeField] private TMP_InputField field = null;
 
     private Dictionary<string,CardsListing> cardsToDisplay = new Dictionary<string, CardsListing>();
     private List<CardBase> listCards = new List<CardBase>();

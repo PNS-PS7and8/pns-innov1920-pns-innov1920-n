@@ -8,7 +8,7 @@ public static class AccessDatabase {
     const string port = "3000";
     
     private class RemoteDeckList {
-        public string[] decks;
+        public string[] decks = null;
     }
 
     private class RemoteDeck {

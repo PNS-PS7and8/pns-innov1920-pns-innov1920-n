@@ -7,10 +7,10 @@ using UnityEngine;
 public class ReadyRPC : MonoBehaviourPun, Photon.Pun.IPunObservable
 {
     [SerializeField]
-    private PhotonView readyView;
+    private PhotonView readyView = null;
 
     [SerializeField]
-    private TMP_Text Text;
+    private TMP_Text Text = null;
 
     public bool Ready;
 

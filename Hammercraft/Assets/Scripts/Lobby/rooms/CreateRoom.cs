@@ -10,18 +10,18 @@ using UnityEngine.UI;
 public class CreateRoom : MonoBehaviourPunCallbacks
 {
     [SerializeField]
-    private TMP_Text _roomName;
+    private TMP_Text _roomName = null;
     [SerializeField]
-    private TMP_Text _roomNamePlaceholder;
+    private TMP_Text _roomNamePlaceholder = null;
     [SerializeField]
-    private TMP_Text ErrorName;
+    private TMP_Text ErrorName = null;
     private bool IsPrivate = false;
     [SerializeField]
-    private GameObject _roomCanvas;
+    private GameObject _roomCanvas = null;
     [SerializeField]
-    private TMP_Dropdown _dropDown;
+    private TMP_Dropdown _dropDown = null;
     [SerializeField]
-    private TMP_Text _selectedGameMode; //_selectedGameMode.text pour avoir le mode sélectionné
+    private TMP_Text _selectedGameMode = null; //_selectedGameMode.text pour avoir le mode sélectionné
 
     public override void OnEnable()
     {

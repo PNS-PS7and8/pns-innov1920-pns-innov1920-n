@@ -5,16 +5,16 @@ using UnityEngine;
 
 [System.Serializable]
 public class Player {
-    [SerializeField] private Deck originalDeck;
-    [SerializeField] private Deck deck;
+    [SerializeField] private Deck originalDeck = null;
+    [SerializeField] private Deck deck = null;
     
     public Deck OriginalDeck => originalDeck;
     public Deck Deck => deck;
 
-    [SerializeField] private List<string> serializedHand;
+    [SerializeField] private List<string> serializedHand = null;
     [SerializeField] private PlayerRole role;
-    [SerializeField] private int gold;
-    [SerializeField] private int currentGold;
+    [SerializeField] private int gold = 0;
+    [SerializeField] private int currentGold = 0;
     public List<CardBase> Hand => serializedHand.Select(c => Resources.Load<CardBase>(c)).ToList();
     public PlayerRole Role => role;
 

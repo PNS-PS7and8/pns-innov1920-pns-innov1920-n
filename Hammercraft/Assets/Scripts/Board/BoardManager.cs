@@ -15,19 +15,19 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
     public GameManager Manager => manager;
     public GameObject ValidateButton => validateButton;
     [SerializeField] private Vector2Int boardSize = new Vector2Int(50, 50);
-    [SerializeField] private float perlinNoiseScale;
-    [SerializeField] private Vector3 perlinNoiseOffset;
-    [SerializeField] private Transform EndTurnButton;
-    [SerializeField] private TMP_Text TimerText;
-    [SerializeField] private BoardCardDraw[] draws;
-    [SerializeField] private Hand _hand;
-    [SerializeField] public TMP_Text scoreText1;
-    [SerializeField] public TMP_Text scoreText2;
-    [SerializeField] public TMP_Text infoWin;
-    [SerializeField] public GameObject YourTurnButton;
-    [SerializeField] private BoardPlayer BoardPlayer;
-    [SerializeField] private GameObject validateButton;
-    [SerializeField] private GameObject DrawUI;
+    [SerializeField] private float perlinNoiseScale = 0.0f;
+    [SerializeField] private Vector3 perlinNoiseOffset = Vector3.zero;
+    [SerializeField] private Transform EndTurnButton = null;
+    [SerializeField] private TMP_Text TimerText = null;
+    [SerializeField] private BoardCardDraw[] draws = null;
+    [SerializeField] private Hand _hand = null;
+    [SerializeField] public TMP_Text scoreText1 = null;
+    [SerializeField] public TMP_Text scoreText2 = null;
+    [SerializeField] public TMP_Text infoWin = null;
+    [SerializeField] public GameObject YourTurnButton = null;
+    [SerializeField] private BoardPlayer BoardPlayer = null;
+    [SerializeField] private GameObject validateButton = null;
+    [SerializeField] private GameObject DrawUI = null;
 
 
     public Hand Hand { get { return _hand; } }

@@ -7,7 +7,7 @@ using System;
 
 public class EndTurnButton : MonoBehaviour
 {
-    [SerializeField] private BoardManager BoardManager;
+    [SerializeField] private BoardManager BoardManager = null;
     public void OnMouseDown()
     {
         if (BoardManager.Manager.Turn != 1 || !BoardManager.ValidateButton.activeInHierarchy)

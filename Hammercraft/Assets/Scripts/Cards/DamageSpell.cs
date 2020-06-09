@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DamageSpell : SpellCard
 {
-    [SerializeField] private int damage;
+    [SerializeField] private int damage = 0;
 
     protected override void CardEffect(Board board, Cell target, PlayerRole player, Player objPlayer)
     {

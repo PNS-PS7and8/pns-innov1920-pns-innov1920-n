@@ -10,15 +10,15 @@ using UnityEngine.Events;
 public class DeckDraw : MonoBehaviour
 {
     
-    [SerializeField] private Hand hand;
-    [SerializeField] private GameObject _unitCard;
-    [SerializeField] private GameObject _spellCard;
-    [SerializeField] private GameObject UnitDeck;
-    [SerializeField] private GameObject SpellDeck;
-    [SerializeField] private GameObject validate;
-    [SerializeField] private BoardPlayer BoardPlayer;
-    [SerializeField] private ParticleSystem DiscardParticleUnit;
-    [SerializeField] private ParticleSystem DiscardParticleSpell;
+    [SerializeField] private Hand hand = null;
+    [SerializeField] private GameObject _unitCard = null;
+    [SerializeField] private GameObject _spellCard = null;
+    [SerializeField] private GameObject UnitDeck = null;
+    [SerializeField] private GameObject SpellDeck = null;
+    [SerializeField] private GameObject validate = null;
+    [SerializeField] private BoardPlayer BoardPlayer = null;
+    [SerializeField] private ParticleSystem DiscardParticleUnit = null;
+    [SerializeField] private ParticleSystem DiscardParticleSpell = null;
     private Button ValidateButton;
     private List<CardBase> listCardMulligan = new List<CardBase>();
     private List<GameObject> cardsMulligan = new List<GameObject>();

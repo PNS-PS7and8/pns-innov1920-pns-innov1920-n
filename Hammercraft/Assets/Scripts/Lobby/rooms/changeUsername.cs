@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class changeUsername : MonoBehaviourPunCallbacks
 {
-    [SerializeField] private TMP_InputField username;
-    [SerializeField] private Canvas MenuCanvas;
+    [SerializeField] private TMP_InputField username = null;
+    [SerializeField] private Canvas MenuCanvas = null;
 
     private void Start() {
         if (PlayerPrefs.HasKey("username")) {

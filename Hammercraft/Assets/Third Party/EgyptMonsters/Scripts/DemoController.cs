@@ -171,7 +171,9 @@ public class DemoController : MonoBehaviour
         {
             if (Input.anyKeyDown)
             {
+#pragma warning disable CS0618 // Le type ou le membre est obsolète
                 Application.LoadLevel(Application.loadedLevelName);
+#pragma warning restore CS0618 // Le type ou le membre est obsolète
                 yield break;
             }
             else

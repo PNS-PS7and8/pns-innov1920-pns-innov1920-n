@@ -8,11 +8,11 @@ using UnityEngine;
 public class RoomListing : MonoBehaviour
 {
     [SerializeField]
-    private TMP_Text _name;
+    private TMP_Text _name = null;
     [SerializeField]
-    private TMP_Text _CountPlayers;
+    private TMP_Text _CountPlayers = null;
     [SerializeField]
-    private TMP_Text _gameFull;
+    private TMP_Text _gameFull = null;
 
 
     public RoomInfo RoomInfo { get; private set; }

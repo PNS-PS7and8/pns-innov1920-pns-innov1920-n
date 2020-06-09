@@ -8,7 +8,7 @@ public class BoardCardDraw : MonoBehaviour {
     }
     
     [SerializeField] private BoardPlayer player = null;
-    [SerializeField] private Draw draw;
+    [SerializeField] private Draw draw = Draw.Spell;
     [SerializeField] private BoardCardDraw[] others = null;
     [SerializeField] private GameObject drawUI = null;
     [SerializeField] private BoardManager BoardManager = null;

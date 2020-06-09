@@ -13,7 +13,7 @@ public class RoomDeckListMenu : MonoBehaviour
     [SerializeField]
     private DeckListingMenu _deckListingMenu = null;
     [SerializeField]
-    private GameObject button;
+    private GameObject button = null;
     private Deck selectedDeck = null;
     private bool display = false;
     

@@ -6,9 +6,9 @@ public class UnitCard : CardBase {
     [SerializeField] public int health = 1;
     [SerializeField] public int attack = 1;
     [SerializeField] private int movement = 5;
-    [SerializeField] private UnitMoveMask movementMask;
-    [SerializeField] private UnitMoveMask atqMask;
-    [SerializeField] protected bool range;
+    [SerializeField] private UnitMoveMask movementMask = UnitMoveMask.NeutralCells;
+    [SerializeField] private UnitMoveMask atqMask = UnitMoveMask.NeutralCells;
+    [SerializeField] protected bool range = false;
     [SerializeField] protected float modelScale = 1f;
 
     public GameObject Model => model;

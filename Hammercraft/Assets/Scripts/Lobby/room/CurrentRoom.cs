@@ -9,19 +9,19 @@ using UnityEngine.UI;
 public class CurrentRoom : MonoBehaviourPunCallbacks
 {
     [SerializeField]
-    private TMP_Text _OtherPlayer;
+    private TMP_Text _OtherPlayer = null;
     [SerializeField]
-    private TMP_Text Text_Timer;
+    private TMP_Text Text_Timer = null;
     private Coroutine _timer=null;
     private Coroutine _dots = null;
     [SerializeField]
-    private RawImage StrangeNebula;
+    private RawImage StrangeNebula = null;
     [SerializeField]
-    private TMP_Text ThreeDots;
+    private TMP_Text ThreeDots = null;
     [SerializeField]
-    private GameObject ChooseDeck;
-    [SerializeField]
-    private GameObject Waiting;
+    private GameObject ChooseDeck = null;
+    //[SerializeField]
+    //private GameObject Waiting = null;
     
 
     public override void OnEnable()

@@ -5,8 +5,8 @@ using UnityEngine;
 
 [System.Serializable]
 public class Board {
-    [SerializeField] private Cell[] cells;
-    [SerializeField] private List<Unit> units;
+    [SerializeField] private Cell[] cells = null;
+    [SerializeField] private List<Unit> units = null;
     public List<Unit> AllUnits => units;
     public List<Unit> Units => units.Where(u => u.Dead == false).ToList();
     public Vector2Int size;

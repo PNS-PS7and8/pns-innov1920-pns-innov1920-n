@@ -6,11 +6,11 @@ using TMPro;
 
 public class DeckCardList : MonoBehaviour
 {
-    [SerializeField] private CollectionCard cardPrefab;
-    [SerializeField] private TMP_Text UnitCountText;
-    [SerializeField] private TMP_Text SpellCountText;
-    [SerializeField] private TMP_Text saveMessage;
-    [SerializeField] private TMP_Text DeckName;
+    [SerializeField] private CollectionCard cardPrefab = null;
+    [SerializeField] private TMP_Text UnitCountText = null;
+    [SerializeField] private TMP_Text SpellCountText = null;
+    [SerializeField] private TMP_Text saveMessage = null;
+    [SerializeField] private TMP_Text DeckName = null;
 
     public CollectionCard[] CardUnit { get; private set; }
     public CollectionCard[] CardSpell { get; private set; }

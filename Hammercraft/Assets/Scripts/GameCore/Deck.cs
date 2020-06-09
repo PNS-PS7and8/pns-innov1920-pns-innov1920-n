@@ -6,18 +6,18 @@ using UnityEngine.Serialization;
 
 [System.Serializable]
 public class Deck {
-    [SerializeField] private string owner;
-    [SerializeField] private string name;
+   // [SerializeField] private string owner = null;
+    [SerializeField] private string name = null;
     public string Name => name;
     
-    [SerializeField, FormerlySerializedAs("units")] private List<string> serializedUnits;
-    [SerializeField, FormerlySerializedAs("spells")] private List<string> serializedSpells;
+    [SerializeField, FormerlySerializedAs("units")] private List<string> serializedUnits = null;
+    [SerializeField, FormerlySerializedAs("spells")] private List<string> serializedSpells = null;
     public List<string> SerializedUnits => serializedUnits;
     public List<string> SerializedSpells => serializedSpells;
     
     public List<UnitCard> units => serializedUnits.Select(c => Resources.Load<UnitCard>(c)).ToList();
     public List<SpellCard> spells => serializedSpells.Select(c => Resources.Load<SpellCard>(c)).ToList();
-    private int MAX = 10;
+    //private int MAX = 10;
 
     public Deck(string name) {
         this.name = name;

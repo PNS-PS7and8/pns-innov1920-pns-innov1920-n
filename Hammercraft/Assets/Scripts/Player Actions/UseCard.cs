@@ -7,8 +7,8 @@ public class UseCard : BoardBehaviour
     [SerializeField] private BoardClicker boardClicker = null;
     [SerializeField] private HoverCell hoverCell = null;
 
-    [SerializeField] private float growDuration = 0.2f;
-    [SerializeField] private float growAmount = 1.5f;
+   // [SerializeField] private float growDuration = 0.2f;
+   // [SerializeField] private float growAmount = 1.5f;
     [SerializeField] private int cardCost = 0;
     private GameCard card;
 

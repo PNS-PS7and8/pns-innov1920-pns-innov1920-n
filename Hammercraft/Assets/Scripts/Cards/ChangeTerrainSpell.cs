@@ -5,8 +5,8 @@ using System.Linq;
 [CreateAssetMenu(menuName="Cards/Spells/Terrain")]
 public class ChangeTerrainSpell : SpellCard
 {
-    [SerializeField] private Cell.CellType terrain;
-    [SerializeField] private int range;
+    [SerializeField] private Cell.CellType terrain = Cell.CellType.None;
+    [SerializeField] private int range = 0;
 
     protected override void CardEffect(Board board, Cell target, PlayerRole player, Player objPlayer)
     {

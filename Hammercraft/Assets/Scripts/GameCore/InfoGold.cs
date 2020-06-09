@@ -7,8 +7,8 @@ public class InfoGold : BoardBehaviour
         Local, Remote
     };
 
-    [SerializeField] private LocalOrRemote role;
-    [SerializeField] public TMP_Text text;
+    [SerializeField] private LocalOrRemote role = LocalOrRemote.Local;
+    [SerializeField] public TMP_Text text = null;
     private void Update() {
         if (role == LocalOrRemote.Local)
             text.text = manager.LocalPlayer.CurrentGold.ToString() + " / " + manager.LocalPlayer.Gold.ToString();

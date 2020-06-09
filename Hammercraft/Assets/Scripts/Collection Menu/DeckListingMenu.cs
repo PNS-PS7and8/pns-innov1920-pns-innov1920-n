@@ -7,9 +7,9 @@ using TMPro;
 public class DeckListingMenu : MonoBehaviour
 {
     [SerializeField]
-    private DeckListing _deckListing;
+    private DeckListing _deckListing = null;
     [SerializeField]
-    private Transform _content;
+    private Transform _content = null;
 
     public Dictionary<string,DeckListing> ListDecks = new Dictionary<string, DeckListing>();
     private Deck selectedDeck = null;
