@@ -128,14 +128,18 @@ public class Board {
     }
 
     public IEnumerable<Cell> Ring(Cell cell, int distance) {
-        Vector2Int pos = cell.position + new Vector2Int(-distance, distance);
-        for (int i = 0; i < 6; i++)
-        {
-            for (int j = 0; j < distance; j++)
+        if (distance == 0){
+            yield return cell;
+        } else {
+            Vector2Int pos = cell.position + new Vector2Int(-distance, distance);
+            for (int i = 0; i < 6; i++)
             {
-                if (HasCell(pos))
-                    yield return GetCell(pos);
-                pos = Neighbors(pos, true).ElementAt(i).position;
+                for (int j = 0; j < distance; j++)
+                {
+                    if (HasCell(pos))
+                        yield return GetCell(pos);
+                    pos = Neighbors(pos, true).ElementAt(i).position;
+                }
             }
         }
     }

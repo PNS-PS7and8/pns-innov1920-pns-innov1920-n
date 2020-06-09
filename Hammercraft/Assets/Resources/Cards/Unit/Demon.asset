@@ -20,12 +20,12 @@ MonoBehaviour:
     their atq & hp.'
   cost: 3
   castMask: 1340
-  model: {fileID: 1204596009998050, guid: 59ccd1309cd2ac94a8700faf3ab6a78d, type: 3}
+  model: {fileID: 1077356408, guid: c6cfc32748fb5004aa11a1be074b5c58, type: 3}
   health: 2
   attack: 2
   movement: 5
   movementMask: 925
   atqMask: 925
   range: 0
-  modelScale: 1
-  killRange: 4
+  modelScale: 0.6
+  killRange: 2

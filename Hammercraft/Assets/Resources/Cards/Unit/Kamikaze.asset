@@ -19,13 +19,13 @@ MonoBehaviour:
     Deal 5 damage on 6 range aoe on deployement.'
   cost: 6
   castMask: 1809
-  model: {fileID: 947470756653672486, guid: fc304f0df643d724da851b985a86a795, type: 3}
+  model: {fileID: 130964, guid: c644a2181ac22e740968a7ece97e8f36, type: 3}
   health: 1
   attack: 3
   movement: 5
   movementMask: 137
   atqMask: 157
   range: 0
-  modelScale: 1
-  aoeDmg: 5
+  modelScale: 0.5
+  aoeDmg: 3
   aoeRange: 12
