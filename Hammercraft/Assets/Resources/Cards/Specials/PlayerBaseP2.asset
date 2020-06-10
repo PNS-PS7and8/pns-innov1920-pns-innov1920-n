@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d6fdbecdfe08ec05a72e4deaf5b058f, type: 3}
   m_Name: PlayerBaseP2
   m_EditorClassIdentifier: 
-  resourcePath: Cards/Specials/PlayerBase
+  resourcePath: Cards/Specials/PlayerBaseP2
   name: Player Base
   description: 
   cost: 1
@@ -25,4 +25,4 @@ MonoBehaviour:
   movementMask: 0
   atqMask: 0
   range: 0
-  modelScale: 2
+  modelScale: 85

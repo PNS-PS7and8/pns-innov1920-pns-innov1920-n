@@ -32,9 +32,16 @@ public class MoveUnit : BoardBehaviour
 
     private void SetInfo(){
         string move;
+        string atq;
         if(infoUnit.Health <= 0){infoUnits.gameObject.SetActive(false);} else {infoUnits.gameObject.SetActive(true);}
-        if (CanMove(infoUnit)){move = "Can move";} else { move = "Can't move";}
-        infoUnits.text = infoUnit.Card.Name+"\nHP: "+infoUnit.Health+"\nATQ: "+infoUnit.Attack+"\n"+move;
+        if (CanMove(infoUnit)){move = "Can move";} else { move = "Movement used";}
+        if (CanAtq(infoUnit)){atq = "Can attack";} else { atq = "Attack used";}
+        if (infoUnit.Player == PlayersExtension.LocalPlayer()){infoUnits.color = Color.cyan;} else {infoUnits.color = Color.red;}
+        if (infoUnit.Card.ResourcePath.Contains("Specials/")){
+            infoUnits.text = infoUnit.Card.Name+"\nHP: "+infoUnit.Health;
+        } else {
+            infoUnits.text = infoUnit.Card.Name+"\nHP: "+infoUnit.Health+"\nATQ: "+infoUnit.Attack+"\n"+move+"\n"+atq;
+        }
     }
 
     private bool CanMove(Unit unit) {
