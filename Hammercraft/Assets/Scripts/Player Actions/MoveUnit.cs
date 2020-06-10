@@ -125,7 +125,11 @@ public class MoveUnit : BoardBehaviour
         } else if(!unit.Dead && manager.MyTurn() && unit.Player == manager.PlayerTurn) {
             this.unit = unit;
             this.origin = cell;
-            hoverCell.ShowCells(color, UnitMovement.AvailableCells(unit.MovementMask, board, cell, unit.Movement));
+            if ((unit.MovementMask & UnitMoveMask.FlyBy) != 0){
+                hoverCell.ShowCells(color, UnitMovement.AvailableCells(unit.MovementMask, board, cell, unit.Movement+1));
+            } else {
+                hoverCell.ShowCells(color, UnitMovement.AvailableCells(unit.MovementMask, board, cell, unit.Movement));
+            }
             hoverCell.ShowCells(Color.yellow, UnitMovement.AvailableCells(unit.AtqMask, board, cell, (unit.RangeAtq)/2));
         }
     }
