@@ -25,5 +25,5 @@ MonoBehaviour:
   movement: 6
   movementMask: 133
   atqMask: 781
-  range: 0
+  range: 1
   modelScale: 5

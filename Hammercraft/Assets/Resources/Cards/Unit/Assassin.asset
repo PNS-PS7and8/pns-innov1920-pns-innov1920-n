@@ -31,4 +31,4 @@ MonoBehaviour:
   range: 0
   modelScale: 2
   aoeDmg: 2
-  aoeRange: 6
+  aoeRange: 3

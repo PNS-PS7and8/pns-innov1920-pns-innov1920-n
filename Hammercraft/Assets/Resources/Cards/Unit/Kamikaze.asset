@@ -29,5 +29,5 @@ MonoBehaviour:
   atqMask: 157
   range: 0
   modelScale: 0.5
-  aoeDmg: 3
-  aoeRange: 12
+  aoeDmg: 5
+  aoeRange: 6

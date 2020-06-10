@@ -25,9 +25,9 @@ MonoBehaviour:
   health: 2
   attack: 4
   movement: 8
-  movementMask: 921
+  movementMask: 913
   atqMask: 925
-  range: 0
+  range: 1
   modelScale: 6
   summon: {fileID: 11400000, guid: 6e5347a09481bad258183b4594db3404, type: 2}
   number: 2
