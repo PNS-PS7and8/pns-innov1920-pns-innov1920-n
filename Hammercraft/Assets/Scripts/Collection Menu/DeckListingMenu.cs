@@ -26,6 +26,11 @@ public class DeckListingMenu : MonoBehaviour
         }
     }
 
+    public void RemoveDeck(Deck deck) {
+        Destroy(ListDecks[deck.Name].gameObject);
+        ListDecks.Remove(deck.Name);
+    }
+
     public void ClickDeck(Deck deck) {
         if(selectedDeck != null) {
             ListDecks[selectedDeck.Name].SetBgColor(new Color(130/255f, 130/255f, 130/255f));

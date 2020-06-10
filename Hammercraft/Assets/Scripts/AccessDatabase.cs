@@ -4,7 +4,7 @@ using System.Net.Http;
 
 public static class AccessDatabase {
     const string protocol = "http";
-    const string host = "games.strange-nebula.com";
+    const string host = "localhost";
     const string port = "3000";
     
     private class RemoteDeckList {
@@ -35,19 +35,24 @@ public static class AccessDatabase {
     }
 
     public static void SaveDeck(string user, Deck deck) {
-        HttpClient client = new HttpClient(); {
-            var url = GetUrl($"/u/{user}/{deck.Name}");
-            var remoteDeck = new RemoteDeck() {
-                owner = user,
-                name = deck.Name,
-                units = deck.SerializedUnits.ToArray(),
-                spells = deck.SerializedSpells.ToArray()
-            };
-            var json = JsonUtility.ToJson(remoteDeck);
-            var content = new ByteArrayContent(System.Text.Encoding.UTF8.GetBytes(json));
-            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-            var res = client.PostAsync(url, content).Result;
-        }
+        HttpClient client = new HttpClient();
+        var url = GetUrl($"/u/{user}/{deck.Name}");
+        var remoteDeck = new RemoteDeck() {
+            owner = user,
+            name = deck.Name,
+            units = deck.SerializedUnits.ToArray(),
+            spells = deck.SerializedSpells.ToArray()
+        };
+        var json = JsonUtility.ToJson(remoteDeck);
+        var content = new ByteArrayContent(System.Text.Encoding.UTF8.GetBytes(json));
+        content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+        var res = client.PostAsync(url, content).Result;
+    }
+
+    public static void DeleteDeck(string user, Deck deck) {
+        HttpClient client = new HttpClient();
+        var url = GetUrl($"/u/{user}/{deck.Name}");
+        var res = client.DeleteAsync(url);
     }
 
     private static Uri GetUrl(string path) {

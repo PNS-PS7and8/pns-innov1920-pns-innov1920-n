@@ -98,6 +98,27 @@ public class DeckCardList : MonoBehaviour
         }
     }
 
+    public void Delete() {
+        TextUpdate();
+        DeckListingMenu dlm = Object.FindObjectOfType<DeckListingMenu>();
+        if (currentDeck != null && dlm.ListDecks.Count > 1) {
+            saveMessage.gameObject.SetActive(true);
+            saveMessage.color = new Color(27/255f, 140/255f, 30/255f, 1);
+            saveMessage.text = "Deck deleted";
+            AccessDatabase.DeleteDeck(PlayerPrefs.GetString("username"), currentDeck);
+            dlm.RemoveDeck(currentDeck);
+            currentDeck = null;
+        } else {
+            saveMessage.gameObject.SetActive(true);
+            saveMessage.color = new Color(250/255f, 34/255f, 48/255f, 1);
+            if (currentDeck == null) {
+                saveMessage.text = "No deck selected.";
+            } else {
+                saveMessage.text = "You must have at least one deck.";
+            }
+        }
+    }
+
     public void AddCard(CardBase cb){
         TextUpdate();
         if (currentDeck != null){
