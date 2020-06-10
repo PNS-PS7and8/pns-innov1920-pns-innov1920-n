@@ -53,7 +53,15 @@ public class CellTest : MonoBehaviour
         Board board = new Board(10,10);
         Cell cell = board.GetCell(5,5);
         Cell cellN = board.GetCell(5,4);
-        Assert.True(board.Ring(cell, 2).Contains(cellN));
+        Assert.True(board.Ring(cell, 1).Contains(cellN));
+    }
+    
+    [Test]
+    public void NotRing_Test() {
+        Board board = new Board(10,10);
+        Cell cell = board.GetCell(5,5);
+        Cell cellN = board.GetCell(5,3);
+        Assert.False(board.Ring(cell, 1).Contains(cellN));
     }
 
     [Test]
