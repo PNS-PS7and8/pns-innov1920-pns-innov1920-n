@@ -4,7 +4,7 @@ using System.Net.Http;
 
 public static class AccessDatabase {
     const string protocol = "http";
-    const string host = "localhost";
+    const string host = "games.strange-nebula.com";
     const string port = "3000";
     
     private class RemoteDeckList {
