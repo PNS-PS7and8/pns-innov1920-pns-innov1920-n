@@ -18,4 +18,4 @@ MonoBehaviour:
   cost: 1
   castMask: 2025
   terrain: 1
-  range: 2
+  range: 1

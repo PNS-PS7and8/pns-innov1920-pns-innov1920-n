@@ -44,6 +44,14 @@ public class MoveUnit : BoardBehaviour
                 action.UnitId == unit.Id;
         }).Count == 0;
     }
+
+    private bool CanAtq(Unit unit) {
+        return manager.History.Find<AtqAction>(action => {
+            return
+                action.Turn == manager.Turn &&
+                action.UnitId == unit.Id;
+        }).Count == 0;
+    }
     
     private void OnEnable() {
         boardClicker.OnHoverUnit += OnInfoUnit;
@@ -105,26 +113,26 @@ public class MoveUnit : BoardBehaviour
 
     void OnSelectUnit(Cell cell, Unit unit)
     {
-        if (this.unit != null && cell.Distance(origin) <= this.unit.RangeAtq && this.unit != unit){ 
+        if (this.unit != null && cell.Distance(origin) <= this.unit.RangeAtq && this.unit != unit && CanAtq(this.unit)){ 
             this.unit.DealDamage(unit);
             DisplayAtq(this.unit.Attack, unit);
-            if (unit.RangeAtq*2>=cell.Distance(origin)){
+            if (unit.RangeAtq>=cell.Distance(origin)){
                 unit.DealDamage(this.unit);
                 DisplayCounterAtq(unit.Attack, this.unit);
             }
-            manager.History.Add(new MovementAction(manager.CurrentPlayer.Role, manager.Turn, this.unit.Id, new Vector2Int(0,0)));
+            manager.History.Add(new AtqAction(manager.CurrentPlayer.Role, manager.Turn, this.unit.Id));
             Deselect();
-        } else if(!unit.Dead && CanMove(unit) && manager.MyTurn() && unit.Player == manager.PlayerTurn) {
+        } else if(!unit.Dead && manager.MyTurn() && unit.Player == manager.PlayerTurn) {
             this.unit = unit;
             this.origin = cell;
             hoverCell.ShowCells(color, UnitMovement.AvailableCells(unit.MovementMask, board, cell, unit.Movement));
-            hoverCell.ShowCells(Color.yellow, UnitMovement.AvailableCells(unit.AtqMask, board, cell, unit.RangeAtq));
+            hoverCell.ShowCells(Color.yellow, UnitMovement.AvailableCells(unit.AtqMask, board, cell, (unit.RangeAtq)/2));
         }
     }
 
     private void OnSelectCell(Cell cell) {
         if (origin != null && unit != null && cell.position != unit.position) {
-            if (UnitMovement.CanMove(unit.MovementMask, board, origin, cell, unit.Movement, out var path)) {
+            if (UnitMovement.CanMove(unit.MovementMask, board, origin, cell, unit.Movement, out var path) && CanMove(unit)) {
                 
                 unit.position = cell.position;
 
