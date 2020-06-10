@@ -15,7 +15,7 @@ MonoBehaviour:
   resourcePath: Cards/Spell/Big Fireball
   name: Big Fireball
   description: "By the rage inside my heart, you shall burn ! \nCan't hit water units.\nDeals
-    4 damages."
+    5 damages."
   cost: 4
   castMask: 1842
   particleSystem: {fileID: 6967301586727974932, guid: f7e8b56b1254b4b4f891dc98c7f1209b,

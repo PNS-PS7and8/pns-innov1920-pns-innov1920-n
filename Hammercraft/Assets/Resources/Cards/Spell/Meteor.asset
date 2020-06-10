@@ -16,7 +16,7 @@ MonoBehaviour:
   name: Meteor
   description: 'Can''t hit water units.
 
-    Deals 10 damages.'
+    Deals 20 damages.'
   cost: 10
   castMask: 1842
   particleSystem: {fileID: 6967301586727974932, guid: f7e8b56b1254b4b4f891dc98c7f1209b,

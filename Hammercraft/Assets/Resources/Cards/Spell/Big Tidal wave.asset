@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourcePath: Cards/Spell/Big Tidal wave
   name: Big Tidal wave
-  description: "The calm before the tempest. \nCan't hit mountain units.\nDeals 4
+  description: "The calm before the tempest. \nCan't hit mountain units.\nDeals 5
     damages."
   cost: 4
   castMask: 1818

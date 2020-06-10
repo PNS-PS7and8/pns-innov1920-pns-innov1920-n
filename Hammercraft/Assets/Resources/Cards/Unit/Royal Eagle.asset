@@ -18,7 +18,7 @@ MonoBehaviour:
 
     Give 2 Eagles to your hand.'
   cost: 4
-  castMask: 1841
+  castMask: 1825
   particleSystem: {fileID: 6967301586727974932, guid: 525611eca87fc9949ab4875dbac62631,
     type: 3}
   model: {fileID: 1537502993957880, guid: 30bdbf2b9c0bd8446af70e5b67b0dfc8, type: 3}
@@ -26,7 +26,7 @@ MonoBehaviour:
   attack: 4
   movement: 8
   movementMask: 913
-  atqMask: 925
+  atqMask: 921
   range: 1
   modelScale: 6
   summon: {fileID: 11400000, guid: 6e5347a09481bad258183b4594db3404, type: 2}
