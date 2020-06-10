@@ -57,8 +57,9 @@ public class GameCard : BoardBehaviour
     }
 
     public bool Use(Cell cell) {
-        PlayEffect(card.particleSystem, cell);
+        ParticleSystem partic = card.particleSystem;
         if (card.Use(board, cell, manager.PlayerTurn, manager.LocalPlayer)) {
+            PlayEffect(partic, cell);
             manager.LocalPlayer.UseCard(card);
             boardManager.Hand.UpdateHand();
             boardManager.SubmitManager();
