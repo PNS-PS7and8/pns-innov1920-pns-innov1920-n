@@ -12,6 +12,10 @@ public abstract class CardBase : ScriptableObject{
     [SerializeField, TextArea] protected string description = "";
     [SerializeField] protected int cost = 1;
     [SerializeField] public CastMask castMask = 0;
+
+    [SerializeField] public ParticleSystem particleSystem;
+
+    ParticleSystem ParticleSystem => particleSystem;
     
     public string ResourcePath => resourcePath;
 

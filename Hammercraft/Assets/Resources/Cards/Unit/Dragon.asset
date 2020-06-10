@@ -19,6 +19,8 @@ MonoBehaviour:
     Give 3 Fireballs to your hand'
   cost: 6
   castMask: 1825
+  particleSystem: {fileID: 6967301586727974932, guid: 525611eca87fc9949ab4875dbac62631,
+    type: 3}
   model: {fileID: 139696, guid: eb58e8f2831a51f45a44a261e6710cdd, type: 3}
   health: 3
   attack: 6

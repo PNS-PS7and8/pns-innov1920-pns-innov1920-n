@@ -17,6 +17,7 @@ MonoBehaviour:
   description: 
   cost: 1
   castMask: 2045
+  particleSystem: {fileID: 0}
   model: {fileID: 8948258272379757237, guid: 034569a40ff2f3900aa794e9ca6a2768, type: 3}
   health: 20
   attack: 0
@@ -24,4 +25,4 @@ MonoBehaviour:
   movementMask: 0
   atqMask: 0
   range: 0
-  modelScale: 72.9
+  modelScale: 2

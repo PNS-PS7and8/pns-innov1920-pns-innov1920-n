@@ -17,5 +17,7 @@ MonoBehaviour:
   description: Change a cell into field.
   cost: 1
   castMask: 2025
+  particleSystem: {fileID: 6967301586727974932, guid: f7e8b56b1254b4b4f891dc98c7f1209b,
+    type: 3}
   terrain: 1
   range: 1

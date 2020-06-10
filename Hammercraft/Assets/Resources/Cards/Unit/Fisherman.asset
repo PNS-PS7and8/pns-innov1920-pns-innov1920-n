@@ -19,6 +19,8 @@ MonoBehaviour:
     Give 2 Fishes to your hand.'
   cost: 5
   castMask: 1817
+  particleSystem: {fileID: 6967301586727974932, guid: 525611eca87fc9949ab4875dbac62631,
+    type: 3}
   model: {fileID: 100000, guid: 28f113bc1593119448bfebc93373c1ad, type: 3}
   health: 4
   attack: 2

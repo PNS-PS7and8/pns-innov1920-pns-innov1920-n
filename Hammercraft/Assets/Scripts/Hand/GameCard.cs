@@ -61,9 +61,17 @@ public class GameCard : BoardBehaviour
             manager.LocalPlayer.UseCard(card);
             boardManager.Hand.UpdateHand();
             boardManager.SubmitManager();
+            PlayEffect(card.particleSystem, cell);
             return true;
         }
         return false;
+    }
+
+    private void PlayEffect(ParticleSystem particle, Cell cell){
+        ParticleSystem particleEff = GameObject.Instantiate(particle);
+        particleEff.transform.parent = boardManager.transform;
+        particleEff.transform.localPosition = board.CellToLocal(cell.position);
+        particleEff.transform.localScale = new Vector3(0.005f,0.005f,0.005f);
     }
 
     private void OnMouseEnter() {

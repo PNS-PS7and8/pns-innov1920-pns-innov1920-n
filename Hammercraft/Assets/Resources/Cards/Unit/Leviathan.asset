@@ -19,6 +19,8 @@ MonoBehaviour:
     Give 3 Tidal waves to your hand.'
   cost: 6
   castMask: 1801
+  particleSystem: {fileID: 6967301586727974932, guid: 525611eca87fc9949ab4875dbac62631,
+    type: 3}
   model: {fileID: 132742, guid: a3e7850e56f7e2d4a8cb9e150f10c835, type: 3}
   health: 6
   attack: 3

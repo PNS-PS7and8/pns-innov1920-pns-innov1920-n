@@ -21,6 +21,8 @@ MonoBehaviour:
     stats by 3.'
   cost: 6
   castMask: 314
+  particleSystem: {fileID: 6967301586727974932, guid: f7e8b56b1254b4b4f891dc98c7f1209b,
+    type: 3}
   atq: 3
   movement: 3
   range: 3

@@ -20,6 +20,8 @@ MonoBehaviour:
     on deployement.'
   cost: 2
   castMask: 1809
+  particleSystem: {fileID: 6967301586727974932, guid: 525611eca87fc9949ab4875dbac62631,
+    type: 3}
   model: {fileID: 6667349562693488409, guid: 25dca67001422c04d8a535a7cd2006c4, type: 3}
   health: 1
   attack: 1

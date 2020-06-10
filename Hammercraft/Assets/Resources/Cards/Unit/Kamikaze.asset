@@ -19,6 +19,8 @@ MonoBehaviour:
     Deal 5 damage on 6 range aoe on deployement.'
   cost: 6
   castMask: 1809
+  particleSystem: {fileID: 6967301586727974932, guid: 525611eca87fc9949ab4875dbac62631,
+    type: 3}
   model: {fileID: 130964, guid: c644a2181ac22e740968a7ece97e8f36, type: 3}
   health: 1
   attack: 3

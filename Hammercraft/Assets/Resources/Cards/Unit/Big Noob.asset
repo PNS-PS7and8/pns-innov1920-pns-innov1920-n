@@ -17,6 +17,8 @@ MonoBehaviour:
   description: Simple unit low cost and weak
   cost: 2
   castMask: 273
+  particleSystem: {fileID: 6967301586727974932, guid: 525611eca87fc9949ab4875dbac62631,
+    type: 3}
   model: {fileID: 1835885862194036, guid: c647a6e9ba715004ebbf4dc6d7bd1e7a, type: 3}
   health: 3
   attack: 2
