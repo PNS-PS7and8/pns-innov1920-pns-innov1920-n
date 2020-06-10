@@ -80,7 +80,8 @@ public class UseCard : BoardBehaviour
             if (ds.Damage > 0) {
                 DisplayAtq(ds.Damage , board.GetUnit(cell));
             } else {
-                DisplayHeal(ds.Damage , board.GetUnit(cell));
+                int heal = ds.Damage*-1;
+                DisplayHeal(heal , board.GetUnit(cell));
             }
         }
     }
