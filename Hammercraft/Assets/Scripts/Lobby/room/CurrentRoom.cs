@@ -79,7 +79,7 @@ public class CurrentRoom : MonoBehaviourPunCallbacks
 
     private IEnumerator Timer()
     {
-        for(int i=15; i >= 0; i--)
+        for(int i=10; i >= 0; i--)
         {
             Text_Timer.text = i.ToString();
             yield return new WaitForSecondsRealtime(1f);

@@ -42,9 +42,9 @@ public class DestroyTheBase : GameMode {
 
     private Vector2Int GetBasePosition(PlayerRole player ,GameManager gameManager) {
         if (player == PlayerRole.PlayerOne) {
-            return new Vector2Int(24, 24);
+            return new Vector2Int(23, 20);
         } else {
-            return new Vector2Int(26, 26);
+            return new Vector2Int(29, 28);
         }
     }
 }
