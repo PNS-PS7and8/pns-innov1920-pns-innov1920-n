@@ -17,11 +17,11 @@ MonoBehaviour:
   description: 
   cost: 1
   castMask: 2045
-  model: {fileID: 8749129071831981201, guid: 4dfed2f3ceee8b9889ae3d3776a28e74, type: 3}
+  model: {fileID: 8948258272379757237, guid: 034569a40ff2f3900aa794e9ca6a2768, type: 3}
   health: 20
   attack: 0
   movement: 0
   movementMask: 0
   atqMask: 0
   range: 0
-  modelScale: 1
+  modelScale: 72.9

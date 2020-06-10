@@ -175,7 +175,7 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
     public static Photon.Realtime.Player LocalPhotonPlayer => PhotonNetwork.LocalPlayer;
 
     private GameManager NewGame() {
-        GameModes mode = GameModes.Point;
+        GameModes mode = GameModes.DestroyTheBase;
         if (PhotonNetwork.InRoom) {
             mode = (GameModes) PhotonNetwork.CurrentRoom.CustomProperties["GameMode"];
         }
