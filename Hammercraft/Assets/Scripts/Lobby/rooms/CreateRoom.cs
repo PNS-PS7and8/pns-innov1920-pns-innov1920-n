@@ -10,9 +10,7 @@ using UnityEngine.UI;
 public class CreateRoom : MonoBehaviourPunCallbacks
 {
     [SerializeField]
-    private TMP_Text _roomName = null;
-    [SerializeField]
-    private TMP_Text _roomNamePlaceholder = null;
+    private TMP_InputField _roomField = null;
     [SerializeField]
     private TMP_Text ErrorName = null;
     private bool IsPrivate = false;
@@ -28,7 +26,7 @@ public class CreateRoom : MonoBehaviourPunCallbacks
     {
         _dropDown.ClearOptions();
         base.OnEnable();
-        _roomNamePlaceholder.text = PhotonNetwork.NickName + "'s Game";
+        _roomField.text = PhotonNetwork.NickName + "'s Game";
         FillDropDown();
     }
 
@@ -37,16 +35,11 @@ public class CreateRoom : MonoBehaviourPunCallbacks
     }
     public void CreateRoom_button()
     {
-        string name = "";
-        if (_roomName.text.Length == 0) {
-            name = _roomNamePlaceholder.text;
-        } else {
-            name = _roomName.text;
-        }
+        
+        string name = _roomField.text;
         if (name.Length > 0 && PhotonNetwork.IsConnected)
         {
             if (Enum.TryParse<GameModes>(_selectedGameMode.text, out mode)) {
-                print("creating room...");
                 RoomOptions RoomOptions = new RoomOptions();
                 RoomOptions.MaxPlayers = 2;
                 RoomOptions.IsVisible = !IsPrivate;
@@ -77,7 +70,6 @@ public class CreateRoom : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        print("Room joined succesfully");
         _roomCanvas.SetActive(true);
     }
 

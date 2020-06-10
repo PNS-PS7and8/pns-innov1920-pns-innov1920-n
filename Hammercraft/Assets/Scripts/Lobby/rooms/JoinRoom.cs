@@ -15,14 +15,11 @@ public class JoinRoom : MonoBehaviourPunCallbacks
 
     public void on_click_join_room()
     {
-
         PhotonNetwork.JoinRoom(_name.text);
-        
     }
 
     public override void OnJoinedRoom()
     {
-        print("Room joined succesfully");
         roomCanvas.SetActive(true);
     }
 

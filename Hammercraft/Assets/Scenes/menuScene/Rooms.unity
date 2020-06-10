@@ -2235,18 +2235,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 545610471}
   m_CullTransparentMesh: 0
---- !u!114 &573779221 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7106690725913027272, guid: bfbdcd02d9488194fa48d1e68b30889b,
-    type: 3}
-  m_PrefabInstance: {fileID: 7106690725343449053}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &612301270
 GameObject:
   m_ObjectHideFlags: 0
@@ -4101,6 +4089,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1128411633}
   m_CullTransparentMesh: 0
+--- !u!114 &1140423908 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7106690724207522509, guid: bfbdcd02d9488194fa48d1e68b30889b,
+    type: 3}
+  m_PrefabInstance: {fileID: 7106690725343449053}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2da0c512f12947e489f739169773d7ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1140793706
 GameObject:
   m_ObjectHideFlags: 0
@@ -8862,12 +8862,17 @@ PrefabInstance:
         type: 3}
       propertyPath: _roomNamePlaceholder
       value: 
-      objectReference: {fileID: 573779221}
+      objectReference: {fileID: 0}
     - target: {fileID: 7915149038773948167, guid: bfbdcd02d9488194fa48d1e68b30889b,
         type: 3}
       propertyPath: _dropDown
       value: 
       objectReference: {fileID: 19611471}
+    - target: {fileID: 7915149038773948167, guid: bfbdcd02d9488194fa48d1e68b30889b,
+        type: 3}
+      propertyPath: _roomField
+      value: 
+      objectReference: {fileID: 1140423908}
     - target: {fileID: 8234249414795358997, guid: bfbdcd02d9488194fa48d1e68b30889b,
         type: 3}
       propertyPath: m_IsActive
