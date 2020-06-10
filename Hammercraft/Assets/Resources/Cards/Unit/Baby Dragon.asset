@@ -30,4 +30,4 @@ MonoBehaviour:
   range: 1
   modelScale: 0.15
   summon: {fileID: 11400000, guid: 8a0107beb4f7ed246a57cbf45688530f, type: 2}
-  number: 3
+  number: 2

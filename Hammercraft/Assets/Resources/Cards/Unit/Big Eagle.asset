@@ -15,13 +15,13 @@ MonoBehaviour:
   resourcePath: Cards/Unit/Big Eagle
   name: Big Eagle
   description: Simple unit low cost and weak, Flies above mountains
-  cost: 2
+  cost: 3
   castMask: 289
   particleSystem: {fileID: 6967301586727974932, guid: 525611eca87fc9949ab4875dbac62631,
     type: 3}
   model: {fileID: 1537502993957880, guid: 30bdbf2b9c0bd8446af70e5b67b0dfc8, type: 3}
-  health: 2
-  attack: 2
+  health: 3
+  attack: 4
   movement: 8
   movementMask: 1010
   atqMask: 1017

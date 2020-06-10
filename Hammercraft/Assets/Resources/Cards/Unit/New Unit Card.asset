@@ -10,20 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d6fdbecdfe08ec05a72e4deaf5b058f, type: 3}
-  m_Name: Noob
+  m_Name: New Unit Card
   m_EditorClassIdentifier: 
-  resourcePath: Cards/Unit/Noob
-  name: The Noob
-  description: Simple unit low cost and weak
-  cost: 1
-  castMask: 273
-  particleSystem: {fileID: 6967301586727974932, guid: 525611eca87fc9949ab4875dbac62631,
-    type: 3}
-  model: {fileID: 1835885862194036, guid: c647a6e9ba715004ebbf4dc6d7bd1e7a, type: 3}
-  health: 2
-  attack: 2
-  movement: 4
-  movementMask: 1017
-  atqMask: 1021
+  resourcePath: 
+  name: 
+  description: 
+  cost: 4
+  castMask: 305
+  particleSystem: {fileID: 0}
+  model: {fileID: 1260152368072798, guid: 4bf449b1b6e781140a548b42020600f6, type: 3}
+  health: 5
+  attack: 4
+  movement: 5
+  movementMask: 536
+  atqMask: 536
   range: 0
   modelScale: 1

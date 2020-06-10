@@ -17,17 +17,17 @@ MonoBehaviour:
   description: 'Boom boom dead.
 
     Deal 5 damage on 6 range aoe on deployement.'
-  cost: 6
+  cost: 5
   castMask: 1809
   particleSystem: {fileID: 6967301586727974932, guid: 525611eca87fc9949ab4875dbac62631,
     type: 3}
   model: {fileID: 130964, guid: c644a2181ac22e740968a7ece97e8f36, type: 3}
-  health: 1
-  attack: 3
+  health: 2
+  attack: 2
   movement: 4
   movementMask: 137
   atqMask: 157
   range: 0
   modelScale: 0.5
-  aoeDmg: 5
+  aoeDmg: 4
   aoeRange: 6

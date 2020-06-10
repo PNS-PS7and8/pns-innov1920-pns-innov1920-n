@@ -24,5 +24,5 @@ MonoBehaviour:
   particleSystem: {fileID: 6967301586727974932, guid: f7e8b56b1254b4b4f891dc98c7f1209b,
     type: 3}
   atq: 1
-  movement: 1
+  movement: 3
   range: 1

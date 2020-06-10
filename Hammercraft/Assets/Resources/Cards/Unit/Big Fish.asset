@@ -15,13 +15,13 @@ MonoBehaviour:
   resourcePath: Cards/Unit/Big Fish
   name: Big Fish
   description: Simple unit low cost and weak, lives in the water
-  cost: 2
+  cost: 3
   castMask: 1801
   particleSystem: {fileID: 6967301586727974932, guid: 525611eca87fc9949ab4875dbac62631,
     type: 3}
   model: {fileID: 162542, guid: 604c6a2a7f9c3484a86af004a7dcaf6a, type: 3}
-  health: 2
-  attack: 2
+  health: 4
+  attack: 3
   movement: 6
   movementMask: 133
   atqMask: 781

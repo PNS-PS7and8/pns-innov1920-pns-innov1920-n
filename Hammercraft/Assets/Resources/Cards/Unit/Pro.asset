@@ -20,8 +20,8 @@ MonoBehaviour:
   particleSystem: {fileID: 6967301586727974932, guid: 525611eca87fc9949ab4875dbac62631,
     type: 3}
   model: {fileID: 1319517528997712, guid: 1543549dcdf638d488bd40cb68dd9b8e, type: 3}
-  health: 5
-  attack: 5
+  health: 7
+  attack: 6
   movement: 4
   movementMask: 1017
   atqMask: 1021

@@ -17,12 +17,12 @@ MonoBehaviour:
   description: 'Eagle is love, Eagle  is life.
 
     Give 2 Eagles to your hand.'
-  cost: 4
+  cost: 5
   castMask: 1825
   particleSystem: {fileID: 6967301586727974932, guid: 525611eca87fc9949ab4875dbac62631,
     type: 3}
   model: {fileID: 1537502993957880, guid: 30bdbf2b9c0bd8446af70e5b67b0dfc8, type: 3}
-  health: 2
+  health: 4
   attack: 4
   movement: 8
   movementMask: 913
