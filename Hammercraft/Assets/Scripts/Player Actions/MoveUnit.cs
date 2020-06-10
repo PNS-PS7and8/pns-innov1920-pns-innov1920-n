@@ -164,9 +164,8 @@ public class MoveUnit : BoardBehaviour
     private void Deselect() {
         unit = null;
         origin = null;
-        
+        hoverCell.HideCells(Color.yellow);
         hoverCell.HideCells(pathColor);
         hoverCell.HideCells(color);
-        hoverCell.HideCells(Color.yellow);
     }
 }
