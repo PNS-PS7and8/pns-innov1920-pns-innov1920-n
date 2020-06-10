@@ -22,7 +22,7 @@ public class DestroyTheBase : GameMode {
 
     public override int GetScore(PlayerRole player, GameManager gameManager) {
         if (player == PlayerRole.Spectator) {
-            return Resources.Load<UnitCard>("Cards/Specials/PlayerBase").Health;
+            return Resources.Load<UnitCard>("Cards/Specials/PlayerBaseP1").Health;
         }
         var unit = GetBase(player, gameManager);
         if (unit != null) return unit.Health;
@@ -35,7 +35,9 @@ public class DestroyTheBase : GameMode {
     }
 
     private void AddBase(PlayerRole player, GameManager gameManager) {
-        UnitCard card = Resources.Load<UnitCard>("Cards/Specials/PlayerBase");
+        UnitCard card;
+        if (player == PlayerRole.PlayerOne) card = Resources.Load<UnitCard>("Cards/Specials/PlayerBaseP1");
+        else card = Resources.Load<UnitCard>("Cards/Specials/PlayerBaseP2");
         Cell cell = gameManager.Board.GetCell(GetBasePosition(player, gameManager));
         gameManager.Board.AddUnit(card, cell, player);
     }
