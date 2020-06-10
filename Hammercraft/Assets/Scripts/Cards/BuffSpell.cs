@@ -10,7 +10,7 @@ public class BuffSpell : SpellCard
     protected override void CardEffect(Board board, Cell target, PlayerRole player, Player objPlayer)
     {
         Unit unit = board.GetUnit(target);
-        if (unit != null){
+        if (unit != null && unit.Card.Name != "Player Base"){
             unit.attack = unit.attack + atq;
             unit.movement = unit.movement + movement;
             unit.rangeAtq = unit.rangeAtq + range;
