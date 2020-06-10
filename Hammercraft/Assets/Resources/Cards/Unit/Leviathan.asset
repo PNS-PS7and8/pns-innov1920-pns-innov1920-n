@@ -16,8 +16,8 @@ MonoBehaviour:
   name: Leviathan
   description: 'Glou glou ...
 
-    Give 3 Tidal waves to your hand.'
-  cost: 6
+    Give 3 Large High tide to your hand.'
+  cost: 5
   castMask: 1801
   particleSystem: {fileID: 6967301586727974932, guid: 525611eca87fc9949ab4875dbac62631,
     type: 3}
@@ -29,5 +29,5 @@ MonoBehaviour:
   atqMask: 909
   range: 0
   modelScale: 0.3
-  summon: {fileID: 11400000, guid: ea5e0fc758a992f468090c4cb8270870, type: 2}
+  summon: {fileID: 11400000, guid: 92f4298695e62f14b887ab993a4c7637, type: 2}
   number: 3

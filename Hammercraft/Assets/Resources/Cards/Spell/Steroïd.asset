@@ -19,7 +19,7 @@ MonoBehaviour:
 
     Increase atq, movement, range
     stats by 1'
-  cost: 4
+  cost: 3
   castMask: 314
   particleSystem: {fileID: 6967301586727974932, guid: f7e8b56b1254b4b4f891dc98c7f1209b,
     type: 3}

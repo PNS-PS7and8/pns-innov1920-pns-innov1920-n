@@ -15,7 +15,7 @@ MonoBehaviour:
   resourcePath: Cards/Spell/High tide
   name: High tide
   description: Change a cell into water.
-  cost: 2
+  cost: 1
   castMask: 2033
   particleSystem: {fileID: 6967301586727974932, guid: f7e8b56b1254b4b4f891dc98c7f1209b,
     type: 3}

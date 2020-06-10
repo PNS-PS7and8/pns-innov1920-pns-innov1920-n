@@ -10,24 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 14c2cc1430d54554f9b3550b2ac0a135, type: 3}
-  m_Name: Dragon
+  m_Name: Baby Leviathan
   m_EditorClassIdentifier: 
-  resourcePath: Cards/Unit/Dragon
-  name: Dragon
-  description: 'Burn, burn !
+  resourcePath: Cards/Unit/Baby Leviathan
+  name: Baby Leviathan
+  description: 'Glou glou ...
 
-    Give 3 Large Mountain to your hand'
-  cost: 5
-  castMask: 1825
+    Give 3 High tide to your hand.'
+  cost: 3
+  castMask: 1801
   particleSystem: {fileID: 6967301586727974932, guid: 525611eca87fc9949ab4875dbac62631,
     type: 3}
-  model: {fileID: 139696, guid: eb58e8f2831a51f45a44a261e6710cdd, type: 3}
+  model: {fileID: 132742, guid: a3e7850e56f7e2d4a8cb9e150f10c835, type: 3}
   health: 3
-  attack: 6
-  movement: 8
-  movementMask: 914
-  atqMask: 1017
-  range: 1
-  modelScale: 0.3
-  summon: {fileID: 11400000, guid: f520d11a445898c458e7e8aca958e619, type: 2}
+  attack: 2
+  movement: 6
+  movementMask: 901
+  atqMask: 909
+  range: 0
+  modelScale: 0.15
+  summon: {fileID: 11400000, guid: db2c61f6dd08fed4195e3f8f7d9975cb, type: 2}
   number: 3

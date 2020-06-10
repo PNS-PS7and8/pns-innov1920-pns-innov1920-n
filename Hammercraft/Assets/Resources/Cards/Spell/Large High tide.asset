@@ -15,7 +15,7 @@ MonoBehaviour:
   resourcePath: Cards/Spell/Large High tide
   name: L High tide
   description: Change cells into water in an aoe of 1 range.
-  cost: 4
+  cost: 2
   castMask: 2033
   particleSystem: {fileID: 6967301586727974932, guid: f7e8b56b1254b4b4f891dc98c7f1209b,
     type: 3}
