@@ -1,3 +1,3 @@
 - Les tests d'acceptation de la story fonctionnent.
-- Issues testés fonctionnellement.
-- Les anciens tests, nouveaux tests, et build passent.
+- Issues testées fonctionnellement.
+- Les anciens tests, nouveaux tests et build passent.
