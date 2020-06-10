@@ -17,7 +17,7 @@ MonoBehaviour:
   description: 'Fish is love, Fish is life.
 
     Give 2 Fishes to your hand.'
-  cost: 5
+  cost: 4
   castMask: 1817
   particleSystem: {fileID: 6967301586727974932, guid: 525611eca87fc9949ab4875dbac62631,
     type: 3}
