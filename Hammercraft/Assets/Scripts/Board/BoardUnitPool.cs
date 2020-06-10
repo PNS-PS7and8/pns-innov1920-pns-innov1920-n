@@ -28,6 +28,8 @@ public class BoardUnitPool : BoardBehaviour {
             boardUnit = go.AddComponent<BoardUnit>();
         }
         boardUnit.unitId = unit.Id;
+        manager.History.Add(new AtqAction(manager.CurrentPlayer.Role, manager.Turn, unit.Id));
+        manager.History.Add(new MovementAction(manager.CurrentPlayer.Role, manager.Turn, unit.Id, new Vector2Int(0,0)));
         return boardUnit;
     }
 }
