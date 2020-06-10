@@ -20,8 +20,9 @@ public class UnitCard : CardBase {
     public bool Range => range;
     public float ModelScale => modelScale;
 
-    protected override void CardEffect(Board board, Cell target, PlayerRole player, Player objPlayer)
+    protected override bool CardEffect(Board board, Cell target, PlayerRole player, Player objPlayer)
     {
         board.AddUnit(this, target, player);
+        return true;
     }
 }

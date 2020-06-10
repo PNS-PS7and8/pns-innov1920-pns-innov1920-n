@@ -6,7 +6,7 @@ using System.Linq;
 public class EaterCard : UnitCard {
     [SerializeField] protected int killRange;
 
-    protected override void CardEffect(Board board, Cell target, PlayerRole player, Player objPlayer)
+    protected override bool CardEffect(Board board, Cell target, PlayerRole player, Player objPlayer)
     {
         base.CardEffect(board, target, player, objPlayer);
         Unit spawned = board.GetUnit(target);
@@ -14,9 +14,12 @@ public class EaterCard : UnitCard {
         int cptHp = 0;
         List<Cell> cells = board.Disc(target, killRange).ToList();
         
+        var mask = CastMask.AnyTerrain | CastMask.AnyPosition | CastMask.AnyCellOwner;
+        mask &= ~CastMask.SpecialCells;
+
         foreach (Cell cell in cells){
             Unit currentUnit = board.GetUnit(cell);
-            if (currentUnit != null && currentUnit != spawned && currentUnit.Player == player){
+            if (currentUnit != null && currentUnit != spawned && currentUnit.Player == player && !currentUnit.Card.ResourcePath.Contains("Specials/")){
                 cptAtq += currentUnit.Attack;
                 cptHp += currentUnit.Health;
                 currentUnit.TakeDamage(999);
@@ -25,5 +28,6 @@ public class EaterCard : UnitCard {
         Debug.Log(cptAtq);
         spawned.attack += cptAtq;
         spawned.TakeDamage(-cptHp);
+        return true;
     }
 }

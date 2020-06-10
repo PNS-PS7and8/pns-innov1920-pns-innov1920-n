@@ -7,9 +7,8 @@ public class AoeDeployCard : UnitCard {
     [SerializeField] protected int aoeDmg;
     [SerializeField] protected int aoeRange;
 
-    protected override void CardEffect(Board board, Cell target, PlayerRole player, Player objPlayer)
+    protected override bool CardEffect(Board board, Cell target, PlayerRole player, Player objPlayer)
     {
-        
         List<Cell> cells = board.Disc(target, aoeRange).ToList();
         foreach (Cell cell in cells){
             if (board.GetUnit(cell) != null){
@@ -17,5 +16,6 @@ public class AoeDeployCard : UnitCard {
             }
         }
         board.AddUnit(this, target, player);
+        return true;
     }
 }

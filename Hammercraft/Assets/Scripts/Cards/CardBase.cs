@@ -27,13 +27,12 @@ public abstract class CardBase : ScriptableObject{
 
     public bool Use(Board board, Cell target, PlayerRole player, Player objPlayer) {
         if (CardCast.CanCast(castMask, board, target)) {
-            CardEffect(board, target, player, objPlayer);
-            return true;
+            return CardEffect(board, target, player, objPlayer);
         }
         return false;
     }
 
-    protected abstract void CardEffect(Board board, Cell target, PlayerRole player, Player objPlayer);
+    protected abstract bool CardEffect(Board board, Cell target, PlayerRole player, Player objPlayer);
 }
 
 public abstract class SpellCard : CardBase {}

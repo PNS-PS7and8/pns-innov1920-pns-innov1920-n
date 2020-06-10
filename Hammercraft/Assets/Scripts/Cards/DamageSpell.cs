@@ -7,13 +7,13 @@ public class DamageSpell : SpellCard
     [SerializeField] private int damage = 0;
     public int Damage => damage;
 
-    protected override void CardEffect(Board board, Cell target, PlayerRole player, Player objPlayer)
+    protected override bool CardEffect(Board board, Cell target, PlayerRole player, Player objPlayer)
     {
         Unit unit = board.GetUnit(target);
         if (unit != null)
         {
             unit.TakeDamage(damage);
-              
         }
+        return true;
     }
 }
