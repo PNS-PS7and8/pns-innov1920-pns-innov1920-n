@@ -83,11 +83,7 @@ public class CurrentRoom : MonoBehaviourPunCallbacks
         {
             Text_Timer.text = i.ToString();
             yield return new WaitForSecondsRealtime(1f);
-            if (i == 1){
-                FindObjectOfType<RoomDeckListMenu>().on_click_confirm_deck();
-            }
         }
-        
         PhotonNetwork.LoadLevel("GameScene");
     }
 
