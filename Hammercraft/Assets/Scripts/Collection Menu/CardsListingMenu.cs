@@ -47,7 +47,7 @@ public class CardsListingMenu : MonoBehaviour
 
     private void Sort(HashSet<CardBase> cards, int mostExpensive) {
         List<CardBase> toRemove;
-        for(int i=1; i<=mostExpensive; i++) {
+        for(int i=0; i<=mostExpensive; i++) {
             toRemove = new List<CardBase>();
             foreach(CardBase card in cards) {
                 if(card.Cost == i) {
