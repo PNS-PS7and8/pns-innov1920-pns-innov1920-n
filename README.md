@@ -12,4 +12,4 @@ Hammercraft is a game that mix together both cards and board games where players
 This project is being made for a school project "projet innovation" at the Polytech Nice-Sophia Engineer School.
   
 ## Thanks
-Thanks to Philippe Collet, Remi Pourtier, Anne-Mary Dery Pinna for organising this project.
+Thanks to Philippe Collet, Remi Pourtier, Anne-Mary Dery Pinna for organising this project. And finally, thanks to Philippe Renevier our sponsor who helped us throughout the duration of the project.
