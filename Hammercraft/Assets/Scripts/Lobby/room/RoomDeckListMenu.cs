@@ -44,6 +44,11 @@ public class RoomDeckListMenu : MonoBehaviour
             ListDecks[deck].SetDeckInfo(deck);
             if(selectedDeck == null) {
                 selectedDeck = deck;
+                if (PhotonNetwork.LocalPlayer.ActorNumber == PhotonNetwork.PlayerList[0].ActorNumber) {
+                    PlayersExtension.RegisterLocalPlayer(PlayerRole.PlayerOne, selectedDeck);
+                } else {
+                    PlayersExtension.RegisterLocalPlayer(PlayerRole.PlayerTwo, selectedDeck);
+                }
                 ListDecks[selectedDeck].SetBgColor(new Color(200/255f, 125/255f, 65/255f));
             }
         }
