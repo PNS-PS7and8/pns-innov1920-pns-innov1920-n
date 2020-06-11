@@ -108,6 +108,11 @@ public class DeckCardList : MonoBehaviour
             AccessDatabase.DeleteDeck(PlayerPrefs.GetString("username"), currentDeck);
             dlm.RemoveDeck(currentDeck);
             currentDeck = null;
+            UnitCountText.text = "";
+            SpellCountText.text = "";
+            DeckName.text = "";
+            Reset();
+            Start();
         } else {
             saveMessage.gameObject.SetActive(true);
             saveMessage.color = new Color(250/255f, 34/255f, 48/255f, 1);

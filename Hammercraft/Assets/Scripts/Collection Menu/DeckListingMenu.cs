@@ -29,6 +29,7 @@ public class DeckListingMenu : MonoBehaviour
     public void RemoveDeck(Deck deck) {
         Destroy(ListDecks[deck.Name].gameObject);
         ListDecks.Remove(deck.Name);
+        selectedDeck = null;
     }
 
     public void ClickDeck(Deck deck) {
