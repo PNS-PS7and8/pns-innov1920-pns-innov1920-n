@@ -16,7 +16,7 @@ MonoBehaviour:
   name: Assassin
   description: 'Kill them before they kill you.
 
-    Deal 2 damage on 3 range aoe
+    Deal 2 damage in a 3 range AoE
     on deployement.'
   cost: 2
   castMask: 1809

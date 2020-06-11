@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourcePath: Cards/Spell/Large Mountain
   name: L Mountain
-  description: Change cells into mountain in an aoe of 1 range.
+  description: Change cells into mountain in an AoE of 1 range.
   cost: 2
   castMask: 2009
   particleSystem: {fileID: 6967301586727974932, guid: f7e8b56b1254b4b4f891dc98c7f1209b,

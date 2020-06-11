@@ -16,7 +16,7 @@ MonoBehaviour:
   name: Fireball
   description: 'Can''t hit water units.
 
-    Deals 6 damages.'
+    Deals 6 damage.'
   cost: 4
   castMask: 1842
   particleSystem: {fileID: 6967301586727974932, guid: f7e8b56b1254b4b4f891dc98c7f1209b,

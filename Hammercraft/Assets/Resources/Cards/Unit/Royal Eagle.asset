@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourcePath: Cards/Unit/Royal Eagle
   name: Royal Eagle
-  description: 'Eagle is love, Eagle  is life.
+  description: 'Eagle is love, eagle is life.
 
-    Give 2 Eagles to your hand.'
+    Add 2 Eagle to your hand.'
   cost: 5
   castMask: 1825
   particleSystem: {fileID: 6967301586727974932, guid: 525611eca87fc9949ab4875dbac62631,

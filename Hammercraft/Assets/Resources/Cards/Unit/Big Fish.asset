@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourcePath: Cards/Unit/Big Fish
   name: Big Fish
-  description: Simple unit low cost and weak, lives in the water
+  description: Fat fish. Lives in water.
   cost: 3
   castMask: 1801
   particleSystem: {fileID: 6967301586727974932, guid: 525611eca87fc9949ab4875dbac62631,

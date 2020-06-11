@@ -10,24 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 14c2cc1430d54554f9b3550b2ac0a135, type: 3}
-  m_Name: Leviathan
+  m_Name: King Slime
   m_EditorClassIdentifier: 
-  resourcePath: Cards/Unit/Leviathan
-  name: Leviathan
-  description: 'Glou glou...
+  resourcePath: Cards/Unit/King Slime
+  name: King Slime
+  description: 'The mighty king of blobs.
 
-    Add 3 Large High Tide to your hand.'
-  cost: 7
-  castMask: 1801
+
+    Add 2 Slime to your hand.'
+  cost: 4
+  castMask: 1809
   particleSystem: {fileID: 6967301586727974932, guid: 525611eca87fc9949ab4875dbac62631,
     type: 3}
-  model: {fileID: 132742, guid: a3e7850e56f7e2d4a8cb9e150f10c835, type: 3}
-  health: 7
-  attack: 7
-  movement: 6
-  movementMask: 901
-  atqMask: 909
-  range: 1
-  modelScale: 0.3
-  summon: {fileID: 11400000, guid: 129fb89a4657c5e4298614d37eab70c1, type: 2}
+  model: {fileID: 1774625739149480, guid: 38efdaadbfe1d624bbee439cb02e7661, type: 3}
+  health: 3
+  attack: 1
+  movement: 4
+  movementMask: 905
+  atqMask: 925
+  range: 0
+  modelScale: 1
+  summon: {fileID: 11400000, guid: a37d3c99457580e40b6247670d147896, type: 2}
   number: 2

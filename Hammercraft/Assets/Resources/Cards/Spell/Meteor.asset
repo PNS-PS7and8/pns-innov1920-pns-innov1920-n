@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourcePath: Cards/Spell/Meteor
   name: Meteor
-  description: Deals 10 damages.
+  description: Deals 10 damage.
   cost: 10
   castMask: -1
   particleSystem: {fileID: 6967301586727974932, guid: f7e8b56b1254b4b4f891dc98c7f1209b,
     type: 3}
   damage: 10
+  canHitSpecials: 1

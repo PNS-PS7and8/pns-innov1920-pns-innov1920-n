@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourcePath: Cards/Unit/Big Eagle
   name: Big Eagle
-  description: Simple unit low cost and weak, Flies above mountains
+  description: Fat eagle. Tries to fly above mountains.
   cost: 3
   castMask: 289
   particleSystem: {fileID: 6967301586727974932, guid: 525611eca87fc9949ab4875dbac62631,

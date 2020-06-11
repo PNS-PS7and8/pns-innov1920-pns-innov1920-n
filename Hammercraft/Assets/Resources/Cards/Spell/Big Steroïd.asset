@@ -17,7 +17,7 @@ MonoBehaviour:
   description: 'Increase all stats of your unit.
 
 
-    Increase atq, movement, range
+    Increase atk, movement, range
     stats by 3.'
   cost: 5
   castMask: 314

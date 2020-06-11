@@ -10,15 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d6fdbecdfe08ec05a72e4deaf5b058f, type: 3}
-  m_Name: Slime
+  m_Name: slime
   m_EditorClassIdentifier: 
-  resourcePath: Cards/Unit/Slime
+  resourcePath: Cards/Unit/slime
   name: Slime
-  description: Just a slime
+  description: Just a slime.
   cost: 0
   castMask: 273
-  particleSystem: {fileID: 6967301586727974932, guid: 525611eca87fc9949ab4875dbac62631,
-    type: 3}
+  particleSystem: {fileID: 0}
   model: {fileID: 100000, guid: 438236b1bb4dc03468cb3f2d12fa922c, type: 3}
   health: 1
   attack: 1

@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourcePath: Cards/Unit/Baby Leviathan
   name: Baby Leviathan
-  description: 'Glou glou ...
+  description: 'Glou glou...
 
-    Give 3 High tide to your hand.'
+    Add 3 High tide to your hand.'
   cost: 3
   castMask: 1801
   particleSystem: {fileID: 6967301586727974932, guid: 525611eca87fc9949ab4875dbac62631,

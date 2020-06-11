@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourcePath: Cards/Unit/Void Demon
   name: Void Demon
-  description: 'Eat your life !
+  description: 'Eat your life!
 
-    Kill the allies unit on 2 range cells to steal
-    their atq & hp.'
+    Kill allied units in 2 range cells to steal their
+    atk & hp.'
   cost: 8
   castMask: 1340
   particleSystem: {fileID: 6967301586727974932, guid: 525611eca87fc9949ab4875dbac62631,
