@@ -16,7 +16,7 @@ MonoBehaviour:
   name: Leviathan
   description: 'Glou glou...
 
-    Add 3 Large High Tide to your hand.'
+    Add 2 Baby leviathan to your hand.'
   cost: 7
   castMask: 1801
   particleSystem: {fileID: 6967301586727974932, guid: 525611eca87fc9949ab4875dbac62631,

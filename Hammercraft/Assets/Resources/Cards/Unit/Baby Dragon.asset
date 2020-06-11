@@ -16,7 +16,7 @@ MonoBehaviour:
   name: Baby Dragon
   description: 'Burn, burn!
 
-    Add 3 Mountain to your hand.'
+    Add 2 Mountain to your hand.'
   cost: 3
   castMask: 1825
   particleSystem: {fileID: 6967301586727974932, guid: 525611eca87fc9949ab4875dbac62631,
