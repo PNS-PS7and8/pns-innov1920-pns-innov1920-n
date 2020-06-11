@@ -20,10 +20,6 @@ public class Hand : BoardBehaviour {
         }
     }
 
-    private void Update() {
-        UpdateHand();
-    }
-
     public void UpdateHand() {
         player = manager.LocalPlayer;
         for (int i = 0; i < Cards.Length; i++)
