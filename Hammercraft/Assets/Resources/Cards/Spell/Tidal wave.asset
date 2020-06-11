@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourcePath: Cards/Spell/Tidal wave
   name: Tidal wave
-  description: "The calm before the tempest. \nCan't hit mountain units.\nDeals 4
-    damages."
+  description: "The calm before the storm. \nCan't hit mountain units.\nDeals 4 damage."
   cost: 3
   castMask: 1818
+  particleSystem: {fileID: 6967301586727974932, guid: f7e8b56b1254b4b4f891dc98c7f1209b,
+    type: 3}
   damage: 4
+  canHitSpecials: 1

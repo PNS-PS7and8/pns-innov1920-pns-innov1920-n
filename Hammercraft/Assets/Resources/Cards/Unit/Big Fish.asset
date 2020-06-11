@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d6fdbecdfe08ec05a72e4deaf5b058f, type: 3}
+  m_Name: Big Fish
+  m_EditorClassIdentifier: 
+  resourcePath: Cards/Unit/Big Fish
+  name: Big Fish
+  description: Fat fish. Lives in water.
+  cost: 3
+  castMask: 1801
+  particleSystem: {fileID: 6967301586727974932, guid: 525611eca87fc9949ab4875dbac62631,
+    type: 3}
+  model: {fileID: 162542, guid: 604c6a2a7f9c3484a86af004a7dcaf6a, type: 3}
+  health: 4
+  attack: 3
+  movement: 6
+  movementMask: 133
+  atqMask: 781
+  range: 1
+  modelScale: 5

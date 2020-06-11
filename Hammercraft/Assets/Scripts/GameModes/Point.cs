@@ -15,12 +15,12 @@ public class Point : GameMode
         else return GameState.NotFinished;
     }
 
-    public override int GetScore(int player, GameManager gameManager){
+    public override int GetScore(PlayerRole player, GameManager gameManager){
         countDeath(gameManager);
-        if (player==1){
+        if (player==PlayerRole.PlayerOne){
             return p2;
         }
-        if (player == 2){
+        if (player == PlayerRole.PlayerTwo){
             return p1;
         }
         return ScoreToWin;

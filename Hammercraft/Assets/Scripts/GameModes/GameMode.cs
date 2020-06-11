@@ -21,7 +21,8 @@ public static class GameStateExtension {
 [System.Serializable]
 public enum GameModes {
  //   KillToWin,
-    Point
+    Point,
+    DestroyTheBase
 }
 
 public static class GameModesExtension {
@@ -29,6 +30,7 @@ public static class GameModesExtension {
         switch(mode) {
        //     case GameModes.KillToWin: return new KillToWin();
             case GameModes.Point: return new Point();
+            case GameModes.DestroyTheBase: return new DestroyTheBase();
             default: return null;
         }
     }
@@ -37,5 +39,5 @@ public static class GameModesExtension {
 [System.Serializable]
 public abstract class GameMode {
     public abstract GameState CurrentGameState(GameManager gameManager);
-    public abstract int GetScore(int player, GameManager gameManager);
+    public abstract int GetScore(PlayerRole player, GameManager gameManager);
 }

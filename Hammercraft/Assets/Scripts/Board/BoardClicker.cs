@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class BoardClicker : BoardBehaviour
 {
-    [SerializeField] private Camera Camera;
+    [SerializeField] private Camera Camera = null;
     public delegate void OnClickCardAction(GameCard card);
     public delegate void OnClickCellAction(Cell cell);
     public delegate void OnClickUnitAction(Cell cell, Unit unit);

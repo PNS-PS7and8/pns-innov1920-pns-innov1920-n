@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -9,38 +10,51 @@ using UnityEngine.UI;
 public class CreateRoom : MonoBehaviourPunCallbacks
 {
     [SerializeField]
-    private TMP_Text _roomName;
+    private TMP_InputField _roomField = null;
     [SerializeField]
-    private TMP_Text _roomNamePlaceholder;
-    [SerializeField]
-    private TMP_Text ErrorName;
+    private TMP_Text ErrorName = null;
     private bool IsPrivate = false;
     [SerializeField]
-    private GameObject _roomCanvas;
-
+    private GameObject _roomCanvas = null;
+    [SerializeField]
+    private TMP_Dropdown _dropDown = null;
+    [SerializeField]
+    private TMP_Text _selectedGameMode = null; //_selectedGameMode.text pour avoir le mode sélectionné
+    private GameModes mode;
+    
     public override void OnEnable()
     {
+        _dropDown.ClearOptions();
         base.OnEnable();
-        _roomNamePlaceholder.text = PhotonNetwork.NickName + "'s Game";
+        _roomField.text = PhotonNetwork.NickName + "'s Game";
+        FillDropDown();
+    }
+
+    private void FillDropDown() {
+        _dropDown.AddOptions(new List<string>(Enum.GetNames(typeof(GameModes))));
     }
     public void CreateRoom_button()
     {
-        if (_roomName.text.Length > 0 && PhotonNetwork.IsConnected)
+        
+        string name = _roomField.text;
+        if (name.Length > 0 && PhotonNetwork.IsConnected)
         {
-            print("creating room...");
-            RoomOptions RoomOptions = new RoomOptions();
-            RoomOptions.MaxPlayers = 2;
-            RoomOptions.IsVisible = !IsPrivate;
-            PhotonNetwork.CreateRoom(_roomName.text, RoomOptions, TypedLobby.Default);
-        } else
-        {
-            return;
+            if (Enum.TryParse<GameModes>(_selectedGameMode.text, out mode)) {
+                RoomOptions RoomOptions = new RoomOptions();
+                RoomOptions.MaxPlayers = 2;
+                RoomOptions.IsVisible = !IsPrivate;
+                                
+                PhotonNetwork.CreateRoom(name, RoomOptions, TypedLobby.Default);
+            }
         }
+        return;
     }
 
     public override void OnCreatedRoom()
     {
-        print("Created room successfully");
+        PhotonNetwork.CurrentRoom.SetCustomProperties(
+            new ExitGames.Client.Photon.Hashtable { {"GameMode", (int) mode}}
+        );
     }
 
     public void on_click_change_private()
@@ -56,7 +70,6 @@ public class CreateRoom : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        print("Room joined succesfully");
         _roomCanvas.SetActive(true);
     }
 

@@ -13,7 +13,7 @@ public class RoomDeckListMenu : MonoBehaviour
     [SerializeField]
     private DeckListingMenu _deckListingMenu = null;
     [SerializeField]
-    private GameObject button;
+    private GameObject button = null;
     private Deck selectedDeck = null;
     private bool display = false;
     
@@ -34,7 +34,7 @@ public class RoomDeckListMenu : MonoBehaviour
     }
 
     private void DisplayDecks() {
-        _deckListingMenu.FetchServer(); // A enlever quand on aura BDD
+        _deckListingMenu.FetchServer();
         foreach (DeckListing deckListing in _deckListingMenu.ListDecks.Values)
         {
             Deck deck = deckListing.Deck;            
@@ -42,14 +42,18 @@ public class RoomDeckListMenu : MonoBehaviour
             listing.SetDeckInfo(deck);
             ListDecks[deck] = listing;
             ListDecks[deck].SetDeckInfo(deck);
-            selectedDeck = deck;
-        } 
+            if(selectedDeck == null) {
+                selectedDeck = deck;
+                ListDecks[selectedDeck].SetBgColor(new Color(200/255f, 125/255f, 65/255f));
+            }
+        }
     }
 
     public void SetSelectedDeck(Deck deck) {
+        ListDecks[selectedDeck].SetBgColor(new Color(100/255f, 100/255f, 100/255f));
         button.SetActive(true);
-        Debug.Log(deck.Name);
         selectedDeck = deck;
+        ListDecks[selectedDeck].SetBgColor(new Color(65/255f, 200/255f, 65/255f));
     }
 
     public void on_click_confirm_deck() {

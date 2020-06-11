@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ff5f8f21005cdfdbaef19f379ddb51c, type: 3}
+  m_Name: Meteor
+  m_EditorClassIdentifier: 
+  resourcePath: Cards/Spell/Meteor
+  name: Meteor
+  description: Deals 10 damage.
+  cost: 10
+  castMask: -1
+  particleSystem: {fileID: 6967301586727974932, guid: f7e8b56b1254b4b4f891dc98c7f1209b,
+    type: 3}
+  damage: 10
+  canHitSpecials: 1

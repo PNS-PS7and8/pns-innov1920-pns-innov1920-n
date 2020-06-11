@@ -1,6 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 public class GameCard : BoardBehaviour
 {
@@ -29,8 +30,7 @@ public class GameCard : BoardBehaviour
             nameText.text = card.Name;
             descriptionText.text = card.Description;
             //image.sprite = card.Image;
-        
-            if (card.GetType().IsAssignableFrom(typeof(UnitCard))) {
+            if (card.GetType().IsAssignableFrom(typeof(UnitCard)) || card.GetType().IsSubclassOf(typeof(UnitCard))) {
                 unitModel.gameObject.SetActive(true);
                 spellModel.gameObject.SetActive(false);
                 RANGEorCACText.text = (((UnitCard) card).Range) ? "Range" : "Melee";
@@ -57,7 +57,9 @@ public class GameCard : BoardBehaviour
     }
 
     public bool Use(Cell cell) {
-        if (card.Use(board, cell, manager.PlayerTurn)) {
+        ParticleSystem partic = card.particleSystem;
+        if (card.Use(board, cell, manager.PlayerTurn, manager.LocalPlayer)) {
+            PlayEffect(partic, cell);
             manager.LocalPlayer.UseCard(card);
             boardManager.Hand.UpdateHand();
             boardManager.SubmitManager();
@@ -66,11 +68,19 @@ public class GameCard : BoardBehaviour
         return false;
     }
 
+    private void PlayEffect(ParticleSystem particle, Cell cell){
+        ParticleSystem particleEff = GameObject.Instantiate(particle);
+        particleEff.transform.parent = boardManager.transform;
+        particleEff.transform.localPosition = board.CellToLocal(cell.position);
+        particleEff.transform.localScale = new Vector3(0.005f,0.005f,0.005f);
+    }
+
     private void OnMouseEnter() {
         transform.DOScale(Vector3.one * scaleUp, 0.1f);
         transform.DOLocalMoveY(offsetY, 0.1f);
         transform.DOLocalMoveZ(-offsetZ, 0.1f);
-        OverCard.gameObject.SetActive(true);
+        if(Int16.Parse(costText.text) <= manager.LocalPlayer.CurrentGold)
+            OverCard.gameObject.SetActive(true);
         DOTween.Play(transform);
     }
 

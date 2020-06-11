@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00ea375547ca0b344878b08c050bda92, type: 3}
+  m_Name: Demon
+  m_EditorClassIdentifier: 
+  resourcePath: Cards/Unit/Demon
+  name: Demon
+  description: 'Eat your life!
+
+    Kill allied units in 1 range cells to steal their
+    atk & hp.'
+  cost: 4
+  castMask: 1340
+  particleSystem: {fileID: 6967301586727974932, guid: 525611eca87fc9949ab4875dbac62631,
+    type: 3}
+  model: {fileID: 1077356408, guid: c6cfc32748fb5004aa11a1be074b5c58, type: 3}
+  health: 1
+  attack: 1
+  movement: 4
+  movementMask: 925
+  atqMask: 925
+  range: 0
+  modelScale: 0.6
+  killRange: 2

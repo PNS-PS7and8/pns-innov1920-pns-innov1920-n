@@ -9,19 +9,19 @@ using UnityEngine.UI;
 public class CurrentRoom : MonoBehaviourPunCallbacks
 {
     [SerializeField]
-    private TMP_Text _OtherPlayer;
+    private TMP_Text _OtherPlayer = null;
     [SerializeField]
-    private TMP_Text Text_Timer;
+    private TMP_Text Text_Timer = null;
     private Coroutine _timer=null;
     private Coroutine _dots = null;
     [SerializeField]
-    private RawImage StrangeNebula;
+    private RawImage StrangeNebula = null;
     [SerializeField]
-    private TMP_Text ThreeDots;
+    private TMP_Text ThreeDots = null;
     [SerializeField]
-    private GameObject ChooseDeck;
-    [SerializeField]
-    private GameObject Waiting;
+    private GameObject ChooseDeck = null;
+    //[SerializeField]
+    //private GameObject Waiting = null;
     
 
     public override void OnEnable()
@@ -33,7 +33,7 @@ public class CurrentRoom : MonoBehaviourPunCallbacks
             foreach (KeyValuePair<int, Photon.Realtime.Player> player in PhotonNetwork.CurrentRoom.Players)
             {
                 if(player.Value.NickName != PhotonNetwork.NickName)
-                    _OtherPlayer.text = player.Value.NickName;
+                    _OtherPlayer.text = "";
                     ThreeDots.gameObject.SetActive(false);
             }
         } 
@@ -44,7 +44,7 @@ public class CurrentRoom : MonoBehaviourPunCallbacks
         foreach (KeyValuePair<int, Photon.Realtime.Player> player in PhotonNetwork.CurrentRoom.Players)
         {
             if (player.Value.NickName != PhotonNetwork.NickName)
-                _OtherPlayer.text = player.Value.NickName;
+                _OtherPlayer.text = "";
                 ThreeDots.gameObject.SetActive(false);
         }
     }
@@ -79,7 +79,7 @@ public class CurrentRoom : MonoBehaviourPunCallbacks
 
     private IEnumerator Timer()
     {
-        for(int i=15; i >= 0; i--)
+        for(int i=10; i >= 0; i--)
         {
             Text_Timer.text = i.ToString();
             yield return new WaitForSecondsRealtime(1f);

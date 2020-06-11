@@ -32,6 +32,16 @@ public class MovementAction : GameAction {
     }
 }
 
+public class AtqAction : GameAction {
+    [SerializeField] private int unitId;
+
+    public int UnitId => unitId;
+
+    public AtqAction(PlayerRole player, int turn, int unitId) : base(player, turn) {
+        this.unitId = unitId;
+    }
+}
+
 public class CardPlayAction : GameAction {
     [SerializeField] protected Vector2Int[] targetPositions;
     [SerializeField] protected string cardResourcePath;

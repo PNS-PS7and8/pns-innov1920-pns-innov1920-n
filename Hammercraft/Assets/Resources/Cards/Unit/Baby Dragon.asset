@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14c2cc1430d54554f9b3550b2ac0a135, type: 3}
+  m_Name: Baby Dragon
+  m_EditorClassIdentifier: 
+  resourcePath: Cards/Unit/Baby Dragon
+  name: Baby Dragon
+  description: 'Burn, burn!
+
+    Add 3 Mountain to your hand.'
+  cost: 3
+  castMask: 1825
+  particleSystem: {fileID: 6967301586727974932, guid: 525611eca87fc9949ab4875dbac62631,
+    type: 3}
+  model: {fileID: 139696, guid: eb58e8f2831a51f45a44a261e6710cdd, type: 3}
+  health: 2
+  attack: 3
+  movement: 8
+  movementMask: 914
+  atqMask: 1017
+  range: 1
+  modelScale: 0.15
+  summon: {fileID: 11400000, guid: 8a0107beb4f7ed246a57cbf45688530f, type: 2}
+  number: 2

@@ -2,11 +2,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BoardProps : BoardBehaviour {
-    [SerializeField, Range(0, 1)] private float spawnRate;
+    [SerializeField, Range(0, 1)] private float spawnRate = 0.0f;
     
-    [SerializeField] private List<GameObject> waterProps;
-    [SerializeField] private List<GameObject> fieldProps;
-    [SerializeField] private List<GameObject> mountainProps;
+    [SerializeField] private List<GameObject> waterProps = null;
+    [SerializeField] private List<GameObject> fieldProps = null;
+    [SerializeField] private List<GameObject> mountainProps = null;
 
     private void Start() {
         AddProps();

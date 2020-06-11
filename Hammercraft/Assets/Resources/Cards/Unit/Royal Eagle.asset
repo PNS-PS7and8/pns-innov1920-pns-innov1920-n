@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14c2cc1430d54554f9b3550b2ac0a135, type: 3}
+  m_Name: Royal Eagle
+  m_EditorClassIdentifier: 
+  resourcePath: Cards/Unit/Royal Eagle
+  name: Royal Eagle
+  description: 'Eagle is love, eagle is life.
+
+    Add 2 Eagle to your hand.'
+  cost: 5
+  castMask: 1825
+  particleSystem: {fileID: 6967301586727974932, guid: 525611eca87fc9949ab4875dbac62631,
+    type: 3}
+  model: {fileID: 1537502993957880, guid: 30bdbf2b9c0bd8446af70e5b67b0dfc8, type: 3}
+  health: 4
+  attack: 4
+  movement: 8
+  movementMask: 913
+  atqMask: 921
+  range: 1
+  modelScale: 6
+  summon: {fileID: 11400000, guid: 6e5347a09481bad258183b4594db3404, type: 2}
+  number: 2

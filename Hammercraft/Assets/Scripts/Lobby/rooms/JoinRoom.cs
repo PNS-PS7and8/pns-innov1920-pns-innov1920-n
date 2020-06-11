@@ -7,22 +7,19 @@ using UnityEngine;
 public class JoinRoom : MonoBehaviourPunCallbacks
 {
     [SerializeField]
-    private TMP_Text _name;
+    private TMP_Text _name = null;
     [SerializeField]
-    private TMP_Text _errorMsg;
+    private TMP_Text _errorMsg = null;
     [SerializeField]
-    private GameObject roomCanvas;
+    private GameObject roomCanvas = null;
 
     public void on_click_join_room()
     {
-
         PhotonNetwork.JoinRoom(_name.text);
-        
     }
 
     public override void OnJoinedRoom()
     {
-        print("Room joined succesfully");
         roomCanvas.SetActive(true);
     }
 

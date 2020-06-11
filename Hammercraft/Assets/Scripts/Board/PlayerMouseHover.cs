@@ -7,9 +7,9 @@ public class PlayerMouseHover : BoardBehaviour
     [SerializeField] private BoardClicker boardClicker = null;
     [SerializeField] private HoverCell hoverCell = null;
 
-    [SerializeField] private Color friendlyColor;
-    [SerializeField] private Color ennemyColor;
-    [SerializeField] private Color hoverColor;
+    [SerializeField] private Color friendlyColor = new Color();
+    [SerializeField] private Color ennemyColor = new Color();
+    [SerializeField] private Color hoverColor = new Color();
 
     private void OnEnable() {
         boardClicker.OnHoverCell += OnHoverCell;

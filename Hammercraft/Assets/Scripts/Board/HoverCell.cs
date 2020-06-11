@@ -1,21 +1,24 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class HoverCell : BoardBehaviour
 {
     private readonly Color transparent = new Color(0,0,0,0); 
     
-    [SerializeField] private Sprite sprite;
+    [SerializeField] private Sprite sprite = null;
     [SerializeField] private float offset = 0.01f;
 
     private Dictionary<Vector2Int, SpriteRenderer> instances;
-    private Dictionary<Vector2Int, List<Color>> colors;
+    private Dictionary<Color, List<Vector2Int>> colorToPos;
+    private List<Color> stack;
 
 
     private void Start()
     {
         instances = new Dictionary<Vector2Int, SpriteRenderer>();
-        colors = new Dictionary<Vector2Int, List<Color>>();
+        colorToPos = new Dictionary<Color, List<Vector2Int>>();
+        stack = new List<Color>();
 
         foreach(Cell cell in board.Cells()) {
             GameObject go = new GameObject(string.Format("Cell ({0}, {1})", cell.position.x, cell.position.y), typeof(SpriteRenderer));
@@ -27,10 +30,19 @@ public class HoverCell : BoardBehaviour
             
             instances[cell.position] = go.GetComponent<SpriteRenderer>();
             instances[cell.position].sprite = sprite;
-            instances[cell.position].color = transparent;
             instances[cell.position].enabled = false;
+        }
+    }
 
-            colors[cell.position] = new List<Color>();
+    private void Update() {
+        foreach (var kv in colorToPos)
+        {
+            foreach (var pos in kv.Value)
+            {
+                instances[pos].transform.localPosition = board.CellToLocal(pos) + Vector3.up * offset;
+                instances[pos].color = kv.Key;
+                instances[pos].enabled = true;
+            }
         }
     }
 
@@ -39,25 +51,27 @@ public class HoverCell : BoardBehaviour
     }
 
     public void ShowCells(Color color, IEnumerable<Cell> cells) {
+        if (!stack.Contains(color)) stack.Add(color);
+        if (!colorToPos.ContainsKey(color)) {
+            colorToPos.Add(color, new List<Vector2Int>());
+        }
         foreach (var cell in cells) {
-            if (instances.ContainsKey(cell.position) && !colors[cell.position].Contains(color)) {
-                colors[cell.position].Add(color);
+            if (instances.ContainsKey(cell.position)) {
                 instances[cell.position].color = color;
                 instances[cell.position].enabled = true;
+                if (!colorToPos[color].Contains(cell.position))
+                    colorToPos[color].Add(cell.position);
             }
         }
     }
 
     public void HideCells(Color color) {
-        foreach (var cell in instances.Keys) {
-            colors[cell].Remove(color);
-            if (colors[cell].Count > 0)
-                instances[cell].color = colors[cell][colors[cell].Count - 1];
-            else {
-                instances[cell].color = transparent;
-                instances[cell].enabled = false;
+        if (colorToPos.ContainsKey(color)) {
+            foreach (var pos in colorToPos[color])
+            {
+                instances[pos].enabled = false;
             }
-
+            colorToPos.Remove(color);
         }
     }
 }

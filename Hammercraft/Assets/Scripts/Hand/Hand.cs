@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class Hand : BoardBehaviour {
     [SerializeField] private float spacing = 0.1f;
-    [SerializeField] private GameCard cardPrefab;
-    [SerializeField] private PlayerRole role;
+    [SerializeField] private GameCard cardPrefab = null;
+  //  [SerializeField] private PlayerRole role = PlayerRole.PlayerOne;
     public Player player { get; private set; }
     public GameCard[] Cards { get; private set; }
 
@@ -18,6 +18,10 @@ public class Hand : BoardBehaviour {
             Cards[i] = cardObject.GetComponent<GameCard>();
             cardObject.SetActive(false);
         }
+    }
+
+    private void Update() {
+        UpdateHand();
     }
 
     public void UpdateHand() {

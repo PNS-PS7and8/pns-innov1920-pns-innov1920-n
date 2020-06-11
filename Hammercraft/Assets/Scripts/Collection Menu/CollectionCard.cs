@@ -4,10 +4,10 @@ using DG.Tweening;
 
 public class CollectionCard : BoardBehaviour
 {
-    [SerializeField, Range(1f, 2f)] private float scaleUp = 1.5f;
-    [SerializeField, Range(0f, 1f)] private float offsetY = 0.2f;
-    [SerializeField, Range(0f, 1f)] private float offsetZ = 0.2f;
-    [SerializeField] private Transform OverCard = null;
+   // [SerializeField, Range(1f, 2f)] private float scaleUp = 1.5f;
+   // [SerializeField, Range(0f, 1f)] private float offsetY = 0.2f;
+   // [SerializeField, Range(0f, 1f)] private float offsetZ = 0.2f;
+    //[SerializeField] private Transform OverCard = null;
     public CardBase card = null;
     
     [SerializeField] private Transform unitModel = null;
@@ -29,8 +29,7 @@ public class CollectionCard : BoardBehaviour
             nameText.text = card.Name;
             descriptionText.text = card.Description;
             //image.sprite = card.Image;
-        
-            if (card.GetType().IsAssignableFrom(typeof(UnitCard))) {
+            if ((card.GetType().IsAssignableFrom(typeof(UnitCard)) || card.GetType().IsSubclassOf(typeof(UnitCard)))) {
                 unitModel.gameObject.SetActive(true);
                 spellModel.gameObject.SetActive(false);
                 RANGEorCACText.text = (((UnitCard) card).Range) ? "Range" : "Melee";
@@ -58,10 +57,12 @@ public class CollectionCard : BoardBehaviour
 
     private void OnMouseEnter() {
         transform.localScale = new Vector3 (3000,3000,3000);
+        transform.localPosition -= new Vector3(0,0,30) ;
     }
 
     private void OnMouseExit() {
-        transform.localScale = new Vector3(2000,2000,2000);
+        transform.localScale = new Vector3(1500,1500,1500);
+        transform.localPosition += new Vector3(0,0,30) ;
     }
 
     private void OnMouseDown() {

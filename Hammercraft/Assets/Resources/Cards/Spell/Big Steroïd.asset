@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bb01eb12b85eb44897a6d99f0bf8005, type: 3}
+  m_Name: "Big Stero\xEFd"
+  m_EditorClassIdentifier: 
+  resourcePath: "Cards/Spell/Big Stero\xEFd"
+  name: "Big Stero\xEFd"
+  description: 'Increase all stats of your unit.
+
+
+    Increase atk, movement, range
+    stats by 3.'
+  cost: 5
+  castMask: 314
+  particleSystem: {fileID: 6967301586727974932, guid: f7e8b56b1254b4b4f891dc98c7f1209b,
+    type: 3}
+  atq: 3
+  movement: 3
+  range: 3

@@ -6,20 +6,21 @@ using TMPro;
 
 public class DeckCardList : MonoBehaviour
 {
-    [SerializeField] private CollectionCard cardPrefab;
-    [SerializeField] private TMP_Text UnitCountText;
-    [SerializeField] private TMP_Text SpellCountText;
-    [SerializeField] private TMP_Text SaveText;
-    [SerializeField] private TMP_Text DuplicateText;
-    [SerializeField] private TMP_Text DeckName;
-    [SerializeField] private TMP_Text InvalidDeck;
+    [SerializeField] private CollectionCard cardPrefab = null;
+    [SerializeField] private TMP_Text UnitCountText = null;
+    [SerializeField] private TMP_Text SpellCountText = null;
+    [SerializeField] private TMP_Text saveMessage = null;
+    [SerializeField] private TMP_Text DeckName = null;
+
     public CollectionCard[] CardUnit { get; private set; }
     public CollectionCard[] CardSpell { get; private set; }
     private Deck currentDeck = null;
-    private int MAX = 5;
-    private float spacing = 190f;
+    private int MAX = 10;
+    private float spacing = 210f;
     private int unitCount = 0;
     private int spellCount = 0;
+
+    private Vector3 size = new Vector3(1700,1700,1700);
 
 
     void Start()
@@ -52,38 +53,37 @@ public class DeckCardList : MonoBehaviour
 
     bool IsNotTriplicate(CardBase cb){
         int cpt = 0;
-        if (cb.GetType().IsAssignableFrom(typeof(UnitCard))){
+        if ( (cb.GetType().IsAssignableFrom(typeof(UnitCard)) || cb.GetType().IsSubclassOf(typeof(UnitCard)) )){
             for (int i = 0; i < currentDeck.units.Count(); i++){
                 if (currentDeck.units[i].Name == cb.Name){cpt++;}
             }
-        }
-
-        if (!cb.GetType().IsAssignableFrom(typeof(UnitCard))){
+        } else if (!cb.GetType().IsAssignableFrom(typeof(UnitCard))){
             for (int i = 0; i < currentDeck.spells.Count(); i++){
                 if (currentDeck.spells[i].Name == cb.Name){cpt++;}
             }
         }
-
         if (cpt < 2){
             return true;
         }
-        DuplicateText.gameObject.SetActive(true);
+        saveMessage.gameObject.SetActive(true);
+        saveMessage.color = new Color(250/255f, 34/255f, 48/255f, 1);
+        saveMessage.text = "Two copies of the same card maximum!";
         return false;
     }
 
     bool IsValidDeck(){
-        if(currentDeck.spells.Count() == 5 && currentDeck.units.Count() == 5){
+        if(currentDeck.spells.Count() == MAX && currentDeck.units.Count() == MAX){
             return true;
         } else {
-            InvalidDeck.gameObject.SetActive(true);    
+            saveMessage.gameObject.SetActive(true);
+            saveMessage.color = new Color(250/255f, 34/255f, 48/255f, 1);
+            saveMessage.text = "Your deck must have 10 units & spells to be saved!";   
             return false;
         }
     }
 
     void TextUpdate(){
-        SaveText.gameObject.SetActive(false);
-        DuplicateText.gameObject.SetActive(false);
-        InvalidDeck.gameObject.SetActive(false);
+        saveMessage.gameObject.SetActive(false);
     }
 
     public void Save(){
@@ -91,8 +91,36 @@ public class DeckCardList : MonoBehaviour
         if (IsValidDeck()){
             DeckListingMenu dlm = Object.FindObjectOfType<DeckListingMenu>();
             dlm.setDeck(currentDeck);
-            SaveText.gameObject.SetActive(true);
+            saveMessage.gameObject.SetActive(true);
+            saveMessage.color = new Color(27/255f, 140/255f, 30/255f, 1);
+            saveMessage.text = "Deck saved!";
             AccessDatabase.SaveDeck(PlayerPrefs.GetString("username"), currentDeck);
+        }
+    }
+
+    public void Delete() {
+        TextUpdate();
+        DeckListingMenu dlm = Object.FindObjectOfType<DeckListingMenu>();
+        if (currentDeck != null && dlm.ListDecks.Count > 1) {
+            saveMessage.gameObject.SetActive(true);
+            saveMessage.color = new Color(27/255f, 140/255f, 30/255f, 1);
+            saveMessage.text = "Deck deleted";
+            AccessDatabase.DeleteDeck(PlayerPrefs.GetString("username"), currentDeck);
+            dlm.RemoveDeck(currentDeck);
+            currentDeck = null;
+            UnitCountText.text = "";
+            SpellCountText.text = "";
+            DeckName.text = "";
+            Reset();
+            Start();
+        } else {
+            saveMessage.gameObject.SetActive(true);
+            saveMessage.color = new Color(250/255f, 34/255f, 48/255f, 1);
+            if (currentDeck == null) {
+                saveMessage.text = "No deck selected.";
+            } else {
+                saveMessage.text = "You must have at least one deck.";
+            }
         }
     }
 
@@ -100,19 +128,18 @@ public class DeckCardList : MonoBehaviour
         TextUpdate();
         if (currentDeck != null){
 
-            if (cb.GetType().IsAssignableFrom(typeof(UnitCard)) && currentDeck.units.Count() < MAX && IsNotTriplicate(cb)){
+            if ( (cb.GetType().IsAssignableFrom(typeof(UnitCard)) || cb.GetType().IsSubclassOf(typeof(UnitCard)) ) && currentDeck.units.Count() < MAX && IsNotTriplicate(cb)){
                 for (int i = 0; i < CardUnit.Count(); i++){
                     if(CardUnit[i].gameObject.activeSelf == false){
                         CardUnit[i].card = cb;
                         CardUnit[i].gameObject.SetActive(true);
+                        CardUnit[i].transform.localScale = size;
                         currentDeck.AddCard(cb);
                         unitCount++;
                         break;
                     }
                 }
-            } 
-            
-            if (!cb.GetType().IsAssignableFrom(typeof(UnitCard)) && currentDeck.spells.Count() < MAX && IsNotTriplicate(cb)){
+            } else if (!cb.GetType().IsAssignableFrom(typeof(UnitCard)) && currentDeck.spells.Count() < MAX && IsNotTriplicate(cb)){
                 for (int i = 0; i < CardSpell.Count(); i++){
                     if(CardSpell[i].gameObject.activeSelf == false){
                         CardSpell[i].card = cb;
@@ -131,8 +158,9 @@ public class DeckCardList : MonoBehaviour
         TextUpdate();
         currentDeck.RemoveCard(cc.card);
         cc.gameObject.SetActive(false);
-        cc.transform.localScale = new Vector3 (1800,1800,1800);
-        if (cc.card.GetType().IsAssignableFrom(typeof(UnitCard))){
+        cc.transform.localScale = size;
+        cc.transform.localPosition += new Vector3(0,0,30) ;
+        if (cc.card.GetType().IsAssignableFrom(typeof(UnitCard)) || cc.card.GetType().IsSubclassOf(typeof(UnitCard))){
             unitCount--;
         } else {spellCount--;}
         DisplayCount();
@@ -159,11 +187,17 @@ public class DeckCardList : MonoBehaviour
                 CardUnit[i].gameObject.SetActive(true);
             }
             Vector3 pos = CardUnit[i].transform.localPosition;
-            Vector3 scale = new Vector3(2000,2000,2000);
+            Vector3 scale = size;
             CardUnit[i].transform.localScale = scale;
-            pos.x = (-380)+(i * spacing);
-            pos.z = -10;
-            pos.y = 200;
+            if (i > 4){
+                pos.x = (-375)+((i-5) * spacing);
+                pos.z = -20;
+                pos.y = 115;
+            } else {
+                pos.x = (-490)+(i * spacing);
+                pos.z = -10;
+                pos.y = 265;
+            }
             CardUnit[i].transform.localPosition = pos;
         }
         
@@ -173,11 +207,17 @@ public class DeckCardList : MonoBehaviour
                 CardSpell[i].gameObject.SetActive(true);
             }
             Vector3 pos = CardSpell[i].transform.localPosition;
-            Vector3 scale = new Vector3(2000,2000,2000);
+            Vector3 scale = size;
             CardSpell[i].transform.localScale = scale;
-            pos.x = (-370)+(i * spacing);
-            pos.z = -10;
-            pos.y = -200;
+            if (i > 4){
+                pos.x = (-375)+((i-5) * spacing);
+                pos.z = -20;
+                pos.y = -295;
+            } else {
+                pos.x = (-490)+(i * spacing);
+                pos.z = -10;
+                pos.y = -145;
+            }
             CardSpell[i].transform.localPosition = pos;
         }
     }

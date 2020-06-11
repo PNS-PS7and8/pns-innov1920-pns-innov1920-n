@@ -33,8 +33,8 @@ public class PlayerTest : MonoBehaviour
 
     /*[Test]
     public void PlayerUseCardSpell_Test(){
-        UnitCard u = ScriptableObject.CreateInstance<UnitCard>();
-        SpellCard s = ScriptableObject.CreateInstance<DamageSpell>();
+        UnitCard u = Resources.Load<UnitCard>("Cards/Unit/Noob");
+        SpellCard s = Resources.Load<SpellCard>("Cards/Spell/Fireball");
         UnitCard[] us = new UnitCard[1];
         SpellCard[] ss = new SpellCard[1];
         us[0] = u;
@@ -43,13 +43,13 @@ public class PlayerTest : MonoBehaviour
         Player p = new Player(deck, 0);
         SpellCard a = p.DrawSpell();
         p.UseCard(a);
-        Assert.True(p.Hand.Count == 0);
+        Assert.That(p.Hand.Count, Is.EqualTo(0));
     }
 
     [Test]
     public void PlayerUseCardUnit_Test(){
-        UnitCard u = ScriptableObject.CreateInstance<UnitCard>();
-        SpellCard s = ScriptableObject.CreateInstance<DamageSpell>();
+        UnitCard u = Resources.Load<UnitCard>("Cards/Unit/Noob");
+        SpellCard s = Resources.Load<SpellCard>("Cards/Spell/Fireball");
         UnitCard[] us = new UnitCard[1];
         SpellCard[] ss = new SpellCard[1];
         us[0] = u;
@@ -63,8 +63,8 @@ public class PlayerTest : MonoBehaviour
 
         [Test]
     public void PlayerDrawSpell_Test(){
-        UnitCard u = ScriptableObject.CreateInstance<UnitCard>();
-        SpellCard s = ScriptableObject.CreateInstance<DamageSpell>();
+        UnitCard u = Resources.Load<UnitCard>("Cards/Unit/Noob");
+        SpellCard s = Resources.Load<SpellCard>("Cards/Spell/Fireball");
         UnitCard[] us = new UnitCard[1];
         SpellCard[] ss = new SpellCard[1];
         us[0] = u;
@@ -77,8 +77,8 @@ public class PlayerTest : MonoBehaviour
 
     [Test]
     public void PlayerDrawUnit_Test(){
-        UnitCard u = ScriptableObject.CreateInstance<UnitCard>();
-        SpellCard s = ScriptableObject.CreateInstance<DamageSpell>();
+        UnitCard u = Resources.Load<UnitCard>("Cards/Unit/Noob");
+        SpellCard s = Resources.Load<SpellCard>("Cards/Spell/Fireball");
         UnitCard[] us = new UnitCard[1];
         SpellCard[] ss = new SpellCard[1];
         us[0] = u;

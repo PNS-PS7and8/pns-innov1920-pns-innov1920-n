@@ -1,21 +1,24 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 [System.Serializable]
 public class Player {
-    [SerializeField] private Deck originalDeck;
-    [SerializeField] private Deck deck;
+    [SerializeField] private Deck originalDeck = null;
+    [SerializeField] private Deck deck = null;
     
     public Deck OriginalDeck => originalDeck;
     public Deck Deck => deck;
 
-    [SerializeField] private List<string> serializedHand;
+    [SerializeField] private List<string> serializedHand = null;
     [SerializeField] private PlayerRole role;
-    [SerializeField] private int gold;
-    [SerializeField] private int currentGold;
+    [SerializeField] private int gold = 0;
+    [SerializeField] private int currentGold = 0;
     public List<CardBase> Hand => serializedHand.Select(c => Resources.Load<CardBase>(c)).ToList();
     public PlayerRole Role => role;
+
+
     public int Gold => gold;
     public int CurrentGold => currentGold;
 
@@ -39,13 +42,36 @@ public class Player {
 
     public UnitCard DrawUnit() {
         UnitCard t = Deck.DrawUnit();
-        serializedHand.Add(t.ResourcePath);
+        if (serializedHand.Count < 10)
+            serializedHand.Add(t.ResourcePath);
         return t;
     }
 
+    public void addCard(CardBase card){
+        if (serializedHand.Count < 10)
+            serializedHand.Add(card.ResourcePath);
+    }
+    
+    public Tuple<List<UnitCard>,List<SpellCard>> DrawMulligan(PlayerRole playerRole)
+    {
+        List<UnitCard> U = new List<UnitCard>();
+        List<SpellCard> S = new List<SpellCard>();
+        U.Add(Deck.DrawUnit());
+        U.Add(Deck.DrawUnit());
+        S.Add(Deck.DrawSpell());
+        if (playerRole.Equals(PlayerRole.PlayerTwo))
+        {
+            S.Add(Deck.DrawSpell());
+        }
+
+        return Tuple.Create(U,S);
+    }
+    
+
     public SpellCard DrawSpell() {
         SpellCard t = Deck.DrawSpell();
-        serializedHand.Add(t.ResourcePath);
+        if (serializedHand.Count < 10)
+            serializedHand.Add(t.ResourcePath);
         return t;
     }
 

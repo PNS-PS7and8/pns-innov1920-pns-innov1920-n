@@ -7,9 +7,9 @@ using UnityEngine;
 public class RoomListingsMenu : MonoBehaviourPunCallbacks
 {
     [SerializeField]
-    private RoomListing _roomListing;
+    private RoomListing _roomListing = null;
     [SerializeField]
-    private Transform _content;
+    private Transform _content = null;
 
     private Dictionary<string,RoomListing> ListGames = new Dictionary<string, RoomListing>();
    

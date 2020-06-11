@@ -12,6 +12,10 @@ public abstract class CardBase : ScriptableObject{
     [SerializeField, TextArea] protected string description = "";
     [SerializeField] protected int cost = 1;
     [SerializeField] public CastMask castMask = 0;
+
+    [SerializeField] public ParticleSystem particleSystem;
+
+    ParticleSystem ParticleSystem => particleSystem;
     
     public string ResourcePath => resourcePath;
 
@@ -21,15 +25,14 @@ public abstract class CardBase : ScriptableObject{
     public string Name => name;
     
 
-    public bool Use(Board board, Cell target, PlayerRole player) {
+    public bool Use(Board board, Cell target, PlayerRole player, Player objPlayer) {
         if (CardCast.CanCast(castMask, board, target)) {
-            CardEffect(board, target, player);
-            return true;
+            return CardEffect(board, target, player, objPlayer);
         }
         return false;
     }
 
-    protected abstract void CardEffect(Board board, Cell target, PlayerRole player);
+    protected abstract bool CardEffect(Board board, Cell target, PlayerRole player, Player objPlayer);
 }
 
 public abstract class SpellCard : CardBase {}

@@ -13,17 +13,21 @@ using DG.Tweening;
 public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
     public Board board => manager.Board;
     public GameManager Manager => manager;
+    public GameObject ValidateButton => validateButton;
     [SerializeField] private Vector2Int boardSize = new Vector2Int(50, 50);
-    [SerializeField] private float perlinNoiseScale;
-    [SerializeField] private Vector3 perlinNoiseOffset;
-    [SerializeField] private Transform EndTurnButton;
-    [SerializeField] private TMP_Text TimerText;
-    [SerializeField] private BoardCardDraw[] draws;
-    [SerializeField] private Hand _hand;
-    [SerializeField] public TMP_Text scoreText1;
-    [SerializeField] public TMP_Text scoreText2;
-    [SerializeField] public TMP_Text infoWin;
-    [SerializeField] public GameObject YourTurnButton;
+    [SerializeField] private float perlinNoiseScale = 0.0f;
+    [SerializeField] private Vector3 perlinNoiseOffset = Vector3.zero;
+    [SerializeField] private Transform EndTurnButton = null;
+    [SerializeField] private TMP_Text TimerText = null;
+    [SerializeField] private BoardCardDraw[] draws = null;
+    [SerializeField] private Hand _hand = null;
+    [SerializeField] public TMP_Text scoreText1 = null;
+    [SerializeField] public TMP_Text scoreText2 = null;
+    [SerializeField] public TMP_Text infoWin = null;
+    [SerializeField] public GameObject YourTurnButton = null;
+    [SerializeField] private BoardPlayer BoardPlayer = null;
+    [SerializeField] private GameObject validateButton = null;
+    [SerializeField] private GameObject DrawUI = null;
 
 
     public Hand Hand { get { return _hand; } }
@@ -72,7 +76,7 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
             StartOfEnnemyTurn();
         }
       
-        UpdateScore(manager.GetScore(PhotonNetwork.LocalPlayer.ActorNumber), manager.GetScore(-1),1);
+        UpdateScore(manager.GetScore(PlayersExtension.LocalPlayer()), manager.GetScore(PlayerRole.Spectator),1);
     }
 
     public void UpdateScore(int localscore, int maxscore,int score){
@@ -89,6 +93,7 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
 
     private void StartOfTurn()
     {
+       
         StartCoroutine(YourTurn());
         startOfEnnemyTurn = true;
         if (_timer != null)
@@ -108,7 +113,17 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
     }
 
     IEnumerator YourTurn(){
-        YourTurnButton.SetActive(true) ;
+        if (manager.Turn == 1)
+        {
+            BoardPlayer.Mulligan();
+            yield return new WaitUntil(() => validateButton.activeInHierarchy);
+            yield return new WaitWhile(() => validateButton.activeInHierarchy);
+
+        }
+            yield return new WaitUntil(() => DrawUI.activeInHierarchy);
+            yield return new WaitWhile(() => DrawUI.activeInHierarchy);
+        
+        YourTurnButton.SetActive(true);
         yield return new WaitForSecondsRealtime(2f);
         YourTurnButton.SetActive(false);
     }
@@ -128,7 +143,16 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
 
     private IEnumerator Timer()
     {
-        for(int i=60; i > 0; i--)
+        TimerText.enabled = false;
+        if (manager.Turn == 1)
+        {
+            yield return new WaitUntil(() => validateButton.activeInHierarchy);
+            yield return new WaitWhile(() => validateButton.activeInHierarchy);
+        }
+        yield return new WaitUntil(() => DrawUI.activeInHierarchy);
+        yield return new WaitWhile(() => DrawUI.activeInHierarchy);
+
+        for (int i=60; i > 0; i--)
         {
             TimerText.text = i.ToString();
             
@@ -151,19 +175,17 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
     public static Photon.Realtime.Player LocalPhotonPlayer => PhotonNetwork.LocalPlayer;
 
     private GameManager NewGame() {
+        GameModes mode = GameModes.DestroyTheBase;
+        if (PhotonNetwork.InRoom) {
+            mode = (GameModes) PhotonNetwork.CurrentRoom.CustomProperties["GameMode"];
+        }
         GameManager.Setup setup = new GameManager.Setup();
         setup.boardSize = boardSize;
         setup.noiseScale = perlinNoiseScale;
         setup.noiseOffset = perlinNoiseOffset;
+        setup.gameMode = mode;
         Deck deck1 = null;
         Deck deck2 = null;
-        /*
-        UnitCard c1 = Resources.Load<UnitCard>("Cards/Unit/Noob");
-        UnitCard c2 = Resources.Load<UnitCard>("Cards/Unit/Noob");
-        UnitCard c3 = Resources.Load<UnitCard>("Cards/Unit/Noob");
-        SpellCard c4 = Resources.Load<SpellCard>("Cards/Spell/Fireball");
-        Deck deck = new Deck( new UnitCard[] { c1, c1, c2, c2, c3, c3 }, new SpellCard[] { c4, c4, c4, c4, c4 } );
-        */
         if (PhotonNetwork.IsConnected)
         {
 
@@ -173,11 +195,11 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
         {
             
             UnitCard c1 = Resources.Load<UnitCard>("Cards/Unit/Noob");
-            UnitCard c2 = Resources.Load<UnitCard>("Cards/Unit/Noob");
-            UnitCard c3 = Resources.Load<UnitCard>("Cards/Unit/Noob");
+            UnitCard c2 = Resources.Load<UnitCard>("Cards/Unit/Eagle");
+            UnitCard c3 = Resources.Load<UnitCard>("Cards/Unit/Dragon");
             SpellCard c4 = Resources.Load<SpellCard>("Cards/Spell/Fireball");
-            deck1 = new Deck( new UnitCard[] { c1, c1, c2, c2, c3, c3 }, new SpellCard[] { c4, c4, c4, c4, c4 } );
-            deck2 = new Deck(new UnitCard[] { c1, c1, c2, c2, c3, c3 }, new SpellCard[] { c4, c4, c4, c4, c4 });
+            deck1 = new Deck( new UnitCard[] { c1, c1, c2, c2, c3, c3, c2, c3, c3}, new SpellCard[] { c4, c4, c4, c4, c4 } );
+            deck2 = new Deck(new UnitCard[] { c1, c1, c2, c2, c3, c3, c2, c3, c3 }, new SpellCard[] { c4, c4, c4, c4, c4 });
 
         }
 
@@ -194,8 +216,9 @@ public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        Debug.Log("Game manager synced");
+       // Debug.Log("Game manager synced");
     }
+
     public override void OnLeftRoom()
     {
 

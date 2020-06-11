@@ -38,7 +38,7 @@ public static class UnitMovement {
         if (Check(value, UnitMoveMask.PathFinding)) {
             return PathFinding.ComputePath(board, origin, target, maxDistance, value, out path);
         } else if (Check(value, UnitMoveMask.FlyBy) && CheckCell(value, board, target)) {
-            if (target.Distance(origin) <= maxDistance) {
+            if (target.Distance(origin) <= maxDistance*2) {
                 path = new List<Cell> {origin, target};
                 return true;
             }

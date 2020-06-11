@@ -14,10 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourcePath: Cards/Spell/Heal
   name: Heal
-  description: 'Heal a unit, and can even overheal !
+  description: 'Heal a unit, and can even overheal!
 
 
-    Heal 2 health.'
+    Heal 3 health.'
   cost: 2
   castMask: 314
-  damage: -2
+  particleSystem: {fileID: 6967301586727974932, guid: f7e8b56b1254b4b4f891dc98c7f1209b,
+    type: 3}
+  damage: -3
+  canHitSpecials: 1
