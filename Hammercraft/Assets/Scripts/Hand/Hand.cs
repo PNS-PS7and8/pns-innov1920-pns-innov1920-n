@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Classe représentant la main du joueur
 public class Hand : BoardBehaviour {
     [SerializeField] private float spacing = 0.1f;
     [SerializeField] private GameCard cardPrefab = null;

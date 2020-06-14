@@ -1,6 +1,7 @@
 using System.Linq;
 using UnityEngine;
 
+//Masque de déploiement permettant de définir des règles de déploiement complexes
 [System.Serializable, System.Flags]
 public enum CastMask {
     EmptyCell     = 1 << 0,

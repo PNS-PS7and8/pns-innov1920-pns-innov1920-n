@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//Classe représentant une carte de jeu
 [System.Serializable]
 public abstract class CardBase : ScriptableObject{
 #if UNITY_EDITOR
@@ -35,4 +36,6 @@ public abstract class CardBase : ScriptableObject{
     protected abstract bool CardEffect(Board board, Cell target, PlayerRole player, Player objPlayer);
 }
 
+//Classe représentant une carte de sort
+//chaque archétype de sort hérite de cette classe est redéfinis le CardEffect
 public abstract class SpellCard : CardBase {}

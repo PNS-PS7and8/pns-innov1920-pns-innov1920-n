@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using TMPro;
 
+//Classe permettant l'affichage des Hammercoins des joueurs
 public class InfoGold : BoardBehaviour
 {
     [System.Serializable] public enum LocalOrRemote {

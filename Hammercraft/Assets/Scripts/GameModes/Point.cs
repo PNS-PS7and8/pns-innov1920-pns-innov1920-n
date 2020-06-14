@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using UnityEngine;
-
+//Mode de jeu Point
 public class Point : GameMode
 {
 

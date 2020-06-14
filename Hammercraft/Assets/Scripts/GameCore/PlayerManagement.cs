@@ -2,6 +2,8 @@ using Photon.Pun;
 using UnityEngine;
 using ExitGames.Client.Photon;
 
+//Classe permettant de faire le lien entre le joueur d'un point de vu réseau
+//et leur objet Player respectif
 public enum PlayerRole {
     PlayerOne = 0,
     PlayerTwo = 1,

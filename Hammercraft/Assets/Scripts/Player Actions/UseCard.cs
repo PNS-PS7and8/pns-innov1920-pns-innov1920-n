@@ -2,6 +2,8 @@
 using System.Linq;
 using UnityEngine;
 using TMPro;
+
+//Classe permettant l'utilisation de cartes, et les contraintes qui y sont liés
 public class UseCard : BoardBehaviour
 {
     [SerializeField] private BoardClicker boardClicker = null;

@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
+//Classe s'occupant de la pioche du deck par le joueur lors du jeu
 public class BoardCardDraw : MonoBehaviour {
     public enum Draw {
         Unit, Spell

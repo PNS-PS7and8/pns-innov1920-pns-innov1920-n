@@ -7,6 +7,7 @@ public class BuffSpell : SpellCard
     [SerializeField] private int movement = 0;
     [SerializeField] private int range = 0;
 
+    //Carte de sort augmentant certaines statistiques de sa cible
     protected override bool CardEffect(Board board, Cell target, PlayerRole player, Player objPlayer)
     {
         Unit unit = board.GetUnit(target);

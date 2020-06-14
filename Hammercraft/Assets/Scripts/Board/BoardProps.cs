@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Classe s'occupant des différents reliefs possibles du plateau
 public class BoardProps : BoardBehaviour {
     [SerializeField, Range(0, 1)] private float spawnRate = 0.0f;
     

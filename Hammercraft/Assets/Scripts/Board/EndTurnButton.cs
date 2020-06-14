@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System;
-
+//Bouton de fin de tour
 public class EndTurnButton : MonoBehaviour
 {
     [SerializeField] private BoardManager BoardManager = null;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Classe s'occupant du zoom/dézoom sur le plateau ainsi que le déplacement en X Y par le joueur.
 public class MoveBoard : MonoBehaviour
 {
     [SerializeField] private float maxZoom = 0.03f;

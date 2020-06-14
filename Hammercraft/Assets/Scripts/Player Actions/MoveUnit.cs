@@ -3,6 +3,8 @@ using System.Linq;
 using UnityEngine;
 using TMPro;
 using System.Collections;
+
+//Classe s'occupant du déplacement et de l'attaque des unités sur le plateau
 public class MoveUnit : BoardBehaviour
 {
     [SerializeField] private BoardClicker boardClicker = null;

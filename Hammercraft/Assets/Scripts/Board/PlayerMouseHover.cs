@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Classe gérant le survol d'une cellule par la souris du joueur
 public class PlayerMouseHover : BoardBehaviour
 {
     [SerializeField] private BoardClicker boardClicker = null;

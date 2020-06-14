@@ -6,6 +6,7 @@ public enum GameState {
     Finished = WinPlayerOne | WinPlayerTwo | Draw
 }
 
+//Classe gérant les modes de jeu, permettant de définir quel joueur gagne et quel joueur perd la partie
 public static class GameStateExtension {
     public static bool Finished(this GameState state) {
         return (int)(state & GameState.Finished) != 0;

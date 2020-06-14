@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using Photon.Pun;
 
+//Classe affichant le nom des joueurs sur le plateau
 public class InfoPlayer : BoardBehaviour
 {
     [SerializeField] public TMP_Text text;

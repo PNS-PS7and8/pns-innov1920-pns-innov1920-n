@@ -7,6 +7,7 @@ public class SummonerCard : UnitCard {
     [SerializeField] protected CardBase summon;
     [SerializeField] protected int number;
 
+    //Carte d'unité ajoutant des cartes dans la main du joueur au déploiement
     protected override bool CardEffect(Board board, Cell target, PlayerRole player, Player objPlayer)
     {
         board.AddUnit(this, target, player);

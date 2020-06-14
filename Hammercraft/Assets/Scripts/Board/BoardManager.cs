@@ -10,6 +10,7 @@ using TMPro;
 using PHashTable = ExitGames.Client.Photon.Hashtable;
 using DG.Tweening;
 
+//Classe s'occupant de la synchronization des joueurs lors d'une partie en réseau
 public class BoardManager : MonoBehaviourPunCallbacks, IPunObservable {
     public Board board => manager.Board;
     public GameManager Manager => manager;

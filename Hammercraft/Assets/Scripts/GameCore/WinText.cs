@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using Photon.Pun;
 
+//Affichage du texte de victoire ou de défaite
 public class WinText : BoardBehaviour
 {
     [SerializeField] public TMP_Text text;

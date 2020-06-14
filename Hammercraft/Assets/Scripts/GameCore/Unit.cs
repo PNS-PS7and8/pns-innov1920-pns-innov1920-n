@@ -4,6 +4,7 @@ using Photon.Pun;
 using UnityEngine.Events;
 using System;
 
+//Classe représentant une unité sur le plateau de jeu
 [System.Serializable]
 public class Unit : ITakeDamage, IDealDamage
 {

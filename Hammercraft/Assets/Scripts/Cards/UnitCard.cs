@@ -1,5 +1,7 @@
 using UnityEngine;
 
+//Classe représentant une carte d'unité
+//chaque archétype d'unité hérite de cette classe est redéfinis le CardEffect
 [CreateAssetMenu(menuName="Cards/Units/Default")]
 public class UnitCard : CardBase {
     [SerializeField] private GameObject model = null;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Classe gérant le clique du joueur sur le plateau afin de récupéré la cellule ou l'unité cliqué
 [RequireComponent(typeof(Collider))]
 public class BoardClicker : BoardBehaviour
 {

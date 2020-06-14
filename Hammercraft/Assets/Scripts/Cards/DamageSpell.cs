@@ -9,6 +9,7 @@ public class DamageSpell : SpellCard
     public int Damage => damage;
     public bool CanHitSpecials => canHitSpecials;
 
+    //Carte de sort réduisant les points de vie de l'unité ciblée
     protected override bool CardEffect(Board board, Cell target, PlayerRole player, Player objPlayer)
     {
         Unit unit = board.GetUnit(target);

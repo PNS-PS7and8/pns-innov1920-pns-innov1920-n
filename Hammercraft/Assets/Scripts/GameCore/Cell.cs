@@ -2,6 +2,7 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Objet représentant une cellule composant le plateau (Board)
 [System.Serializable]
 public class Cell {
     public enum CellState { Free, Occupied, Blocked }
@@ -30,6 +31,7 @@ public class Cell {
         }
     }}
 
+    //Permet d'obtenir la distance entre deux cellules
     public float Distance(Cell other) {
         return 
             Mathf.Abs(position.x - other.position.x) +

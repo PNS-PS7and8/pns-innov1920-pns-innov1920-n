@@ -2,6 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
+//Classe s'occupant d'afficher un retour visuel du survol de la souris par l'utilisateur sur le plateau
 public class HoverCell : BoardBehaviour
 {
     private readonly Color transparent = new Color(0,0,0,0); 

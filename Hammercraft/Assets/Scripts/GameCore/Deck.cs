@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Text;
 using UnityEngine.Serialization;
 
+//Classe représentant le deck du joueur
 [System.Serializable]
 public class Deck {
    // [SerializeField] private string owner = null;
@@ -54,18 +55,21 @@ public class Deck {
         serializedSpells = serializedSpells.OrderBy(spell => Random.value).ToList();
     }
 
+    //Pioche une carte du deck Unité et l'ajoute à la main du joueur
     public UnitCard DrawUnit() {
         var card = serializedUnits[0];
         serializedUnits.RemoveAt(0);
         return Resources.Load<UnitCard>(card);
     }
 
+    //Pioche une carte du deck Sorts et l'ajoute à la main du joueur
     public SpellCard DrawSpell() {
         var card = serializedSpells[0];
         serializedSpells.RemoveAt(0);
         return Resources.Load<SpellCard>(card);
     }
 
+    //Ajoute une carte au deck
     public void AddCard(CardBase card) {
         if (card.GetType().IsAssignableFrom(typeof(UnitCard)) || card.GetType().IsSubclassOf(typeof(UnitCard)) ) {
             serializedUnits.Add(card.ResourcePath);
@@ -74,6 +78,7 @@ public class Deck {
         }
     }
 
+    //Supprime une carte du deck
     public void RemoveCard(CardBase card) {
         if (card.GetType().IsAssignableFrom(typeof(UnitCard)) || card.GetType().IsSubclassOf(typeof(UnitCard)) ) {
             serializedUnits.Remove(card.ResourcePath);

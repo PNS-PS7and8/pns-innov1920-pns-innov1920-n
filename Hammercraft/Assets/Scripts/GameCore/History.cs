@@ -2,7 +2,8 @@
 using UnityEngine;
 using System.Linq;
 
-
+//Historique permettant de garder une trace des différentes actions des joueurs lors de leur tour
+//Cela permet par exemple d'empécher une unité d'être déplacée 2 fois dans le même tour
 [System.Serializable]
 public class GameAction {
     [SerializeField] protected PlayerRole player;

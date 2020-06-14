@@ -6,6 +6,7 @@ using System.Linq;
 public class EaterCard : UnitCard {
     [SerializeField] protected int killRange;
 
+    //Carte d'unité qui détruit les unités alliés proche lors du déploiement pour prendre leurs statistiques de vie et d'attaque
     protected override bool CardEffect(Board board, Cell target, PlayerRole player, Player objPlayer)
     {
         base.CardEffect(board, target, player, objPlayer);

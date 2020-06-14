@@ -3,6 +3,7 @@ using UnityEngine;
 using Photon.Pun;
 using System.Collections.Generic;
 
+//Game manager s'occupant de la gestion des tours des joueurs lors d'une partie
 [System.Serializable]
 public class GameManager {
     [System.Serializable]
@@ -61,11 +62,11 @@ public class GameManager {
             new Player(playerTwoDeck, PlayerRole.PlayerTwo)
         };
     }
-
     public int GetScore(PlayerRole player){
         return GameMode.GetScore(player, this);
     }
 
+    //Indique si c'est le tour du joueur donnée ou non
     public bool CanPlay(PlayerRole player) {
         return player == playerTurn;
     }
@@ -92,6 +93,7 @@ public class GameManager {
         return playerTurn == PlayersExtension.LocalPlayer();
     }
 
+    //Augmente le compteur de tour, et augmente les Hammercoin quand les deux joueurs ont joués leur tour
     public void IncreaseTurn(){
         if (midturn == 1){
             midturn = 0;
@@ -102,12 +104,14 @@ public class GameManager {
         }
     }
 
+    //Augmente les Hammercoins maximum de chaque joueur
     public void IncreaseGold(){
         foreach (Player p in players){
             p.SetGold(turn);
         }
     }
 
+    //Remet à 0 les Hammercoins des joueurs
     public void ResetGold(){
         foreach (Player p in players){
             p.SetCurrentGold(p.Gold);

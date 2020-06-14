@@ -1,6 +1,7 @@
 using System.Linq;
 using UnityEngine;
 
+//Mode de jeu DestroyTheBase
 public class DestroyTheBase : GameMode {
     public override GameState CurrentGameState(GameManager gameManager)
     {

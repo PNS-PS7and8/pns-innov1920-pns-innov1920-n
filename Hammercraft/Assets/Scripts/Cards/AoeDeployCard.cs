@@ -7,6 +7,7 @@ public class AoeDeployCard : UnitCard {
     [SerializeField] protected int aoeDmg;
     [SerializeField] protected int aoeRange;
 
+    //Carte effectuant des dommage en zone lorsqu'elle est déployée
     protected override bool CardEffect(Board board, Cell target, PlayerRole player, Player objPlayer)
     {
         List<Cell> cells = board.Disc(target, aoeRange).ToList();

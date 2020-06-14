@@ -3,6 +3,7 @@ using UnityEngine;
 using DG.Tweening;
 using System;
 
+//Classe représentant l'objet carte dans la main du joueur lors d'une partie
 public class GameCard : BoardBehaviour
 {
     [SerializeField, Range(1f, 2f)] private float scaleUp = 1.5f;
@@ -56,6 +57,7 @@ public class GameCard : BoardBehaviour
         }
     }
 
+    //Utilise la carte sur la cellule donnée, et la retire de la main du joueur
     public bool Use(Cell cell) {
         ParticleSystem partic = card.particleSystem;
         if (card.Use(board, cell, manager.PlayerTurn, manager.LocalPlayer)) {
@@ -68,6 +70,7 @@ public class GameCard : BoardBehaviour
         return false;
     }
 
+    //Joue l'effet de particule sur la cellule donnée de la carte
     private void PlayEffect(ParticleSystem particle, Cell cell){
         ParticleSystem particleEff = GameObject.Instantiate(particle);
         particleEff.transform.parent = boardManager.transform;
@@ -75,6 +78,7 @@ public class GameCard : BoardBehaviour
         particleEff.transform.localScale = new Vector3(0.005f,0.005f,0.005f);
     }
 
+    //Grossis la carte lorsque l'on passe la souris dessus
     private void OnMouseEnter() {
         transform.DOScale(Vector3.one * scaleUp, 0.1f);
         transform.DOLocalMoveY(offsetY, 0.1f);
@@ -84,6 +88,7 @@ public class GameCard : BoardBehaviour
         DOTween.Play(transform);
     }
 
+    //Remet la carte à sa taille normale lorsque la souris quitte celle-ci
     private void OnMouseExit() {
         transform.DOScale(Vector3.one,0.2f);
         transform.DOLocalMoveY(0, 0.1f);

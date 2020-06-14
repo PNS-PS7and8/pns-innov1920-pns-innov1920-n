@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+//Classe représentant le plateau de jeu hexagonale
+
 [System.Serializable]
 public class Board {
     [SerializeField] private Cell[] cells = null;
@@ -29,6 +31,7 @@ public class Board {
         ResetGrid();
     }
 
+    //Permet d'obtenir la cell à l'index x y donné
     public int CellIndex(int x, int y) {
         return x % size.x + y * size.x;
     }
@@ -59,6 +62,7 @@ public class Board {
         return 0 <= x && x < size.x && 0 <= y && y < size.y && GetCell(x, y).cellType != Cell.CellType.None;
     }
 
+    //Retourne la cellule pour la position demandée
     public Cell GetCell(Vector2Int cellPosition) {
         return GetCell(cellPosition.x, cellPosition.y);
     }
@@ -68,6 +72,7 @@ public class Board {
         
     }
 
+    //Permet d'obtenir les coordonnées dans l'espace de la cellule donnée
     public Vector3 CellToLocal(Vector2Int cell) {
         return CellToLocal(cell.x, cell.y);
     }
@@ -80,11 +85,13 @@ public class Board {
         return pos;
     }
 
+    //Permet d'obtenir la cellule présente aux coordonnées dans l'espace données
     public Vector2Int LocalToCell(Vector3 point) {
         return new Vector2Int(Mathf.RoundToInt(point.x * 2f / 3f), Mathf.RoundToInt(point.x / -3f + Mathf.Sqrt(3f)/3f * point.z)) + size / 2;
     }
 
-
+    //Permet d'obtenir l'unité présente sur la cellule donnée
+    //null si aucune cellule n'est présente
     public Unit GetUnit(Cell cell, bool dead = false) {
         IEnumerable<Unit> e = units.Where(u => u.position == cell.position && (dead || !u.Dead));
         if (e.Count() > 0) {
@@ -103,6 +110,7 @@ public class Board {
         }
     }
 
+    //Permet d'obtenir la cellule sur laquelle se trouve l'unité
     public Cell GetCell(Unit unit) {
         return GetCell(unit.position);
     }
@@ -110,6 +118,7 @@ public class Board {
     public Vector3 LocalPosition(Unit unit) => CellToLocal(unit.position);
     public Vector3 LocalPosition(Cell cell) => CellToLocal(cell.position);
 
+    //Permet d'obtenir une liste de cellules voisines pour la position ou la cellule donnée
     public IEnumerable<Cell> Neighbors(Vector2Int pos, bool addDummy=false) {
         int[] dx = new int[] {1,1,0,-1,-1,0};
         int[] dy = new int[] {0,-1,-1,0,1,1};
@@ -127,6 +136,7 @@ public class Board {
         return Neighbors(cell.position, addDummy);
     }
 
+    //Permet d'obtenir une liste de cellules en anneau autour d'une cellule pour une distance donnée
     public IEnumerable<Cell> Ring(Cell cell, int distance) {
         if (distance == 0){
             yield return cell;
@@ -144,12 +154,14 @@ public class Board {
         }
     }
 
+    //Permet d'obtenir une liste de toutes les cellules autour d'une cellule pour une distance donnée
     public IEnumerable<Cell> Disc(Cell cell, int distance) {
         for (int d=0; d<distance; d++)
             foreach(var c in Ring(cell, d))
                 yield return c;
     }
 
+    //Retourne la liste des unités appartenant au player donnée
     public IEnumerable<Unit> PlayerUnits(PlayerRole player) {
         foreach(var unit in units) {
             if (unit.Player == player)
@@ -157,6 +169,7 @@ public class Board {
         }
     }
 
+    //Permet d'ajouter une unité sur une cellule du plateau
     public void AddUnit(UnitCard card, Cell target, PlayerRole owner) {
         units.Add(new Unit(card, target.position, units.Count, owner));
     }

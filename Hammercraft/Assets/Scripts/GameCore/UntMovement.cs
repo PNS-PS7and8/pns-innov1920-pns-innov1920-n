@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+//Masque de déplacement permettant de définir des règles de déplacement complexes
 [System.Serializable, System.Flags  ]
 public enum UnitMoveMask {
     PathFinding   = 1 << 0,
